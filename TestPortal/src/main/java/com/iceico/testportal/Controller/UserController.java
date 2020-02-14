@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
@@ -15,6 +17,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.iceico.testportal.Model.User;
 import com.iceico.testportal.Model.UserProfile;
+import com.iceico.testportal.Service.EMailService;
+import com.iceico.testportal.Service.OtpService;
 import com.iceico.testportal.Service.UserProfileService;
 import com.iceico.testportal.Service.UserService;
 
@@ -35,15 +40,25 @@ import com.iceico.testportal.Service.UserService;
 
 @Controller
 public class UserController {
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private UserService userService;
+
 	@Autowired
 	private UserProfileService userProfileService;
+
 	@Autowired
 	private PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
+
 	@Autowired
 	private AuthenticationTrustResolver authenticationTrustResolver;
+
+	@Autowired
+	private OtpService otpService;
+
+	@Autowired
+	private EMailService emailService;
 
 	/**
 	 * This method will provide the medium to add a new user.
@@ -55,6 +70,18 @@ public class UserController {
 		model.addAttribute("edit", false);
 		model.addAttribute("userList", userService.findAllUsers());
 		model.addAttribute("user", getPrincipal());
+		return "register";
+	}
+
+	@GetMapping("/generateOtp")
+	public String generateOtp() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		int otp = otpService.generateOTP(username);
+		logger.info("OTP : " + otp);
+
+
+		emailService.sendOtpMessage("patilrajat805@gmail.com", "OTP -SpringBoot", "Hello");
 		return "register";
 	}
 
