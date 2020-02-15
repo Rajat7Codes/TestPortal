@@ -12,8 +12,8 @@
 		<put-attribute name="sidebar"
 			value="/WEB-INF/TestPortal/view/admin-module/common-pages/sidebar.jsp" />
 		<put-attribute name="body" value="" />
-	<!-- 	<put-attribute name="footer"
-			value="/WEB-INF/TestPortal/view/admin-module/common-pages/footer.jsp" /> -->
+		<!-- <put-attribute name="footer" value="/WEB-INF/TestPortal/view/admin-module/common-pages/footer.jsp" 
+			/> -->
 	</definition>
 
 
@@ -39,6 +39,14 @@
 		<put-attribute name="title" value="Dashboard" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/admin-module/dashboard.jsp" />
+	</definition>
+
+<!-- Question Bank -->
+	<definition name="questionBank"
+		extends="adminbase.definition">
+		<put-attribute name="title" value="question Bank" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/question-bank/questionBank.jsp" />
 	</definition>
 
 </tiles-definitions>
