@@ -61,7 +61,7 @@ public class QuestionBankController {
 	public String saveQuestionBank(@ModelAttribute("questionBank") @Valid QuestionBank questionBank,
 			BindingResult bindingResult, ModelMap modelMap) {
 
-		return "";
+		return "questionBank";
 	}
 
 }

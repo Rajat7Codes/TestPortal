@@ -30,6 +30,9 @@ public class QuestionBank {
 	@Column(name = "question_bank_Id")
 	private Long questionBankId;
 
+	@Column(name = "question")
+	private String question;
+
 	@Column(name = "marks")
 	private String marks;
 
@@ -44,14 +47,17 @@ public class QuestionBank {
 
 	/**
 	 * @param questionBankId
+	 * @param question
 	 * @param marks
 	 * @param subject
 	 * @param description
 	 * @param questionType
 	 */
-	public QuestionBank(Long questionBankId, String marks, String subject, String description, String questionType) {
+	public QuestionBank(Long questionBankId, String question, String marks, String subject, String description,
+			String questionType) {
 		super();
 		this.questionBankId = questionBankId;
+		this.question = question;
 		this.marks = marks;
 		this.subject = subject;
 		this.description = description;
@@ -70,6 +76,20 @@ public class QuestionBank {
 	 */
 	public void setQuestionBankId(Long questionBankId) {
 		this.questionBankId = questionBankId;
+	}
+
+	/**
+	 * @return the question
+	 */
+	public String getQuestion() {
+		return question;
+	}
+
+	/**
+	 * @param question the question to set
+	 */
+	public void setQuestion(String question) {
+		this.question = question;
 	}
 
 	/**
