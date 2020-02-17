@@ -9,10 +9,10 @@
 <body>
 	<div class="top-bar color-scheme-transparent">
 		<div class="top-menu-controls">
-			<div class="element-search autosuggest-search-activator">
+			<!-- 	<div class="element-search autosuggest-search-activator">
 				<input placeholder="Start typing to search...">
-			</div>
-			<div
+			</div> -->
+			<!-- 	<div
 				class="messages-notifications os-dropdown-trigger os-dropdown-position-left">
 				<i class="os-icon os-icon-mail-14"></i>
 				<div class="new-messages-count">12</div>
@@ -48,7 +48,7 @@
 								</div></a></li>
 					</ul>
 				</div>
-			</div>
+			</div> -->
 			<div
 				class="top-icon top-settings os-dropdown-trigger os-dropdown-position-left">
 				<i class="os-icon os-icon-ui-46"></i>
@@ -57,26 +57,44 @@
 						<i class="os-icon os-icon-ui-46"></i>
 					</div>
 					<ul>
-						<li><a href="users_profile_small.html"><i
+						<li><a
+							href="${pageContext.request.contextPath }/admin/department"><i
+								class="os-icon os-icon-ui-49"></i><span>Department</span></a></li>
+						<li><a
+							href="${pageContext.request.contextPath }/admin/subject"><i
+								class="os-icon os-icon-grid-10"></i><span>Subject</span></a></li>
+						<li><a
+							href="${pageContext.request.contextPath }/admin/questionType"><i
+								class="os-icon os-icon-ui-44"></i><span>Question Type</span></a></li>
+						<%-- 	<li><a
+										href="${pageContext.request.contextPath }/admin/category">
+											<span class="photo"><i class="fa fa-graduation-cap"></i></span>
+											<!-- <span class="subject"> </span> --> <span class="subject">
+												<span class="from">CATEGORY</span>
+										</span>
+									</a></li> --%>
+						<!-- <li><a href="users_profile_small.html"><i
 								class="os-icon os-icon-ui-49"></i><span>Profile Settings</span></a></li>
 						<li><a href="users_profile_small.html"><i
 								class="os-icon os-icon-grid-10"></i><span>Billing Info</span></a></li>
 						<li><a href="users_profile_small.html"><i
 								class="os-icon os-icon-ui-44"></i><span>My Invoices</span></a></li>
 						<li><a href="users_profile_small.html"><i
-								class="os-icon os-icon-ui-15"></i><span>Cancel Account</span></a></li>
+								class="os-icon os-icon-ui-15"></i><span>Cancel Account</span></a></li> -->
 					</ul>
 				</div>
 			</div>
 			<div class="logged-user-w">
 				<div class="logged-user-i">
 					<div class="avatar-w">
-						<img alt="" src="${pageContext.request.contextPath }/static/img/avatar2.jpg">
+						<img alt=""
+							src="${pageContext.request.contextPath }/static/img/avatar2.jpg">
 					</div>
 					<div class="logged-user-menu color-style-bright">
 						<div class="logged-user-avatar-info">
 							<div class="avatar-w">
-								<img alt="" src="${pageContext.request.contextPath }/static/img/avatar2.jpg">
+								<img alt=""
+									src="${pageContext.request.contextPath }/static/img/avatar2.jpg">
 							</div>
 							<div class="logged-user-info-w">
 								<div class="logged-user-name">Maria Gomez</div>
@@ -98,7 +116,7 @@
 							<li><a href="#"><i class="os-icon os-icon-others-43"></i><span>Notifications</span></a>
 							</li>
 							<li><a href="#"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a></li>
-						</ul> 
+						</ul>
 					</div>
 				</div>
 			</div>
