@@ -5,6 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.iceico.testportal.Model.Subject;
 
+/**
+ * @author puja
+ *
+ */
 @Repository
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
 

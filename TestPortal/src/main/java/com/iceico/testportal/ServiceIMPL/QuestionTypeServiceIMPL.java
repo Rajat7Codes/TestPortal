@@ -14,6 +14,11 @@ import com.iceico.testportal.Model.QuestionType;
 import com.iceico.testportal.Repository.QuestionTypeRepository;
 import com.iceico.testportal.Service.QuestionTypeService;
 
+/**
+ * @author puja
+ *
+ */
+
 @Service
 @Transactional
 public class QuestionTypeServiceIMPL implements QuestionTypeService {

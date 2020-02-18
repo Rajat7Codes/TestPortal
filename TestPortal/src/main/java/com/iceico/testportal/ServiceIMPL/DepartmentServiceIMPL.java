@@ -12,6 +12,10 @@ import com.iceico.testportal.Model.Department;
 import com.iceico.testportal.Repository.DepartmentRepository;
 import com.iceico.testportal.Service.DepartmentService;
 
+/**
+ * @author puja
+ *
+ */
 @Service
 @Transactional
 public class DepartmentServiceIMPL implements DepartmentService {

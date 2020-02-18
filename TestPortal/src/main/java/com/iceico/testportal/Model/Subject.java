@@ -1,14 +1,22 @@
 package com.iceico.testportal.Model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * @author puja
+ *
+ */
 @Entity
 @Table(name = "tab_subject")
 public class Subject implements Serializable {
@@ -30,16 +38,21 @@ public class Subject implements Serializable {
 	@Column(name = "status")
 	private Boolean status;
 
+	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<AddTest> addTest;
+
 	/**
 	 * @param subjectId
 	 * @param subjectName
 	 * @param status
+	 * @param addTest
 	 */
-	public Subject(Long subjectId, String subjectName, Boolean status) {
-		// super();
+	public Subject(Long subjectId, String subjectName, Boolean status, List<AddTest> addTest) {
+		super();
 		this.subjectId = subjectId;
 		this.subjectName = subjectName;
 		this.status = status;
+		this.addTest = addTest;
 	}
 
 	/**
@@ -82,6 +95,20 @@ public class Subject implements Serializable {
 	 */
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	/**
+	 * @return the addTest
+	 */
+	public List<AddTest> getAddTest() {
+		return addTest;
+	}
+
+	/**
+	 * @param addTest the addTest to set
+	 */
+	public void setAddTest(List<AddTest> addTest) {
+		this.addTest = addTest;
 	}
 
 }
