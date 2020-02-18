@@ -27,6 +27,11 @@
 		template="/WEB-INF/TestPortal/view/login-module/register.jsp">
 	</definition>
 
+	<!-- VERIFICATION PAGE -->
+	<definition name="verifyMail"
+		template="/WEB-INF/TestPortal/view/login-module/emailVerify.jsp">
+	</definition>
+
 	<!-- FORGOT PASSWORD -->
 	<definition name="forgotPassword"
 		template="/WEB-INF/TestPortal/view/login-module/forgotPassword.jsp">

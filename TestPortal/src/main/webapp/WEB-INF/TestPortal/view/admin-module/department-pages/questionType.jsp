@@ -86,7 +86,7 @@
 									<hr>
 								</div>
 								<div class="table-responsive">
-									<table id="dataTable3"
+									<table id="dataTable1"
 										class="table table-striped table-lightfont">
 										<thead>
 											<tr>
@@ -157,10 +157,9 @@
 	</div>
 </body>
 
-
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#dataTable3').DataTable();
+		$('#dataTable1').DataTable();
 	});
 </script>
 </html>

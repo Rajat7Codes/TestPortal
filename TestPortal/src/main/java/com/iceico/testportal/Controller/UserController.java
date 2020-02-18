@@ -1,14 +1,17 @@
 package com.iceico.testportal.Controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.json.simple.parser.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,11 +20,11 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.iceico.testportal.Model.User;
 import com.iceico.testportal.Model.UserProfile;
@@ -40,7 +43,6 @@ import com.iceico.testportal.Service.UserService;
 
 @Controller
 public class UserController {
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private UserService userService;
@@ -59,7 +61,8 @@ public class UserController {
 
 	@Autowired
 	private EMailService emailService;
-
+	
+	
 	/**
 	 * This method will provide the medium to add a new user.
 	 */
@@ -73,16 +76,61 @@ public class UserController {
 		return "register";
 	}
 
-	@GetMapping("/generateOtp")
-	public String generateOtp() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
-		int otp = otpService.generateOTP(username);
-		logger.info("OTP : " + otp);
+	@RequestMapping(value = { "/admin/user/verify/mail" }, method = RequestMethod.POST)
+	public String verifyUserMail( @RequestParam("emailId") String emailId,  @RequestParam("fname") String fName,  @RequestParam("lname") String lName, 
+			@RequestParam("mobile") String mobile,  @RequestParam("password") String password,  @RequestParam("department") String department,
+			@RequestParam("position") String position,  @RequestParam("image") String image, ModelMap model) {
+		
+		String emailOtp = this.otpService.generateOTP();
+		String toEmail = emailId;
+		String subject = "ICEICO Test Portal OTP";
 
+		String emailMessage = "Hello Student, \n" + " Your One time Passowrd For Registering On ICEICO Test "
+				+ "Portal is" + " " + emailOtp + "";
 
-		emailService.sendOtpMessage("patilrajat805@gmail.com", "OTP -SpringBoot", "Hello");
-		return "register";
+		emailService.sendOtpMessage( toEmail, subject, emailMessage);
+
+		User user = new User();
+		user.setEmail(emailId);
+		user.setFirstName(fName);
+		user.setLastName(lName);
+		user.setPassword(password);
+		user.setMobileNumber(mobile);
+
+		model.addAttribute("firstName", fName);
+		model.addAttribute("lastName", lName);
+		model.addAttribute("email", emailId);
+		model.addAttribute("password", password);
+		model.addAttribute("mobile", mobile);
+		model.addAttribute("edit", false);
+		model.addAttribute("otp", emailOtp);
+		model.addAttribute("userList", userService.findAllUsers());
+		model.addAttribute("user", getPrincipal());
+		return "verifyMail";
+	}
+	
+	
+	@SuppressWarnings({ "deprecation" })
+	@RequestMapping( value= {"/register/user"}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
+	public String registerUser(  @RequestParam("fname") String fName,  @RequestParam("lname") String lName, 
+			@RequestParam("mob") String mobile,  @RequestParam("pass") String password,  @RequestParam("email") String emailId, ModelMap modelMap) throws ParseException {
+		
+		User user = new User();
+		user.setEmail(emailId);
+		user.setFirstName(fName);
+		user.setLastName(lName);
+		user.setMobileNumber(mobile);
+		user.setPassword(password);
+		user.setSsoId(user.getFirstName()+" "+user.getLastName());
+		
+		UserProfile profile = this.userProfileService.findByType("STUDENT");
+		Set<UserProfile> role = new HashSet<UserProfile>();
+		role.add(profile);
+		user.setUserProfiles(role);
+		
+		this.userService.saveUser(user);
+		modelMap.addAttribute("user", getPrincipal());
+		return null;
 	}
 
 	/**

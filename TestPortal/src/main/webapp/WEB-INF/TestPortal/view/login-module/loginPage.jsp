@@ -37,6 +37,9 @@
 .reg-form {
 	padding-bottom: 30px!important 
 }
+.auth-box-w {
+	margin: auto !important
+}
 </style>
 
 </head>
