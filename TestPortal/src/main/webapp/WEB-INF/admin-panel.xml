@@ -27,6 +27,11 @@
 		template="/WEB-INF/TestPortal/view/login-module/register.jsp">
 	</definition>
 
+	<!-- VERIFICATION PAGE -->
+	<definition name="verifyMail"
+		template="/WEB-INF/TestPortal/view/login-module/emailVerify.jsp">
+	</definition>
+
 	<!-- FORGOT PASSWORD -->
 	<definition name="forgotPassword"
 		template="/WEB-INF/TestPortal/view/login-module/forgotPassword.jsp">
@@ -40,6 +45,16 @@
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/admin-module/dashboard.jsp" />
 	</definition>
+
+
+	<!-- Question Bank -->
+	<definition name="questionBank"
+		extends="adminbase.definition">
+		<put-attribute name="title" value="question Bank" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/question-bank/questionBank.jsp" />
+	</definition>
+
 
 
 	<!-- department pages -->
@@ -64,6 +79,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/admin-module/department-pages/questionType.jsp" />
 	</definition>
-
+	<definition name="questionBankView"
+		extends="adminbase.definition">
+		<put-attribute name="title" value="Question" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/question-bank/questionBankView.jsp" />
+	</definition>
 
 </tiles-definitions>

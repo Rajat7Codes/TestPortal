@@ -2,8 +2,10 @@ package com.iceico.testportal.ServiceIMPL;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,13 @@ public class QuestionTypeServiceIMPL implements QuestionTypeService {
 
 	@Autowired
 	private QuestionTypeRepository questionTypeRepository;
+
+	@Autowired
+	private EntityManager entityManager;
+
+	private Session getSession() {
+		return entityManager.unwrap(Session.class);
+	}
 
 	@Override
 	public void saveQuestionType(QuestionType questionType) {
@@ -38,5 +47,11 @@ public class QuestionTypeServiceIMPL implements QuestionTypeService {
 	public QuestionType getQuestionTypeById(Long questionTypeId) throws ResourceNotFoundException {
 		return this.questionTypeRepository.findById(questionTypeId)
 				.orElseThrow(() -> new ResourceNotFoundException("QuestionTypeId not found" + questionTypeId));
+	}
+
+	@Override
+	public QuestionType getActiveQuestionType() {
+		return (QuestionType) this.getSession().createQuery("from QuestionType where active=:active")
+				.setParameter("active", true).list();
 	}
 }

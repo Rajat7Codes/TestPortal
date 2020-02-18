@@ -27,49 +27,112 @@
 <!-- favicon -->
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath }/static/img/favicon.png" />
+
+
+<link
+	href="${pageContext.request.contextPath}/static/css/main5739.css?version=4.5.0"
+	rel="stylesheet">
 <style>
 input:focus {
 	outline: solid 1px green !important;
+}
+
+.logo-w {
+	padding: 30px 100px !important
+}
+
+.reg-form {
+	padding-bottom: 30px !important
 }
 </style>
 </head>
 <body>
 	<c:url var="loginUrl" value="/login" />
-	<div class="form-title"></div>
-	<div class="login-form text-center">
-		<div>
-			<img
-				src="${pageContext.request.contextPath }/static/img/vidybhavan/VBCMR LOGO.png"
-				class="brand_logo" alt="Logo"
-				style="height: 50%; width: 100%; margin-bottom: 0px;">
-		</div>
-		<div class="form formLogin" style="margin-top: -40px;">
+	<div class="all-wrapper menu-side with-pattern">
+		<div class="auth-box-w wider">
+			<div class="logo-w">
+				<a href="index-2.html"><img width="200px" alt=""
+					src="${pageContext.request.contextPath}/static/img/Iceico_logo.png"></a>
+			</div>
+			<h4 class="auth-header">Create new account</h4>
+			<form class="reg-form" action="${pageContext.request.contextPath}/admin/user/verify/mail" method="post">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for=""> First Name </label> <input id="fname"
+								class="form-control" placeholder="Enter first name" name="fname"
+								type="text">
+							<div class="pre-icon os-icon os-icon-user-male-circle"></div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for=""> Last Name </label> <input class="form-control"
+								placeholder="Enter last name" id="lname" name="lname"
+								type="text">
+						</div>
+					</div>
+				</div>
 
-			<form
-				action="${pageContext.request.contextPath}/register/generate/otp"
-				method="post">
-				<input type="text" id="fName" name="fName"
-					placeholder="Enter First Name" required="required" /> <input
-					type="text" id="lName" name="lName" placeholder="Enter Last Name"
-					required="required" /> <input type="text" id="emailId"
-					name="emailId" placeholder="Enter Email" required="required" /> <input
-					type="text" id="mobile" name="mobile" placeholder="Enter Mobile"
-					required="required" /> <input type="password" id="password"
-					name="password" placeholder="Enter Password" required="required"
-					onkeyup="return passwordChanged();" /> <span id="strength"
-					style="float: right; margin-top: -20px;"> </span><input
-					type="password" id="cpassword" name="cpassword"
-					placeholder="Enter Confirm Password" required="required"
-					onkeyup="confirmPassword()" /> <span id="cpass"
-					style="float: right; margin-top: -20px;"> </span><input
-					type="hidden" name="data" id="data" />
-				<button onclick="getRegisterDetails();">Register</button>
+				<div class="form-group">
+					<label class="w-100" for=""> Email
+						address </label> <input class="form-control" placeholder="Enter email"
+						id="emailId" name="emailId" type="email">
+					<div class="pre-icon os-icon os-icon-email-2-at2"></div>
+				</div>
 
+
+				<div class="form-group">
+					<label for=""> Phone Number</label> <input class="form-control"
+						name="mobile" id="mobile" placeholder="Enter mobile number"
+						type="text">
+					<div class="pre-icon os-icon os-icon-phone"></div>
+				</div>
+				<div class="form-group">
+					<label for=""> Department</label> <select class="form-control"
+						id="department" name="department">
+						<option value="Java">Java</option>
+						<option value="Web">Web</option>
+					</select>
+					<div class="pre-icon os-icon os-icon-hierarchy-structure-2">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="">Position</label> <input class="form-control"
+						placeholder="Enter position" id="position" name="position"
+						type="text">
+					<div class="pre-icon os-icon os-icon-phone"></div>
+				</div>
+				<div class="form-group">
+					<label for=""> Image</label> <input type="file"
+						class="form-control" id="img" name="image" accept="image/*">
+					<div class="pre-icon os-icon os-icon-image"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for=""> Password</label> <input class="form-control"
+								placeholder="Password" id="password" name="password"
+								type="password">
+							<div class="pre-icon os-icon os-icon-fingerprint"></div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="">Confirm Password</label> <input
+								class="form-control" placeholder="Password" type="password">
+						</div>
+					</div>
+				</div>
+				<div class="mt-3 text-center">
+					<input type="submit"
+						value="Verify Email" id="reg"
+						class="btn btn-primary form-control" />
+				</div>
 			</form>
 		</div>
-
 	</div>
-	
+
 </body>
 <!-- start js include path -->
 <script
@@ -78,25 +141,84 @@ input:focus {
 	src="${pageContext.request.contextPath }/static/js/pages/extra_pages/pages.js"></script>
 <!-- end js include path -->
 
-<script type="text/javascript">
-	function getRegisterDetails() {
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	crossorigin="anonymous"></script>
 
-		var fName = jQuery('#fName').val();
-		var lName = jQuery('#lName').val();
-		var emailId = jQuery('#emailId').val();
-		var password = jQuery('#password').val();
-		var mobile = jQuery('#mobile').val();
+<script type="text/javascript">
+	let otpRec = 0;
+
+	function getRegisterDetails() {
+		console.log(otpRec);
+
+		/* var fName = $('#fname').val();
+		var lName = $('#lname').val();
+		var emailId = $('#emailId').val();
+		var mobile = $('#mobile').val();
+		var department = $("#department").val();
+		var position = $('#position').val();
+		var image = $('#img').val();
+		var password = $('#password').val();
 
 		var registerDetails = {
 			'fName' : fName,
 			'lName' : lName,
 			'emailId' : emailId,
 			'password' : password,
-			'mobile' : mobile
-
+			'mobile' : mobile,
+			'department' : department,
+			'position' : position,
+			'image' : image
 		};
-		jQuery('#data').val(JSON.stringify(registerDetails));
 
+		document.getElementById("otpBtn").style.display = "none";
+		document.getElementById("otp").style.display = "block";
+		document.getElementById("reg").style.display = "block";
+
+		$.ajax({
+			type : "GET",
+			contentType : "application/json",
+			url : "${pageContext.request.contextPath}/generate/otp",
+			data : registerDetails,
+			dataType : 'json',
+			cache : false,
+			timeout : 600000,
+			success : function(response) {
+
+				alert(JSON.stringify(response))
+
+
+			}
+		}); */
+	}
+
+	function sendOtp() {
+		var emailId = $('#emailId').val();
+
+		if (emailId == null || emailId == "") {
+			alert("Enter Email Address to Verify")
+		} else {
+			var data = {
+				'emailId' : emailId
+			};
+
+			$.ajax({
+				type : "GET",
+				contentType : "application/json",
+				url : "${pageContext.request.contextPath}/generate/otp",
+				data : data,
+				dataType : 'json',
+				cache : false,
+				timeout : 600000,
+				success : function(response) {
+					document.getElementById("otpBtn").style.display = "none";
+					document.getElementById("otp").style.display = "block";
+					document.getElementById("reg").style.display = "block";
+					alert("Check your mail for OTP " + response)
+					otpRec = response;
+				}
+			});
+		}
 	}
 
 	function passwordChanged() {
