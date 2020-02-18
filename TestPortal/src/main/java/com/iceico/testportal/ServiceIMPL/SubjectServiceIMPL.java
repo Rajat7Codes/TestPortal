@@ -16,6 +16,13 @@ import com.iceico.testportal.Service.SubjectService;
 @Transactional
 public class SubjectServiceIMPL implements SubjectService {
 
+	/**
+	 * 
+	 */
+	public SubjectServiceIMPL() {
+
+	}
+
 	@Autowired
 	private SubjectRepository subjectRepository;
 

@@ -44,6 +44,25 @@
 										</form:select>
 										<form:errors path="status"></form:errors>
 									</div>
+									<div class="col-md-12 col-sm-12 col-lg-12 col-12">
+										<form:label path="programType">Program Status</form:label>
+										<form:select path="programType" name="programType"
+											id="programType" class="form-control">
+											<form:option value="false">Inactive</form:option>
+											<form:option value="true">Active</form:option>
+										</form:select>
+										<form:errors path="programType"></form:errors>
+									</div>
+									<div class="col-md-12 col-sm-12 col-lg-12 col-12">
+										<form:label path="imageType">Image Status</form:label>
+										<form:select path="imageType" name="imageType" id="imageType"
+											class="form-control">
+											<form:option value="false">Inactive</form:option>
+											<form:option value="true">Active</form:option>
+
+										</form:select>
+										<form:errors path="imageType"></form:errors>
+									</div>
 								</div>
 								<br>
 								<div class="form-buttons-w">
@@ -74,7 +93,9 @@
 
 												<th>Sr. No.</th>
 												<th class="type">Question Type</th>
-												<th class="status">status</th>
+												<th class="status">Status</th>
+												<th class="status">Program Status</th>
+												<th class="status">Image Status</th>
 												<th class="action">Action</th>
 											</tr>
 										</thead>
@@ -92,6 +113,20 @@
 														<td class="status"><c:out value="Inactive" /></td>
 													</c:if>
 
+													<c:if test="${questionType.programType == true}">
+														<td class="status"><c:out value="Active" /></td>
+													</c:if>
+													<c:if test="${questionType.programType == false}">
+														<td class="status"><c:out value="Inactive" /></td>
+													</c:if>
+
+													<c:if test="${questionType.imageType == true}">
+														<td class="status"><c:out value="Active" /></td>
+													</c:if>
+													<c:if test="${questionType.imageType == false}">
+														<td class="status"><c:out value="Inactive" /></td>
+													</c:if>
+
 													<td class="valigntop"><div class="btn-group">
 															<button
 																class="btn btn-xs btn-success dropdown-toggle no-margin"
@@ -106,7 +141,6 @@
 																<li><a title="Edit"
 																	href="<c:url value='/admin/questionType/edit/${questionType.questionTypeId }' />"><i
 																		class="fa fa-edit"></i>Edit</a></li>
-
 															</ul>
 														</div></td>
 												</tr>
