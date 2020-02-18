@@ -26,7 +26,7 @@
 									<form:hidden path="subjectId" />
 
 									<div class="form-desc">
-										<h4>ADD DEPARTMENT</h4>
+										<h4>ADD SUBJECT</h4>
 										<hr>
 									</div>
 
