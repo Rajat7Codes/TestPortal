@@ -59,7 +59,6 @@ public class QuestionBankController {
 	@GetMapping("/admin/question/bank/new")
 	public String getQuestionBank(ModelMap modelMap, Locale locale) {
 		QuestionBank questionBank = new QuestionBank();
-		// questionBank.setQuestionType(this.questionTypeService.getActiveQuestionType());
 
 		modelMap.addAttribute("questionBank", questionBank);
 		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
@@ -75,6 +74,7 @@ public class QuestionBankController {
 			jsonArray.add(jsonObject);
 		}
 		modelMap.addAttribute("questionTypeJson", jsonArray);
+		modelMap.addAttribute("edit", false);
 		return "questionBank";
 	}
 
@@ -82,6 +82,7 @@ public class QuestionBankController {
 	public String saveQuestionBank(@ModelAttribute("questionBank") @Valid QuestionBank questionBank,
 			BindingResult bindingResult, @RequestParam("imageName") MultipartFile imageName,
 			@RequestParam("data") String data, ModelMap modelMap, HttpServletRequest httpServletRequest) {
+		System.out.println("data =====>>>" + data);
 		String uploadFolder = httpServletRequest.getServletContext().getRealPath("/uploaded");
 		File directory = new File(uploadFolder);
 		if (!directory.exists()) {
@@ -105,22 +106,47 @@ public class QuestionBankController {
 				System.out.println("File Upload Error " + e);
 			}
 		}
+
 		JSONParser jsonParser = new JSONParser();
 		List<Options> optionsList = new ArrayList<Options>();
-		try {
-			JSONArray jsonArray = (JSONArray) jsonParser.parse(data);
-			for (int i = 0; i < jsonArray.size(); i++) {
-				JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-				Options options = new Options();
-				options.setOptionName(jsonObject.get("optionName").toString());
-				options.setCorrectAnswer(jsonObject.get("correctAnswer").toString());
-				options.setQuestionBank(questionBank);
-				optionsList.add(options);
+
+		if (questionBank.getQuestionBankId() == null) {
+
+			try {
+				JSONArray jsonArray = (JSONArray) jsonParser.parse(data);
+				for (int i = 0; i < jsonArray.size(); i++) {
+					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+					Options options = new Options();
+					options.setOptionName(jsonObject.get("optionName").toString());
+					options.setCorrectAnswer(jsonObject.get("correctAnswer").toString());
+					options.setQuestionBank(questionBank);
+					optionsList.add(options);
+				}
+				questionBank.setOptions(optionsList);
+				this.questionBankService.saveQuestionBank(questionBank);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			questionBank.setOptions(optionsList);
-			this.questionBankService.saveQuestionBank(questionBank);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} else {
+			try {
+				JSONArray jsonArray = (JSONArray) jsonParser.parse(data);
+				for (int i = 0; i < jsonArray.size(); i++) {
+					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+					Options options = new Options();
+					String id = jsonObject.get("optionsId").toString();
+					Long optionsId = Long.parseLong(id);
+
+					options.setOptionsId(optionsId);
+					options.setOptionName(jsonObject.get("optionName").toString());
+					options.setCorrectAnswer(jsonObject.get("correctAnswer").toString());
+					options.setQuestionBank(questionBank);
+					optionsList.add(options);
+				}
+				questionBank.setOptions(optionsList);
+				this.questionBankService.saveQuestionBank(questionBank);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return "redirect:/admin/question/bank/new";
 	}
@@ -136,9 +162,10 @@ public class QuestionBankController {
 	public String editQuestionBankPage(@PathVariable("questionBankId") @Valid Long questionBankId, ModelMap modelMap,
 			Locale locale) throws ResourceNotFoundException {
 		modelMap.addAttribute("questionBank", this.questionBankService.getQuestionBankById(questionBankId));
+		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
 		modelMap.addAttribute("questionBankList", this.questionBankService.getQuestionBankList());
 		modelMap.addAttribute("edit", true);
-		return "questionBankView";
+		return "questionBank";
 	}
 
 	/*

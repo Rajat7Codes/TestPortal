@@ -34,7 +34,6 @@
 									<th>Action</th>
 								</tr>
 							</thead>
-
 							<tbody>
 								<c:forEach var="questionBank" items="${questionBankList }"
 									varStatus="ind">
@@ -52,28 +51,21 @@
 												</button>
 												<ul class="dropdown-menu pull-left" role="menu">
 													<li><a title="Delete"
-														href="<c:url value='/admin/question/bank/edit/${questionBankId}' />"><i
-															class="fa fa-trash"></i>Delete</a></li>
+														href="<c:url value='/admin/question/bank/edit/${questionBank.questionBankId}' />"><i
+															class="fa fa-trash"></i>Edit</a></li>
 													<li><a title="Edit"
 														href="<c:url value='/admin/questionType/edit/${questionType.questionTypeId }' />"><i
-															class="fa fa-edit"></i>Edit</a></li>
+															class="fa fa-edit"></i>Delete</a></li>
 												</ul>
 											</div></td>
 									</tr>
-
 								</c:forEach>
 							</tbody>
 						</table>
 					</div>
-
-
-
-
 				</div>
 			</div>
 		</div>
-
 	</div>
-
 </body>
 </html>
