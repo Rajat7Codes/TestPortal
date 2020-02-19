@@ -52,14 +52,14 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 	}
 
 	protected String determineTargetUrl(Authentication authentication) {
-		boolean isUser = false;
+		boolean isStudent = false;
 		boolean isAdmin = false;
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
 		for (GrantedAuthority grantedAuthority : authorities) {
-			if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
+			if (grantedAuthority.getAuthority().equals("ROLE_STUDENT")) {
 
-				isUser = true;
+				isStudent = true;
 				break;
 			} else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
 
@@ -68,8 +68,8 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 			}
 		}
 
-		if (isUser) {
-			return "/user/dashboard";
+		if (isStudent) {
+			return "/student/dashboard";
 		} else if (isAdmin) {
 			return "/admin/dashboard";
 		} else {

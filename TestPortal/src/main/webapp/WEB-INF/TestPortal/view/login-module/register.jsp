@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>VBCMR | Register</title>
+<title>TEST PORTAL | REGISTER</title>
 
 <link
 	href="../../../../../fonts.googleapis.com/css6079.css?family=Poppins:300,400,500,600,700"
@@ -27,11 +27,10 @@
 <!-- favicon -->
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath }/static/img/favicon.png" />
-
-
 <link
 	href="${pageContext.request.contextPath}/static/css/main5739.css?version=4.5.0"
 	rel="stylesheet">
+
 <style>
 input:focus {
 	outline: solid 1px green !important;
@@ -45,6 +44,7 @@ input:focus {
 	padding-bottom: 30px !important
 }
 </style>
+
 </head>
 <body>
 	<c:url var="loginUrl" value="/login" />
@@ -55,11 +55,13 @@ input:focus {
 					src="${pageContext.request.contextPath}/static/img/Iceico_logo.png"></a>
 			</div>
 			<h4 class="auth-header">Create new account</h4>
-			<form class="reg-form" action="${pageContext.request.contextPath}/admin/user/verify/mail" method="post">
+			<form class="reg-form"
+				action="${pageContext.request.contextPath }/register/generate/otp"
+				method="POST" enctype="multipart/form-data">
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label for=""> First Name </label> <input id="fname"
+							<label> First Name </label> <input id="fname"
 								class="form-control" placeholder="Enter first name" name="fname"
 								type="text">
 							<div class="pre-icon os-icon os-icon-user-male-circle"></div>
@@ -67,29 +69,40 @@ input:focus {
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label for=""> Last Name </label> <input class="form-control"
+							<label> Last Name </label> <input class="form-control"
 								placeholder="Enter last name" id="lname" name="lname"
 								type="text">
 						</div>
 					</div>
 				</div>
-
 				<div class="form-group">
-					<label class="w-100" for=""> Email
-						address </label> <input class="form-control" placeholder="Enter email"
-						id="emailId" name="emailId" type="email">
+					<label class="w-100"> Username </label> <input class="form-control"
+						placeholder="Enter username" id="ssoId" name="ssoId" type="text">
+					<div class="pre-icon os-icon os-icon-user-male-circle"></div>
+				</div>
+				<div class="form-group">
+					<label class="w-100"> Email address </label> <input
+						class="form-control" placeholder="Enter email" id="emailId"
+						name="emailId" type="email">
 					<div class="pre-icon os-icon os-icon-email-2-at2"></div>
 				</div>
-
-
 				<div class="form-group">
-					<label for=""> Phone Number</label> <input class="form-control"
+					<label> Phone Number</label> <input class="form-control"
 						name="mobile" id="mobile" placeholder="Enter mobile number"
 						type="text">
 					<div class="pre-icon os-icon os-icon-phone"></div>
 				</div>
 				<div class="form-group">
-					<label for=""> Department</label> <select class="form-control"
+					<label> Gender</label> <select class="form-control" id="gender"
+						name="gender">
+						<option value="Female">Female</option>
+						<option value="Male">Male</option>
+						<option value="Transgender">Transgender</option>
+					</select>
+					<div class="pre-icon os-icon os-icon-user"></div>
+				</div>
+				<div class="form-group">
+					<label> Department</label> <select class="form-control"
 						id="department" name="department">
 						<option value="Java">Java</option>
 						<option value="Web">Web</option>
@@ -98,20 +111,15 @@ input:focus {
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="">Position</label> <input class="form-control"
+					<label>Position</label> <input class="form-control"
 						placeholder="Enter position" id="position" name="position"
 						type="text">
-					<div class="pre-icon os-icon os-icon-phone"></div>
-				</div>
-				<div class="form-group">
-					<label for=""> Image</label> <input type="file"
-						class="form-control" id="img" name="image" accept="image/*">
-					<div class="pre-icon os-icon os-icon-image"></div>
+					<div class="pre-icon os-icon os-icon-users"></div>
 				</div>
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label for=""> Password</label> <input class="form-control"
+							<label> Password</label> <input class="form-control"
 								placeholder="Password" id="password" name="password"
 								type="password">
 							<div class="pre-icon os-icon os-icon-fingerprint"></div>
@@ -119,108 +127,43 @@ input:focus {
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label for="">Confirm Password</label> <input
+							<label>Confirm Password</label> <input id="confirmPassword"
 								class="form-control" placeholder="Password" type="password">
 						</div>
 					</div>
 				</div>
+				<input id="data" name="data">
 				<div class="mt-3 text-center">
-					<input type="submit"
-						value="Verify Email" id="reg"
-						class="btn btn-primary form-control" />
+					<button id="reg" type="submit" class="btn btn-primary form-control"
+						onclick="getFormData();">
+						<b>Register</b>
+					</button>
 				</div>
 			</form>
 		</div>
 	</div>
-
 </body>
-<!-- start js include path -->
-<script
-	src="${pageContext.request.contextPath }/static/plugins/jquery/jquery.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/js/pages/extra_pages/pages.js"></script>
-<!-- end js include path -->
-
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-	crossorigin="anonymous"></script>
 
 <script type="text/javascript">
-	let otpRec = 0;
-
-	function getRegisterDetails() {
-		console.log(otpRec);
-
-		/* var fName = $('#fname').val();
-		var lName = $('#lname').val();
-		var emailId = $('#emailId').val();
-		var mobile = $('#mobile').val();
-		var department = $("#department").val();
-		var position = $('#position').val();
-		var image = $('#img').val();
-		var password = $('#password').val();
-
-		var registerDetails = {
-			'fName' : fName,
-			'lName' : lName,
-			'emailId' : emailId,
-			'password' : password,
-			'mobile' : mobile,
-			'department' : department,
-			'position' : position,
-			'image' : image
+	function getFormData() {
+		var data = {
+			"fname" : $("#fname").val(),
+			"lname" : $("#lname").val(),
+			"username" : $("#ssoId").val(),
+			"emailId" : $("#emailId").val(),
+			"mobile" : $("#mobile").val(),
+			"department" : $("#department").val(),
+			"position" : $("#position").val(),
+			"password" : $("#password").val(),
+			"gender" : $("#gender").val(),
 		};
 
-		document.getElementById("otpBtn").style.display = "none";
-		document.getElementById("otp").style.display = "block";
-		document.getElementById("reg").style.display = "block";
-
-		$.ajax({
-			type : "GET",
-			contentType : "application/json",
-			url : "${pageContext.request.contextPath}/generate/otp",
-			data : registerDetails,
-			dataType : 'json',
-			cache : false,
-			timeout : 600000,
-			success : function(response) {
-
-				alert(JSON.stringify(response))
-
-
-			}
-		}); */
+		$('#data').val(JSON.stringify(data));
+		alert(JSON.stringify(data));
 	}
+</script>
 
-	function sendOtp() {
-		var emailId = $('#emailId').val();
-
-		if (emailId == null || emailId == "") {
-			alert("Enter Email Address to Verify")
-		} else {
-			var data = {
-				'emailId' : emailId
-			};
-
-			$.ajax({
-				type : "GET",
-				contentType : "application/json",
-				url : "${pageContext.request.contextPath}/generate/otp",
-				data : data,
-				dataType : 'json',
-				cache : false,
-				timeout : 600000,
-				success : function(response) {
-					document.getElementById("otpBtn").style.display = "none";
-					document.getElementById("otp").style.display = "block";
-					document.getElementById("reg").style.display = "block";
-					alert("Check your mail for OTP " + response)
-					otpRec = response;
-				}
-			});
-		}
-	}
-
+<script type="text/javascript">
 	function passwordChanged() {
 		var strength = document.getElementById("strength");
 		var strongRegex = new RegExp(
@@ -248,7 +191,6 @@ input:focus {
 			$("#strength").text('Weak!').css('color', 'red').css('font-weight',
 					'bold').css('font-size', '15px');
 		}
-
 	}
 
 	function confirmPassword() {
@@ -261,8 +203,68 @@ input:focus {
 			$("#cpass").text('Password match!').css('color', 'green').css(
 					'font-weight', 'bold').css('font-size', '15px');
 		}
-
 	}
 </script>
+
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/jquery/dist/jquery.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/popper.js/dist/umd/popper.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/moment/moment.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/chart.js/dist/Chart.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/select2/dist/js/select2.full.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/ckeditor/ckeditor.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/bootstrap-validator/dist/validator.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/dropzone/dist/dropzone.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/editable-table/mindmup-editabletable.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/tether/dist/js/tether.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/slick-carousel/slick/slick.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/util.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/alert.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/button.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/carousel.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/collapse.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/dropdown.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/modal.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/tab.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/tooltip.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/popover.js"></script>
+<script
+	src="${pageContext.request.contextPath }/static/js/demo_customizer5739.js?version=4.5.0"></script>
+<script
+	src="${pageContext.request.contextPath }/static/js/main5739.js?version=4.5.0"></script>
 
 </html>

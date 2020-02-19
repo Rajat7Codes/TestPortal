@@ -29,7 +29,7 @@ public class TilesConfiguration {
 	@Bean
 	public TilesConfigurer tilesConfigurer() {
 		TilesConfigurer tilesConfigurer = new TilesConfigurer();
-		String[] defs = { "/WEB-INF/admin-panel.xml", "/WEB-INF/user-panel.xml" };
+		String[] defs = { "/WEB-INF/admin-panel.xml", "/WEB-INF/student-panel.xml" };
 		tilesConfigurer.setDefinitions(defs);
 		return tilesConfigurer;
 	}

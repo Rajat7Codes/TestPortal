@@ -1,68 +1,59 @@
 package com.iceico.testportal.Controller;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Locale;
+import java.util.Properties;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.iceico.testportal.Model.User;
 import com.iceico.testportal.Model.UserProfile;
-import com.iceico.testportal.Service.EMailService;
 import com.iceico.testportal.Service.OtpService;
 import com.iceico.testportal.Service.UserProfileService;
 import com.iceico.testportal.Service.UserService;
-
-/**
- * @author LEKHA BHANGE
- * @version 0.1
- * 
- *          Created Date : 11/02/2020
- *
- */
 
 @Controller
 public class UserController {
 
 	@Autowired
 	private UserService userService;
-
 	@Autowired
 	private UserProfileService userProfileService;
-
 	@Autowired
 	private PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
-
 	@Autowired
 	private AuthenticationTrustResolver authenticationTrustResolver;
-
 	@Autowired
-	private OtpService otpService;
-
+	private OtpService otpServiceINF;
 	@Autowired
-	private EMailService emailService;
-	
-	
+	private PasswordEncoder passwordEncoder;
+
 	/**
 	 * This method will provide the medium to add a new user.
 	 */
@@ -74,63 +65,6 @@ public class UserController {
 		model.addAttribute("userList", userService.findAllUsers());
 		model.addAttribute("user", getPrincipal());
 		return "register";
-	}
-
-	@RequestMapping(value = { "/admin/user/verify/mail" }, method = RequestMethod.POST)
-	public String verifyUserMail( @RequestParam("emailId") String emailId,  @RequestParam("fname") String fName,  @RequestParam("lname") String lName, 
-			@RequestParam("mobile") String mobile,  @RequestParam("password") String password,  @RequestParam("department") String department,
-			@RequestParam("position") String position,  @RequestParam("image") String image, ModelMap model) {
-		
-		String emailOtp = this.otpService.generateOTP();
-		String toEmail = emailId;
-		String subject = "ICEICO Test Portal OTP";
-
-		String emailMessage = "Hello Student, \n" + " Your One time Passowrd For Registering On ICEICO Test "
-				+ "Portal is" + " " + emailOtp + "";
-
-		emailService.sendOtpMessage( toEmail, subject, emailMessage);
-
-		User user = new User();
-		user.setEmail(emailId);
-		user.setFirstName(fName);
-		user.setLastName(lName);
-		user.setPassword(password);
-		user.setMobileNumber(mobile);
-
-		model.addAttribute("firstName", fName);
-		model.addAttribute("lastName", lName);
-		model.addAttribute("email", emailId);
-		model.addAttribute("password", password);
-		model.addAttribute("mobile", mobile);
-		model.addAttribute("edit", false);
-		model.addAttribute("otp", emailOtp);
-		model.addAttribute("userList", userService.findAllUsers());
-		model.addAttribute("user", getPrincipal());
-		return "verifyMail";
-	}
-	
-	
-	@SuppressWarnings({ "deprecation" })
-	@RequestMapping( value= {"/register/user"}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
-	public String registerUser(  @RequestParam("fname") String fName,  @RequestParam("lname") String lName, 
-			@RequestParam("mob") String mobile,  @RequestParam("pass") String password,  @RequestParam("email") String emailId, ModelMap modelMap) throws ParseException {
-		
-		User user = new User();
-		user.setEmail(emailId);
-		user.setFirstName(fName);
-		user.setLastName(lName);
-		user.setMobileNumber(mobile);
-		user.setPassword(password);
-		user.setSsoId(user.getFirstName()+" "+user.getLastName());
-		
-		UserProfile profile = this.userProfileService.findByType("STUDENT");
-		Set<UserProfile> role = new HashSet<UserProfile>();
-		role.add(profile);
-		user.setUserProfiles(role);
-		
-		this.userService.saveUser(user);
-		modelMap.addAttribute("user", getPrincipal());
-		return null;
 	}
 
 	/**
@@ -338,24 +272,134 @@ public class UserController {
 		return "forgotPassword";
 	}
 
-	@RequestMapping(value = { "/forgot/password" }, method = RequestMethod.POST)
-	public String forgetPassword(@ModelAttribute("userName") String userName, @ModelAttribute("email") String email,
-			@ModelAttribute("mobileNumber") String mobileNumber, @ModelAttribute("password") String password,
-			ModelMap modelMap) {
+	@PostMapping("/forgot/password/generate/otp")
+	public String generateOtp(@RequestParam("data") String data, ModelMap modelMap, Locale locale)
+			throws ParseException {
+
+		String emailOtp = this.otpServiceINF.generateOTP();
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(data);
+		String toEmail = jsonObject.get("email").toString();
+		String mobileNumber = jsonObject.get("mobileNumber").toString();
+		String userName = jsonObject.get("userName").toString();
 
 		User user = userService.findBySSO(userName);
 
 		if (user == null) {
 			modelMap.addAttribute("userError", "Username Not Available");
 			return "forgotPassword";
-		} else if (email.equals(user.getEmail()) && mobileNumber.equals(user.getMobileNumber())) {
-			user.setPassword(password);
-			userService.updateUser(user);
-			modelMap.addAttribute("updated", "Password Upodated Successfully");
-			return "forgotPassword";
+		} else if (toEmail.equals(user.getEmail()) && mobileNumber.equals(user.getMobileNumber())) {
+			String subject = "[ICEICO TEST PORTAL OTP]";
+
+			String emailMessage = "Hello, \n" + "Your One time Passowrd For Registering On ICEICO Test Portal " + " "
+					+ "is" + " " + emailOtp + "";
+
+			JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+
+			mailSender.setHost("smtp.gmail.com");
+			mailSender.setPort(587);
+			mailSender.setUsername("lekhabhange.iceico@gmail.com");
+			mailSender.setPassword("lekha@iceico");
+
+			Properties javaMailProperties = new Properties();
+			javaMailProperties.put("mail.smtp.starttls.enable", "true");
+			javaMailProperties.put("mail.smtp.auth", "true");
+			javaMailProperties.put("mail.transport.protocol", "smtp");
+			javaMailProperties.put("mail.debug", "true");
+
+			mailSender.setJavaMailProperties(javaMailProperties);
+
+			MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+				@Override
+				public void prepare(MimeMessage mimeMessage) throws Exception {
+					MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+					message.setTo(toEmail);
+					message.setSubject(subject);
+					message.setText(emailMessage);
+				}
+			};
+			mailSender.send(preparator);
+
+			modelMap.addAttribute("data", jsonObject);
+			modelMap.addAttribute("emailOtp", emailOtp);
+			return "otpVerify";
+
 		} else {
 			modelMap.addAttribute("detailsError", "Please Enter Proper Details");
 			return "forgotPassword";
+		}
+	}
+
+	@PostMapping("/forgot/password/resend/otp")
+	public String resendOtp(@RequestParam("finalJson") String data, ModelMap modelMap, Locale locale)
+			throws ParseException {
+
+		String emailOtp = this.otpServiceINF.generateOTP();
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(data);
+		String toEmail = jsonObject.get("email").toString();
+		String subject = "[ICEICO TEST PORTAL OTP]";
+
+		String emailMessage = "Hello, \n" + "Your One time Passowrd For Registering On ICEICO Test Portal " + " " + "is"
+				+ " " + emailOtp + "";
+
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+
+		mailSender.setHost("smtp.gmail.com");
+		mailSender.setPort(587);
+		mailSender.setUsername("lekhabhange.iceico@gmail.com");
+		mailSender.setPassword("lekha@iceico");
+
+		Properties javaMailProperties = new Properties();
+		javaMailProperties.put("mail.smtp.starttls.enable", "true");
+		javaMailProperties.put("mail.smtp.auth", "true");
+		javaMailProperties.put("mail.transport.protocol", "smtp");
+		javaMailProperties.put("mail.debug", "true");
+
+		mailSender.setJavaMailProperties(javaMailProperties);
+
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+				message.setTo(toEmail);
+				message.setSubject(subject);
+				message.setText(emailMessage);
+			}
+		};
+		mailSender.send(preparator);
+
+		modelMap.addAttribute("data", data);
+		modelMap.addAttribute("emailOtp", emailOtp);
+		return "otpVerify";
+	}
+
+	@PostMapping("/forgot/password/verify/otp")
+	public String verifyOtpSave(@RequestParam("finalJson") String sdata,
+			@RequestParam("verifyEmailOtp") String verifyEmailOtp, ModelMap modelMap, Locale locale)
+			throws ParseException {
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(sdata);
+		String emailOtp = jsonObject.get("emailOtp").toString();
+		JSONObject data = (JSONObject) jsonParser.parse(jsonObject.get("data").toString());
+
+		if (emailOtp.equalsIgnoreCase(verifyEmailOtp)) {
+
+			String userName = data.get("userName").toString();
+			String password = data.get("password").toString();
+
+			User user = userService.findBySSO(userName);
+
+			user.setPassword(passwordEncoder.encode(password));
+			userService.updateUser(user);
+			return "redirect:/login";
+		} else {
+			modelMap.addAttribute("emailOtp", emailOtp);
+			modelMap.addAttribute("data", data.toJSONString());
+			modelMap.addAttribute("verificationFailed", true);
+			return "otpVerify";
 		}
 	}
 

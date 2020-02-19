@@ -28,8 +28,8 @@
 	</definition>
 
 	<!-- VERIFICATION PAGE -->
-	<definition name="verifyMail"
-		template="/WEB-INF/TestPortal/view/login-module/emailVerify.jsp">
+	<definition name="otpVerify"
+		template="/WEB-INF/TestPortal/view/login-module/otpVerify.jsp">
 	</definition>
 
 	<!-- FORGOT PASSWORD -->

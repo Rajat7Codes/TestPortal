@@ -6,16 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Required meta tags-->
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="au theme template">
-<meta name="author" content="Hau Nguyen">
-<meta name="keywords" content="au theme template">
-
-<!-- Title Page-->
-<%-- <title><tiles:insertAttribute name="title" /></title> --%>
+<title>TEST PORTAL | LOGIN</title>
 
 <!-- Bootstrap CSS-->
 <link
@@ -29,14 +21,16 @@
 
 <link href="${pageContext.request.contextPath}/static/css/main5739.css"
 	rel="stylesheet" type="text/css">
-	
-	<style>
+
+<style>
 .logo-w {
 	padding: 40px 100px !important
 }
+
 .reg-form {
-	padding-bottom: 30px!important 
+	padding-bottom: 30px !important
 }
+
 .auth-box-w {
 	margin: auto !important
 }
@@ -69,17 +63,10 @@
 	<div class="all-wrapper menu-side with-pattern">
 		<div class="auth-box-w">
 			<div class="logo-w">
-				<a href="index-2.html"><img width="200px" alt="" src="${pageContext.request.contextPath}/static/img/Iceico_logo.png"></a>
+				<a href="index-2.html"><img width="200px" alt=""
+					src="${pageContext.request.contextPath}/static/img/Iceico_logo.png"></a>
 			</div>
 			<h4 class="auth-header">Login Form</h4>
-			<!-- Tabs Titles -->
-
-			<!-- Icon -->
-			<%-- <div class="fadeIn first pt-4 pb-4">
-				<img
-					src="${pageContext.request.contextPath}/static/img/Iceico_logo.png"
-					id="icon" alt="User Icon" width="100px" />
-			</div> --%>
 
 			<!-- Login Form -->
 			<form action="${loginUrl}" method="post">
