@@ -5,6 +5,10 @@ import java.util.List;
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.Subject;
 
+/**
+ * @author puja
+ *
+ */
 public interface SubjectService {
 
 	public void saveSubject(Subject subject);

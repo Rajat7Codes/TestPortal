@@ -12,6 +12,11 @@ import com.iceico.testportal.Model.Subject;
 import com.iceico.testportal.Repository.SubjectRepository;
 import com.iceico.testportal.Service.SubjectService;
 
+/**
+ * @author puja
+ *
+ */
+
 @Service
 @Transactional
 public class SubjectServiceIMPL implements SubjectService {

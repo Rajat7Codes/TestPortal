@@ -5,6 +5,10 @@ import java.util.List;
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.Department;
 
+/**
+ * @author puja
+ *
+ */
 public interface DepartmentService {
 
 	public void saveDepartment(Department department);

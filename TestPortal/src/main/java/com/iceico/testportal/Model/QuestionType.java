@@ -13,6 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * @author puja
+ *
+ */
+
 @Entity
 @Table(name = "tab_question_type")
 public class QuestionType implements Serializable {

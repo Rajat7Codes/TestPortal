@@ -5,6 +5,10 @@ import java.util.List;
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.QuestionType;
 
+/**
+ * @author puja
+ *
+ */
 public interface QuestionTypeService {
 
 	public void saveQuestionType(QuestionType questionType);

@@ -19,6 +19,11 @@ import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.Subject;
 import com.iceico.testportal.Service.SubjectService;
 
+/**
+ * @author puja
+ *
+ */
+
 @Controller
 public class SubjectController {
 
