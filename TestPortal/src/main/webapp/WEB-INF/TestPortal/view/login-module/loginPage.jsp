@@ -29,14 +29,16 @@
 
 <link href="${pageContext.request.contextPath}/static/css/main5739.css"
 	rel="stylesheet" type="text/css">
-	
-	<style>
+
+<style>
 .logo-w {
 	padding: 40px 100px !important
 }
+
 .reg-form {
-	padding-bottom: 30px!important 
+	padding-bottom: 30px !important
 }
+
 .auth-box-w {
 	margin: auto !important
 }
@@ -69,7 +71,8 @@
 	<div class="all-wrapper menu-side with-pattern">
 		<div class="auth-box-w">
 			<div class="logo-w">
-				<a href="index-2.html"><img width="200px" alt="" src="${pageContext.request.contextPath}/static/img/Iceico_logo.png"></a>
+				<a href="index-2.html"><img width="200px" alt=""
+					src="${pageContext.request.contextPath}/static/img/Iceico_logo.png"></a>
 			</div>
 			<h4 class="auth-header">Login Form</h4>
 			<!-- Tabs Titles -->
@@ -100,6 +103,11 @@
 						<label class="form-check-label"><input
 							class="form-check-input" type="checkbox">Remember Me</label>
 					</div>
+				</div>
+				<div class="buttons-w mt-3 text-center">
+					<label class="form-check-label"> 
+						<a href="${pageContext.request.contextPath}/forgot/password"> Forgot Password </a>
+					</label>
 				</div>
 			</form>
 
