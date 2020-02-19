@@ -53,8 +53,16 @@ public class User implements Serializable {
 	@Column(name = "email", nullable = false)
 	private String email;
 
-	@Column(name = "mobile_number", nullable = false)
+	@Column(name = "position", nullable = false)
+	private String position;
 
+	@Column(name = "department", nullable = false)
+	private String department;
+
+	@Column(name = "gender", nullable = false)
+	private String gender;
+
+	@Column(name = "mobile_number", nullable = false)
 	@Size(min = 10, max = 10, message = "Enter valid 10 digit mobile number")
 	private String mobileNumber;
 
@@ -67,66 +75,142 @@ public class User implements Serializable {
 			@JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "user_profile_id") })
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
+	/**
+	 * @return the id
+	 */
 	public Integer getId() {
 		return id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the ssoId
+	 */
 	public String getSsoId() {
 		return ssoId;
 	}
 
+	/**
+	 * @param ssoId the ssoId to set
+	 */
 	public void setSsoId(String ssoId) {
 		this.ssoId = ssoId;
 	}
 
+	/**
+	 * @return the password
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * @param password the password to set
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	/**
+	 * @return the firstName
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
+	/**
+	 * @param firstName the firstName to set
+	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
+	/**
+	 * @return the lastName
+	 */
 	public String getLastName() {
 		return lastName;
 	}
 
+	/**
+	 * @param lastName the lastName to set
+	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
+	/**
+	 * @return the email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * @param email the email to set
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public Set<UserProfile> getUserProfiles() {
-		return userProfiles;
+	/**
+	 * @return the position
+	 */
+	public String getPosition() {
+		return position;
 	}
 
-	public void setUserProfiles(Set<UserProfile> userProfiles) {
-		this.userProfiles = userProfiles;
+	/**
+	 * @param position the position to set
+	 */
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
+	/**
+	 * @return the department
+	 */
+	public String getDepartment() {
+		return department;
+	}
+
+	/**
+	 * @param department the department to set
+	 */
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	/**
+	 * @return the gender
+	 */
+	public String getGender() {
+		return gender;
+	}
+
+	/**
+	 * @param gender the gender to set
+	 */
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	/**
+	 * @return the mobileNumber
+	 */
 	public String getMobileNumber() {
 		return mobileNumber;
 	}
 
+	/**
+	 * @param mobileNumber the mobileNumber to set
+	 */
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
@@ -143,6 +227,20 @@ public class User implements Serializable {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the userProfiles
+	 */
+	public Set<UserProfile> getUserProfiles() {
+		return userProfiles;
+	}
+
+	/**
+	 * @param userProfiles the userProfiles to set
+	 */
+	public void setUserProfiles(Set<UserProfile> userProfiles) {
+		this.userProfiles = userProfiles;
 	}
 
 	@Override

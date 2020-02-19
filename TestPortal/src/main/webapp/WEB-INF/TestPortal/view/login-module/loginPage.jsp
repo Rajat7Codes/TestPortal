@@ -6,16 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Required meta tags-->
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="au theme template">
-<meta name="author" content="Hau Nguyen">
-<meta name="keywords" content="au theme template">
-
-<!-- Title Page-->
-<%-- <title><tiles:insertAttribute name="title" /></title> --%>
+<title>TEST PORTAL | LOGIN</title>
 
 <!-- Bootstrap CSS-->
 <link
@@ -81,14 +73,6 @@
 					src="${pageContext.request.contextPath}/static/img/Iceico_logo.png"></a>
 			</div>
 			<h4 class="auth-header">Login Form</h4>
-			<!-- Tabs Titles -->
-
-			<!-- Icon -->
-			<%-- <div class="fadeIn first pt-4 pb-4">
-				<img
-					src="${pageContext.request.contextPath}/static/img/Iceico_logo.png"
-					id="icon" alt="User Icon" width="100px" />
-			</div> --%>
 
 			<!-- Login Form -->
 			<form action="${loginUrl}" method="post">

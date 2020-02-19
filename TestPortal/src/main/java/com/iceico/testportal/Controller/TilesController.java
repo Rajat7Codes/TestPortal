@@ -6,6 +6,7 @@ package com.iceico.testportal.Controller;
 import java.text.ParseException;
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
+import com.iceico.testportal.Service.UserService;
 
 /**
  * @author LEKHA BHANGE
@@ -25,11 +27,13 @@ import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 @Controller
 public class TilesController {
 
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping("/admin/dashboard")
 	public String adminDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
-
-		modelMap.addAttribute("user", this.getPrincipal());
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+//		modelMap.addAttribute("user", this.getPrincipal());
 		return "adminDashboard";
 	}
 
