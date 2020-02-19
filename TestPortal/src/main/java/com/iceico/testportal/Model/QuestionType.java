@@ -1,13 +1,22 @@
 package com.iceico.testportal.Model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+/**
+ * @author puja
+ *
+ */
 
 @Entity
 @Table(name = "tab_question_type")
@@ -30,16 +39,32 @@ public class QuestionType implements Serializable {
 	@Column(name = "status")
 	private Boolean status;
 
+	@Column(name = "program_type")
+	private Boolean programType;
+
+	@Column(name = "image_type")
+	private Boolean imageType;
+
+	@OneToMany(mappedBy = "questionType", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<QuestionBank> questionBank;
+
 	/**
 	 * @param questionTypeId
 	 * @param type
 	 * @param status
+	 * @param programType
+	 * @param imageType
+	 * @param questionBank
 	 */
-	public QuestionType(Long questionTypeId, String type, Boolean status) {
-		// super();
+	public QuestionType(Long questionTypeId, String type, Boolean status, Boolean programType, Boolean imageType,
+			List<QuestionBank> questionBank) {
+		super();
 		this.questionTypeId = questionTypeId;
 		this.type = type;
 		this.status = status;
+		this.programType = programType;
+		this.imageType = imageType;
+		this.questionBank = questionBank;
 	}
 
 	/**
@@ -82,6 +107,48 @@ public class QuestionType implements Serializable {
 	 */
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	/**
+	 * @return the programType
+	 */
+	public Boolean getProgramType() {
+		return programType;
+	}
+
+	/**
+	 * @param programType the programType to set
+	 */
+	public void setProgramType(Boolean programType) {
+		this.programType = programType;
+	}
+
+	/**
+	 * @return the imageType
+	 */
+	public Boolean getImageType() {
+		return imageType;
+	}
+
+	/**
+	 * @param imageType the imageType to set
+	 */
+	public void setImageType(Boolean imageType) {
+		this.imageType = imageType;
+	}
+
+	/**
+	 * @return the questionBank
+	 */
+	public List<QuestionBank> getQuestionBank() {
+		return questionBank;
+	}
+
+	/**
+	 * @param questionBank the questionBank to set
+	 */
+	public void setQuestionBank(List<QuestionBank> questionBank) {
+		this.questionBank = questionBank;
 	}
 
 }

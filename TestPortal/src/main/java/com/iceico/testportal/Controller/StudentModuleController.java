@@ -179,12 +179,6 @@ public class StudentModuleController {
 		}
 	}
 
-	/* USER DASHBOARD */
-	@GetMapping(value = { "/user/dashboard" })
-	public String userDashboard(ModelMap modelMap, Locale locale) {
-		modelMap.addAttribute("user", this.getPrincipal());
-		return "userDashboard";
-	}
 
 	/**
 	 * This method returns the principal[user-name] of logged-in user.

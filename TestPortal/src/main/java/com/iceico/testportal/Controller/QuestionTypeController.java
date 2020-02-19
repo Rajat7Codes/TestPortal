@@ -19,6 +19,11 @@ import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.QuestionType;
 import com.iceico.testportal.Service.QuestionTypeService;
 
+/**
+ * @author puja
+ *
+ */
+
 @Controller
 public class QuestionTypeController {
 

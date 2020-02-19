@@ -19,6 +19,10 @@ import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.Department;
 import com.iceico.testportal.Service.DepartmentService;
 
+/**
+ * @author puja
+ *
+ */
 @Controller
 public class DepartmentController {
 

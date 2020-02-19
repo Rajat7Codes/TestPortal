@@ -47,6 +47,16 @@
 	</definition>
 
 
+	<!-- Question Bank -->
+	<definition name="questionBank"
+		extends="adminbase.definition">
+		<put-attribute name="title" value="question Bank" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/question-bank/questionBank.jsp" />
+	</definition>
+
+
+
 	<!-- department pages -->
 
 	<!--Department page -->
@@ -65,10 +75,23 @@
 
 	<definition name="questionType"
 		extends="adminbase.definition">
-		<put-attribute name="title" value="Question" />
+		<put-attribute name="title" value="Question Type" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/admin-module/department-pages/questionType.jsp" />
 	</definition>
 
+	<!--Add test -->
+	<definition name="addTest" extends="adminbase.definition">
+		<put-attribute name="title" value="Add Test" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/add-test/addTest.jsp" />
+	</definition>
+
+	<definition name="questionBankView"
+		extends="adminbase.definition">
+		<put-attribute name="title" value="Question" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/question-bank/questionBankView.jsp" />
+	</definition>
 
 </tiles-definitions>
