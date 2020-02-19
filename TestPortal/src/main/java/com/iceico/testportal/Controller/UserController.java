@@ -344,16 +344,13 @@ public class UserController {
 
 	@RequestMapping(value = { "/change/password" }, method = RequestMethod.POST)
 	public String changePassword(@ModelAttribute("otp") Integer otpRecieved, @ModelAttribute("password") String password, ModelMap modelMap) {
-
-		System.out.println("====> Otp Recieved =====> "+otpRecieved);
-
-		System.out.println("====> Otp Sent =====> "+this.otpSent);
 		
 		if (otpRecieved.equals( otpSent)) {
 			User user = this.userService.findBySSO(this.changePassUserSSO);
 			user.setPassword(password);
+			this.userService.saveUser(user);
 			modelMap.addAttribute("alertMsg", "Password Updated");
-			return "redirect:/admin/user";
+			return "welcome";
 		} else {
 			modelMap.addAttribute("alertMsg", "Wrong OTP");
 			return "forgotPassword";

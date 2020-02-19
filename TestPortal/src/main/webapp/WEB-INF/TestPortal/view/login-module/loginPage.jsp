@@ -51,6 +51,12 @@
 
 	<c:url var="loginUrl" value="/login" />
 
+	<c:if test="${alertMsg == \"Password Updated\"}">
+		<div class="alert alert-success">
+			<p>${ alertMsg }</p>
+		</div>
+	</c:if>
+
 	<c:if test="${expireDate == true}">
 		<div class="alert alert-danger">
 			<p>YOUR APPLICATION DATE IS EXPIRED......!</p>
@@ -86,6 +92,28 @@
 
 			<!-- Login Form -->
 			<form action="${loginUrl}" method="post">
+				<c:if test="${alertMsg == \"Password Updated\"}">
+					<div class="alert alert-success">
+						<p>${ alertMsg }</p>
+					</div>
+				</c:if>
+
+				<c:if test="${expireDate == true}">
+					<div class="alert alert-danger">
+						<p>YOUR APPLICATION DATE IS EXPIRED......!</p>
+					</div>
+				</c:if>
+
+				<c:if test="${param.error != null}">
+					<div class="alert alert-danger m-0">
+						<p>Invalid Credentials</p>
+					</div>
+				</c:if>
+				<c:if test="${param.logout != null}">
+					<div class="alert alert-success m-0">
+						<p>Logged Out Successfully</p>
+					</div>
+				</c:if>
 				<div class="form-group">
 					<label for="">Username</label> <input class="form-control"
 						name="ssoId" placeholder="Enter your username">
@@ -105,8 +133,9 @@
 					</div>
 				</div>
 				<div class="buttons-w mt-3 text-center">
-					<label class="form-check-label"> 
-						<a href="${pageContext.request.contextPath}/forgot/password"> Forgot Password </a>
+					<label class="form-check-label"> <a
+						href="${pageContext.request.contextPath}/forgot/password">
+							Forgot Password </a>
 					</label>
 				</div>
 			</form>

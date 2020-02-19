@@ -61,7 +61,7 @@
 
 
 
-<body class="auth-wrapper">
+<body class="auth-wrapper" onload="confirmPassword()">
 	<div class="all-wrapper menu-side with-pattern">
 		<div class="auth-box-w">
 			<div class="logo-w">
@@ -121,7 +121,8 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for="">Confirm Password</label> <input
-									class="form-control" placeholder="Password" type="password">
+									id="confirm_password" class="form-control"
+									placeholder="Password" type="password">
 							</div>
 						</div>
 					</div>
@@ -167,6 +168,28 @@
 	crossorigin="anonymous"></script>
 
 <script type="text/javascript">
+
+function validatePassword(){
+	if(password.value != confirm_password.value) {
+	  confirm_password.setCustomValidity("Passwords Don't Match");
+	} else {
+	  confirm_password.setCustomValidity('');
+	}
+}
+
+ function confirmPassword() {
+	var password = document.getElementById("password");
+	var confirm_password = document.getElementById("confirm_password");
+	password.onchange = validatePassword;
+	confirm_password.onkeyup = validatePassword;
+}
+
+
+
+
+
+
+
 	function sendOtp() {
 		var otp = $('#otp').val();
 
