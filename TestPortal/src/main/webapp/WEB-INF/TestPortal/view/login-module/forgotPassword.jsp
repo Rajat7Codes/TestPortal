@@ -30,6 +30,9 @@
 <link href="${pageContext.request.contextPath}/static/css/main5739.css"
 	rel="stylesheet" type="text/css">
 
+<link rel="stylesheet"
+	href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css" />
+
 <style>
 .logo-w {
 	padding: 40px 100px !important
@@ -45,23 +48,7 @@
 </style>
 
 </head>
-
-<c:if test="${ alertMsg!=null }">
-	<c:if test="${ alertMsg!=\"Please Check Your Mail For OTP\" }">
-		<div class="alert alert-danger">
-			<p>${alertMsg}!</p>
-		</div>
-	</c:if>
-	<c:if test="${ alertMsg==\"Please Check Your Mail For OTP\" }">
-		<div class="alert alert-success">
-			<p>${alertMsg}!</p>
-		</div>
-	</c:if>
-</c:if>
-
-
-
-<body class="auth-wrapper" onload="confirmPassword()">
+<body class="auth-wrapper">
 	<div class="all-wrapper menu-side with-pattern">
 		<div class="auth-box-w">
 			<div class="logo-w">
@@ -75,6 +62,13 @@
 			<c:if test="${ !isOtp }">
 				<form action="${pageContext.request.contextPath}/forgot/password"
 					method="post">
+					<c:if test="${ alertMsg!=null }">
+						<c:if test="${ alertMsg!=\"Please Check Your Mail For OTP\" }">
+							<div class="alert alert-danger">
+								<p>${alertMsg}!</p>
+							</div>
+						</c:if>
+					</c:if>
 					<div class="form-group">
 						<label for="">Username</label> <input class="form-control"
 							name="userName" placeholder="Enter your username">
@@ -102,27 +96,42 @@
 				</form>
 			</c:if>
 			<c:if test="${ isOtp }">
-				<form action="${pageContext.request.contextPath}/change/password"
+				<form id="change-password"
+					action="${pageContext.request.contextPath}/change/password"
+					data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+					data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+					data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"
 					method="post">
+					<c:if test="${ alertMsg!=null }">
+						<c:if test="${ alertMsg==\"Please Check Your Mail For OTP\" }">
+							<div class="alert alert-success">
+								<p>${alertMsg}!</p>
+							</div>
+						</c:if>
+					</c:if>
 					<div class="form-group">
 						<label for="">OTP</label> <input type="text" name="otp" id="otp"
-							class="form-control" placeholder="Enter your OTP">
+							class="form-control" required placeholder="Enter your OTP">
 						<div class="pre-icon os-icon os-icon-mail"></div>
 					</div>
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for=""> Password</label> <input class="form-control"
-									placeholder="Password" id="password" name="password"
-									type="password">
+									placeholder="Password" required id="password1" name="password"
+									type="password" data-bv-identical="true"
+									data-bv-identical-field="confirmPassword"
+									data-bv-identical-message=" ">
 								<div class="pre-icon os-icon os-icon-fingerprint"></div>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for="">Confirm Password</label> <input
-									id="confirm_password" class="form-control"
-									placeholder="Password" type="password">
+									name="confirmPassword" required class="form-control"
+									placeholder="Password" type="password" data-bv-identical="true"
+									data-bv-identical-field="password"
+									data-bv-identical-message="Password mismatch">
 							</div>
 						</div>
 					</div>
@@ -139,85 +148,44 @@
 
 				</form>
 			</c:if>
-
-
-
-
-
-			<!-- <input type="text" id="login" class="form-group fadeIn second"
-				name="ssoId" placeholder="Username"> <input type="password"
-				id="password" class="form-group fadeIn third" name="password"
-				placeholder="Password"> <label style="width: 100%"
-				class="text-center pt-4 pb-3 text-secondary"> <input
-				type="checkbox" name="remember-me" id="rememberme"> Remember
-				Me
-			</label> <input type="submit" class="form-group fadeIn fourth" value="Log In">
-			</form> -->
-
-			<!-- Remind Passowrd -->
-			<%-- <div id="formFooter">
-					<a class="underlineHover" href="${pageContext.request.contextPath }/forgot/password">Forgot Password?</a>
-				</div> --%>
-
 		</div>
 	</div>
 </body>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 
 <script type="text/javascript">
-
-function validatePassword(){
-	if(password.value != confirm_password.value) {
-	  confirm_password.setCustomValidity("Passwords Don't Match");
-	} else {
-	  confirm_password.setCustomValidity('');
-	}
-}
-
- function confirmPassword() {
-	var password = document.getElementById("password");
-	var confirm_password = document.getElementById("confirm_password");
-	password.onchange = validatePassword;
-	confirm_password.onkeyup = validatePassword;
-}
-
-
-
-
-
-
-
-	function sendOtp() {
-		var otp = $('#otp').val();
-
-		if (otp != ${otp}) {
-			alert("Enter Email Address to Verify")
-		} else {
-			var data = {
-				'emailId' : emailId
-			};
-
-			$.ajax({
-				type : "GET",
-				contentType : "application/json",
-				url : "${pageContext.request.contextPath}/generate/otp",
-				data : data,
-				dataType : 'json',
-				cache : false,
-				timeout : 600000,
-				success : function(response) {
-					document.getElementById("otpBtn").style.display = "none";
-					document.getElementById("otp").style.display = "block";
-					document.getElementById("reg").style.display = "block";
-					alert("Check your mail for OTP " + response)
-					otpRec = response;
-				}
-			});
-		}
-	}
+	$(document)
+			.ready(
+					function() {
+						$('#change-password')
+								.bootstrapValidator(
+										{
+											feedbackIcons : {
+												valid : 'glyphicon glyphicon-ok',
+												invalid : 'glyphicon glyphicon-remove',
+												validating : 'glyphicon glyphicon-refresh'
+											},
+											fields : {
+												password : {
+													validators : {
+														identical : {
+															field : 'password'
+														}
+													}
+												},
+												confirmPassword : {
+													validators : {
+														identical : {
+															field : 'confirmPassword'
+														}
+													}
+												}
+											}
+										});
+					});
 </script>
 
 </html>

@@ -45,6 +45,10 @@ input:focus {
 }
 </style>
 
+
+<link rel="stylesheet"
+	href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css" />
+
 </head>
 <body>
 	<c:url var="loginUrl" value="/login" />
@@ -55,7 +59,7 @@ input:focus {
 					src="${pageContext.request.contextPath}/static/img/Iceico_logo.png"></a>
 			</div>
 			<h4 class="auth-header">Create new account</h4>
-			<form class="reg-form"
+			<form id="registerForm" class="reg-form"
 				action="${pageContext.request.contextPath }/register/generate/otp"
 				method="POST" enctype="multipart/form-data">
 				<div class="row">
@@ -121,14 +125,18 @@ input:focus {
 						<div class="form-group">
 							<label> Password</label> <input class="form-control"
 								placeholder="Password" id="password" name="password"
-								type="password">
+								type="password" data-bv-identical="true"
+								data-bv-identical-field="confirmPassword"
+								data-bv-identical-message=" ">
 							<div class="pre-icon os-icon os-icon-fingerprint"></div>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label>Confirm Password</label> <input id="confirmPassword"
-								class="form-control" placeholder="Password" type="password">
+								class="form-control" placeholder="Password" type="password"
+								data-bv-identical="true" data-bv-identical-field="password"
+								data-bv-identical-message="Password mismatch">
 						</div>
 					</div>
 				</div>
@@ -206,8 +214,10 @@ input:focus {
 	}
 </script>
 
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<%-- <script
+	src="${pageContext.request.contextPath }/static/bower_components/jquery/dist/jquery.min.js"></script> --%>
 <script
 	src="${pageContext.request.contextPath }/static/bower_components/popper.js/dist/umd/popper.min.js"></script>
 <script
@@ -266,5 +276,41 @@ input:focus {
 	src="${pageContext.request.contextPath }/static/js/demo_customizer5739.js?version=4.5.0"></script>
 <script
 	src="${pageContext.request.contextPath }/static/js/main5739.js?version=4.5.0"></script>
+
+
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						$('#registerForm')
+								.bootstrapValidator(
+										{
+											feedbackIcons : {
+												valid : 'glyphicon glyphicon-ok',
+												invalid : 'glyphicon glyphicon-remove',
+												validating : 'glyphicon glyphicon-refresh'
+											},
+											fields : {
+												password : {
+													validators : {
+														identical : {
+															field : 'password'
+														}
+													}
+												},
+												confirmPassword : {
+													validators : {
+														identical : {
+															field : 'confirmPassword'
+														}
+													}
+												}
+											}
+										});
+					});
+</script>
 
 </html>

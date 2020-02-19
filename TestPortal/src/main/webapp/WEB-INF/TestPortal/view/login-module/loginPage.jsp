@@ -43,29 +43,6 @@
 
 	<c:url var="loginUrl" value="/login" />
 
-	<c:if test="${alertMsg == \"Password Updated\"}">
-		<div class="alert alert-success">
-			<p>${ alertMsg }</p>
-		</div>
-	</c:if>
-
-	<c:if test="${expireDate == true}">
-		<div class="alert alert-danger">
-			<p>YOUR APPLICATION DATE IS EXPIRED......!</p>
-		</div>
-	</c:if>
-
-	<c:if test="${param.error != null}">
-		<div class="alert alert-danger m-0">
-			<p>Invalid Credentials</p>
-		</div>
-	</c:if>
-	<c:if test="${param.logout != null}">
-		<div class="alert alert-success m-0">
-			<p>Logged Out Successfully</p>
-		</div>
-	</c:if>
-
 	<div class="all-wrapper menu-side with-pattern">
 		<div class="auth-box-w">
 			<div class="logo-w">
@@ -74,30 +51,26 @@
 			</div>
 			<h4 class="auth-header">Login Form</h4>
 
+			<c:if test="${expireDate == true}">
+				<div class="alert alert-danger">
+					<p>YOUR APPLICATION DATE IS EXPIRED......!</p>
+				</div>
+			</c:if>
+
+			<c:if test="${param.error != null}">
+				<div class="alert alert-danger m-0">
+					<p>Invalid Credentials</p>
+				</div>
+			</c:if>
+			<c:if test="${param.logout != null}">
+				<div class="alert alert-success m-0">
+					<p>Logged Out Successfully</p>
+				</div>
+			</c:if>
+
 			<!-- Login Form -->
 			<form action="${loginUrl}" method="post">
-				<c:if test="${alertMsg == \"Password Updated\"}">
-					<div class="alert alert-success">
-						<p>${ alertMsg }</p>
-					</div>
-				</c:if>
 
-				<c:if test="${expireDate == true}">
-					<div class="alert alert-danger">
-						<p>YOUR APPLICATION DATE IS EXPIRED......!</p>
-					</div>
-				</c:if>
-
-				<c:if test="${param.error != null}">
-					<div class="alert alert-danger m-0">
-						<p>Invalid Credentials</p>
-					</div>
-				</c:if>
-				<c:if test="${param.logout != null}">
-					<div class="alert alert-success m-0">
-						<p>Logged Out Successfully</p>
-					</div>
-				</c:if>
 				<div class="form-group">
 					<label for="">Username</label> <input class="form-control"
 						name="ssoId" placeholder="Enter your username">
