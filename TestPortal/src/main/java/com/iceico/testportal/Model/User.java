@@ -56,6 +56,9 @@ public class User implements Serializable {
 	@Column(name = "position", nullable = false)
 	private String position;
 
+	@Column(name = "dob")
+	private String dob;
+
 	@Column(name = "department", nullable = false)
 	private String department;
 
@@ -65,6 +68,15 @@ public class User implements Serializable {
 	@Column(name = "mobile_number", nullable = false)
 	@Size(min = 10, max = 10, message = "Enter valid 10 digit mobile number")
 	private String mobileNumber;
+
+	@Column(name = "content_type")
+	private String contentType;
+
+	@Column(name = "file_path")
+	private String filePath;
+
+	@Column(name = "file_name")
+	private String fileName;
 
 	@Column(name = "description")
 	@Size(min = 0, max = 255, message = "Description range must be 0-255 charecters only")
@@ -174,6 +186,20 @@ public class User implements Serializable {
 	}
 
 	/**
+	 * @return the dob
+	 */
+	public String getDob() {
+		return dob;
+	}
+
+	/**
+	 * @param dob the dob to set
+	 */
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	/**
 	 * @return the department
 	 */
 	public String getDepartment() {
@@ -213,6 +239,48 @@ public class User implements Serializable {
 	 */
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
+	}
+
+	/**
+	 * @return the contentType
+	 */
+	public String getContentType() {
+		return contentType;
+	}
+
+	/**
+	 * @param contentType the contentType to set
+	 */
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	/**
+	 * @return the filePath
+	 */
+	public String getFilePath() {
+		return filePath;
+	}
+
+	/**
+	 * @param filePath the filePath to set
+	 */
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	/**
+	 * @return the fileName
+	 */
+	public String getFileName() {
+		return fileName;
+	}
+
+	/**
+	 * @param fileName the fileName to set
+	 */
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	/**

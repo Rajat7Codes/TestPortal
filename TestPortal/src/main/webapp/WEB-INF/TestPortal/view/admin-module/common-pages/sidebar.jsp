@@ -207,10 +207,11 @@
 		</div>
 	</div>
 	<div
-		class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link" style="margin-top:-54px;">
+		class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link"
+		style="margin-top: -54px;">
 		<div class="logo-w">
 			<a class="logo" href="index-2.html"><div class="logo-element"></div>
-				<div class="logo-label">Clean Admin</div></a>
+				<div class="logo-label">Test Portal</div></a>
 		</div>
 		<div class="logged-user-w avatar-inline">
 			<div class="logged-user-i">
@@ -579,6 +580,10 @@
 						</ul>
 					</div>
 				</div></li>
+
+
+
+
 			<!-- 	<li class="has-sub-menu"><a href="#"><div class="icon-w">
 					<div class="os-icon os-icon-zap"></div>
 				</div> <span>Icons</span></a>

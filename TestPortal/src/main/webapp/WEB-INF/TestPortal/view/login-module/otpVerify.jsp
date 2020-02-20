@@ -55,9 +55,10 @@
 						name="verifyEmailOtp" placeholder="Enter OTP">
 				</div>
 
-				<div id="data">${data }</div>
-				<input id="emailOtp" name="emailOtp" value="${emailOtp }"><input
-					id="finalJson" name="finalJson">
+				<div id="data" style="display: none;">${data }</div>
+				<input id="emailOtp" name="emailOtp" value="${emailOtp }"
+					type="hidden"><input id="finalJson" name="finalJson"
+					type="hidden">
 				<div class="mt-3 text-center">
 					<div class="row">
 						<div class="col-sm-6">
@@ -89,7 +90,6 @@
 			"data" : data,
 		};
 		$("#finalJson").val(JSON.stringify(object));
-		alert(JSON.stringify(object));
 
 		var form = document.getElementById("otpVerifyForm");
 		form.setAttribute("action",

@@ -16,12 +16,28 @@
 	</definition>
 
 
-	<!-- USER DASHBOARD PAGE -->
+	<!-- STUDENT DASHBOARD PAGE -->
 	<definition name="studentDashboard"
 		extends="studentbase.definition">
 		<put-attribute name="title" value="STUDENT | DASHBOARD" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/student-module/dashboard.jsp" />
+	</definition>
+
+	<!-- STUDENT PROFILE PAGE -->
+	<definition name="studentProfile"
+		extends="studentbase.definition">
+		<put-attribute name="title" value="STUDENT | PROFILE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/student-module/studentProfile.jsp" />
+	</definition>
+
+	<!-- UPDATE STUDENT PROFILE PAGE -->
+	<definition name="updateStudProfile"
+		extends="studentbase.definition">
+		<put-attribute name="title" value="STUDENT | PROFILE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/student-module/updateStudProfile.jsp" />
 	</definition>
 
 </tiles-definitions>

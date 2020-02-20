@@ -1,6 +1,8 @@
 package com.iceico.testportal.ServiceIMPL;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.iceico.testportal.Dao.UserDao;
 import com.iceico.testportal.Model.User;
+import com.iceico.testportal.Model.UserProfile;
+import com.iceico.testportal.Service.UserProfileService;
 import com.iceico.testportal.Service.UserService;
 
 /**
@@ -27,6 +31,9 @@ public class UserServiceIMPL implements UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private UserProfileService userProfileService;
 
 	/*
 	 * public User findById(int id) { return dao.findById(id); }
@@ -96,14 +103,24 @@ public class UserServiceIMPL implements UserService {
 			if (!user.getPassword().equals(entity.getPassword())) {
 				entity.setPassword(passwordEncoder.encode(user.getPassword()));
 			}
+
+			/*
+			 * UserProfile profile = userProfileService.findByType("STUDENT");
+			 * Set<UserProfile> role = new HashSet<>(); role.add(profile);
+			 * 
+			 * entity.setUserProfiles(role);
+			 */
 			entity.setFirstName(user.getFirstName());
 			entity.setLastName(user.getLastName());
 			entity.setEmail(user.getEmail());
 			entity.setUserProfiles(user.getUserProfiles());
 			entity.setMobileNumber(user.getMobileNumber());
 			entity.setDescription(user.getDescription());
+			entity.setDob(user.getDob());
+			entity.setFileName(user.getFileName());
+			entity.setContentType(user.getContentType());
+			entity.setFilePath(user.getFilePath());
 		}
-
 	}
 
 	@Override

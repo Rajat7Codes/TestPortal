@@ -57,7 +57,7 @@ input:focus {
 			<h4 class="auth-header">Create new account</h4>
 			<form class="reg-form"
 				action="${pageContext.request.contextPath }/register/generate/otp"
-				method="POST" enctype="multipart/form-data">
+				method="POST">
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
@@ -132,7 +132,7 @@ input:focus {
 						</div>
 					</div>
 				</div>
-				<input id="data" name="data">
+				<input id="data" name="data" type="hidden">
 				<div class="mt-3 text-center">
 					<button id="reg" type="submit" class="btn btn-primary form-control"
 						onclick="getFormData();">
@@ -159,7 +159,6 @@ input:focus {
 		};
 
 		$('#data').val(JSON.stringify(data));
-		alert(JSON.stringify(data));
 	}
 </script>
 
