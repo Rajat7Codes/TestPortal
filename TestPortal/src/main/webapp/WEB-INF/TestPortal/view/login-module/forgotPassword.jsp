@@ -96,7 +96,7 @@
 				</form>
 			</c:if>
 			<c:if test="${ isOtp }">
-				<form id="change-password"
+				<form id="change-password" class="pt-0"
 					action="${pageContext.request.contextPath}/change/password"
 					data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
 					data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
@@ -104,7 +104,7 @@
 					method="post">
 					<c:if test="${ alertMsg!=null }">
 						<c:if test="${ alertMsg==\"Please Check Your Mail For OTP\" }">
-							<div class="alert alert-success">
+							<div class="alert alert-white text-success mb-2 text-center font-weight-bolder">
 								<p>${alertMsg}!</p>
 							</div>
 						</c:if>
@@ -140,7 +140,7 @@
 							Password</button>
 					</div>
 					<div class="buttons-w mt-3 text-center">
-						<label class="form-check-label"> <a
+						<label class="form-check-label"> <a class="btn btn-outline-light text-dark"
 							href="${pageContext.request.contextPath}/login"> Go To Login
 						</a>
 						</label>
