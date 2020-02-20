@@ -113,37 +113,17 @@ public class QuestionBankController {
 				System.out.println("File Upload Error " + e);
 			}
 		}
-
 		JSONParser jsonParser = new JSONParser();
 		List<Options> optionsList = new ArrayList<Options>();
 
 		if (questionBank.getQuestionBankId() == null) {
+			System.out.println("Inside save If");
 
 			try {
 				JSONArray jsonArray = (JSONArray) jsonParser.parse(data);
 				for (int i = 0; i < jsonArray.size(); i++) {
 					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 					Options options = new Options();
-					options.setOptionName(jsonObject.get("optionName").toString());
-					options.setCorrectAnswer(jsonObject.get("correctAnswer").toString());
-					options.setQuestionBank(questionBank);
-					optionsList.add(options);
-				}
-				questionBank.setOptions(optionsList);
-				this.questionBankService.saveQuestionBank(questionBank);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			try {
-				JSONArray jsonArray = (JSONArray) jsonParser.parse(data);
-				for (int i = 0; i < jsonArray.size(); i++) {
-					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-					Options options = new Options();
-					String id = jsonObject.get("optionsId").toString();
-					Long optionsId = Long.parseLong(id);
-
-					options.setOptionsId(optionsId);
 					options.setOptionName(jsonObject.get("optionName").toString());
 					options.setCorrectAnswer(jsonObject.get("correctAnswer").toString());
 					options.setQuestionBank(questionBank);

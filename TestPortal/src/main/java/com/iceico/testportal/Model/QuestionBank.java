@@ -65,7 +65,7 @@ public class QuestionBank {
 	@JoinColumn(name = "question_Type_Id", insertable = true, nullable = true, updatable = true)
 	private QuestionType questionType;
 
-	@OneToMany(mappedBy = "questionBank", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "questionBank", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Options> options;
 
 	/**

@@ -203,7 +203,7 @@
 								<div class="form-buttons-w text-center">
 									<input type="text" id="data" name="data" style="display: none;">
 									<!-- <i class="btn" id="jsonBtn" onclick="addToUpdateJson1();">Add</i> -->
-									<!-- <input type="button" onclick="newJsonUpdate();"> -->
+									<!-- <input type="button" onclick="newPageJson();">Cheack -->
 									<c:if test="${edit == true }">
 										<button class="btn btn-primary" type="submit"
 											onclick="addToUpdateJson1();">Update</button>
@@ -306,7 +306,7 @@
 		}
 		var data = document.getElementById('data');
 		data.value = JSON.stringify(sellEntryDetArray);
-		//alert("json array===>" + JSON.stringify(sellEntryDetArray));
+		alert("json array===>" + JSON.stringify(sellEntryDetArray));
 	}
 </script>
 
