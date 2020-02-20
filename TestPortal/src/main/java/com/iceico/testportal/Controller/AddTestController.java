@@ -65,6 +65,9 @@ public class AddTestController {
 			return "redirect:/admin/add/test";
 		}
 	}
+	
+	
+	
 
 	private String getPrincipal() {
 		String userName = null;

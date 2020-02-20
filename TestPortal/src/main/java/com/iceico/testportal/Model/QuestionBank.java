@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @author SAMEER KADGAYE
  * @version 0.1
  * 
- *          Created Date : 14/02/2020
+ *          Created Date : 14/02/2020 updated by: puja
  *
  */
 @Entity
@@ -65,7 +65,11 @@ public class QuestionBank {
 	@JoinColumn(name = "question_Type_Id", insertable = true, nullable = true, updatable = true)
 	private QuestionType questionType;
 
-	@OneToMany(mappedBy = "questionBank", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@JoinColumn(name = "add_test_id", insertable = true, nullable = true, updatable = true)
+	private AddTest addTest;
+
+	@OneToMany(mappedBy = "questionBank", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private List<Options> options;
 
 	/**
@@ -78,10 +82,12 @@ public class QuestionBank {
 	 * @param contentType
 	 * @param description
 	 * @param questionType
+	 * @param addTest
 	 * @param options
 	 */
 	public QuestionBank(Long questionBankId, String question, Integer marks, String subject, String imageName,
-			String filePath, String contentType, String description, QuestionType questionType, List<Options> options) {
+			String filePath, String contentType, String description, QuestionType questionType, AddTest addTest,
+			List<Options> options) {
 		super();
 		this.questionBankId = questionBankId;
 		this.question = question;
@@ -92,6 +98,7 @@ public class QuestionBank {
 		this.contentType = contentType;
 		this.description = description;
 		this.questionType = questionType;
+		this.addTest = addTest;
 		this.options = options;
 	}
 
@@ -219,6 +226,20 @@ public class QuestionBank {
 	 */
 	public void setQuestionType(QuestionType questionType) {
 		this.questionType = questionType;
+	}
+
+	/**
+	 * @return the addTest
+	 */
+	public AddTest getAddTest() {
+		return addTest;
+	}
+
+	/**
+	 * @param addTest the addTest to set
+	 */
+	public void setAddTest(AddTest addTest) {
+		this.addTest = addTest;
 	}
 
 	/**

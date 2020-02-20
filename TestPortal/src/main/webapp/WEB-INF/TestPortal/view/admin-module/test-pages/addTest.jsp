@@ -105,10 +105,56 @@
 
 								</div>
 
-								<div class="form-buttons-w">
-									<button class="btn btn-secondary" type="submit">Reset</button>
-									<button class="btn btn-primary" type="submit">Submit</button>
+								<!-- table -->
+								<div class="element-wrapper">
+									<div class="element-box">
+										<h5 class="form-header">QUESTIONS LIST</h5>
+										<hr>
+
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>Customer Name</th>
+														<th>Orders</th>
+														<th>Location</th>
+														<th class="text-center">Status</th>
+														<th class="text-right">Order Total</th>
+													</tr>
+												</thead>
+												<tbody>
+
+													<tr>
+														<td>Joe Trulli</td>
+														<td>1,256</td>
+														<td><img alt="" src="img/flags-icons/es.png"
+															width="25px"></td>
+														<td class="text-center"><div
+																class="status-pill yellow" data-title="Pending"
+																data-toggle="tooltip"></div></td>
+														<td class="text-right">$1,120</td>
+													</tr>
+													<tr>
+														<td>Fred Kolton</td>
+														<td>74</td>
+														<td><img alt="" src="img/flags-icons/fr.png"
+															width="25px"></td>
+														<td class="text-center"><div
+																class="status-pill green" data-title="Complete"
+																data-toggle="tooltip"></div></td>
+														<td class="text-right">$74</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="form-buttons-w">
+										<button class="btn btn-secondary" type="submit">Reset</button>
+										<button class="btn btn-primary" type="submit">Submit</button>
+									</div>
 								</div>
+
+
 							</form:form>
 						</div>
 					</div>
