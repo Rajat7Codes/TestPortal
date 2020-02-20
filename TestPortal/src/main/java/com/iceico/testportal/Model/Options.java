@@ -40,7 +40,7 @@ public class Options {
 	@Column(name = "correct_answer")
 	private String correctAnswer;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "questionBankId", insertable = true, nullable = true, updatable = true)
 	private QuestionBank questionBank;
 
