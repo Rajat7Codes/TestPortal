@@ -26,8 +26,12 @@
 					<img alt="" src="img/avatar1.jpg">
 				</div>
 				<div class="logged-user-info-w">
-					<div class="logged-user-name">${user.ssoId }</div>
-					<div class="logged-user-role">${user.position }</div>
+					<div class="logged-user-name">
+						<%-- ${user.ssoId } --%>
+					</div>
+					<div class="logged-user-role">
+						<%-- ${user.position } --%>
+					</div>
 				</div>
 			</div>
 			<ul class="main-menu">
@@ -171,6 +175,12 @@
 						<li><a href="tables_datatables.html">Data Tables</a></li>
 						<li><a href="tables_editable.html">Editable Tables</a></li>
 					</ul></li>
+
+				<li class="has-sub-menu"><a
+					href="${pageContext.request.contextPath }/admin/add/test"><div
+							class="icon-w">
+							<div class="os-icon os-icon-edit-32"></div>
+						</div> <span>Add Test</span></a></li>
 				<!-- <li class="has-sub-menu"><a href="#"><div class="icon-w">
 						<div class="os-icon os-icon-zap"></div>
 					</div> <span>Icons</span></a>
@@ -207,7 +217,8 @@
 		</div>
 	</div>
 	<div
-		class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link" style="margin-top:-54px;">
+		class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link"
+		style="margin-top: -54px;">
 		<div class="logo-w">
 			<a class="logo" href="index-2.html"><div class="logo-element"></div>
 				<div class="logo-label">Clean Admin</div></a>
@@ -218,8 +229,12 @@
 					<img alt="" src="img/avatar1.jpg">
 				</div>
 				<div class="logged-user-info-w">
-					<div class="logged-user-name">${user.ssoId }</div>
-					<div class="logged-user-role">${user.position }</div>
+					<div class="logged-user-name">
+						<%-- ${user.ssoId } --%>
+					</div>
+					<div class="logged-user-role">
+						<%-- ${user.position } --%>
+					</div>
 				</div>
 				<div class="logged-user-toggler-arrow">
 					<div class="os-icon os-icon-chevron-down"></div>
@@ -230,8 +245,12 @@
 							<img alt="" src="img/avatar1.jpg">
 						</div>
 						<div class="logged-user-info-w">
-							<div class="logged-user-name">${user.ssoId }</div>
-							<div class="logged-user-role">${user.position }</div>
+							<div class="logged-user-name">
+								<%-- ${user.ssoId } --%>
+							</div>
+							<div class="logged-user-role">
+								<%-- ${user.position } --%>
+							</div>
 						</div>
 					</div>
 					<div class="bg-icon">
@@ -579,6 +598,13 @@
 						</ul>
 					</div>
 				</div></li>
+
+			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/admin/add/test">
+					<div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span>Add Test</span>
+			</a></li>
 			<!-- 	<li class="has-sub-menu"><a href="#"><div class="icon-w">
 					<div class="os-icon os-icon-zap"></div>
 				</div> <span>Icons</span></a>
