@@ -178,13 +178,12 @@
 							<div class="os-icon os-icon-grid"></div>
 						</div> <span>Question Bank</span></a>
 					<ul class="sub-menu">
-						<li><a
-							href="${pageContext.request.contextPath }/admin/question/bank/new">New</a></li>
-						<li><a
-							href="${pageContext.request.contextPath }/admin/question/bank">New</a></li>
+						<li><a href="#">New</a></li>
+						<li><a href="#">New</a></li>
 						<!-- <li><a href="tables_datatables.html">Data Tables</a></li> -->
 						<!-- <li><a href="tables_editable.html">Search Master</a></li> -->
 					</ul></li>
+
 
 				<li class="has-sub-menu"><a href="#"><div class="icon-w">
 							<div class="os-icon os-icon-grid"></div>
@@ -604,6 +603,34 @@
 						</ul>
 					</div>
 				</div></li>
+
+
+			<li class="has-sub-menu"><a href="#"><div class="icon-w">
+						<div class="os-icon os-icon-grid"></div>
+					</div> <span>Question Bank</span></a>
+				<div class="sub-menu-w">
+					<div class="sub-menu-header">Question Bank</div>
+					<div class="sub-menu-icon">
+						<i class="os-icon os-icon-grid"></i>
+					</div>
+					<div class="sub-menu-i">
+						<ul class="sub-menu">
+							<li><a
+								href="${pageContext.request.contextPath }/admin/question/bank/new">New</a></li>
+							<li><a
+								href="${pageContext.request.contextPath }/admin/question/bank">View</a></li>
+							<!-- <li><a href="tables_editable.html">Editable Tables</a></li> -->
+						</ul>
+					</div>
+				</div></li>
+
+
+
+
+
+
+
+
 			<!-- 	<li class="has-sub-menu"><a href="#"><div class="icon-w">
 					<div class="os-icon os-icon-zap"></div>
 				</div> <span>Icons</span></a>
