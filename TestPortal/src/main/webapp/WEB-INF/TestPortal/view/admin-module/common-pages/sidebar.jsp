@@ -599,7 +599,7 @@
 					</div>
 				</div></li>
 
-			<li class="has-sub-menu"><a
+			<li class="sub-menu"><a
 				href="${pageContext.request.contextPath }/admin/add/test">
 					<div class="icon-w">
 						<div class="os-icon os-icon-edit-32"></div>
