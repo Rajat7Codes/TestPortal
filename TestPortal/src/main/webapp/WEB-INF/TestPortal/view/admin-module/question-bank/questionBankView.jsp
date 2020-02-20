@@ -11,18 +11,10 @@
 	<div class="content-i">
 		<div class="content-box">
 			<div class="element-wrapper">
-				<h6 class="element-header">Data Tables</h6>
+				<h6 class="element-header">Question Bank View</h6>
 				<div class="element-box">
-					<!-- <h5 class="form-header">Powerful Datatables</h5> -->
-					<!-- <div class="form-desc">
-						DataTables is a plug-in for the jQuery Javascript library. It is a
-						highly flexible tool, based upon the foundations of progressive
-						enhancement, and will add advanced interaction controls to any
-						HTML table.. <a href="https://www.datatables.net/" target="_blank">Learn
-							More about DataTables</a>
-					</div> -->
 					<div class="table-responsive">
-						<table id="example1" width="100%"
+						<table id="" width="100%"
 							class="table table-striped table-lightfont">
 							<thead>
 								<tr>
@@ -54,7 +46,7 @@
 														href="<c:url value='/admin/question/bank/edit/${questionBank.questionBankId}' />"><i
 															class="fa fa-trash"></i>Edit</a></li>
 													<li><a title="Edit"
-														href="<c:url value='/admin/questionType/edit/${questionType.questionTypeId }' />"><i
+														href="<c:url value='/admin/question/bank/delete/${questionBank.questionBankId}' />"><i
 															class="fa fa-edit"></i>Delete</a></li>
 												</ul>
 											</div></td>

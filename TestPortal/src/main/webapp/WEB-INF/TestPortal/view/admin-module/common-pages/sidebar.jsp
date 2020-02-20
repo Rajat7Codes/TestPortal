@@ -171,6 +171,30 @@
 						<li><a href="tables_datatables.html">Data Tables</a></li>
 						<li><a href="tables_editable.html">Editable Tables</a></li>
 					</ul></li>
+
+
+
+				<li class="has-sub-menu"><a href="#"><div class="icon-w">
+							<div class="os-icon os-icon-grid"></div>
+						</div> <span>Question Bank</span></a>
+					<ul class="sub-menu">
+						<li><a
+							href="${pageContext.request.contextPath }/admin/question/bank/new">New</a></li>
+						<li><a
+							href="${pageContext.request.contextPath }/admin/question/bank">New</a></li>
+						<!-- <li><a href="tables_datatables.html">Data Tables</a></li> -->
+						<!-- <li><a href="tables_editable.html">Search Master</a></li> -->
+					</ul></li>
+
+				<li class="has-sub-menu"><a href="#"><div class="icon-w">
+							<div class="os-icon os-icon-grid"></div>
+						</div> <span>Search Master</span></a>
+					<ul class="sub-menu">
+						<li><a
+							href="${pageContext.request.contextPath }/admin/question/bank/search">Search</a></li>
+					</ul></li>
+
+
 				<!-- <li class="has-sub-menu"><a href="#"><div class="icon-w">
 						<div class="os-icon os-icon-zap"></div>
 					</div> <span>Icons</span></a>
@@ -207,7 +231,8 @@
 		</div>
 	</div>
 	<div
-		class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link" style="margin-top:-54px;">
+		class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link"
+		style="margin-top: -54px;">
 		<div class="logo-w">
 			<a class="logo" href="index-2.html"><div class="logo-element"></div>
 				<div class="logo-label">Clean Admin</div></a>

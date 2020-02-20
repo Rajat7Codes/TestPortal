@@ -23,15 +23,15 @@
 <link
 	href="${pageContext.request.contextPath }/static/bower_components/bootstrap-daterangepicker/daterangepicker.css"
 	rel="stylesheet">
-<link																																																																																																																																																																																																													
+<link
 	href="${pageContext.request.contextPath }/static/bower_components/dropzone/dist/dropzone.css"
 	rel="stylesheet">
 <link
 	href="${pageContext.request.contextPath }/static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"
-	rel="stylesheet">																																																																																																									
+	rel="stylesheet">
 <link
 	href="${pageContext.request.contextPath }/static/bower_components/fullcalendar/dist/fullcalendar.min.css"
-	rel="stylesheet">																																																										
+	rel="stylesheet">
 <link
 	href="${pageContext.request.contextPath }/static/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css"
 	rel="stylesheet">
@@ -129,11 +129,11 @@
 		src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> -->
 
 
-	<!-- <!-- <script type="text/javascript">
+	<!-- <script type="text/javascript">
 		jQuery(document).ready(function() {
 			jQuery('#example1').DataTable();
 		});
 	</script> -->
-	-->
+
 </body>
 </html>

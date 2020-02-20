@@ -10,7 +10,10 @@ import com.iceico.testportal.Model.QuestionBank;
 import com.iceico.testportal.Model.QuestionType;
 
 /**
- * @author sameer
+ * @author SAMEER KADGAYE
+ * @version 0.1
+ * 
+ *          Created Date : 14/02/2020
  *
  */
 @Repository

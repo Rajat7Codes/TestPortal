@@ -18,7 +18,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * @author sameer
+ * @author SAMEER KADGAYE
+ * @version 0.1
+ * 
+ *          Created Date : 14/02/2020
  *
  */
 @Entity
@@ -41,7 +44,7 @@ public class QuestionBank {
 	private String question;
 
 	@Column(name = "marks")
-	private String marks;
+	private Integer marks;
 
 	@Column(name = "subject")
 	private String subject;
@@ -59,7 +62,7 @@ public class QuestionBank {
 	private String description;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "questionTypeId", insertable = true, nullable = true, updatable = true)
+	@JoinColumn(name = "question_Type_Id", insertable = true, nullable = true, updatable = true)
 	private QuestionType questionType;
 
 	@OneToMany(mappedBy = "questionBank", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
@@ -77,7 +80,7 @@ public class QuestionBank {
 	 * @param questionType
 	 * @param options
 	 */
-	public QuestionBank(Long questionBankId, String question, String marks, String subject, String imageName,
+	public QuestionBank(Long questionBankId, String question, Integer marks, String subject, String imageName,
 			String filePath, String contentType, String description, QuestionType questionType, List<Options> options) {
 		super();
 		this.questionBankId = questionBankId;
@@ -123,14 +126,14 @@ public class QuestionBank {
 	/**
 	 * @return the marks
 	 */
-	public String getMarks() {
+	public Integer getMarks() {
 		return marks;
 	}
 
 	/**
 	 * @param marks the marks to set
 	 */
-	public void setMarks(String marks) {
+	public void setMarks(Integer marks) {
 		this.marks = marks;
 	}
 

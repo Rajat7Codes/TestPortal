@@ -12,7 +12,8 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="menu-position-side menu-side-left full-screen">
+<body class="menu-position-side menu-side-left full-screen"
+	onload="myToggle();">
 	<!-- onload="myToggle();" -->
 	<div class="content-i">
 		<div class="content-box">
