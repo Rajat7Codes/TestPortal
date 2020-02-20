@@ -72,7 +72,7 @@
 							<div class="element-box">
 
 								<div class="form-desc">
-									<h4 class="form-header">STUDENT LIST</h4>
+									<h4 class="form-header">SUBJECT LIST</h4>
 									<hr>
 								</div>
 								<div class="table-responsive">

@@ -61,8 +61,10 @@ public class UserController {
 
 	@Autowired
 	private EMailService emailService;
-	
-	
+
+	private Integer otpSent = null;
+	private String changePassUserSSO = null;
+
 	/**
 	 * This method will provide the medium to add a new user.
 	 */
@@ -77,10 +79,11 @@ public class UserController {
 	}
 
 	@RequestMapping(value = { "/admin/user/verify/mail" }, method = RequestMethod.POST)
-	public String verifyUserMail( @RequestParam("emailId") String emailId,  @RequestParam("fname") String fName,  @RequestParam("lname") String lName, 
-			@RequestParam("mobile") String mobile,  @RequestParam("password") String password,  @RequestParam("department") String department,
-			@RequestParam("position") String position,  @RequestParam("image") String image, ModelMap model) {
-		
+	public String verifyUserMail(@RequestParam("emailId") String emailId, @RequestParam("fname") String fName,
+			@RequestParam("lname") String lName, @RequestParam("mobile") String mobile,
+			@RequestParam("password") String password, @RequestParam("department") String department,
+			@RequestParam("position") String position, @RequestParam("image") String image, ModelMap model) {
+
 		String emailOtp = this.otpService.generateOTP();
 		String toEmail = emailId;
 		String subject = "ICEICO Test Portal OTP";
@@ -88,7 +91,7 @@ public class UserController {
 		String emailMessage = "Hello Student, \n" + " Your One time Passowrd For Registering On ICEICO Test "
 				+ "Portal is" + " " + emailOtp + "";
 
-		emailService.sendOtpMessage( toEmail, subject, emailMessage);
+		emailService.sendOtpMessage(toEmail, subject, emailMessage);
 
 		User user = new User();
 		user.setEmail(emailId);
@@ -108,26 +111,26 @@ public class UserController {
 		model.addAttribute("user", getPrincipal());
 		return "verifyMail";
 	}
-	
-	
+
 	@SuppressWarnings({ "deprecation" })
-	@RequestMapping( value= {"/register/user"}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
-	public String registerUser(  @RequestParam("fname") String fName,  @RequestParam("lname") String lName, 
-			@RequestParam("mob") String mobile,  @RequestParam("pass") String password,  @RequestParam("email") String emailId, ModelMap modelMap) throws ParseException {
-		
+	@RequestMapping(value = { "/register/user" }, produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
+	public String registerUser(@RequestParam("fname") String fName, @RequestParam("lname") String lName,
+			@RequestParam("mob") String mobile, @RequestParam("pass") String password,
+			@RequestParam("email") String emailId, ModelMap modelMap) throws ParseException {
+
 		User user = new User();
 		user.setEmail(emailId);
 		user.setFirstName(fName);
 		user.setLastName(lName);
 		user.setMobileNumber(mobile);
 		user.setPassword(password);
-		user.setSsoId(user.getFirstName()+" "+user.getLastName());
-		
+		user.setSsoId(user.getFirstName() + " " + user.getLastName());
+
 		UserProfile profile = this.userProfileService.findByType("STUDENT");
 		Set<UserProfile> role = new HashSet<UserProfile>();
 		role.add(profile);
 		user.setUserProfiles(role);
-		
+
 		this.userService.saveUser(user);
 		modelMap.addAttribute("user", getPrincipal());
 		return null;
@@ -335,28 +338,51 @@ public class UserController {
 
 	@RequestMapping(value = { "/forgot/password" }, method = RequestMethod.GET)
 	public String forgotPassword(ModelMap modelMap) {
+		
 		return "forgotPassword";
 	}
 
-	@RequestMapping(value = { "/forgot/password" }, method = RequestMethod.POST)
-	public String forgetPassword(@ModelAttribute("userName") String userName, @ModelAttribute("email") String email,
-			@ModelAttribute("mobileNumber") String mobileNumber, @ModelAttribute("password") String password,
-			ModelMap modelMap) {
-
-		User user = userService.findBySSO(userName);
-
-		if (user == null) {
-			modelMap.addAttribute("userError", "Username Not Available");
-			return "forgotPassword";
-		} else if (email.equals(user.getEmail()) && mobileNumber.equals(user.getMobileNumber())) {
+	@RequestMapping(value = { "/change/password" }, method = RequestMethod.POST)
+	public String changePassword(@ModelAttribute("otp") Integer otpRecieved, @ModelAttribute("password") String password, ModelMap modelMap) {
+		System.out.println( "========> "+otpRecieved);
+		System.out.println( "========> "+otpSent);
+		if ((otpRecieved+"").equals( otpSent+"")) {
+			User user = this.userService.findBySSO(this.changePassUserSSO);
 			user.setPassword(password);
-			userService.updateUser(user);
-			modelMap.addAttribute("updated", "Password Upodated Successfully");
-			return "forgotPassword";
+			this.userService.saveUser(user);
+			return "welcome";
 		} else {
-			modelMap.addAttribute("detailsError", "Please Enter Proper Details");
+			modelMap.addAttribute("alertMsg", "Wrong OTP");
 			return "forgotPassword";
 		}
+	}
+
+	@RequestMapping(value = { "/forgot/password" }, method = RequestMethod.POST)
+	public String forgetPassword(@ModelAttribute("userName") String userName, 
+			@ModelAttribute("email") String email, @ModelAttribute("mobileNumber") String mobileNumber, ModelMap modelMap) {
+		
+		User user = this.userService.findBySSO( userName);
+		
+		if (user == null) {
+			modelMap.addAttribute("isOtp", false);
+			modelMap.addAttribute("alertMsg", "Username Not Available");
+		} else if (email.equals(user.getEmail()) && mobileNumber.equals(user.getMobileNumber())) {
+			String emailOtp = this.otpService.generateOTP();
+			String subject = "ICEICO Test Portal OTP";
+			String emailMessage = "Hello Student, \n" + " Your One time Passowrd for changing password On ICEICO Test "
+					+ "Portal is" + " " + emailOtp;
+			emailService.sendOtpMessage(email, subject, emailMessage);
+			this.otpSent = Integer.parseInt(emailOtp);
+			this.changePassUserSSO = userName;
+			modelMap.addAttribute("alertMsg", "Please Check Your Mail For OTP");
+			modelMap.addAttribute("otp", emailOtp);
+			modelMap.addAttribute("isOtp", true);
+		} else {
+			modelMap.addAttribute("isOtp", false);
+			modelMap.addAttribute("alertMsg", "Please Enter Proper Details");
+		}
+
+		return "forgotPassword";
 	}
 
 	/**

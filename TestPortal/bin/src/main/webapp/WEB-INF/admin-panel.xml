@@ -12,8 +12,8 @@
 		<put-attribute name="sidebar"
 			value="/WEB-INF/TestPortal/view/admin-module/common-pages/sidebar.jsp" />
 		<put-attribute name="body" value="" />
-	<!-- 	<put-attribute name="footer"
-			value="/WEB-INF/TestPortal/view/admin-module/common-pages/footer.jsp" /> -->
+		<!-- <put-attribute name="footer" value="/WEB-INF/TestPortal/view/admin-module/common-pages/footer.jsp" 
+			/> -->
 	</definition>
 
 
@@ -25,6 +25,16 @@
 	<!-- REGISTRATION PAGE -->
 	<definition name="register"
 		template="/WEB-INF/TestPortal/view/login-module/register.jsp">
+	</definition>
+	
+	<!-- FORGOT PASSWORD PAGE -->
+	<definition name="forgotPassword"
+		template="/WEB-INF/TestPortal/view/login-module/forgotPassword.jsp">
+	</definition>
+
+	<!-- VERIFICATION PAGE -->
+	<definition name="otpVerify"
+		template="/WEB-INF/TestPortal/view/login-module/otpVerify.jsp">
 	</definition>
 
 	<!-- FORGOT PASSWORD -->
@@ -39,6 +49,54 @@
 		<put-attribute name="title" value="Dashboard" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/admin-module/dashboard.jsp" />
+	</definition>
+
+
+	<!-- Question Bank -->
+	<definition name="questionBank"
+		extends="adminbase.definition">
+		<put-attribute name="title" value="question Bank" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/question-bank/questionBank.jsp" />
+	</definition>
+
+
+
+	<!-- department pages -->
+
+	<!--Department page -->
+	<definition name="department" extends="adminbase.definition">
+		<put-attribute name="title" value="Department" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/department-pages/department.jsp" />
+	</definition>
+
+
+	<definition name="subject" extends="adminbase.definition">
+		<put-attribute name="title" value="Subject" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/department-pages/subject.jsp" />
+	</definition>
+
+	<definition name="questionType"
+		extends="adminbase.definition">
+		<put-attribute name="title" value="Question Type" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/department-pages/questionType.jsp" />
+	</definition>
+
+	<!--Add test -->
+	<definition name="addTest" extends="adminbase.definition">
+		<put-attribute name="title" value="Add Test" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/add-test/addTest.jsp" />
+	</definition>
+
+	<definition name="questionBankView"
+		extends="adminbase.definition">
+		<put-attribute name="title" value="Question" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/question-bank/questionBankView.jsp" />
 	</definition>
 
 </tiles-definitions>

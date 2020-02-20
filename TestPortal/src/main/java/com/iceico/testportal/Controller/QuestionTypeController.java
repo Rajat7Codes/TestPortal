@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.QuestionType;
 import com.iceico.testportal.Service.QuestionTypeService;
+import com.iceico.testportal.Service.UserService;
 
 /**
  * @author puja
@@ -29,6 +30,8 @@ public class QuestionTypeController {
 
 	@Autowired
 	private QuestionTypeService questionTypeService;
+	@Autowired
+	private UserService usrService;
 
 	public QuestionTypeController() {
 	}
@@ -37,7 +40,7 @@ public class QuestionTypeController {
 	public String getQuestionType(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("questionType", new QuestionType());
 		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
-		modelMap.addAttribute("user", this.getPrincipal());
+		modelMap.addAttribute("user", usrService.findBySSO(this.getPrincipal()));
 		return "questionType";
 
 	}
@@ -48,12 +51,12 @@ public class QuestionTypeController {
 		if (bindingResult.hasErrors()) {
 			modelMap.addAttribute("questionType", new QuestionType());
 			modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
-			modelMap.addAttribute("user", this.getPrincipal());
+			modelMap.addAttribute("user", usrService.findBySSO(this.getPrincipal()));
 			return "questionType";
 
 		} else {
 			this.questionTypeService.saveQuestionType(questionType);
-			modelMap.addAttribute("user", this.getPrincipal());
+			modelMap.addAttribute("user", usrService.findBySSO(this.getPrincipal()));
 			return "redirect:/admin/questionType";
 		}
 	}
@@ -63,7 +66,7 @@ public class QuestionTypeController {
 			Locale locale) throws ResourceNotFoundException {
 		modelMap.addAttribute("questionType", this.questionTypeService.getQuestionTypeById(questionTypeId));
 		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
-		modelMap.addAttribute("user", this.getPrincipal());
+		modelMap.addAttribute("user", usrService.findBySSO(this.getPrincipal()));
 		return "questionType";
 
 	}
@@ -72,7 +75,6 @@ public class QuestionTypeController {
 	public String deleteQuestionType(@PathVariable("questionTypeId") @Valid Long questionTypeId, ModelMap modelMap,
 			Locale locale) throws ResourceNotFoundException {
 		this.questionTypeService.deleteQuestionType(questionTypeId);
-		modelMap.addAttribute("user", this.getPrincipal());
 		return "redirect:/admin/questionType";
 	}
 
