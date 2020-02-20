@@ -129,7 +129,7 @@
 		src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> -->
 
 
-	<!-- <script type="text/javascript">
+	<!-- <!-- <script type="text/javascript">
 		jQuery(document).ready(function() {
 			jQuery('#example1').DataTable();
 		});

@@ -1,0 +1,5 @@
+INSERT INTO tab_user_profile(type)VALUES ('ADMIN'),('STUDENT');
+  
+INSERT INTO tab_app_user(FIRST_NAME,LAST_NAME,SSO_ID,PASSWORD,EMAIL,MOBILE_NUMBER,DESCRIPTION) VALUES ('Admin','Admin','admin','$2a$10$xKJ4XNL6TrUfaCPue983T.m5MOmVlzM2bpDzSghrAklCJpcQ954ku','admin@gmail.com','0123456789','ABC');
+
+INSERT INTO tab_app_user_user_profile(USER_ID,USER_PROFILE_ID) VALUES (1,1);
