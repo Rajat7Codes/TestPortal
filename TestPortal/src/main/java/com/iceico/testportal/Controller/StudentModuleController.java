@@ -149,14 +149,20 @@ public class StudentModuleController {
 		System.out.println("jobj========" + jobj);
 		JSONObject data = (JSONObject) jsonParser.parse(jobj);
 
+		UserProfile profile = null;
+
 		if (emailOtp.equalsIgnoreCase(verifyEmailOtp)) {
 
-			UserProfile profile = userProfileService.findByType("STUDENT");
+			if (data.get("department").toString().equalsIgnoreCase("Java"))
+				profile = userProfileService.findByType("JAVA");
+
+			if (data.get("department").toString().equalsIgnoreCase("Web"))
+				profile = userProfileService.findByType("WEB");
+
 			Set<UserProfile> role = new HashSet<>();
 			role.add(profile);
 
 			User user = new User();
-
 			user.setUserProfiles(role);
 			user.setSsoId(data.get("username").toString());
 			user.setFirstName(data.get("fname").toString());
@@ -170,7 +176,6 @@ public class StudentModuleController {
 
 			this.userService.saveUser(user);
 			return "redirect:/login";
-
 		} else {
 			modelMap.addAttribute("emailOtp", emailOtp);
 			modelMap.addAttribute("data", data.toJSONString());
@@ -178,7 +183,6 @@ public class StudentModuleController {
 			return "otpVerify";
 		}
 	}
-
 
 	/**
 	 * This method returns the principal[user-name] of logged-in user.

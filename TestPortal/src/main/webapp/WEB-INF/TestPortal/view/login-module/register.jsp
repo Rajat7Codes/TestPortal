@@ -7,26 +7,26 @@
 <meta charset="UTF-8">
 <title>TEST PORTAL | REGISTER</title>
 
-<link
+<%-- <link
 	href="../../../../../fonts.googleapis.com/css6079.css?family=Poppins:300,400,500,600,700"
 	rel="stylesheet" type="text/css" />
-<!-- icons -->
+
 <link
 	href="${pageContext.request.contextPath }/static/fonts/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css" />
 <link
 	href="${pageContext.request.contextPath }/static/fonts/material-design-icons/material-icon.css"
 	rel="stylesheet" type="text/css" />
-<!-- bootstrap -->
+
 <link
 	href="${pageContext.request.contextPath }/static/plugins/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" type="text/css" />
-<!-- style -->
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/static/css/pages/extra_pages.css">
-<!-- favicon -->
+
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath }/static/img/favicon.png" />
+	href="${pageContext.request.contextPath }/static/img/favicon.png" /> --%>
 <link
 	href="${pageContext.request.contextPath}/static/css/main5739.css?version=4.5.0"
 	rel="stylesheet">
@@ -60,7 +60,10 @@ input:focus {
 			</div>
 			<h4 class="auth-header">Create new account</h4>
 			<form id="registerForm" class="reg-form"
-				action="${pageContext.request.contextPath }/register/generate/otp"
+				action="${pageContext.request.contextPath }/register/generate/otp"data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+					data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+					data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"
+					
 				method="POST" enctype="multipart/form-data">
 				<div class="row">
 					<div class="col-sm-6">
@@ -93,11 +96,12 @@ input:focus {
 				<div class="form-group">
 					<label> Phone Number</label> <input class="form-control"
 						name="mobile" id="mobile" placeholder="Enter mobile number"
-						type="text">
+						type="number">
 					<div class="pre-icon os-icon os-icon-phone"></div>
 				</div>
 				<div class="form-group">
-					<label> Gender</label> <select class="form-control" id="gender"
+					<label> Gender</label> 
+					<select class="form-control" id="gender"
 						name="gender">
 						<option value="Female">Female</option>
 						<option value="Male">Male</option>
@@ -106,7 +110,8 @@ input:focus {
 					<div class="pre-icon os-icon os-icon-user"></div>
 				</div>
 				<div class="form-group">
-					<label> Department</label> <select class="form-control"
+					<label> Department</label> 
+					<select class="form-control"
 						id="department" name="department">
 						<option value="Java">Java</option>
 						<option value="Web">Web</option>
@@ -133,7 +138,7 @@ input:focus {
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label>Confirm Password</label> <input id="confirmPassword"
+							<label>Confirm Password</label> <input id="confirmPassword" name="confirmPassword"
 								class="form-control" placeholder="Password" type="password"
 								data-bv-identical="true" data-bv-identical-field="password"
 								data-bv-identical-message="Password mismatch">
@@ -151,6 +156,40 @@ input:focus {
 		</div>
 	</div>
 </body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						$('#registerForm')
+								.bootstrapValidator(
+										{
+											feedbackIcons : {
+												valid : 'glyphicon glyphicon-ok',
+												invalid : 'glyphicon glyphicon-remove',
+												validating : 'glyphicon glyphicon-refresh'
+											},
+											fields : {
+												password : {
+													validators : {
+														identical : {
+															field : 'password'
+														}
+													}
+												},
+												confirmPassword : {
+													validators : {
+														identical : {
+															field : 'confirmPassword'
+														}
+													}
+												}
+											}
+										});
+					});
+</script>
 
 <script type="text/javascript">
 	function getFormData() {
@@ -214,11 +253,11 @@ input:focus {
 	}
 </script>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 
 <%-- <script
 	src="${pageContext.request.contextPath }/static/bower_components/jquery/dist/jquery.min.js"></script> --%>
-<script
+<%-- <script
 	src="${pageContext.request.contextPath }/static/bower_components/popper.js/dist/umd/popper.min.js"></script>
 <script
 	src="${pageContext.request.contextPath }/static/bower_components/moment/moment.js"></script>
@@ -278,39 +317,7 @@ input:focus {
 	src="${pageContext.request.contextPath }/static/js/main5739.js?version=4.5.0"></script>
 
 
+ --%>
 
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
-
-<script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$('#registerForm')
-								.bootstrapValidator(
-										{
-											feedbackIcons : {
-												valid : 'glyphicon glyphicon-ok',
-												invalid : 'glyphicon glyphicon-remove',
-												validating : 'glyphicon glyphicon-refresh'
-											},
-											fields : {
-												password : {
-													validators : {
-														identical : {
-															field : 'password'
-														}
-													}
-												},
-												confirmPassword : {
-													validators : {
-														identical : {
-															field : 'confirmPassword'
-														}
-													}
-												}
-											}
-										});
-					});
-</script>
 
 </html>
