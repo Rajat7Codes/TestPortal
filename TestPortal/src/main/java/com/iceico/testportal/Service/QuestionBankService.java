@@ -26,17 +26,29 @@ public interface QuestionBankService {
 
 	public QuestionBank getQuestionBankById(Long questionBankId) throws ResourceNotFoundException;
 
-	public List<QuestionBank> questionBanksBySubjectsList(String sub) throws ResourceNotFoundException;
+	public List<QuestionBank> questionBanksBySubjectsList(String subject) throws ResourceNotFoundException;
 
-	public List<QuestionBank> questionBanksByMarkList(Integer marks) throws ResourceNotFoundException;
+	public List<QuestionBank> questionBankListByMarks(Integer marks) throws ResourceNotFoundException;
 
-	public List<QuestionBank> questionBanksByAllList(QuestionType questionTypeId, Integer marks, String subject)
+	public List<QuestionBank> questionBanksByQuestionTypeList(QuestionType question_Type_Id)
 			throws ResourceNotFoundException;
 
-	public List<QuestionBank> questionBanksByIndividualList(QuestionType questionTypeId, Integer marks, String subject)
-			throws ResourceNotFoundException;
+	public List<QuestionBank> questionBanksByTypeSubjectMarksList(QuestionType question_Type_Id, Integer marks,
+			String subject) throws ResourceNotFoundException;
 
 	public List<QuestionBank> questionBanksBySubjetAndMarks(String subject, Integer marks)
 			throws ResourceNotFoundException;
+
+	public List<QuestionBank> questionBanksByTypeAndMarks(QuestionType question_Type_Id, Integer marks)
+			throws ResourceNotFoundException;
+
+	public List<QuestionBank> questionBanksByTypeAndSubject(QuestionType question_Type_Id, String subject)
+			throws ResourceNotFoundException;
+
+	/*
+	 * public List<QuestionBank> questionBanksByIndividualList(QuestionType
+	 * questionTypeId, Integer marks, String subject) throws
+	 * ResourceNotFoundException;
+	 */
 
 }

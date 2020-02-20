@@ -177,141 +177,29 @@
 
 	}
 </script>
-
-<script type="text/javascript">
-	function question_type_submit() {
-		alert("question_type_submit()");
-		data = {
-			"type" : $("#questionType").val()
-		};
-		$.ajax({
-			type : "GET",
-			contentType : "application/json",
-			url : "${pageContext.request.contextPath}/question/bank/type",
-			data : data,
-			dataType : 'json',
-			cache : false,
-			timeout : 600000,
-			success : function(response) {
-				var trHTML = '';
-				alert("response =========>>" + JSON.stringify(response));
-
-				$.each(response, function(i, item) {
-					//	alert("inside =====>");
-					trHTML += '<tr><td>' + "&nbsp;" + (i + 1) + '</td><td>'
-							+ "&nbsp;" + item.questionBankId + '</td><td>'
-							+ "&nbsp;" + item.subject + '</td><td>' + "&nbsp;"
-							+ item.quetionType + '</td><td>' + "&nbsp;"
-							+ item.question + '</td><td>' + "&nbsp;"
-							+ item.marks + '</td></tr>';
-				});
-
-				$('#wantThatBody tr td').remove();
-				$('#wantThatBody').append(trHTML);
-			}
-		});
-	}
-</script>
-
-<script type="text/javascript">
-	function subject_type_submit() {
-		alert("subject_type_submit()");
-		data = {
-			"subject" : $("#subject").val()
-		};
-		alert("data ========>> " + data);
-		$
-				.ajax({
-					type : "GET",
-					contentType : "application/json",
-					url : "${pageContext.request.contextPath}/question/bank/type/subject",
-					data : data,
-					dataType : 'json',
-					cache : false,
-					timeout : 600000,
-					success : function(response) {
-						var trHTML = '';
-						alert("response =========>>" + JSON.stringify(response));
-
-						$.each(response, function(i, item) {
-							//	alert("inside =====>");
-							trHTML += '<tr><td>' + "&nbsp;" + (i + 1)
-									+ '</td><td>' + "&nbsp;"
-									+ item.questionBankId + '</td><td>'
-									+ "&nbsp;" + item.subject + '</td><td>'
-									+ "&nbsp;" + item.quetionType + '</td><td>'
-									+ "&nbsp;" + item.question + '</td><td>'
-									+ "&nbsp;" + item.marks + '</td></tr>';
-						});
-
-						$('#wantThatBody tr td').remove();
-						$('#wantThatBody').append(trHTML);
-					}
-				});
-	}
-</script>
-
-<script type="text/javascript">
-	function marks_type_submit() {
-		alert("marks_type_submit()");
-		data = {
-			"marks" : $("#marks").val()
-		};
-		//alert("data ========>> " + data);
-		$
-				.ajax({
-					type : "GET",
-					contentType : "application/json",
-					url : "${pageContext.request.contextPath}/question/bank/type/marks",
-					data : data,
-					dataType : 'json',
-					cache : false,
-					timeout : 600000,
-					success : function(response) {
-						var trHTML = '';
-						alert("response =========>>" + JSON.stringify(response));
-
-						$.each(response, function(i, item) {
-							//	alert("inside =====>");
-							trHTML += '<tr><td>' + "&nbsp;" + (i + 1)
-									+ '</td><td>' + "&nbsp;"
-									+ item.questionBankId + '</td><td>'
-									+ "&nbsp;" + item.subject + '</td><td>'
-									+ "&nbsp;" + item.quetionType + '</td><td>'
-									+ "&nbsp;" + item.question + '</td><td>'
-									+ "&nbsp;" + item.marks + '</td></tr>';
-						});
-
-						$('#wantThatBody tr td').remove();
-						$('#wantThatBody').append(trHTML);
-					}
-				});
-	}
-</script>
-
 <script type="text/javascript">
 	function all_type_submit() {
-		alert("all_type_submit()");
+		//alert("all_type_submit()");
 		/* 
 		 alert("questionType ========>> " + $("#questionType").val());
 		 alert("marks ========>> " + $("#marks").val());
 		 alert("subject ========>> " + $("#subject").val());
 		 */
 		var mark = $("#marks").val();
-		alert("marks Before========>> " + $("#marks").val());
+		//	alert("marks Before========>> " + $("#marks").val());
 		if (mark == "") {
-			alert("inside mark empty==>")
+			//alert("inside mark empty==>")
 			mark = 0;
 			document.getElementById('marks').value = mark;
-			alert("Now marks ========>> " + $("#marks").val());
+			//alert("Now marks ========>> " + $("#marks").val());
 		}
 
 		var subject = $("#subject").val();
 		if (subject == "") {
-			alert("inside subject empty==>")
-			subject = 0;
+			//alert("inside subject empty==>")
+			subject = null;
 			document.getElementById('subject').value = subject;
-			alert("Now subject ========>> " + $("#subject").val());
+			//alert("Now subject ========>> " + $("#subject").val());
 		}
 
 		data = {

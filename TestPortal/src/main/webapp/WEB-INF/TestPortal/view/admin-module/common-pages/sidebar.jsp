@@ -648,7 +648,12 @@
 
 
 
-
+			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/admin/question/bank/search">
+					<div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span>Search Master</span>
+			</a></li>
 
 
 

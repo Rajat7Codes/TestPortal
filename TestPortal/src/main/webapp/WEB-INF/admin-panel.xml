@@ -67,11 +67,13 @@
 			value="/WEB-INF/TestPortal/view/admin-module/question-bank/questionBankView.jsp" />
 	</definition>
 
+	<!-- search master -->
+
 	<definition name="searchQuestions"
 		extends="adminbase.definition">
 		<put-attribute name="title" value="Question" />
 		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/admin-module/question-bank/searchQuestions.jsp" />
+			value="/WEB-INF/TestPortal/view/admin-module/search-master/searchQuestions.jsp" />
 	</definition>
 
 

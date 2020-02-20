@@ -165,87 +165,36 @@ public class QuestionBankController {
 		return "searchQuestions";
 	}
 
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/question/bank/type", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
-	public @ResponseBody JSONArray filterStudentListByType(@RequestParam("type") Long type)
-			throws JsonProcessingException, ParseException, ResourceNotFoundException {
-		System.out.println("Type ==========>>" + type);
-		JSONArray questionBankArray = new JSONArray();
-		QuestionType questionType = this.questionTypeService.getQuestionTypeById(type);
-		for (QuestionBank questionBank : questionType.getQuestionBank()) {
-			JSONObject questionBankObject = new JSONObject();
-			questionBankObject.put("questionBankId", questionBank.getQuestionBankId());
-			questionBankObject.put("question", questionBank.getQuestion());
-			questionBankObject.put("marks", questionBank.getMarks());
-			questionBankObject.put("subject", questionBank.getSubject());
-			questionBankObject.put("quetionType", questionBank.getQuestionType().getType());
-			questionBankArray.add(questionBankObject);
-		}
-		return questionBankArray;
-	}
-
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/question/bank/type/subject", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
-	public @ResponseBody JSONArray filterStudentListBySubject(@RequestParam("subject") String sub)
-			throws JsonProcessingException, ParseException, ResourceNotFoundException {
-
-		/* System.out.println("Subject =============>>" + subject); */
-		JSONArray questionBankArray = new JSONArray();
-
-		for (QuestionBank questionBank : questionBankService.questionBanksBySubjectsList(sub)) {
-			JSONObject questionBankObject = new JSONObject();
-			questionBankObject.put("questionBankId", questionBank.getQuestionBankId());
-			questionBankObject.put("question", questionBank.getQuestion());
-			questionBankObject.put("marks", questionBank.getMarks());
-			questionBankObject.put("subject", questionBank.getSubject());
-			questionBankObject.put("quetionType", questionBank.getQuestionType().getType());
-			questionBankArray.add(questionBankObject);
-		}
-
-		return questionBankArray;
-	}
-
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/question/bank/type/marks", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
-	public @ResponseBody JSONArray filterStudentListByMarks(@RequestParam("marks") Integer marks)
-			throws JsonProcessingException, ParseException, ResourceNotFoundException {
-		/* System.out.println("marks =============>>" + marks); */
-		JSONArray questionBankArray = new JSONArray();
-		for (QuestionBank questionBank : questionBankService.questionBanksByMarkList(marks)) {
-			JSONObject questionBankObject = new JSONObject();
-			questionBankObject.put("questionBankId", questionBank.getQuestionBankId());
-			questionBankObject.put("question", questionBank.getQuestion());
-			questionBankObject.put("marks", questionBank.getMarks());
-			questionBankObject.put("subject", questionBank.getSubject());
-			questionBankObject.put("quetionType", questionBank.getQuestionType().getType());
-			questionBankArray.add(questionBankObject);
-		}
-		return questionBankArray;
-	}
+	
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/question/bank/type/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	public @ResponseBody JSONArray filterStudentListByAll(@RequestParam("type") Long type,
 			@RequestParam("marks") Integer marks, @RequestParam("subject") String subject)
 			throws JsonProcessingException, ParseException, ResourceNotFoundException {
-
-		System.out.println("marks =============>>" + marks);
-		System.out.println("Subject =============>>" + subject);
-		System.out.println("Type ==========>>" + type);
+		/*
+		 * System.out.println("marks =============>>" + marks);
+		 * System.out.println("Subject =============>>" + subject);
+		 * System.out.println("Type ==========>>" + type);
+		 */
 		QuestionType questionType = null;
 
-		if (subject != null) {
-			System.out.println("NOT NULL");
-
-		}
+		/*
+		 * if (subject.isEmpty()) { System.out.println("SUBJECT NULL"); } else {
+		 * System.out.println("SUBJECT NOT NULL"); }
+		 * 
+		 * if (marks == 0) { System.out.println("MARKS NULL"); } else {
+		 * System.out.println("MARKS NOT NULL"); }
+		 */
 
 		if (type != null) {
 			questionType = this.questionTypeService.getQuestionTypeById(type);
 		}
 		JSONArray questionBankArray = new JSONArray();
 
-		if (type == null && subject != "0" && marks != 0) {
+		if (type == null & !subject.isEmpty() & marks != 0) {
 			System.out.println("Subject & Marks ========>>>");
+
 			for (QuestionBank questionBank : questionBankService.questionBanksBySubjetAndMarks(subject, marks)) {
 				JSONObject questionBankObject = new JSONObject();
 				questionBankObject.put("questionBankId", questionBank.getQuestionBankId());
@@ -254,16 +203,96 @@ public class QuestionBankController {
 				questionBankObject.put("question", questionBank.getQuestion());
 				questionBankObject.put("marks", questionBank.getMarks());
 				questionBankArray.add(questionBankObject);
-				return questionBankArray;
 			}
+			return questionBankArray;
 		}
 
-		if (type == null && subject == "0" && marks != null) {
+		if (type == null & subject.isEmpty() & marks != 0) {
 			System.out.println("Marks only =====>>>");
+			for (QuestionBank questionBank : questionBankService.questionBankListByMarks(marks)) {
+				JSONObject questionBankObject = new JSONObject();
+				questionBankObject.put("questionBankId", questionBank.getQuestionBankId());
+				questionBankObject.put("subject", questionBank.getSubject());
+				questionBankObject.put("quetionType", questionBank.getQuestionType().getType());
+				questionBankObject.put("question", questionBank.getQuestion());
+				questionBankObject.put("marks", questionBank.getMarks());
+				questionBankArray.add(questionBankObject);
+			}
+			return questionBankArray;
+
 		}
 
+		if (type == null & !subject.isEmpty() & marks == 0) {
+			System.out.println("SUBJECT only =====>>>");
+			for (QuestionBank questionBank : questionBankService.questionBanksBySubjectsList(subject)) {
+				JSONObject questionBankObject = new JSONObject();
+				questionBankObject.put("questionBankId", questionBank.getQuestionBankId());
+				questionBankObject.put("subject", questionBank.getSubject());
+				questionBankObject.put("quetionType", questionBank.getQuestionType().getType());
+				questionBankObject.put("question", questionBank.getQuestion());
+				questionBankObject.put("marks", questionBank.getMarks());
+				questionBankArray.add(questionBankObject);
+			}
+			return questionBankArray;
+
+		}
+
+		if (type != null & subject.isEmpty() & marks == 0) {
+			System.out.println("Question type only =====>>>");
+			for (QuestionBank questionBank : questionBankService.questionBanksByQuestionTypeList(questionType)) {
+				JSONObject questionBankObject = new JSONObject();
+				questionBankObject.put("questionBankId", questionBank.getQuestionBankId());
+				questionBankObject.put("subject", questionBank.getSubject());
+				questionBankObject.put("quetionType", questionBank.getQuestionType().getType());
+				questionBankObject.put("question", questionBank.getQuestion());
+				questionBankObject.put("marks", questionBank.getMarks());
+				questionBankArray.add(questionBankObject);
+			}
+			return questionBankArray;
+		}
+
+		if (type != null & !subject.isEmpty() & marks != 0) {
+			System.out.println("ALL OFF ======>>> TYPE & SUBJECT & MARKS only =====>>>");
+			for (QuestionBank questionBank : questionBankService.questionBanksByTypeSubjectMarksList(questionType,
+					marks, subject)) {
+				JSONObject questionBankObject = new JSONObject();
+				questionBankObject.put("questionBankId", questionBank.getQuestionBankId());
+				questionBankObject.put("subject", questionBank.getSubject());
+				questionBankObject.put("quetionType", questionBank.getQuestionType().getType());
+				questionBankObject.put("question", questionBank.getQuestion());
+				questionBankObject.put("marks", questionBank.getMarks());
+				questionBankArray.add(questionBankObject);
+			}
+			return questionBankArray;
+		}
+
+		if (type != null & subject.isEmpty() & marks != 0) {
+			System.out.println("Type & MARKS only =====>>>");
+			for (QuestionBank questionBank : questionBankService.questionBanksByTypeAndMarks(questionType, marks)) {
+				JSONObject questionBankObject = new JSONObject();
+				questionBankObject.put("questionBankId", questionBank.getQuestionBankId());
+				questionBankObject.put("subject", questionBank.getSubject());
+				questionBankObject.put("quetionType", questionBank.getQuestionType().getType());
+				questionBankObject.put("question", questionBank.getQuestion());
+				questionBankObject.put("marks", questionBank.getMarks());
+				questionBankArray.add(questionBankObject);
+			}
+			return questionBankArray;
+		}
+
+		if (type != null & !subject.isEmpty() & marks == 0) {
+			System.out.println("Type & SUBJECT only =====>>>");
+			for (QuestionBank questionBank : questionBankService.questionBanksByTypeAndSubject(questionType, subject)) {
+				JSONObject questionBankObject = new JSONObject();
+				questionBankObject.put("questionBankId", questionBank.getQuestionBankId());
+				questionBankObject.put("subject", questionBank.getSubject());
+				questionBankObject.put("quetionType", questionBank.getQuestionType().getType());
+				questionBankObject.put("question", questionBank.getQuestion());
+				questionBankObject.put("marks", questionBank.getMarks());
+				questionBankArray.add(questionBankObject);
+			}
+			return questionBankArray;
+		}
 		return questionBankArray;
-
 	}
-
 }
