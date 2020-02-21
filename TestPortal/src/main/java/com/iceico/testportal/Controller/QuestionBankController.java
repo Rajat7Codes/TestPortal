@@ -39,6 +39,7 @@ import com.iceico.testportal.Model.QuestionBank;
 import com.iceico.testportal.Model.QuestionType;
 import com.iceico.testportal.Service.QuestionBankService;
 import com.iceico.testportal.Service.QuestionTypeService;
+import com.iceico.testportal.Service.SubjectService;
 
 /**
  * @author SAMEER KADGAYE
@@ -62,6 +63,9 @@ public class QuestionBankController {
 	@Autowired
 	private QuestionBankService questionBankService;
 
+	@Autowired
+	private SubjectService subjectService;
+
 	@SuppressWarnings("unchecked")
 	@GetMapping("/admin/question/bank/new")
 	public String getQuestionBank(ModelMap modelMap, Locale locale) {
@@ -69,6 +73,7 @@ public class QuestionBankController {
 
 		modelMap.addAttribute("questionBank", questionBank);
 		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
 		List<QuestionType> questionTypeList = this.questionTypeService.getQuestionTypeList();
 		JSONArray jsonArray = new JSONArray();
 
