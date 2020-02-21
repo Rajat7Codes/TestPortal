@@ -57,6 +57,14 @@
 			value="/WEB-INF/TestPortal/view/java-department-module/profile-pages/userInformation.jsp" />
 	</definition>
 	
+	<!-- UPSATE USER PROFILE PAGE -->
+	<definition name="updateUser"
+		extends="javabase.definition">
+		<put-attribute name="title" value="Dashboard" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-department-module/profile-pages/updateUserInformation.jsp" />
+	</definition>
+	
 	
 
 </tiles-definitions>

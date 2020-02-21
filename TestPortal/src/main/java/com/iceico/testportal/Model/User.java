@@ -59,6 +59,18 @@ public class User implements Serializable {
 
 	@Column(name = "gender", nullable = true)
 	private String gender;
+	
+	@Column(name = "dob")
+	private String dob;
+	
+	@Column(name = "content_type")
+	private String contentType;
+
+	@Column(name = "file_path")
+	private String filePath;
+
+	@Column(name = "file_name")
+	private String fileName;
 
 	@Column(name = "mobile_number", nullable = false)
 	@Size(min = 10, max = 10, message = "Enter valid 10 digit mobile number")
@@ -77,6 +89,64 @@ public class User implements Serializable {
 			@JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "user_profile_id") })
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
+	
+	/**
+	 * @return the dob
+	 */
+	public String getDob() {
+		return dob;
+	}
+
+	/**
+	 * @param dob the dob to set
+	 */
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	/**
+	 * @return the contentType
+	 */
+	public String getContentType() {
+		return contentType;
+	}
+
+	/**
+	 * @param contentType the contentType to set
+	 */
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	/**
+	 * @return the filePath
+	 */
+	public String getFilePath() {
+		return filePath;
+	}
+
+	/**
+	 * @param filePath the filePath to set
+	 */
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	/**
+	 * @return the fileName
+	 */
+	public String getFileName() {
+		return fileName;
+	}
+
+	/**
+	 * @param fileName the fileName to set
+	 */
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	
 	/**
 	 * @return the id
 	 */
