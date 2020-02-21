@@ -105,43 +105,22 @@
 								</div>
 
 								<!-- table -->
-								<div class="element-wrapper">
+								<div class="element-wrapper d-none" id="questions-table">
 									<div class="element-box">
 										<h6 class="element-header mb-5">Questions List</h6>
 
 										<div class="table-responsive">
-											<table class="table table-striped">
+											<table id="questionListTable" class="table table-striped">
 												<thead>
 													<tr>
-														<th>Customer Name</th>
-														<th>Orders</th>
-														<th>Location</th>
-														<th class="text-center">Status</th>
-														<th class="text-right">Order Total</th>
+														<th>Sr.No.</th>
+														<th>Question</th>
+														<th>Question Type</th>
+														<th class="text-center">Marks</th>
+														<th class="text-right">Action</th>
 													</tr>
 												</thead>
-												<tbody>
-
-													<tr>
-														<td>Joe Trulli</td>
-														<td>1,256</td>
-														<td><img alt="" src="img/flags-icons/es.png"
-															width="25px"></td>
-														<td class="text-center"><div
-																class="status-pill yellow" data-title="Pending"
-																data-toggle="tooltip"></div></td>
-														<td class="text-right">$1,120</td>
-													</tr>
-													<tr>
-														<td>Fred Kolton</td>
-														<td>74</td>
-														<td><img alt="" src="img/flags-icons/fr.png"
-															width="25px"></td>
-														<td class="text-center"><div
-																class="status-pill green" data-title="Complete"
-																data-toggle="tooltip"></div></td>
-														<td class="text-right">$74</td>
-													</tr>
+												<tbody id="tableBody">
 												</tbody>
 											</table>
 										</div>
@@ -167,6 +146,92 @@
 		$("#negativeMarking").change(function() {
 			$("#ratioDiv").toggle();
 		});
+	});
+</script>
+
+<!-- AJAX script for subject -->
+<script type="text/javascript">
+	$("#subject").change(function() {
+		alert("inside function");
+
+		data = {
+
+			"subjectID" : $("#subject").val()
+
+		};
+
+		alert(JSON.stringify(data));
+
+		$
+
+		.ajax({
+
+			type : "POST",
+
+			contentType : "application/json",
+
+			url : "${pageContext.request.contextPath}/add/test/filter/subject",
+
+			data : data,
+
+			dataType : 'json',
+
+			cache : false,
+
+			timeout : 600000,
+
+			success : function(response) {
+
+				alert(JSON.stringify(response));
+
+				var trHTML = '';
+
+				$.each(
+
+				response.questions,
+
+				function(i, item) {
+
+					trHTML += '<tr><td>' + "&nbsp;"
+
+					+ (i + 1)
+
+					+ '</td><td>'
+
+					+ "&nbsp;"
+
+					+ item.question
+
+					+ '</td><td>'
+
+					+ "&nbsp;"
+
+					+ item.questionType
+
+					+ '</td><td>'
+
+					+ "&nbsp;"
+
+					+ item.marks
+
+					+ '</td><td>'
+
+					+ "&nbsp;"
+
+					+ ''
+
+					+ '</td></tr>';
+
+				});
+
+				$('#questionListTable tr td').remove();
+				$('#questionListTable').append(trHTML);
+
+			}
+
+		});
+
+		$("#questions-table").css("display", "block !important");
 	});
 </script>
 </html>
