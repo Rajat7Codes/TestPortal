@@ -49,7 +49,7 @@
 											<td>${ind.index+1}</td>
 											<td>${questionBank.getQuestionType().type }</td>
 											<td>${questionBank.question }</td>
-											<td>${questionBank.subject }</td>
+											<td>${questionBank.getSubject().subjectName }</td>
 											<td>${questionBank.marks }</td>
 											<%-- <td class="valigntop"><div class="btn-group">
 													<button

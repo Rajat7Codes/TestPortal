@@ -88,11 +88,19 @@
 								<%-- <c:if test="${imageTypeStatus == true }"> --%>
 								<div class="row">
 									<div class="col-sm-6" id="subDiv">
-										<div class="form-group">
+										<%-- <div class="form-group">
 											<form:label path="subject">Subject</form:label>
 											<form:input path="subject" class="form-control"
 												placeholder="Enter subject" type="text" />
 											<form:errors path="subject"></form:errors>
+										</div> --%>
+										<div class="form-group">
+											<form:label path="subject">Subject</form:label>
+											<form:select class="form-control" name="questionType"
+												onchange="myToggle();" path="subject" id="subject"
+												itemLabel="subjectName" multiple="single"
+												items="${subjectList }" itemValue="subjectId" />
+											<form:errors path="subject" />
 										</div>
 									</div>
 									<div class="col-sm-6" id="imageToggle">
