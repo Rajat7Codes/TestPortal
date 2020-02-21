@@ -26,7 +26,7 @@
 	<definition name="register"
 		template="/WEB-INF/TestPortal/view/login-module/register.jsp">
 	</definition>
-	
+
 	<!-- FORGOT PASSWORD PAGE -->
 	<definition name="forgotPassword"
 		template="/WEB-INF/TestPortal/view/login-module/forgotPassword.jsp">
@@ -57,9 +57,24 @@
 		extends="adminbase.definition">
 		<put-attribute name="title" value="question Bank" />
 		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/question-bank/questionBank.jsp" />
+			value="/WEB-INF/TestPortal/view/admin-module/question-bank/questionBank.jsp" />
 	</definition>
 
+	<definition name="questionBankView"
+		extends="adminbase.definition">
+		<put-attribute name="title" value="Question" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/question-bank/questionBankView.jsp" />
+	</definition>
+
+	<!-- search master -->
+
+	<definition name="searchQuestions"
+		extends="adminbase.definition">
+		<put-attribute name="title" value="Question" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/search-master/searchQuestions.jsp" />
+	</definition>
 
 
 	<!-- department pages -->
@@ -89,14 +104,9 @@
 	<definition name="addTest" extends="adminbase.definition">
 		<put-attribute name="title" value="Add Test" />
 		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/add-test/addTest.jsp" />
+			value="/WEB-INF/TestPortal/view/admin-module/test-pages/addTest.jsp" />
 	</definition>
 
-	<definition name="questionBankView"
-		extends="adminbase.definition">
-		<put-attribute name="title" value="Question" />
-		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/question-bank/questionBankView.jsp" />
-	</definition>
+
 
 </tiles-definitions>

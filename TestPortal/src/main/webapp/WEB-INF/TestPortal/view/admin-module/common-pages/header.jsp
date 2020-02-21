@@ -97,8 +97,10 @@
 									src="${pageContext.request.contextPath }/static/img/avatar2.jpg">
 							</div>
 							<div class="logged-user-info-w">
-								<div class="logged-user-name">${user.ssoId }</div>
-								<div class="logged-user-role">${user.position }</div>
+								<div class="logged-user-name"><%-- ${user.ssoId } --%></div>
+								<div class="logged-user-role">
+									<%-- ${user.position } --%>
+								</div>
 							</div>
 						</div>
 						<div class="bg-icon">
