@@ -13,48 +13,19 @@
 	<div class="content-i">
 		<div class="content-box">
 			<div class="element-wrapper">
-				<h6 class="element-header">Search Data</h6>
 				<div class="element-box">
 					<form:form action="#" modelAttribute="questionBank" method="get"
 						enctype="multipart/form-data">
+						<h6 class="element-header mb-5">Search Bank</h6>
 						<div class="row">
-							<div class="text-center p-4">
-								<div class="form-check-inline">
-									<label class="form-check-label"> <input type="radio"
-										id="subjectWiseRadio"
-										onclick="if(this.checked){ searchOption(); }"
-										name="search-type"><strong>By Subject</strong>
-									</label>
-								</div>
-								<div class="form-check-inline">
-									<label class="form-check-label"> <input type="radio"
-										id="typeWiseRadio" onclick="if(this.checked){ searchOption()}"
-										name="search-type"> <strong>By Type</strong>
-									</label>
-								</div>
-								<div class="form-check-inline">
-									<label class="form-check-label"> <input type="radio"
-										onclick="if(this.checked){ searchOption()}" name="search-type"
-										id="marksWiseRadio"> <strong>By Marks</strong>
-									</label>
-								</div>
-								<div class="form-check-inline">
-									<label class="form-check-label"> <input type="radio"
-										id="allWiseRadio" onclick="if(this.checked){ searchOption()}"
-										name="search-type"> <strong>By All</strong>
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="row" style="display: none;" id="searchRow">
-							<div class="col-sm-3" id="bySubject">
+							<div class="col-sm-4">
 								<div class="form-group">
 									<label> Subject</label> <input class="form-control"
 										placeholder="Enter subject" type="text" name="subject"
 										id="subject">
 								</div>
 							</div>
-							<div class="col-sm-3" id="byType">
+							<div class="col-sm-4">
 								<div class="form-group">
 									<form:label path="questionType">Question Type</form:label>
 									<form:select class="form-control" name="questionType"
@@ -67,7 +38,7 @@
 									<form:errors path="questionType" />
 								</div>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 								<div class="form-group" id="byMarks">
 									<label> Marks</label> <input class="form-control"
 										placeholder="Enter Marks" type="text" id="marks" name="marks">
@@ -75,108 +46,39 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-sm-12 text-center mb-5 mt-5">
+							<div class="col-sm-12 text-center mb-4 mt-4">
 								<div class="form-group">
 									<button class="btn btn-primary" type="button"
-										onclick="question_type_submit();" id="btnByType"
-										style="display: none;">Submit</button>
-
-									<button class="btn btn-primary" type="button"
-										onclick="subject_type_submit()" id="btnBySubject"
-										style="display: none;">Submit</button>
-
-									<button class="btn btn-primary" type="button"
-										onclick="marks_type_submit();" id="btnByMarks"
-										style="display: none;">Submit</button>
-
-									<button class="btn btn-primary" type="button"
-										onclick="all_type_submit();" id="btnByAllType"
-										style="display: none;">Submit</button>
+										onclick="all_type_submit();" id="btnByAllType">Submit</button>
 								</div>
 							</div>
 						</div>
 					</form:form>
-				</div>
-				<div class="table-responsive">
-					<table id="example1" width="100%"
-						class="table table-striped table-lightfont">
-						<thead>
-							<tr>
-								<th>Sr. No</th>
-								<th>Question Id</th>
-								<th>Subject</th>
-								<th>Type</th>
-								<th>Question</th>
-								<th>Marks</th>
-								<!-- <th>Action</th> -->
-							</tr>
-						</thead>
-						<tbody id="wantThatBody">
 
-						</tbody>
-					</table>
+					<div class="table-responsive">
+						<table id="example1" width="100%"
+							class="table table-striped table-lightfont">
+							<thead>
+								<tr>
+									<th>Sr. No</th>
+									<th>Question Id</th>
+									<th>Subject</th>
+									<th>Type</th>
+									<th>Question</th>
+									<th>Marks</th>
+									<!-- <th>Action</th> -->
+								</tr>
+							</thead>
+							<tbody id="wantThatBody">
+
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
-<script>
-	function searchOption() {
-		if (document.getElementById('subjectWiseRadio').checked) {
-			document.getElementById('searchRow').style.display = 'block';
-			document.getElementById('bySubject').style.display = 'block';
-			document.getElementById('byType').style.display = 'none';
-			document.getElementById('byMarks').style.display = 'none';
-			//document.getElementById('byAll').style.display = 'none';
-
-			document.getElementById('btnBySubject').style.display = 'block';
-
-			document.getElementById('btnByType').style.display = 'none';
-			document.getElementById('btnByAllType').style.display = 'none';
-			document.getElementById('btnByMarks').style.display = 'none';
-			//document.getElementById('year').value = "";
-		}
-		if (document.getElementById('typeWiseRadio').checked) {
-			document.getElementById('searchRow').style.display = 'block';
-			document.getElementById('byType').style.display = 'block';
-			document.getElementById('bySubject').style.display = 'none';
-			document.getElementById('byMarks').style.display = 'none';
-			//document.getElementById('byAll').style.display = 'none';
-
-			document.getElementById('btnByType').style.display = 'block';
-
-			document.getElementById('btnBySubject').style.display = 'none';
-			document.getElementById('btnByAllType').style.display = 'none';
-			document.getElementById('btnByMarks').style.display = 'none';
-		}
-		if (document.getElementById('marksWiseRadio').checked) {
-			document.getElementById('searchRow').style.display = 'block';
-			document.getElementById('byMarks').style.display = 'block';
-			//document.getElementById('byAll').style.display = 'none';
-			document.getElementById('bySubject').style.display = 'none';
-			document.getElementById('byType').style.display = 'none';
-
-			document.getElementById('btnByMarks').style.display = 'block';
-
-			document.getElementById('btnBySubject').style.display = 'none';
-			document.getElementById('btnByType').style.display = 'none';
-			document.getElementById('btnByAllType').style.display = 'none';
-		}
-		if (document.getElementById('allWiseRadio').checked) {
-			document.getElementById('searchRow').style.display = 'block';
-			document.getElementById('byMarks').style.display = 'block';
-			document.getElementById('bySubject').style.display = 'block';
-			document.getElementById('byType').style.display = 'block';
-
-			document.getElementById('btnByAllType').style.display = 'block';
-
-			document.getElementById('btnBySubject').style.display = 'none';
-			document.getElementById('btnByType').style.display = 'none';
-			document.getElementById('btnByMarks').style.display = 'none';
-		}
-
-	}
-</script>
 <script type="text/javascript">
 	function all_type_submit() {
 		//alert("all_type_submit()");

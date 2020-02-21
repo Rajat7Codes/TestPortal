@@ -31,7 +31,6 @@
 								<form:hidden path="contentType" />
 								<div style="display: none;" id="typeArray">${questionTypeJson}</div>
 								<h6 class="element-header mb-5">Question Bank</h6>
-
 								<div class="row">
 									<c:if test="${edit == false }">
 										<div class="col-sm-6">
@@ -122,11 +121,12 @@
 												placeholder="Option Name" id="optionName"><label
 												class="form-check-label text-center col-sm-3 mb-2"><input
 												class="form-check-input" type="checkbox" id="correct">
-												Correct</label> <i class="btn btn-primary" id="add">Add</i>
+												Correct</label>
+											<button class="btn btn-primary" id="add" type="button">Add</button>
 										</div>
 
 
-										<div class="mb-5">
+										<div class="mt-5">
 											<div class="table-responsive mb-5">
 
 												<table id="allDetailsTableBody"
@@ -200,7 +200,7 @@
 										</div>
 									</div>
 								</c:if>
-								<div class="form-buttons-w text-center">
+								<div class="form-buttons-w text-center pt-5">
 									<input type="text" id="data" name="data" style="display: none;">
 									<!-- <i class="btn" id="jsonBtn" onclick="addToUpdateJson1();">Add</i> -->
 									<!-- <input type="button" onclick="newPageJson();">Cheack -->
@@ -269,8 +269,10 @@
 													.getElementById("optionName").value;
 
 											if ($("#correct").prop('checked') == true) {
+
 												var answer = document
 														.getElementById("optionName").value;
+												var answer = true;
 											} else {
 												var answer = document
 														.getElementById("optionName").value;

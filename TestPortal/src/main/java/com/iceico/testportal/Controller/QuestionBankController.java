@@ -90,6 +90,8 @@ public class QuestionBankController {
 			BindingResult bindingResult, @RequestParam("imageName") MultipartFile imageName,
 			@RequestParam("data") String data, ModelMap modelMap, HttpServletRequest httpServletRequest) {
 		System.out.println("data =====>>>" + data);
+		JSONParser jsonParser = new JSONParser();
+		List<Options> optionsList = new ArrayList<Options>();
 		String uploadFolder = httpServletRequest.getServletContext().getRealPath("/uploaded");
 		File directory = new File(uploadFolder);
 		if (!directory.exists()) {
@@ -113,9 +115,6 @@ public class QuestionBankController {
 				System.out.println("File Upload Error " + e);
 			}
 		}
-		JSONParser jsonParser = new JSONParser();
-		List<Options> optionsList = new ArrayList<Options>();
-
 		if (questionBank.getQuestionBankId() == null) {
 			System.out.println("Inside save If");
 
@@ -124,8 +123,9 @@ public class QuestionBankController {
 				for (int i = 0; i < jsonArray.size(); i++) {
 					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 					Options options = new Options();
+					Boolean answer = Boolean.parseBoolean((String) jsonObject.get("correctAnswer"));
 					options.setOptionName(jsonObject.get("optionName").toString());
-					options.setCorrectAnswer(jsonObject.get("correctAnswer").toString());
+					options.setCorrectAnswer(answer);
 					options.setQuestionBank(questionBank);
 					optionsList.add(options);
 				}
@@ -135,7 +135,7 @@ public class QuestionBankController {
 				e.printStackTrace();
 			}
 		}
-		return "redirect:/admin/question/bank/new";
+		return "redirect:/admin/question/bank";
 	}
 
 	@GetMapping("/admin/question/bank")
@@ -164,8 +164,6 @@ public class QuestionBankController {
 		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
 		return "searchQuestions";
 	}
-
-	
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/question/bank/type/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
