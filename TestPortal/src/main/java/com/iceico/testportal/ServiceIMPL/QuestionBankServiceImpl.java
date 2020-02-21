@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.QuestionBank;
 import com.iceico.testportal.Model.QuestionType;
+import com.iceico.testportal.Model.Subject;
 import com.iceico.testportal.Repository.QuestionBankRepository;
 import com.iceico.testportal.Service.QuestionBankService;
 
@@ -71,10 +72,10 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<QuestionBank> questionBanksBySubjectsList(String subject) throws ResourceNotFoundException {
+	public List<QuestionBank> questionBanksBySubjectsList(Subject subject_Id) throws ResourceNotFoundException {
 
-		return this.getSession().createQuery("from QuestionBank where subject=:subject")
-				.setParameter("subject", subject).list();
+		return this.getSession().createQuery("from QuestionBank where subject_Id=:subject_Id")
+				.setParameter("subject_Id", subject_Id).list();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -87,19 +88,19 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<QuestionBank> questionBanksByTypeSubjectMarksList(QuestionType question_Type_Id, Integer marks,
-			String subject) throws ResourceNotFoundException {
+			Subject subject_Id) throws ResourceNotFoundException {
 		return this.getSession().createQuery(
-				"from QuestionBank where question_Type_Id=:question_Type_Id AND marks=:marks AND subject=:subject")
+				"from QuestionBank where question_Type_Id=:question_Type_Id AND marks=:marks AND subject_Id=:subject_Id")
 				.setParameter("question_Type_Id", question_Type_Id).setParameter("marks", marks)
-				.setParameter("subject", subject).list();
+				.setParameter("subject_Id", subject_Id).list();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<QuestionBank> questionBanksBySubjetAndMarks(String subject, Integer marks)
+	public List<QuestionBank> questionBanksBySubjetAndMarks(Subject subject_Id, Integer marks)
 			throws ResourceNotFoundException {
-		return this.getSession().createQuery("from QuestionBank where subject=:subject AND marks=:marks")
-				.setParameter("subject", subject).setParameter("marks", marks).list();
+		return this.getSession().createQuery("from QuestionBank where subject_Id=:subject_Id AND marks=:marks")
+				.setParameter("subject_Id", subject_Id).setParameter("marks", marks).list();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -123,12 +124,12 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<QuestionBank> questionBanksByTypeAndSubject(QuestionType question_Type_Id, String subject)
+	public List<QuestionBank> questionBanksByTypeAndSubject(QuestionType question_Type_Id, Subject subject_Id)
 			throws ResourceNotFoundException {
 
 		return this.getSession()
-				.createQuery("from QuestionBank where question_Type_Id=:question_Type_Id AND subject=:subject")
-				.setParameter("question_Type_Id", question_Type_Id).setParameter("subject", subject).list();
+				.createQuery("from QuestionBank where question_Type_Id=:question_Type_Id AND subject_Id=:subject_Id")
+				.setParameter("question_Type_Id", question_Type_Id).setParameter("subject_Id", subject_Id).list();
 	}
 
 }

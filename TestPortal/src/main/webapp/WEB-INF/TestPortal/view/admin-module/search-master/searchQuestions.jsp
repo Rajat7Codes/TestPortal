@@ -20,9 +20,14 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<div class="form-group">
-									<label> Subject</label> <input class="form-control"
-										placeholder="Enter subject" type="text" name="subject"
+									<form:label path="subject">Subject</form:label>
+									<form:select class="form-control" name="subject" path="subject"
 										id="subject">
+										<form:option value="" label="--- Select Category---" />
+										<form:options items="${subjectList}" itemValue="subjectId"
+											itemLabel="subjectName" id="subject" multiple="single" />
+									</form:select>
+									<form:errors path="subject" />
 								</div>
 							</div>
 							<div class="col-sm-4">
@@ -96,13 +101,13 @@
 			//alert("Now marks ========>> " + $("#marks").val());
 		}
 
-		var subject = $("#subject").val();
+		/* var subject = $("#subject").val();
 		if (subject == "") {
 			//alert("inside subject empty==>")
 			subject = null;
 			document.getElementById('subject').value = subject;
 			//alert("Now subject ========>> " + $("#subject").val());
-		}
+		} */
 
 		data = {
 			"type" : $("#questionType").val(),
