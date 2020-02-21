@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="javabase.definition"
+		template="/WEB-INF/TestPortal/layout/java-department-layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/TestPortal/view/java-department-module/common-pages/header.jsp" />
+		<put-attribute name="sidebar"
+			value="/WEB-INF/TestPortal/view/java-department-module/common-pages/sidebar.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+
+
+	<!-- LOGIN PAGE -->
+	<definition name="welcome"
+		template="/WEB-INF/TestPortal/view/login-module/loginPage.jsp">
+	</definition>
+
+	<!-- REGISTRATION PAGE -->
+	<definition name="register"
+		template="/WEB-INF/TestPortal/view/login-module/register.jsp">
+	</definition>
+	
+	<!-- FORGOT PASSWORD PAGE -->
+	<definition name="forgotPassword"
+		template="/WEB-INF/TestPortal/view/login-module/forgotPassword.jsp">
+	</definition>
+
+	<!-- VERIFICATION PAGE -->
+	<definition name="otpVerify"
+		template="/WEB-INF/TestPortal/view/login-module/otpVerify.jsp">
+	</definition>
+
+	<!-- FORGOT PASSWORD -->
+	<definition name="forgotPassword"
+		template="/WEB-INF/TestPortal/view/login-module/forgotPassword.jsp">
+	</definition>
+
+
+	<!-- DASHBOARD PAGE -->
+	<definition name="javaDashboard"
+		extends="javabase.definition">
+		<put-attribute name="title" value="Dashboard" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-department-module/dashboard.jsp" />
+	</definition>
+	
+	<!-- USER PROFILE PAGE -->
+	<definition name="javaUser"
+		extends="javabase.definition">
+		<put-attribute name="title" value="Dashboard" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-department-module/profile-pages/userInformation.jsp" />
+	</definition>
+	
+	
+
+</tiles-definitions>

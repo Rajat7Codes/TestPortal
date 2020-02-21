@@ -29,8 +29,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.iceico.testportal.Exceptions.ResourceNotFoundException;
+import com.iceico.testportal.Model.Department;
 import com.iceico.testportal.Model.User;
 import com.iceico.testportal.Model.UserProfile;
+import com.iceico.testportal.Service.DepartmentService;
 import com.iceico.testportal.Service.OtpService;
 import com.iceico.testportal.Service.UserProfileService;
 import com.iceico.testportal.Service.UserService;
@@ -47,6 +50,9 @@ public class StudentModuleController {
 
 	@Autowired
 	private UserProfileService userProfileService;
+	
+	@Autowired
+	private DepartmentService departmentService;
 
 	@Autowired
 	private OtpService otpServiceINF;
@@ -131,7 +137,7 @@ public class StudentModuleController {
 	@PostMapping("/register/verify/otp")
 	public String verifyOtpSave(@RequestParam("finalJson") String sdata,
 			@RequestParam("verifyEmailOtp") String verifyEmailOtp, ModelMap modelMap, Locale locale,
-			HttpServletRequest httpServletRequest) throws ParseException {
+			HttpServletRequest httpServletRequest) throws ParseException, NumberFormatException, ResourceNotFoundException {
 		System.out.println("sdata========" + sdata);
 
 		String character = sdata.substring(sdata.length() - 1, sdata.length());
@@ -153,11 +159,9 @@ public class StudentModuleController {
 
 		if (emailOtp.equalsIgnoreCase(verifyEmailOtp)) {
 
-			if (data.get("department").toString().equalsIgnoreCase("Java"))
-				profile = userProfileService.findByType("JAVA");
-
-			if (data.get("department").toString().equalsIgnoreCase("Web"))
-				profile = userProfileService.findByType("WEB");
+			Department department = this.departmentService.getDepartmentById( Long.parseLong( data.get("department")+""));
+			profile = userProfileService.findByType(department.getDepartmentName());
+			profile.setType(department.getDepartmentName());
 
 			Set<UserProfile> role = new HashSet<>();
 			role.add(profile);
@@ -167,7 +171,7 @@ public class StudentModuleController {
 			user.setSsoId(data.get("username").toString());
 			user.setFirstName(data.get("fname").toString());
 			user.setLastName(data.get("lname").toString());
-			user.setDepartment(data.get("department").toString());
+			user.setDepartment(department);
 			user.setEmail(data.get("emailId").toString());
 			user.setPosition(data.get("position").toString());
 			user.setMobileNumber(data.get("mobile").toString());

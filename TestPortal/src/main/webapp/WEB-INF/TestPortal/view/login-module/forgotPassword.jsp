@@ -87,8 +87,8 @@
 					<div class="buttons-w text-center">
 						<button type="submit" class="btn btn-primary">Send OTP</button>
 					</div>
-					<div class="buttons-w mt-3 text-center">
-						<label class="form-check-label"> <a
+					<div class="buttons-w text-center">
+						<label class="form-check-label"> <a class="btn btn-outline-light text-dark"
 							href="${pageContext.request.contextPath}/login"> Go To Login
 						</a>
 						</label>
@@ -139,7 +139,7 @@
 						<button type="submit" class="btn btn-primary">Reset
 							Password</button>
 					</div>
-					<div class="buttons-w mt-3 text-center">
+					<div class="buttons-w text-center">
 						<label class="form-check-label"> <a class="btn btn-outline-light text-dark"
 							href="${pageContext.request.contextPath}/login"> Go To Login
 						</a>

@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -53,13 +54,10 @@ public class User implements Serializable {
 	@Column(name = "email", nullable = false)
 	private String email;
 
-	@Column(name = "position", nullable = false)
+	@Column(name = "position", nullable = true)
 	private String position;
 
-	@Column(name = "department", nullable = false)
-	private String department;
-
-	@Column(name = "gender", nullable = false)
+	@Column(name = "gender", nullable = true)
 	private String gender;
 
 	@Column(name = "mobile_number", nullable = false)
@@ -69,6 +67,10 @@ public class User implements Serializable {
 	@Column(name = "description")
 	@Size(min = 0, max = 255, message = "Description range must be 0-255 charecters only")
 	private String description;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "department_id", insertable = true, nullable = true, updatable = true)
+	private Department department;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinTable(name = "tab_app_user_user_profile", joinColumns = {
@@ -173,17 +175,18 @@ public class User implements Serializable {
 		this.position = position;
 	}
 
+
 	/**
 	 * @return the department
 	 */
-	public String getDepartment() {
+	public Department getDepartment() {
 		return department;
 	}
 
 	/**
 	 * @param department the department to set
 	 */
-	public void setDepartment(String department) {
+	public void setDepartment(Department department) {
 		this.department = department;
 	}
 

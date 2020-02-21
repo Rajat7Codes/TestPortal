@@ -54,16 +54,22 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 	protected String determineTargetUrl(Authentication authentication) {
 		boolean isStudent = false;
 		boolean isAdmin = false;
+		boolean isDepartmentJava = false;
+		boolean isDepartmentWeb = false;
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
 		for (GrantedAuthority grantedAuthority : authorities) {
 			if (grantedAuthority.getAuthority().equals("ROLE_STUDENT")) {
-
 				isStudent = true;
 				break;
 			} else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
-
 				isAdmin = true;
+				break;
+			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_Java")) {
+				isDepartmentJava = true;
+				break;
+			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_Web")) {
+				isDepartmentWeb = true;
 				break;
 			}
 		}
@@ -72,6 +78,10 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 			return "/student/dashboard";
 		} else if (isAdmin) {
 			return "/admin/dashboard";
+		} else if (isDepartmentJava) {
+			return "/java/dashboard";
+		} else if (isDepartmentWeb) {
+			return "/web/dashboard";
 		} else {
 			throw new IllegalStateException();
 		}
