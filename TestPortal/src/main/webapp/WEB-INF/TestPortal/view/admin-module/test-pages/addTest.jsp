@@ -25,8 +25,7 @@
 
 								<form:hidden path="addTestId" />
 
-								<h5 class="form-header">ADD TEST</h5>
-								<hr>
+								<h6 class="element-header mb-5">Add Test</h6>
 								<div class="row">
 									<div class="col-sm-3">
 										<div class="form-group">
@@ -108,8 +107,7 @@
 								<!-- table -->
 								<div class="element-wrapper">
 									<div class="element-box">
-										<h5 class="form-header">QUESTIONS LIST</h5>
-										<hr>
+										<h6 class="element-header mb-5">Questions List</h6>
 
 										<div class="table-responsive">
 											<table class="table table-striped">

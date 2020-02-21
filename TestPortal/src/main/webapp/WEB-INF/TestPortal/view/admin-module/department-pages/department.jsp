@@ -13,53 +13,53 @@
 		<div class="col-lg-4">
 			<div class="card">
 				<div class="card-body">
-					<div class="element-wrapper">
-						<div class="element-box">
-							<form:form
-								action="${pageContext.request.contextPath }/admin/department/save"
-								modelAttribute="department" name="department"
-								id="departmentForm" method="post">
+					<div class="content-box">
+						<div class="element-wrapper">
+							<div class="element-box">
+								<form:form
+									action="${pageContext.request.contextPath }/admin/department/save"
+									modelAttribute="department" name="department"
+									id="departmentForm" method="post">
 
-								<form:hidden path="departmentId" />
+									<form:hidden path="departmentId" />
 
-								<div class="form-desc">
-									<h4>ADD DEPARTMENT</h4>
-									<hr>
-								</div>
-
-								<div class="row form-group">
-									<div class="col-md-12 col-sm-12 col-lg-12 col-12">
-										<form:label path="departmentName"> Department Name </form:label>
-										<form:input path="departmentName" name="departmentName"
-											id="departmentName" class="form-control"
-											placeholder="Enter Department Name" />
-										<form:errors path="departmentName"></form:errors>
+									<div class="form-desc">
+										<h6 class="element-header mb-5">Add Department</h6>
 									</div>
 
-									<div class="col-md-12 col-sm-12 col-lg-12 col-12">
-										<form:label path="status">Status</form:label>
-										<form:select path="status" name="status" id="status"
-											class="form-control">
-											<form:option value="true">Active</form:option>
-											<form:option value="false">Inactive</form:option>
-										</form:select>
-										<form:errors path="status"></form:errors>
-									</div>
+									<div class="row form-group">
+										<div class="col-md-12 col-sm-12 col-lg-12 col-12">
+											<form:label path="departmentName"> Department Name </form:label>
+											<form:input path="departmentName" name="departmentName"
+												id="departmentName" class="form-control"
+												placeholder="Enter Department Name" />
+											<form:errors path="departmentName"></form:errors>
+										</div>
 
-									<div class="col-md-12 col-sm-12 col-lg-12 col-12">
-										<form:label path="description">Description</form:label>
-										<form:textarea path="description" name="description" rows="1"
-											id="description" class="form-control"
-											placeholder="Enter Description" />
-										<form:errors path="description"></form:errors>
+										<div class="col-md-12 col-sm-12 col-lg-12 col-12">
+											<form:label path="status">Status</form:label>
+											<form:select path="status" name="status" id="status"
+												class="form-control">
+												<form:option value="true">Active</form:option>
+												<form:option value="false">Inactive</form:option>
+											</form:select>
+											<form:errors path="status"></form:errors>
+										</div>
+
+										<div class="col-md-12 col-sm-12 col-lg-12 col-12">
+											<form:label path="description">Description</form:label>
+											<form:textarea path="description" name="description" rows="1"
+												id="description" class="form-control"
+												placeholder="Enter Description" />
+											<form:errors path="description"></form:errors>
+										</div>
 									</div>
-								</div>
-								<br>
-								<div class="form-buttons-w">
-									<button class="btn btn-secondary" type="submit">Reset</button>
-									<button class="btn btn-primary" type="submit">Submit</button>
-								</div>
-							</form:form>
+									<div class="form-buttons-w">
+										<button class="btn btn-secondary" type="submit">Reset</button>
+										<button class="btn btn-primary" type="submit">Submit</button>
+									</div>
+								</form:form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -73,8 +73,7 @@
 							<div class="element-box">
 
 								<div class="form-desc">
-									<h4 class="form-header">DEPARTMENT LIST</h4>
-									<hr>
+									<h6 class="element-header mb-5">Department List</h6>
 								</div>
 								<div class="table-responsive">
 									<table id="dataTable1"

@@ -26,8 +26,7 @@
 									<form:hidden path="subjectId" />
 
 									<div class="form-desc">
-										<h4>ADD SUBJECT</h4>
-										<hr>
+										<h6 class="element-header mb-5">Add Subject</h6>
 									</div>
 
 									<div class="row form-group">
@@ -72,8 +71,7 @@
 							<div class="element-box">
 
 								<div class="form-desc">
-									<h4 class="form-header">SUBJECT LIST</h4>
-									<hr>
+									<h6 class="element-header mb-5">Subject List</h6>
 								</div>
 								<div class="table-responsive">
 									<table id="dataTable1"
