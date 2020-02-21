@@ -8,6 +8,7 @@ import java.util.List;
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.QuestionBank;
 import com.iceico.testportal.Model.QuestionType;
+import com.iceico.testportal.Model.Subject;
 
 /**
  * @author SAMEER KADGAYE
@@ -26,7 +27,7 @@ public interface QuestionBankService {
 
 	public QuestionBank getQuestionBankById(Long questionBankId) throws ResourceNotFoundException;
 
-	public List<QuestionBank> questionBanksBySubjectsList(String subject) throws ResourceNotFoundException;
+	public List<QuestionBank> questionBanksBySubjectsList(Subject subject_Id) throws ResourceNotFoundException;
 
 	public List<QuestionBank> questionBankListByMarks(Integer marks) throws ResourceNotFoundException;
 
@@ -34,15 +35,15 @@ public interface QuestionBankService {
 			throws ResourceNotFoundException;
 
 	public List<QuestionBank> questionBanksByTypeSubjectMarksList(QuestionType question_Type_Id, Integer marks,
-			String subject) throws ResourceNotFoundException;
+			Subject subject_Id) throws ResourceNotFoundException;
 
-	public List<QuestionBank> questionBanksBySubjetAndMarks(String subject, Integer marks)
+	public List<QuestionBank> questionBanksBySubjetAndMarks(Subject subject_Id, Integer marks)
 			throws ResourceNotFoundException;
 
 	public List<QuestionBank> questionBanksByTypeAndMarks(QuestionType question_Type_Id, Integer marks)
 			throws ResourceNotFoundException;
 
-	public List<QuestionBank> questionBanksByTypeAndSubject(QuestionType question_Type_Id, String subject)
+	public List<QuestionBank> questionBanksByTypeAndSubject(QuestionType question_Type_Id, Subject subject_Id)
 			throws ResourceNotFoundException;
 
 	/*
