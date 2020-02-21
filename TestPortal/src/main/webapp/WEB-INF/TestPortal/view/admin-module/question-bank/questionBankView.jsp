@@ -10,7 +10,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	<!-- <button class="btn btn-primary" type="button">View</button> -->
 	<div class="content-i">
 		<div class="content-box">
 			<div class="element-wrapper">

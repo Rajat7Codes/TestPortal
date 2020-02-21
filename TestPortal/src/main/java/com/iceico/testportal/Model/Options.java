@@ -3,9 +3,12 @@
  */
 package com.iceico.testportal.Model;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,13 +17,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.iceico.testportal.audit.Auditable.Auditable;
+
 /**
  * @author sameer
  *
  */
 @Entity
 @Table(name = "tab_options")
-public class Options {
+@EntityListeners(AuditingEntityListener.class)
+public class Options extends Auditable<String> implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -248038106833636883L;
 
 	/**
 	 * 

@@ -296,7 +296,7 @@
 		var sellEntryDetArray = [];
 		var sellEntryTable = document.getElementById("optionsBody");
 
-		alert("sellEntryTable===>" + sellEntryTable.rows.length);
+		//alert("sellEntryTable===>" + sellEntryTable.rows.length);
 		for (var i = 0; i < sellEntryTable.rows.length; i++) {
 			//alert("sellEntryTable===>" + sellEntryTable.rows[i].cells[0].innerHTML);
 			var jsonObject = {
@@ -308,7 +308,7 @@
 		}
 		var data = document.getElementById('data');
 		data.value = JSON.stringify(sellEntryDetArray);
-		alert("json array===>" + JSON.stringify(sellEntryDetArray));
+		//alert("json array===>" + JSON.stringify(sellEntryDetArray));
 	}
 </script>
 
@@ -344,7 +344,7 @@
 		jsonArray.push(tbl);
 		var data = document.getElementById("data");
 		data.value = JSON.stringify(tbl);
-		alert("update array data =====>>>" + JSON.stringify(tbl))
+		//alert("update array data =====>>>" + JSON.stringify(tbl))
 	}
 </script>
 </html>
