@@ -54,12 +54,12 @@ public class JavaUserController {
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "javaUser";
 	}
-
+	
 	@PostMapping("/java/user/save")
 	public String saveJavaUser(@RequestParam("jsonData") String jsonData,
-			@RequestParam("fileName") MultipartFile fileName, HttpServletRequest httpServletRequest, BindingResult bindingResult, ModelMap modelMap,
+			@RequestParam("fileName") MultipartFile fileName, HttpServletRequest httpServletRequest, ModelMap modelMap,
 			Locale locale) throws ParseException {
-
+		
 		String uploadFolder = httpServletRequest.getServletContext().getRealPath("/uploaded");
 
 		File directory = new File(uploadFolder);
@@ -108,7 +108,6 @@ public class JavaUserController {
 			user.setMobileNumber(jsonObject.get("mobileNumber").toString());
 			userService.updateUser(user);
 		}
-		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "redirect:/java/user";
