@@ -68,4 +68,11 @@ public class SubjectServiceIMPL implements SubjectService {
 		return this.getSession().createQuery("from Subject where status=:status").setParameter("status", true).list();
 	}
 
+	@Override
+	public Subject getBySubject(String subjectName) {
+		return (Subject) this.getSession().createQuery("from Subject where subjectName=:subjectName")
+				.setParameter("subjectName", subjectName).uniqueResult();
+
+	}
+
 }

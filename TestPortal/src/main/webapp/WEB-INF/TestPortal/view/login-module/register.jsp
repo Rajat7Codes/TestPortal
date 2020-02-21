@@ -68,26 +68,28 @@ input:focus {
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label> First Name </label> <input id="fname" name="fname" type="text"
-								class="form-control" placeholder="Enter first name" data-bv-regexp="true"
-								data-bv-regexp-regexp="^[a-z]*$" data-bv-regexp-message="Alphabets without spaces only" >
+							<label> First Name </label> <input id="fname" name="fname"
+								type="text" class="form-control" placeholder="Enter first name"
+								data-bv-regexp="true" data-bv-regexp-regexp="^[a-zA-Z]*$"
+								data-bv-regexp-message="Alphabets without spaces only">
 							<div class="pre-icon os-icon os-icon-user-male-circle"></div>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label> Last Name </label> <input class="form-control"
-								placeholder="Enter last name" id="lname" name="lname" data-bv-regexp="true"
-								data-bv-regexp-regexp="^[a-z]*$" data-bv-regexp-message="Alphabets without spaces only"
+								placeholder="Enter last name" id="lname" name="lname"
+								data-bv-regexp="true" data-bv-regexp-regexp="^[a-zA-Z]*$"
+								data-bv-regexp-message="Alphabets without spaces only"
 								type="text">
 						</div>
 					</div>
-				</div><!-- ^[a-z\s]+$ -->
+				</div>
+				<!-- ^[a-z\s]+$ -->
 				<div class="form-group">
-					<label class="w-100"> Username </label> 
-					<input class="form-control"
+					<label class="w-100"> Username </label> <input class="form-control"
 						placeholder="Enter username" id="ssoId" name="ssoId" type="text"
-						data-bv-regexp="true" data-bv-regexp-regexp="^[a-z]*$"
+						data-bv-regexp="true" data-bv-regexp-regexp="^[a-zA-Z]*$"
 						data-bv-regexp-message="Alphabets without spaces only" />
 					<div class="pre-icon os-icon os-icon-user-male-circle"></div>
 				</div>
@@ -115,8 +117,9 @@ input:focus {
 				<div class="form-group">
 					<label> Department</label> <select class="form-control"
 						id="department" name="department">
-						<option value="Java">Java</option>
-						<option value="Web">Web</option>
+						<c:forEach var="department" items="${departmentList}">
+							<option value="${department.departmentId}">${department.departmentName}</option>
+						</c:forEach>
 					</select>
 					<div class="pre-icon os-icon os-icon-hierarchy-structure-2">
 					</div>
@@ -124,7 +127,8 @@ input:focus {
 				<div class="form-group">
 					<label>Position</label> <input class="form-control"
 						placeholder="Enter position" id="position" name="position"
-						type="text" data-bv-regexp="true" data-bv-regexp-regexp="^[a-z]*$"
+						type="text" data-bv-regexp="true"
+						data-bv-regexp-regexp="^[a-zA-Z]*$"
 						data-bv-regexp-message="Alphabets without spaces only">
 					<div class="pre-icon os-icon os-icon-users"></div>
 				</div>

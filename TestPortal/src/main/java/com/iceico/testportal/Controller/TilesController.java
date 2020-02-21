@@ -37,6 +37,20 @@ public class TilesController {
 		return "adminDashboard";
 	}
 
+	@RequestMapping("/java/dashboard")
+	public String javaDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+//		modelMap.addAttribute("user", this.getPrincipal());
+		return "javaDashboard";
+	}
+
+	@RequestMapping("/web/dashboard")
+	public String webDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+//		modelMap.addAttribute("user", this.getPrincipal());
+		return "webDashboard";
+	}
+
 	private String getPrincipal() {
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

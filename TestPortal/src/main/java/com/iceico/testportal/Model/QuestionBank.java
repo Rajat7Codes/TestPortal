@@ -21,13 +21,15 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.iceico.testportal.audit.Auditable.Auditable;
 
 /**
  * @author SAMEER KADGAYE
  * @version 0.1
  * 
- *          Created Date : 14/02/2020 updated by: puja
+ *          Created Date : 14/02/2020
  *
  */
 @Entity
@@ -70,7 +72,7 @@ public class QuestionBank extends Auditable<String> implements Serializable {
 	@Column(name = "description")
 	private String description;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "question_Type_Id", insertable = true, nullable = true, updatable = true)
 	private QuestionType questionType;
 
