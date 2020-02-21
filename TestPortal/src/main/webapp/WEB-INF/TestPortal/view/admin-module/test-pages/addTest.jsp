@@ -105,12 +105,12 @@
 								</div>
 
 								<!-- table -->
-								<div class="element-wrapper">
+								<div class="element-wrapper d-none" id="questions-table">
 									<div class="element-box">
 										<h6 class="element-header mb-5">Questions List</h6>
 
 										<div class="table-responsive">
-											<table class="table table-striped">
+											<table id="questionListTable" class="table table-striped">
 												<thead>
 													<tr>
 														<th>Sr.No.</th>
@@ -146,6 +146,92 @@
 		$("#negativeMarking").change(function() {
 			$("#ratioDiv").toggle();
 		});
+	});
+</script>
+
+<!-- AJAX script for subject -->
+<script type="text/javascript">
+	$("#subject").change(function() {
+		alert("inside function");
+
+		data = {
+
+			"subjectID" : $("#subject").val()
+
+		};
+
+		alert(JSON.stringify(data));
+
+		$
+
+		.ajax({
+
+			type : "POST",
+
+			contentType : "application/json",
+
+			url : "${pageContext.request.contextPath}/add/test/filter/subject",
+
+			data : data,
+
+			dataType : 'json',
+
+			cache : false,
+
+			timeout : 600000,
+
+			success : function(response) {
+
+				alert(JSON.stringify(response));
+
+				var trHTML = '';
+
+				$.each(
+
+				response.questions,
+
+				function(i, item) {
+
+					trHTML += '<tr><td>' + "&nbsp;"
+
+					+ (i + 1)
+
+					+ '</td><td>'
+
+					+ "&nbsp;"
+
+					+ item.question
+
+					+ '</td><td>'
+
+					+ "&nbsp;"
+
+					+ item.questionType
+
+					+ '</td><td>'
+
+					+ "&nbsp;"
+
+					+ item.marks
+
+					+ '</td><td>'
+
+					+ "&nbsp;"
+
+					+ ''
+
+					+ '</td></tr>';
+
+				});
+
+				$('#questionListTable tr td').remove();
+				$('#questionListTable').append(trHTML);
+
+			}
+
+		});
+
+		$("#questions-table").css("display", "block !important");
 	});
 </script>
 </html>

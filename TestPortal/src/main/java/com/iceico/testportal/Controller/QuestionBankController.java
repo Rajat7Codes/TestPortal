@@ -34,9 +34,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
+import com.iceico.testportal.Model.AddTest;
 import com.iceico.testportal.Model.Options;
 import com.iceico.testportal.Model.QuestionBank;
 import com.iceico.testportal.Model.QuestionType;
+import com.iceico.testportal.Model.Subject;
 import com.iceico.testportal.Service.QuestionBankService;
 import com.iceico.testportal.Service.QuestionTypeService;
 import com.iceico.testportal.Service.SubjectService;
@@ -298,4 +300,30 @@ public class QuestionBankController {
 		}
 		return questionBankArray;
 	}
+
+	/* AJAX CALL FOR GET BY SUBJECT */
+	@SuppressWarnings({ "deprecation", "unchecked" })
+	@RequestMapping(value = "/add/test/filter/subject", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.POST)
+	public @ResponseBody JSONObject filterQuestionListBySubject(@RequestParam("subjectID") Long subjectId)
+			throws JsonProcessingException, ParseException, ResourceNotFoundException {
+		System.out.println("\n=========>Ssssss111");
+		Subject subject = this.subjectService.getSubjectById( subjectId);
+
+		JSONObject subObject = new JSONObject();
+		JSONArray questionArray = new JSONArray();
+		System.out.println("=========>Ssssss222");
+		for (QuestionBank questionsBank : subject.getQuestionBank()) {
+
+			JSONObject queObject = new JSONObject();
+
+			queObject.put("question", questionsBank.getQuestion());
+			queObject.put("questionType", questionsBank.getQuestionType());
+			queObject.put("marks", questionsBank.getQuestionType());
+			questionArray.add(queObject);
+		}
+		subObject.put("questions", questionArray);
+
+		return subObject;
+	}
+
 }

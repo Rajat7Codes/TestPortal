@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * @author puja
  *
@@ -49,13 +51,16 @@ public class Subject implements Serializable {
 	 * @param subjectName
 	 * @param status
 	 * @param addTest
+	 * @param questionBank
 	 */
-	public Subject(Long subjectId, String subjectName, Boolean status, List<AddTest> addTest) {
-		super();
+	public Subject(Long subjectId, String subjectName, Boolean status, List<AddTest> addTest,
+			List<QuestionBank> questionBank) {
+		// super();
 		this.subjectId = subjectId;
 		this.subjectName = subjectName;
 		this.status = status;
 		this.addTest = addTest;
+		this.questionBank = questionBank;
 	}
 
 	/**
@@ -112,6 +117,20 @@ public class Subject implements Serializable {
 	 */
 	public void setAddTest(List<AddTest> addTest) {
 		this.addTest = addTest;
+	}
+
+	/**
+	 * @return the questionBank
+	 */
+	public List<QuestionBank> getQuestionBank() {
+		return questionBank;
+	}
+
+	/**
+	 * @param questionBank the questionBank to set
+	 */
+	public void setQuestionBank(List<QuestionBank> questionBank) {
+		this.questionBank = questionBank;
 	}
 
 }
