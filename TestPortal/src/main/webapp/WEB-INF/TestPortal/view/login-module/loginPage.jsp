@@ -52,18 +52,21 @@
 			<h4 class="auth-header">Login Form</h4>
 
 			<c:if test="${expireDate == true}">
-				<div class="alert alert-danger">
+				<div
+					class="alert alert-white text-danger text-center font-weight-bolder">
 					<p>YOUR APPLICATION DATE IS EXPIRED......!</p>
 				</div>
 			</c:if>
 
 			<c:if test="${param.error != null}">
-				<div class="alert alert-danger m-0">
+				<div
+					class="alert alert-white text-danger text-center m-0 font-weight-bolder">
 					<p>Invalid Credentials</p>
 				</div>
 			</c:if>
 			<c:if test="${param.logout != null}">
-				<div class="alert alert-success m-0">
+				<div
+					class="alert alert-white text-success m-0 text-center font-weight-bolder">
 					<p>Logged Out Successfully</p>
 				</div>
 			</c:if>
@@ -89,15 +92,18 @@
 							class="form-check-input" type="checkbox">Remember Me</label>
 					</div>
 				</div>
-				<div class="buttons-w mt-3 text-center">
-					<label class="form-check-label"> <a
+				<div class="buttons-w row">
+					<label class="form-check-label col-6"> <a
+						class="label label-outline-light text-dark" style="float: left;"
+						href="${pageContext.request.contextPath}/register"> Register
+							User </a>
+					</label> <label class="form-check-label col-6"> <a
+						class="label label-outline-light text-dark" style="float: right;"
 						href="${pageContext.request.contextPath}/forgot/password">
 							Forgot Password </a>
 					</label>
 				</div>
 			</form>
-
-
 
 			<!-- <input type="text" id="login" class="form-group fadeIn second"
 				name="ssoId" placeholder="Username"> <input type="password"

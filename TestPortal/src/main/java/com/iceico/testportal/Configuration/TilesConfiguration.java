@@ -29,7 +29,9 @@ public class TilesConfiguration {
 	@Bean
 	public TilesConfigurer tilesConfigurer() {
 		TilesConfigurer tilesConfigurer = new TilesConfigurer();
-		String[] defs = { "/WEB-INF/admin-panel.xml", "/WEB-INF/student-panel.xml" };
+		String[] defs = { "/WEB-INF/admin-panel.xml", "/WEB-INF/student-panel.xml",
+				"/WEB-INF/java-department-panel.xml", "/WEB-INF/web-department-panel.xml",
+				"/WEB-INF/drive-student-panel.xml" };
 		tilesConfigurer.setDefinitions(defs);
 		return tilesConfigurer;
 	}

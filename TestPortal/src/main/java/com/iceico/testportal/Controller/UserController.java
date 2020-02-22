@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.iceico.testportal.Model.User;
 import com.iceico.testportal.Model.UserProfile;
+import com.iceico.testportal.Service.DepartmentService;
 import com.iceico.testportal.Service.EMailService;
 import com.iceico.testportal.Service.OtpService;
 import com.iceico.testportal.Service.UserProfileService;
@@ -46,6 +47,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private DepartmentService departmentService;
 
 	@Autowired
 	private UserProfileService userProfileService;
@@ -74,7 +78,8 @@ public class UserController {
 		model.addAttribute("newUser", user);
 		model.addAttribute("edit", false);
 		model.addAttribute("userList", userService.findAllUsers());
-		model.addAttribute("user", getPrincipal());
+		model.addAttribute("departmentList", this.departmentService.getDepartmentList());
+		model.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "register";
 	}
 
@@ -108,7 +113,7 @@ public class UserController {
 		model.addAttribute("edit", false);
 		model.addAttribute("otp", emailOtp);
 		model.addAttribute("userList", userService.findAllUsers());
-		model.addAttribute("user", getPrincipal());
+		model.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "verifyMail";
 	}
 
@@ -191,7 +196,7 @@ public class UserController {
 		model.addAttribute("newUser", newUser);
 		model.addAttribute("userList", userService.findAllUsers());
 		model.addAttribute("edit", true);
-		model.addAttribute("user", getPrincipal());
+		model.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "register";
 	}
 
@@ -318,7 +323,7 @@ public class UserController {
 		model.addAttribute("newUser", newUser);
 		model.addAttribute("userList", userService.findAllUsers());
 		model.addAttribute("edit", true);
-		model.addAttribute("user", getPrincipal());
+		model.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "uregister";
 	}
 
@@ -333,7 +338,7 @@ public class UserController {
 		userService.updateUser(user);
 		model.addAttribute("updated", "Updated Successfully");
 		model.addAttribute("edit", true);
-		model.addAttribute("user", getPrincipal());
+		model.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "uregister";
 	}
 

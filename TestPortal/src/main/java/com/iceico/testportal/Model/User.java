@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -53,18 +54,15 @@ public class User implements Serializable {
 	@Column(name = "email", nullable = false)
 	private String email;
 
-	@Column(name = "position", nullable = false)
+	@Column(name = "position", nullable = true)
 	private String position;
 
 	@Column(name = "dob")
 	private String dob;
 
-	@Column(name = "department", nullable = false)
-	private String department;
-
 	@Column(name = "gender", nullable = false)
 	private String gender;
-
+	
 	@Column(name = "mobile_number", nullable = false)
 	@Size(min = 10, max = 10, message = "Enter valid 10 digit mobile number")
 	private String mobileNumber;
@@ -82,10 +80,15 @@ public class User implements Serializable {
 	@Size(min = 0, max = 255, message = "Description range must be 0-255 charecters only")
 	private String description;
 
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "department_id", insertable = true, nullable = true, updatable = true)
+	private Department department;
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinTable(name = "tab_app_user_user_profile", joinColumns = {
 			@JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "user_profile_id") })
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
+
 
 	/**
 	 * @return the id
@@ -200,20 +203,6 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @return the department
-	 */
-	public String getDepartment() {
-		return department;
-	}
-
-	/**
-	 * @param department the department to set
-	 */
-	public void setDepartment(String department) {
-		this.department = department;
-	}
-
-	/**
 	 * @return the gender
 	 */
 	public String getGender() {
@@ -298,6 +287,20 @@ public class User implements Serializable {
 	}
 
 	/**
+	 * @return the department
+	 */
+	public Department getDepartment() {
+		return department;
+	}
+
+	/**
+	 * @param department the department to set
+	 */
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+	/**
 	 * @return the userProfiles
 	 */
 	public Set<UserProfile> getUserProfiles() {
@@ -311,6 +314,7 @@ public class User implements Serializable {
 		this.userProfiles = userProfiles;
 	}
 
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -18,7 +18,6 @@ import java.util.Set;
 import javax.imageio.ImageIO;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -31,9 +30,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,8 +38,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.iceico.testportal.Exceptions.ResourceNotFoundException;
+import com.iceico.testportal.Model.Department;
 import com.iceico.testportal.Model.User;
 import com.iceico.testportal.Model.UserProfile;
+import com.iceico.testportal.Service.DepartmentService;
 import com.iceico.testportal.Service.OtpService;
 import com.iceico.testportal.Service.UserProfileService;
 import com.iceico.testportal.Service.UserService;
@@ -61,26 +61,28 @@ public class StudentModuleController {
 	private UserProfileService userProfileService;
 
 	@Autowired
+	private DepartmentService departmentService;
+
+	@Autowired
 	private OtpService otpServiceINF;
 
 	/* USER REGISTER */
 	@GetMapping(value = { "/register" })
 	public String registerStudent(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("user", new User());
+		modelMap.addAttribute("departmentList", this.departmentService.getDepartmentList());
 		return "register";
 	}
 
 	/* USER REGISTRATION SAVE */
-	@PostMapping(value = { "/register/save" })
-	public String saveStudentRegistration(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
-			ModelMap modelMap, Locale locale) {
-		UserProfile profile = userProfileService.findByType("STUDENT");
-		Set<UserProfile> role = new HashSet<>();
-		role.add(profile);
-		user.setUserProfiles(role);
-		this.userService.saveUser(user);
-		return "redirect:/login";
-	}
+	/*
+	 * @PostMapping(value = { "/register/save" }) public String
+	 * saveStudentRegistration(@ModelAttribute("user") @Valid User user,
+	 * BindingResult bindingResult, ModelMap modelMap, Locale locale) { UserProfile
+	 * profile = userProfileService.findByType("STUDENT"); Set<UserProfile> role =
+	 * new HashSet<>(); role.add(profile); user.setUserProfiles(role);
+	 * this.userService.saveUser(user); return "redirect:/login"; }
+	 */
 
 	/* USER DASHBOARD */
 	@GetMapping(value = { "/student/dashboard" })
@@ -141,7 +143,8 @@ public class StudentModuleController {
 	@PostMapping("/register/verify/otp")
 	public String verifyOtpSave(@RequestParam("finalJson") String sdata,
 			@RequestParam("verifyEmailOtp") String verifyEmailOtp, ModelMap modelMap, Locale locale,
-			HttpServletRequest httpServletRequest) throws ParseException {
+			HttpServletRequest httpServletRequest)
+			throws ParseException, NumberFormatException, ResourceNotFoundException {
 
 		String character = sdata.substring(sdata.length() - 1, sdata.length());
 		if (character.equals(",")) {
@@ -159,11 +162,10 @@ public class StudentModuleController {
 
 		if (emailOtp.equalsIgnoreCase(verifyEmailOtp)) {
 
-			if (data.get("department").toString().equalsIgnoreCase("Java"))
-				profile = userProfileService.findByType("JAVA");
-
-			if (data.get("department").toString().equalsIgnoreCase("Web"))
-				profile = userProfileService.findByType("WEB");
+			Department department = this.departmentService
+					.getDepartmentById(Long.parseLong(data.get("department").toString()));
+			profile = userProfileService.findByType(department.getDepartmentName());
+			profile.setType(department.getDepartmentName());
 
 			Set<UserProfile> role = new HashSet<>();
 			role.add(profile);
@@ -173,7 +175,7 @@ public class StudentModuleController {
 			user.setSsoId(data.get("username").toString());
 			user.setFirstName(data.get("fname").toString());
 			user.setLastName(data.get("lname").toString());
-			user.setDepartment(data.get("department").toString());
+			user.setDepartment(department);
 			user.setEmail(data.get("emailId").toString());
 			user.setPosition(data.get("position").toString());
 			user.setMobileNumber(data.get("mobile").toString());
@@ -297,7 +299,7 @@ public class StudentModuleController {
 			user.setLastName(jsonObject.get("lastName").toString());
 			user.setEmail(jsonObject.get("email").toString());
 			user.setPosition(jsonObject.get("position").toString());
-			user.setDepartment(jsonObject.get("department").toString());
+//			user.setDepartment(jsonObject.get("department").toString());
 			user.setDob(jsonObject.get("dob").toString());
 			user.setGender(jsonObject.get("gender").toString());
 			user.setDescription(jsonObject.get("description").toString());

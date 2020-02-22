@@ -14,7 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * @author puja
+ * @author PUJA POKALE
+ * @version 0.1
  *
  */
 @Entity
@@ -41,18 +42,24 @@ public class Subject implements Serializable {
 	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<AddTest> addTest;
 
+	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<QuestionBank> questionBank;
+
 	/**
 	 * @param subjectId
 	 * @param subjectName
 	 * @param status
 	 * @param addTest
+	 * @param questionBank
 	 */
-	public Subject(Long subjectId, String subjectName, Boolean status, List<AddTest> addTest) {
-		super();
+	public Subject(Long subjectId, String subjectName, Boolean status, List<AddTest> addTest,
+			List<QuestionBank> questionBank) {
+		// super();
 		this.subjectId = subjectId;
 		this.subjectName = subjectName;
 		this.status = status;
 		this.addTest = addTest;
+		this.questionBank = questionBank;
 	}
 
 	/**
@@ -109,6 +116,20 @@ public class Subject implements Serializable {
 	 */
 	public void setAddTest(List<AddTest> addTest) {
 		this.addTest = addTest;
+	}
+
+	/**
+	 * @return the questionBank
+	 */
+	public List<QuestionBank> getQuestionBank() {
+		return questionBank;
+	}
+
+	/**
+	 * @param questionBank the questionBank to set
+	 */
+	public void setQuestionBank(List<QuestionBank> questionBank) {
+		this.questionBank = questionBank;
 	}
 
 }

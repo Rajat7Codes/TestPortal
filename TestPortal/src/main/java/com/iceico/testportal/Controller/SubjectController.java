@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.Subject;
 import com.iceico.testportal.Service.SubjectService;
+import com.iceico.testportal.Service.UserService;
 
 /**
  * @author puja
+ * @version 0.1
+ *  Creation Date: 13/02/2020
  *
  */
 
@@ -30,6 +33,9 @@ public class SubjectController {
 	@Autowired
 	private SubjectService subjectService;
 
+	@Autowired
+	private UserService userService;
+
 	public SubjectController() {
 	}
 
@@ -37,7 +43,7 @@ public class SubjectController {
 	public String getSubject(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("subject", new Subject());
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-		modelMap.addAttribute("user", this.getPrincipal());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "subject";
 	}
 
@@ -47,12 +53,12 @@ public class SubjectController {
 		if (bindingResult.hasErrors()) {
 			modelMap.addAttribute("subject", new Subject());
 			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-			modelMap.addAttribute("user", this.getPrincipal());
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 
 			return "subject";
 		} else {
 			this.subjectService.saveSubject(subject);
-			modelMap.addAttribute("user", this.getPrincipal());
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 			return "redirect:/admin/subject";
 		}
 	}
@@ -62,7 +68,7 @@ public class SubjectController {
 			throws ResourceNotFoundException {
 		modelMap.addAttribute("subject", this.subjectService.getSubjectById(subjectId));
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-		modelMap.addAttribute("user", this.getPrincipal());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "subject";
 	}
 
@@ -70,7 +76,6 @@ public class SubjectController {
 	public String deleteSubject(@PathVariable("subjectId") @Valid Long subjectId, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
 		this.subjectService.deleteSubject(subjectId);
-		modelMap.addAttribute("user", this.getPrincipal());
 		return "redirect:/admin/subject";
 	}
 

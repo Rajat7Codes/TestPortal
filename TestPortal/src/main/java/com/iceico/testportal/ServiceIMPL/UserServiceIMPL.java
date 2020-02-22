@@ -1,8 +1,6 @@
 package com.iceico.testportal.ServiceIMPL;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,8 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.iceico.testportal.Dao.UserDao;
 import com.iceico.testportal.Model.User;
-import com.iceico.testportal.Model.UserProfile;
-import com.iceico.testportal.Service.UserProfileService;
 import com.iceico.testportal.Service.UserService;
 
 /**
@@ -31,9 +27,6 @@ public class UserServiceIMPL implements UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
-	@Autowired
-	private UserProfileService userProfileService;
 
 	/*
 	 * public User findById(int id) { return dao.findById(id); }

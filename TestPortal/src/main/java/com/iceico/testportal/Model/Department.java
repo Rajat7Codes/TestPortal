@@ -1,12 +1,16 @@
 package com.iceico.testportal.Model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -37,6 +41,23 @@ public class Department implements Serializable {
 
 	@Column(name = "status")
 	private boolean status;
+	
+	/**
+	 * @return the user
+	 */
+	public List<User> getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(List<User> user) {
+		this.user = user;
+	}
+
+	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<User> user;
 
 	/**
 	 * @param departmentId

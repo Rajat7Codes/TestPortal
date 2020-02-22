@@ -13,63 +13,63 @@
 		<div class="col-lg-4">
 			<div class="card">
 				<div class="card-body">
-					<div class="element-wrapper">
-						<div class="element-box">
-							<form:form
-								action="${pageContext.request.contextPath }/admin/questionType/save"
-								modelAttribute="questionType" name="questionType"
-								id="questionTypeForm" method="post">
+					<div class="content-box">
+						<div class="element-wrapper">
+							<div class="element-box">
+								<form:form
+									action="${pageContext.request.contextPath }/admin/questionType/save"
+									modelAttribute="questionType" name="questionType"
+									id="questionTypeForm" method="post">
 
-								<form:hidden path="questionTypeId" />
+									<form:hidden path="questionTypeId" />
 
-								<div class="form-desc">
-									<h4>ADD QUESTION TYPE</h4>
-									<hr>
-								</div>
-
-								<div class="row form-group">
-									<div class="col-md-12 col-sm-12 col-lg-12 col-12">
-										<form:label path="type"> Question Type</form:label>
-										<form:input path="type" name="type" id="type"
-											class="form-control" placeholder="Enter Question type" />
-										<form:errors path="type"></form:errors>
+									<div class="form-desc">
+										<h6 class="element-header mb-5">Add Question Type</h6>
 									</div>
 
-									<div class="col-md-12 col-sm-12 col-lg-12 col-12">
-										<form:label path="status">Status</form:label>
-										<form:select path="status" name="status" id="status"
-											class="form-control">
-											<form:option value="true">Active</form:option>
-											<form:option value="false">Inactive</form:option>
-										</form:select>
-										<form:errors path="status"></form:errors>
-									</div>
-									<div class="col-md-12 col-sm-12 col-lg-12 col-12">
-										<form:label path="programType">Program Status</form:label>
-										<form:select path="programType" name="programType"
-											id="programType" class="form-control">
-											<form:option value="false">Inactive</form:option>
-											<form:option value="true">Active</form:option>
-										</form:select>
-										<form:errors path="programType"></form:errors>
-									</div>
-									<div class="col-md-12 col-sm-12 col-lg-12 col-12">
-										<form:label path="imageType">Image Status</form:label>
-										<form:select path="imageType" name="imageType" id="imageType"
-											class="form-control">
-											<form:option value="false">Inactive</form:option>
-											<form:option value="true">Active</form:option>
+									<div class="row form-group">
+										<div class="col-md-12 col-sm-12 col-lg-12 col-12">
+											<form:label path="type"> Question Type</form:label>
+											<form:input path="type" name="type" id="type"
+												class="form-control" placeholder="Enter Question type" />
+											<form:errors path="type"></form:errors>
+										</div>
 
-										</form:select>
-										<form:errors path="imageType"></form:errors>
+										<div class="col-md-12 col-sm-12 col-lg-12 col-12">
+											<form:label path="status">Status</form:label>
+											<form:select path="status" name="status" id="status"
+												class="form-control">
+												<form:option value="true">Active</form:option>
+												<form:option value="false">Inactive</form:option>
+											</form:select>
+											<form:errors path="status"></form:errors>
+										</div>
+										<div class="col-md-12 col-sm-12 col-lg-12 col-12">
+											<form:label path="programType">Program Status</form:label>
+											<form:select path="programType" name="programType"
+												id="programType" class="form-control">
+												<form:option value="false">Inactive</form:option>
+												<form:option value="true">Active</form:option>
+											</form:select>
+											<form:errors path="programType"></form:errors>
+										</div>
+										<div class="col-md-12 col-sm-12 col-lg-12 col-12">
+											<form:label path="imageType">Image Status</form:label>
+											<form:select path="imageType" name="imageType" id="imageType"
+												class="form-control">
+												<form:option value="false">Inactive</form:option>
+												<form:option value="true">Active</form:option>
+
+											</form:select>
+											<form:errors path="imageType"></form:errors>
+										</div>
 									</div>
-								</div>
-								<br>
-								<div class="form-buttons-w">
-									<button class="btn btn-secondary" type="submit">Reset</button>
-									<button class="btn btn-primary" type="submit">Submit</button>
-								</div>
-							</form:form>
+									<div class="form-buttons-w">
+										<button class="btn btn-secondary" type="submit">Reset</button>
+										<button class="btn btn-primary" type="submit">Submit</button>
+									</div>
+								</form:form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -82,8 +82,7 @@
 						<div class="element-wrapper">
 							<div class="element-box">
 								<div class="form-desc">
-									<h4 class="form-header">QUESTION TYPE LIST</h4>
-									<hr>
+									<h6 class="element-header mb-5">Question Type List</h6>
 								</div>
 								<div class="table-responsive">
 									<table id="dataTable1"

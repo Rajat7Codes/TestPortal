@@ -276,8 +276,8 @@
 									<div class="form-group">
 										<label> About Yourself</label>
 										<textarea class="form-control" rows="3" name="description"
-											id="description"><c:out
-												value="${user.description }" /></textarea>
+											id="description"><%-- <c:out
+												value="${user.description }" /> --%></textarea>
 									</div>
 								</fieldset>
 								<div class="form-check">

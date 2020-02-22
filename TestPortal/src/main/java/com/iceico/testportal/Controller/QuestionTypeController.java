@@ -22,7 +22,8 @@ import com.iceico.testportal.Service.UserService;
 
 /**
  * @author puja
- *
+ * @version 0.1 
+ * Creation Date: 13/02/2020
  */
 
 @Controller
@@ -30,6 +31,8 @@ public class QuestionTypeController {
 
 	@Autowired
 	private QuestionTypeService questionTypeService;
+	@Autowired
+	private UserService usrService;
 
 	@Autowired
 	private UserService userService;
@@ -52,12 +55,12 @@ public class QuestionTypeController {
 		if (bindingResult.hasErrors()) {
 			modelMap.addAttribute("questionType", new QuestionType());
 			modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
-			modelMap.addAttribute("user", this.getPrincipal());
+			modelMap.addAttribute("user", usrService.findBySSO(this.getPrincipal()));
 			return "questionType";
 
 		} else {
 			this.questionTypeService.saveQuestionType(questionType);
-			modelMap.addAttribute("user", this.getPrincipal());
+			modelMap.addAttribute("user", usrService.findBySSO(this.getPrincipal()));
 			return "redirect:/admin/questionType";
 		}
 	}
@@ -67,7 +70,7 @@ public class QuestionTypeController {
 			Locale locale) throws ResourceNotFoundException {
 		modelMap.addAttribute("questionType", this.questionTypeService.getQuestionTypeById(questionTypeId));
 		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
-		modelMap.addAttribute("user", this.getPrincipal());
+		modelMap.addAttribute("user", usrService.findBySSO(this.getPrincipal()));
 		return "questionType";
 
 	}
@@ -76,7 +79,6 @@ public class QuestionTypeController {
 	public String deleteQuestionType(@PathVariable("questionTypeId") @Valid Long questionTypeId, ModelMap modelMap,
 			Locale locale) throws ResourceNotFoundException {
 		this.questionTypeService.deleteQuestionType(questionTypeId);
-		modelMap.addAttribute("user", this.getPrincipal());
 		return "redirect:/admin/questionType";
 	}
 

@@ -2,6 +2,7 @@ package com.iceico.testportal.Model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -55,9 +57,12 @@ public class AddTest implements Serializable {
 	@Column(name = "passing_percent")
 	private float passingPercent;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "subject_id", insertable = true, nullable = true, updatable = true)
 	private Subject subject;
+
+	@OneToMany(mappedBy = "addTest", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<QuestionBank> questionBank;
 
 	/**
 	 * @param addTestId
@@ -69,10 +74,11 @@ public class AddTest implements Serializable {
 	 * @param instructions
 	 * @param passingPercent
 	 * @param subject
+	 * @param questionBank
 	 */
 	public AddTest(Long addTestId, String testName, Integer time, Date date, Boolean negativeMarking, Integer ratio,
-			String instructions, float passingPercent, Subject subject) {
-		//super();
+			String instructions, float passingPercent, Subject subject, List<QuestionBank> questionBank) {
+		super();
 		this.addTestId = addTestId;
 		this.testName = testName;
 		this.time = time;
@@ -82,6 +88,7 @@ public class AddTest implements Serializable {
 		this.instructions = instructions;
 		this.passingPercent = passingPercent;
 		this.subject = subject;
+		this.questionBank = questionBank;
 	}
 
 	/**
@@ -208,6 +215,20 @@ public class AddTest implements Serializable {
 	 */
 	public void setSubject(Subject subject) {
 		this.subject = subject;
+	}
+
+	/**
+	 * @return the questionBank
+	 */
+	public List<QuestionBank> getQuestionBank() {
+		return questionBank;
+	}
+
+	/**
+	 * @param questionBank the questionBank to set
+	 */
+	public void setQuestionBank(List<QuestionBank> questionBank) {
+		this.questionBank = questionBank;
 	}
 
 }

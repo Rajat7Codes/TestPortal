@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.Department;
 import com.iceico.testportal.Service.DepartmentService;
+import com.iceico.testportal.Service.UserService;
 
 /**
  * @author puja
+ * @version 0.1
+ *  Creation Date: 13/02/2020
  *
  */
 @Controller
@@ -28,6 +31,8 @@ public class DepartmentController {
 
 	@Autowired
 	private DepartmentService departmentService;
+	@Autowired
+	private UserService userService;
 
 	public DepartmentController() {
 	}
@@ -36,7 +41,7 @@ public class DepartmentController {
 	public String getDepartment(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("department", new Department());
 		modelMap.addAttribute("departmentList", this.departmentService.getDepartmentList());
-		modelMap.addAttribute("user", this.getPrincipal());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "department";
 	}
 
@@ -46,12 +51,12 @@ public class DepartmentController {
 		if (bindingResult.hasErrors()) {
 			modelMap.addAttribute("department", new Department());
 			modelMap.addAttribute("departmentList", this.departmentService.getDepartmentList());
-			modelMap.addAttribute("user", this.getPrincipal());
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 
 			return "department";
 		} else {
 			this.departmentService.saveDepartment(department);
-			modelMap.addAttribute("user", this.getPrincipal());
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 			return "redirect:/admin/department";
 		}
 	}
@@ -61,7 +66,7 @@ public class DepartmentController {
 			Locale locale) throws ResourceNotFoundException {
 		modelMap.addAttribute("department", this.departmentService.getDepartmentById(departmentId));
 		modelMap.addAttribute("departmentList", this.departmentService.getDepartmentList());
-		modelMap.addAttribute("user", this.getPrincipal());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "department";
 	}
 
@@ -69,7 +74,6 @@ public class DepartmentController {
 	public String deleteDepartment(@PathVariable("departmentId") @Valid Long departmentId, ModelMap modelMap,
 			Locale locale) throws ResourceNotFoundException {
 		this.departmentService.deleteDepartment(departmentId);
-		modelMap.addAttribute("user", this.getPrincipal());
 		return "redirect:/admin/department";
 	}
 
