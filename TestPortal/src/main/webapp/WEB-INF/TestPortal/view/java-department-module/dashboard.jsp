@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +15,8 @@
 <meta content="Admin dashboard html template" name="description">
 <meta content="width=device-width,initial-scale=1" name="viewport">
 </head>
+
+
 <body
 	class="menu-position-side menu-side-left full-screen with-content-panel ">
 
@@ -25,6 +33,7 @@
 									<option value="Cancelled">Last 30 Days</option></select>
 							</form>
 						</div>
+
 						<h6 class="element-header">Sales Dashboard</h6>
 						<div class="element-content">
 							<div class="row">
@@ -435,5 +444,6 @@
 			</div>
 		</div>
 	</div>
+	dvs
 </body>
 </html>

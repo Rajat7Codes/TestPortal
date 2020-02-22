@@ -34,7 +34,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
-import com.iceico.testportal.Model.AddTest;
 import com.iceico.testportal.Model.Options;
 import com.iceico.testportal.Model.QuestionBank;
 import com.iceico.testportal.Model.QuestionType;
@@ -173,7 +172,7 @@ public class QuestionBankController {
 		return "searchQuestions";
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	@RequestMapping(value = "/question/bank/type/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	public @ResponseBody JSONArray filterStudentListByAll(@RequestParam("type") Long type,
 			@RequestParam("marks") Integer marks, @RequestParam("subject") Long subjectType)

@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +18,12 @@
 <body
 	class="menu-position-side menu-side-left full-screen with-content-panel ">
 
+
+<c:if test="${ passwordChange==false }">
+	<script>
+		alert("Please check your mail to change password");
+	</script>
+</c:if>
 
 <div class="content-i">
 		<div class="content-box">
@@ -62,6 +74,9 @@
 								<a class="btn btn-primary btn-sm"
 									href="${pageContext.request.contextPath }/java/user/update"><i
 									class="os-icon os-icon-edit"></i><span>Edit Profile</span></a>
+								<a class="btn btn-primary btn-sm"
+									href="${pageContext.request.contextPath }/java/user/send/token"><i
+									class="os-icon os-icon-edit"></i><span>Change Password</span></a>
 							</div>
 						</div>
 					</div>
