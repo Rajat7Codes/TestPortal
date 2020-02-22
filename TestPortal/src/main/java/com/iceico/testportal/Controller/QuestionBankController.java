@@ -73,8 +73,8 @@ public class QuestionBankController {
 		QuestionBank questionBank = new QuestionBank();
 
 		modelMap.addAttribute("questionBank", questionBank);
-		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
-		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("questionTypeList", this.questionTypeService.getActiveQuestionType());
+		modelMap.addAttribute("subjectList", this.subjectService.getActiveSubject());
 		List<QuestionType> questionTypeList = this.questionTypeService.getQuestionTypeList();
 		JSONArray jsonArray = new JSONArray();
 

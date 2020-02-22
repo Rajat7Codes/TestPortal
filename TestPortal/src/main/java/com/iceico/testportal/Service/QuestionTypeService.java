@@ -18,6 +18,7 @@ public interface QuestionTypeService {
 	public List<QuestionType> getQuestionTypeList();
 
 	public QuestionType getQuestionTypeById(Long questionTypeId) throws ResourceNotFoundException;
-	
-	public QuestionType getActiveQuestionType();
+
+	public List<QuestionType> getActiveQuestionType();
+
 }

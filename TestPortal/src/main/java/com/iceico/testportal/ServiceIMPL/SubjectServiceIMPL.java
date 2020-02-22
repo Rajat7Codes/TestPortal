@@ -61,16 +61,18 @@ public class SubjectServiceIMPL implements SubjectService {
 				.orElseThrow(() -> new ResourceNotFoundException("Subject Id not found" + subjectId));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Subject getActiveSubject() {
-		return (Subject) this.getSession().createQuery("from Subject where status=:active").setParameter("active", true)
-				.uniqueResult();
+	public List<Subject> getActiveSubject() {
+
+		return this.getSession().createQuery("from Subject where status=:status").setParameter("status", true).list();
 	}
 
 	@Override
 	public Subject getBySubject(String subjectName) {
 		return (Subject) this.getSession().createQuery("from Subject where subjectName=:subjectName")
 				.setParameter("subjectName", subjectName).uniqueResult();
+
 	}
 
 }

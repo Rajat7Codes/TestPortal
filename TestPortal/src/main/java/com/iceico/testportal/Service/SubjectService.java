@@ -19,7 +19,7 @@ public interface SubjectService {
 
 	public Subject getSubjectById(Long subjectId) throws ResourceNotFoundException;
 
-	public Subject getActiveSubject();
+	public List<Subject> getActiveSubject();
 
 	public Subject getBySubject(String subjectName);
 

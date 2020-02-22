@@ -23,7 +23,7 @@
 									<form:label path="subject">Subject</form:label>
 									<form:select class="form-control" name="subject" path="subject"
 										id="subject">
-										<form:option value="" label="--- Select Category---" />
+										<form:option value="" label="--- Select Subject ---" />
 										<form:options items="${subjectList}" itemValue="subjectId"
 											itemLabel="subjectName" id="subject" multiple="single" />
 									</form:select>
@@ -35,7 +35,7 @@
 									<form:label path="questionType">Question Type</form:label>
 									<form:select class="form-control" name="questionType"
 										path="questionType" id="questionType">
-										<form:option value="" label="--- Select Category---" />
+										<form:option value="" label="--- Select Question Type ---" />
 										<form:options items="${questionTypeList}"
 											itemValue="questionTypeId" itemLabel="type"
 											id="categoryOption" multiple="single" />
@@ -59,25 +59,26 @@
 							</div>
 						</div>
 					</form:form>
+					<div id="tableToggle" style="display: none;">
+						<div class="table-responsive">
+							<table id="example1" width="100%"
+								class="table table-striped table-lightfont">
+								<thead>
+									<tr>
+										<th>Sr. No</th>
+										<th>Question Id</th>
+										<th>Subject</th>
+										<th>Type</th>
+										<th>Question</th>
+										<th>Marks</th>
+										<!-- <th>Action</th> -->
+									</tr>
+								</thead>
+								<tbody id="wantThatBody">
 
-					<div class="table-responsive">
-						<table id="example1" width="100%"
-							class="table table-striped table-lightfont">
-							<thead>
-								<tr>
-									<th>Sr. No</th>
-									<th>Question Id</th>
-									<th>Subject</th>
-									<th>Type</th>
-									<th>Question</th>
-									<th>Marks</th>
-									<!-- <th>Action</th> -->
-								</tr>
-							</thead>
-							<tbody id="wantThatBody">
-
-							</tbody>
-						</table>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -86,35 +87,18 @@
 </body>
 <script type="text/javascript">
 	function all_type_submit() {
-		//alert("all_type_submit()");
-		/* 
-		 alert("questionType ========>> " + $("#questionType").val());
-		 alert("marks ========>> " + $("#marks").val());
-		 alert("subject ========>> " + $("#subject").val());
-		 */
+		document.getElementById('tableToggle').style.display = 'block';
 		var mark = $("#marks").val();
-		//	alert("marks Before========>> " + $("#marks").val());
 		if (mark == "") {
-			//alert("inside mark empty==>")
 			mark = 0;
 			document.getElementById('marks').value = mark;
-			//alert("Now marks ========>> " + $("#marks").val());
 		}
-
-		/* var subject = $("#subject").val();
-		if (subject == "") {
-			//alert("inside subject empty==>")
-			subject = null;
-			document.getElementById('subject').value = subject;
-			//alert("Now subject ========>> " + $("#subject").val());
-		} */
 
 		data = {
 			"type" : $("#questionType").val(),
 			"marks" : $("#marks").val(),
 			"subject" : $("#subject").val()
 		};
-		//alert("data ========>> " + data);
 		$.ajax({
 			type : "GET",
 			contentType : "application/json",
@@ -126,7 +110,6 @@
 			success : function(response) {
 				var trHTML = '';
 				//alert("response =========>>" + JSON.stringify(response));
-
 				$.each(response, function(i, item) {
 					//	alert("inside =====>");
 					trHTML += '<tr><td>' + "&nbsp;" + (i + 1) + '</td><td>'

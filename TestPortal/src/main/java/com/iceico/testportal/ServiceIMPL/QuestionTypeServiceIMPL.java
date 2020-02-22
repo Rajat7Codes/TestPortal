@@ -54,9 +54,10 @@ public class QuestionTypeServiceIMPL implements QuestionTypeService {
 				.orElseThrow(() -> new ResourceNotFoundException("QuestionTypeId not found" + questionTypeId));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public QuestionType getActiveQuestionType() {
-		return (QuestionType) this.getSession().createQuery("from QuestionType where active=:active")
-				.setParameter("active", true).list();
+	public List<QuestionType> getActiveQuestionType() {
+		return this.getSession().createQuery("from QuestionType where status=:status").setParameter("status", true)
+				.list();
 	}
 }
