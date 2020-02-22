@@ -18,10 +18,15 @@
 <body
 	class="menu-position-side menu-side-left full-screen with-content-panel ">
 
-
 <c:if test="${ passwordChange==false }">
 	<script>
 		alert("Please check your mail to change password");
+	</script>
+</c:if>
+
+<c:if test="${ passMsg==false }">
+	<script>
+		alert("Password changed successfully");
 	</script>
 </c:if>
 

@@ -183,9 +183,10 @@ public class JavaUserController {
 		user.setPassword(password);
 		this.userService.saveUser(user);
 		this.passwordToken = "Used";
+		modelMap.addAttribute("passMsg", false);
 
 		modelMap.addAttribute("user", user);
-		return "javaUser";
+		return "redirect:/java/user";
 	}
 
 	@GetMapping("/java/user/update")
