@@ -67,10 +67,7 @@
 									class="os-icon os-icon-link-3"></i><span>Add to Friends</span></a> -->
 								<a class="btn btn-primary btn-sm"
 									href="${pageContext.request.contextPath }/java/student/profile/update"><i
-									class="os-icon os-icon-edit"></i><span>Edit Profile</span></a> <a
-									class="btn btn-primary btn-sm"
-									href="${pageContext.request.contextPath }/java/user/send/token"><i
-									class="os-icon os-icon-edit"></i><span>Change Password</span></a>
+									class="os-icon os-icon-edit"></i><span>Edit Profile</span></a> 
 							</div>
 						</div>
 					</div>
@@ -682,16 +679,7 @@
 	 -->
 </body>
 
-<c:if test="${ passwordChange==false }">
-	<script>
-		alert("Please check your mail to change password");
-	</script>
-</c:if>
-
-<c:if test="${ passMsg==false }">
-	<script>
-		alert("Password changed successfully");
-	</script>
-</c:if>
-
+<script>
+	alert('${passwordMsg}');
+</script>
 </html>

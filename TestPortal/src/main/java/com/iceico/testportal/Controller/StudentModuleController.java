@@ -111,8 +111,8 @@ public class StudentModuleController {
 
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
-		mailSender.setUsername("lekhabhange.iceico@gmail.com");
-		mailSender.setPassword("lekha@iceico");
+		mailSender.setUsername("iceico.testportal@gmail.com");
+		mailSender.setPassword("testportal@2020");
 
 		Properties javaMailProperties = new Properties();
 		javaMailProperties.put("mail.smtp.starttls.enable", "true");
@@ -201,16 +201,14 @@ public class StudentModuleController {
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(data);
 		String toEmail = jsonObject.get("emailId").toString();
 		String subject = "[ICEICO TEST PORTAL OTP]";
-
-		String emailMessage = "Hello, \n" + "Your One time Passowrd For Registering On ICEICO Test Portal " + " " + "is"
-				+ " " + emailOtp + "";
+		String emailMessage = "Hello, \n" + "Your One time Passowrd For Registering On ICEICO Test Portal " + " " + "is " + emailOtp + "";
 
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
-		mailSender.setUsername("lekhabhange.iceico@gmail.com");
-		mailSender.setPassword("lekha@iceico");
+		mailSender.setUsername("iceico.testportal@gmail.com");
+		mailSender.setPassword("testportal@2020");
 
 		Properties javaMailProperties = new Properties();
 		javaMailProperties.put("mail.smtp.starttls.enable", "true");
@@ -299,7 +297,6 @@ public class StudentModuleController {
 			user.setLastName(jsonObject.get("lastName").toString());
 			user.setEmail(jsonObject.get("email").toString());
 			user.setPosition(jsonObject.get("position").toString());
-//			user.setDepartment(jsonObject.get("department").toString());
 			user.setDob(jsonObject.get("dob").toString());
 			user.setGender(jsonObject.get("gender").toString());
 			user.setDescription(jsonObject.get("description").toString());
