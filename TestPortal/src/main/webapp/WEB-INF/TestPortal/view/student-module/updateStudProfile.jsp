@@ -286,10 +286,11 @@
 										agree to terms and conditions</label>
 								</div>
 
-								<input id="id" name="id" value="${user.id }" /> <input
-									id="ssoId" name="ssoId" value="${user.ssoId }" /> <input
-									id="password" name="password" value="${user.password }" /> <input
-									id="jsonData" name="jsonData" />
+								<input id="id" name="id" value="${user.id }" type="hidden" /> <input
+									id="ssoId" name="ssoId" value="${user.ssoId }" type="hidden" />
+								<input id="password" name="password" value="${user.password }"
+									type="hidden" /> <input id="jsonData" name="jsonData"
+									type="hidden" />
 
 								<div class="form-buttons-w">
 									<button class="btn btn-primary" type="submit"

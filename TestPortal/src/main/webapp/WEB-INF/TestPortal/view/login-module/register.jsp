@@ -8,26 +8,6 @@
 <title>TEST PORTAL | REGISTER</title>
 
 <link
-	href="../../../../../fonts.googleapis.com/css6079.css?family=Poppins:300,400,500,600,700"
-	rel="stylesheet" type="text/css" />
-<!-- icons -->
-<link
-	href="${pageContext.request.contextPath }/static/fonts/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath }/static/fonts/material-design-icons/material-icon.css"
-	rel="stylesheet" type="text/css" />
-<!-- bootstrap -->
-<link
-	href="${pageContext.request.contextPath }/static/plugins/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<!-- style -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/static/css/pages/extra_pages.css">
-<!-- favicon -->
-<link rel="shortcut icon"
-	href="${pageContext.request.contextPath }/static/img/favicon.png" />
-<link
 	href="${pageContext.request.contextPath}/static/css/main5739.css?version=4.5.0"
 	rel="stylesheet">
 
@@ -45,6 +25,9 @@ input:focus {
 }
 </style>
 
+<link rel="stylesheet"
+	href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css" />
+
 </head>
 <body>
 	<c:url var="loginUrl" value="/login" />
@@ -55,9 +38,13 @@ input:focus {
 					src="${pageContext.request.contextPath}/static/img/Iceico_logo.png"></a>
 			</div>
 			<h4 class="auth-header">Create new account</h4>
-			<form class="reg-form"
+			<form id="registerForm" class="reg-form"
 				action="${pageContext.request.contextPath }/register/generate/otp"
-				method="POST">
+				data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+				data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+				data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"
+				method="POST" enctype="multipart/form-data">
+
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
@@ -89,7 +76,7 @@ input:focus {
 				<div class="form-group">
 					<label> Phone Number</label> <input class="form-control"
 						name="mobile" id="mobile" placeholder="Enter mobile number"
-						type="text">
+						type="number">
 					<div class="pre-icon os-icon os-icon-phone"></div>
 				</div>
 				<div class="form-group">
@@ -121,14 +108,19 @@ input:focus {
 						<div class="form-group">
 							<label> Password</label> <input class="form-control"
 								placeholder="Password" id="password" name="password"
-								type="password">
+								type="password" data-bv-identical="true"
+								data-bv-identical-field="confirmPassword"
+								data-bv-identical-message=" ">
 							<div class="pre-icon os-icon os-icon-fingerprint"></div>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label>Confirm Password</label> <input id="confirmPassword"
-								class="form-control" placeholder="Password" type="password">
+								name="confirmPassword" class="form-control"
+								placeholder="Password" type="password" data-bv-identical="true"
+								data-bv-identical-field="password"
+								data-bv-identical-message="Password mismatch">
 						</div>
 					</div>
 				</div>
@@ -143,6 +135,39 @@ input:focus {
 		</div>
 	</div>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script type="text/javascript"
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#registerForm').bootstrapValidator({
+			feedbackIcons : {
+				valid : 'glyphicon glyphicon-ok',
+				invalid : 'glyphicon glyphicon-remove',
+				validating : 'glyphicon glyphicon-refresh'
+			},
+			fields : {
+				password : {
+					validators : {
+						identical : {
+							field : 'password'
+						}
+					}
+				},
+				confirmPassword : {
+					validators : {
+						identical : {
+							field : 'confirmPassword'
+						}
+					}
+				}
+			}
+		});
+	});
+</script>
 
 <script type="text/javascript">
 	function getFormData() {
@@ -204,66 +229,5 @@ input:focus {
 		}
 	}
 </script>
-
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/jquery/dist/jquery.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/popper.js/dist/umd/popper.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/moment/moment.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/chart.js/dist/Chart.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/select2/dist/js/select2.full.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/ckeditor/ckeditor.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap-validator/dist/validator.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/dropzone/dist/dropzone.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/editable-table/mindmup-editabletable.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/tether/dist/js/tether.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/slick-carousel/slick/slick.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/util.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/alert.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/button.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/carousel.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/collapse.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/dropdown.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/modal.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/tab.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/tooltip.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/popover.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/js/demo_customizer5739.js?version=4.5.0"></script>
-<script
-	src="${pageContext.request.contextPath }/static/js/main5739.js?version=4.5.0"></script>
 
 </html>

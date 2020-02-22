@@ -171,6 +171,12 @@
 						<li><a href="tables_datatables.html">Data Tables</a></li>
 						<li><a href="tables_editable.html">Editable Tables</a></li>
 					</ul></li>
+
+				<li class="has-sub-menu"><a
+					href="${pageContext.request.contextPath}/admin/addTest"><div
+							class="icon-w">
+							<div class="os-icon os-icon-grid"></div>
+						</div> <span>Test</span></a></li>
 				<!-- <li class="has-sub-menu"><a href="#"><div class="icon-w">
 						<div class="os-icon os-icon-zap"></div>
 					</div> <span>Icons</span></a>
@@ -581,7 +587,11 @@
 					</div>
 				</div></li>
 
-
+			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath}/admin/addTest"><div
+						class="icon-w">
+						<div class="os-icon os-icon-grid"></div>
+					</div> <span>Test</span></a></li>
 
 
 			<!-- 	<li class="has-sub-menu"><a href="#"><div class="icon-w">

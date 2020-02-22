@@ -26,6 +26,11 @@
 	<definition name="register"
 		template="/WEB-INF/TestPortal/view/login-module/register.jsp">
 	</definition>
+	
+	<!-- FORGOT PASSWORD PAGE -->
+	<definition name="forgotPassword"
+		template="/WEB-INF/TestPortal/view/login-module/forgotPassword.jsp">
+	</definition>
 
 	<!-- VERIFICATION PAGE -->
 	<definition name="otpVerify"
