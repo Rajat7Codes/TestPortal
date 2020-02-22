@@ -25,13 +25,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.User;
+import com.iceico.testportal.Service.EMailService;
 import com.iceico.testportal.Service.UserService;
 
 /**
+ * <<<<<<<
+ * HEAD:TestPortal/src/main/java/com/iceico/testportal/Controller/JavaStudentController.java
+ * 
  * @author RAJAT PATIL
  * @version 0.1
  * 
- *          Created Date : 21/02/2020
+ *          Created Date : 21/02/2020 =======
+ * @author Rajat Date : 21 Feb 2020 >>>>>>>
+ *         4298a52b689a1aa384638e85ef5ce1a3dade56f7:TestPortal/src/main/java/com/iceico/testportal/Controller/JavaUserController.java
  *
  */
 @Controller
@@ -41,7 +47,13 @@ public class JavaStudentController {
 	private UserService userService;
 
 	public JavaStudentController() {
+
 	}
+
+	@Autowired
+	private EMailService emailService;
+
+	private String passwordToken = null;
 
 	@GetMapping("/java/student/profile")
 	public String displayUserInformation(ModelMap modelMap, Locale locale) {
@@ -112,6 +124,76 @@ public class JavaStudentController {
 
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "updateStudProfile";
+	}
+
+	@GetMapping("/java/user/send/token")
+	public String sendToken(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
+
+		String charString = "abcdefghijklmnopqrstuvwxyz0123456789";
+		String randAlphaNum = "";
+		double randRoll;
+		String randChar;
+
+		// Generate Random Alphanumberic Token
+		for (double i = 0; i < 30; i++) {
+			randRoll = Math.random();
+			randChar = "";
+			for (int j = 1; j <= 35; j++) {
+				if (randRoll <= (1.0 / 36.0 * j)) {
+					randChar = Character.toString(charString.charAt(j - 1));
+					break;
+				}
+			}
+			randAlphaNum += randChar;
+		}
+
+		this.passwordToken = randAlphaNum;
+
+		User user = userService.findBySSO(this.getPrincipal());
+		String email = user.getEmail();
+
+		String subject = "ICEICO Test Portal OTP";
+		String emailMessage = "Hello Student, \n" + " Your link for changing password On ICEICO Test " + "Portal is"
+				+ " http://localhost:9003/java/user/validate/token/" + randAlphaNum;
+		emailService.sendOtpMessage(email, subject, emailMessage);
+
+		modelMap.addAttribute("passwordChange", false);
+		modelMap.addAttribute("user", user);
+		return "javaStudProfile";
+	}
+
+	@GetMapping("/java/user/validate/token/{token}")
+	public String validateToken(@PathVariable("token") @Valid String token, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		if (token.equals(this.passwordToken) && !token.equals("Used")) {
+			modelMap.addAttribute("tokenMsg", true);
+			return "redirect:/java/change/password";
+		} else {
+			modelMap.addAttribute("tokenMsg", false);
+		}
+
+		return "javaStudProfile";
+	}
+
+	@GetMapping("/java/change/password")
+	public String getPassword(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "changePassword";
+	}
+
+	@PostMapping("/java/change/password")
+	public String changePassword(@RequestParam("password") String password, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+
+		User user = this.userService.findBySSO(this.getPrincipal());
+		user.setPassword(password);
+		this.userService.saveUser(user);
+		this.passwordToken = "Used";
+
+		modelMap.addAttribute("user", user);
+		return "javaStudProfile";
 	}
 
 	@GetMapping("/java/student/profile/delete/{userId}")

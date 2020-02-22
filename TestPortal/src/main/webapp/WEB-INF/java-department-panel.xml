@@ -41,4 +41,12 @@
 			value="/WEB-INF/TestPortal/view/java-department-module/profile-pages/updateUserInformation.jsp" />
 	</definition>
 
+	<!-- CHANGE USER PASSWORD PAGE -->
+	<definition name="changePassword"
+		extends="javabase.definition">
+		<put-attribute name="title" value="Change Password" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/login-module/changePassword.jsp" />
+	</definition>
+	
 </tiles-definitions>
