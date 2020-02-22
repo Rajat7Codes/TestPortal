@@ -13,10 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 /**
- * @author puja
+ * @author PUJA POKALE
+ * @version 0.1
  *
  */
 @Entity

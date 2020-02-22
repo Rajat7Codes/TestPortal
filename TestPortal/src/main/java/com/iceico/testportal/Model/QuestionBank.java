@@ -21,8 +21,6 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.iceico.testportal.audit.Auditable.Auditable;
 
 /**
@@ -46,7 +44,7 @@ public class QuestionBank extends Auditable<String> implements Serializable {
 	 * 
 	 */
 	public QuestionBank() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Id

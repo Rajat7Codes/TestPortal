@@ -5,10 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>JAVA DASHBOARD</title>
+<title>Admin Dashboard HTML Template</title>
 </head>
-<body
-	class="menu-position-side menu-side-left full-screen with-content-panel ">
+<body>
 	<div class="content-i">
 		<div class="content-box">
 			<div class="row">
@@ -43,7 +42,7 @@
 								</div>
 								<div class="col-sm-6 text-right">
 									<a class="btn btn-primary btn-sm"
-										href="${pageContext.request.contextPath }/java/student/profile"><i
+										href="${pageContext.request.contextPath }/student/profile"><i
 										class="os-icon os-icon-user"></i><span>View Profile</span></a>
 								</div>
 							</div>
@@ -184,7 +183,7 @@
 						<div class="element-box">
 
 							<form
-								action="${pageContext.request.contextPath }/java/student/profile/save"
+								action="${pageContext.request.contextPath }/student/profile/save"
 								name="formValidateForm" id="formValidateForm" method="post"
 								enctype="multipart/form-data">
 
@@ -214,8 +213,8 @@
 								</div>
 								<div class="form-group">
 									<label>Department</label> <input class="form-control"
-										id="department" name="department"
-										value="${user.department.departmentName }" readonly="readonly" />
+										id="department" name="department" value="${user.department }"
+										readonly="readonly" />
 								</div>
 								<fieldset class="form-group">
 									<legend>
@@ -277,8 +276,8 @@
 									<div class="form-group">
 										<label> About Yourself</label>
 										<textarea class="form-control" rows="3" name="description"
-											id="description"><c:out
-												value="${user.description }" /></textarea>
+											id="description"><%-- <c:out
+												value="${user.description }" /> --%></textarea>
 									</div>
 								</fieldset>
 								<div class="form-check">
@@ -603,4 +602,5 @@
 		$('#jsonData').val(JSON.stringify(data));
 	}
 </script>
+
 </html>

@@ -7,26 +7,6 @@
 <meta charset="UTF-8">
 <title>TEST PORTAL | REGISTER</title>
 
-<%-- <link
-	href="../../../../../fonts.googleapis.com/css6079.css?family=Poppins:300,400,500,600,700"
-	rel="stylesheet" type="text/css" />
-
-<link
-	href="${pageContext.request.contextPath }/static/fonts/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath }/static/fonts/material-design-icons/material-icon.css"
-	rel="stylesheet" type="text/css" />
-
-<link
-	href="${pageContext.request.contextPath }/static/plugins/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/static/css/pages/extra_pages.css">
-
-<link rel="shortcut icon"
-	href="${pageContext.request.contextPath }/static/img/favicon.png" /> --%>
 <link
 	href="${pageContext.request.contextPath}/static/css/main5739.css?version=4.5.0"
 	rel="stylesheet">
@@ -44,7 +24,6 @@ input:focus {
 	padding-bottom: 30px !important
 }
 </style>
-
 
 <link rel="stylesheet"
 	href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css" />
@@ -65,6 +44,7 @@ input:focus {
 				data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
 				data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"
 				method="POST" enctype="multipart/form-data">
+
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
@@ -128,8 +108,7 @@ input:focus {
 					<label>Position</label> <input class="form-control"
 						placeholder="Enter position" id="position" name="position"
 						type="text" data-bv-regexp="true"
-						data-bv-regexp-regexp="^[a-zA-Z]*$"
-						data-bv-regexp-message="Alphabets without spaces only">
+						data-bv-regexp-regexp="^[a-zA-Z ]*$">
 					<div class="pre-icon os-icon os-icon-users"></div>
 				</div>
 				<div class="row">
@@ -153,7 +132,7 @@ input:focus {
 						</div>
 					</div>
 				</div>
-				<input id="data" name="data">
+				<input id="data" name="data" type="hidden">
 				<div class="mt-3 text-center">
 					<button id="reg" type="submit" class="btn btn-primary form-control"
 						onclick="getFormData();">
@@ -170,7 +149,9 @@ input:focus {
 		</div>
 	</div>
 </body>
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 <script type="text/javascript"
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 
@@ -217,7 +198,6 @@ input:focus {
 		};
 
 		$('#data').val(JSON.stringify(data));
-		alert(JSON.stringify(data));
 	}
 </script>
 
@@ -263,72 +243,5 @@ input:focus {
 		}
 	}
 </script>
-
-
-
-<%-- <script
-	src="${pageContext.request.contextPath }/static/bower_components/jquery/dist/jquery.min.js"></script> --%>
-<%-- <script
-	src="${pageContext.request.contextPath }/static/bower_components/popper.js/dist/umd/popper.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/moment/moment.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/chart.js/dist/Chart.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/select2/dist/js/select2.full.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/ckeditor/ckeditor.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap-validator/dist/validator.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/dropzone/dist/dropzone.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/editable-table/mindmup-editabletable.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/tether/dist/js/tether.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/slick-carousel/slick/slick.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/util.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/alert.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/button.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/carousel.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/collapse.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/dropdown.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/modal.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/tab.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/tooltip.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/popover.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/js/demo_customizer5739.js?version=4.5.0"></script>
-<script
-	src="${pageContext.request.contextPath }/static/js/main5739.js?version=4.5.0"></script>
-
-
- --%>
-
 
 </html>

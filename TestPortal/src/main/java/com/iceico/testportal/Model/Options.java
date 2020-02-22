@@ -22,7 +22,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.iceico.testportal.audit.Auditable.Auditable;
 
 /**
- * @author sameer
+ * @author SAMEER KADGAYE
+ * @version 0.1
  *
  */
 @Entity
@@ -39,7 +40,7 @@ public class Options extends Auditable<String> implements Serializable {
 	 * 
 	 */
 	public Options() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Id

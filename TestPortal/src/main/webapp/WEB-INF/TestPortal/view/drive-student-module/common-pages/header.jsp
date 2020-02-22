@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,12 +107,12 @@
 						</div>
 						<ul>
 							<li><a
-								href="${pageContext.request.contextPath }/web/student/profile"><i
-									class="os-icon os-icon-user-male-circle2"></i><span>Profile
-										Details</span></a></li>
+								href="${pageContext.request.contextPath }/drive/student/profile"><i
+									class="os-icon os-icon-user-male-circle2"></i><span>
+										Profile Details</span></a></li>
 
 							<li><a data-target="#myModal" data-toggle="modal"><i
-									class="os-icon os-icon-common-07"></i><span>Reset
+									class="os-icon os-icon-common-07"></i><span>Change
 										Password</span></a></li>
 
 							<li><a href="${pageContext.request.contextPath }/logout"><i
@@ -124,7 +123,6 @@
 			</div>
 		</div>
 	</div>
-
 
 	<!-- MODAL -->
 	<div aria-hidden="true" id="myModal"
@@ -233,5 +231,6 @@
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

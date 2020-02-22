@@ -184,7 +184,7 @@
 						<div class="element-box">
 
 							<form
-								action="${pageContext.request.contextPath }/java/student/profile/save"
+								action="${pageContext.request.contextPath }/web/student/profile/save"
 								name="formValidateForm" id="formValidateForm" method="post"
 								enctype="multipart/form-data">
 

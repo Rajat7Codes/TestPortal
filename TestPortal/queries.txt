@@ -1,11 +1,15 @@
-INSERT INTO tab_user_profile(type)VALUES ('ADMIN'),('STUDENT'), ('JAVA'), ('WEB');
+INSERT INTO tab_user_profile(type)VALUES ('JAVAADMIN'),('WEBADMIN'),('STUDENT'), ('JAVA'), ('WEB'),('DRIVE');
   
 INSERT INTO tab_app_user(FIRST_NAME,LAST_NAME,SSO_ID,PASSWORD,EMAIL,MOBILE_NUMBER,DEPARTMENT_ID,DESCRIPTION) VALUES ('Admin','Admin','admin','$2a$10$xKJ4XNL6TrUfaCPue983T.m5MOmVlzM2bpDzSghrAklCJpcQ954ku','admin@gmail.com','0123456789',1,'ABC');
 
-INSERT INTO tab_app_user_user_profile(USER_ID,USER_PROFILE_ID) VALUES (1,1);
-
-
-______________
-Dont Use Below Query
-
 INSERT INTO tab_department VALUES ( 1, "JAVA", "Department", true);
+
+INSERT INTO tab_department VALUES ( 2, "WEB", "Department", true);
+
+INSERT INTO tab_department VALUES ( 3, "DRIVE", "Department", true);
+
+INSERT INTO tab_app_user(ID,FIRST_NAME,LAST_NAME,SSO_ID,PASSWORD,EMAIL,MOBILE_NUMBER,DEPARTMENT_ID,DESCRIPTION) VALUES (1,'JavaAdmin','JavaAdmin','JavaAdmin','$2a$10$xKJ4XNL6TrUfaCPue983T.m5MOmVlzM2bpDzSghrAklCJpcQ954ku','javaadmin@gmail.com','0123456789',1,'JavaAdmin');
+
+INSERT INTO tab_app_user(ID,FIRST_NAME,LAST_NAME,SSO_ID,PASSWORD,EMAIL,MOBILE_NUMBER,DEPARTMENT_ID,DESCRIPTION) VALUES (2,'WebAdmin','WebAdmin','WebAdmin','$2a$10$xKJ4XNL6TrUfaCPue983T.m5MOmVlzM2bpDzSghrAklCJpcQ954ku','webadmin@gmail.com','0123456789',2,'WebAdmin');
+
+INSERT INTO tab_app_user_user_profile(USER_ID,USER_PROFILE_ID) VALUES (1,1), (2,2);

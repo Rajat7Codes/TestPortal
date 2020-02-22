@@ -1,12 +1,11 @@
+/**
+ * 
+ */
 package com.iceico.testportal.Controller;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Locale;
 
 import javax.imageio.ImageIO;
@@ -24,43 +23,41 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.User;
-import com.iceico.testportal.Service.EMailService;
 import com.iceico.testportal.Service.UserService;
 
 /**
- * @author Rajat Date : 21 Feb 2020
+ * @author LEKHA BHANGE
+ * @version 0.1
+ * 
+ *          Created Date : 22/02/2020
  *
  */
 @Controller
-public class JavaUserController {
+public class WebStudentController {
+
+	/**
+	 * 
+	 */
+	public WebStudentController() {
+
+	}
 
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private EMailService emailService;
-
-	private String passwordToken = null;
-
-	public JavaUserController() {
-	}
-
-	@GetMapping("/java/user")
-	public String displayUserInformation(ModelMap modelMap, Locale locale) {
-
+	@GetMapping("/web/student/profile")
+	public String displayStudentInformation(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		return "javaUser";
+		return "webStudProfile";
 	}
 
-	@PostMapping("/java/user/save")
-	public String saveJavaUser(@RequestParam("jsonData") String jsonData,
+	@PostMapping("/web/student/profile/save")
+	public String saveWebStudent(@RequestParam("jsonData") String jsonData,
 			@RequestParam("fileName") MultipartFile fileName, HttpServletRequest httpServletRequest, ModelMap modelMap,
 			Locale locale) throws ParseException {
 
@@ -114,103 +111,20 @@ public class JavaUserController {
 		}
 
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		return "redirect:/java/user";
+		return "redirect:/web/student/profile";
 	}
 
-	@GetMapping("/java/user/send/token")
-	public String sendToken(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
-
-		String charString = "abcdefghijklmnopqrstuvwxyz0123456789";
-		String randAlphaNum = "";
-		double randRoll;
-		String randChar;
-
-		// Generate Random Alphanumberic Token
-		for (double i = 0; i < 30; i++) {
-			randRoll = Math.random();
-			randChar = "";
-			for (int j = 1; j <= 35; j++) {
-				if (randRoll <= (1.0 / 36.0 * j)) {
-					randChar = Character.toString(charString.charAt(j - 1));
-					break;
-				}
-			}
-			randAlphaNum += randChar;
-		}
-
-		this.passwordToken = randAlphaNum;
-
-		User user = userService.findBySSO(this.getPrincipal());
-		String email = user.getEmail();
-
-		String subject = "ICEICO Test Portal OTP";
-		String emailMessage = "Hello Student, \n" + " Your link for changing password On ICEICO Test " + "Portal is"
-				+ " http://localhost:9003/java/user/validate/token/" + randAlphaNum;
-		emailService.sendOtpMessage(email, subject, emailMessage);
-
-		modelMap.addAttribute("passwordChange", false);
-		modelMap.addAttribute("user", user);
-		return "javaUser";
-	}
-
-	@GetMapping("/java/user/validate/token/{token}")
-	public String validateToken(@PathVariable("token") @Valid String token, ModelMap modelMap, Locale locale)
-			throws ResourceNotFoundException {
-
+	@GetMapping("/web/student/profile/update")
+	public String editStudent(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		if (token.equals(this.passwordToken) && !token.equals("Used")) {
-			modelMap.addAttribute("tokenMsg", true);
-			return "redirect:/java/change/password";
-		} else {
-			modelMap.addAttribute("tokenMsg", false);
-		}
-
-		return "javaUser";
+		return "updateStudProfile";
 	}
 
-	@GetMapping("/java/change/password")
-	public String getPassword( ModelMap modelMap, Locale locale)
-			throws ResourceNotFoundException {
-		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		return "changePassword";
-	}
-
-	@PostMapping("/java/change/password")
-	public String changePassword(@RequestParam("password") String password, ModelMap modelMap, Locale locale)
-			throws ResourceNotFoundException {
-
-		User user = this.userService.findBySSO(this.getPrincipal());
-		user.setPassword(password);
-		this.userService.saveUser(user);
-		this.passwordToken = "Used";
-		modelMap.addAttribute("passMsg", false);
-
-		modelMap.addAttribute("user", user);
-		return "redirect:/java/user";
-	}
-
-	@GetMapping("/java/user/update")
-	public String editUser(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
-
-		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		return "updateUser";
-	}
-
-	@GetMapping("/java/user/delete/{userId}")
+	@GetMapping("/web/student/profile/delete/{userId}")
 	public String deleteUser(@PathVariable("userId") @Valid Long userId, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
 
-		return "redirect:/java/user";
-	}
-
-	@RequestMapping(value = "/getImage/{imagePath}")
-	@ResponseBody
-	public byte[] getImage(@PathVariable String imagePath, HttpServletRequest request) throws IOException {
-
-		String rpath = request.getServletContext().getRealPath("/uploaded") + "/" + imagePath + ".jpg";
-		Path path = Paths.get(rpath);
-		byte[] data = Files.readAllBytes(path);
-		return data;
+		return "redirect:/web/student/profile";
 	}
 
 	/**

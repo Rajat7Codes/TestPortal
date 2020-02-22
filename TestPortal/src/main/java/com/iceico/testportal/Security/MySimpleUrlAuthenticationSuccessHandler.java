@@ -24,7 +24,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  * @author LEKHA BHANGE
  * @version 0.1
  * 
- *          Created Date : 11/02/2020
+ *          Created Date : 22/02/2020
  *
  */
 public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
@@ -56,6 +56,8 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 		boolean isAdmin = false;
 		boolean isDepartmentJava = false;
 		boolean isDepartmentWeb = false;
+		boolean isDriveStudent = false;
+
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
 		for (GrantedAuthority grantedAuthority : authorities) {
@@ -65,11 +67,14 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 			} else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
 				isAdmin = true;
 				break;
-			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_Java")) {
+			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_JAVA")) {
 				isDepartmentJava = true;
 				break;
-			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_Web")) {
+			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_WEB")) {
 				isDepartmentWeb = true;
+				break;
+			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_DRIVE")) {
+				isDriveStudent = true;
 				break;
 			}
 		}
@@ -79,9 +84,11 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 		} else if (isAdmin) {
 			return "/admin/dashboard";
 		} else if (isDepartmentJava) {
-			return "/java/dashboard";
+			return "/java/student/dashboard";
 		} else if (isDepartmentWeb) {
-			return "/web/dashboard";
+			return "/web/student/dashboard";
+		} else if (isDriveStudent) {
+			return "/drive/student/dashboard";
 		} else {
 			throw new IllegalStateException();
 		}

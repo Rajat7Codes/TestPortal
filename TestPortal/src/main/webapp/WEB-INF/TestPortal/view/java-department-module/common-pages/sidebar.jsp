@@ -9,8 +9,9 @@
 <body>
 	<div class="menu-mobile menu-activated-on-click color-scheme-dark">
 		<div class="mm-logo-buttons-w">
-			<a class="mm-logo" href="index-2.html"><img src="img/logo.png"><span>Clean
-					Admin</span></a>
+			<a class="mm-logo"
+				href="${pageContext.request.contextPath }/java/student/dashboard"><img
+				src="img/logo.png"><span>Test Portal</span></a>
 			<div class="mm-buttons">
 				<div class="content-panel-open">
 					<div class="os-icon os-icon-grid-circles"></div>
@@ -23,7 +24,9 @@
 		<div class="menu-and-user">
 			<div class="logged-user-w">
 				<div class="avatar-w">
-					<img alt="" src="img/avatar1.jpg">
+					<img
+						src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+						height="100px" width="100px">
 				</div>
 				<div class="logged-user-info-w">
 					<div class="logged-user-name">${user.ssoId }</div>
@@ -31,8 +34,6 @@
 				</div>
 			</div>
 			<ul class="main-menu">
-
-
 				<li class="has-sub-menu"><a href="#"><div class="icon-w">
 							<div class="os-icon os-icon-edit-32"></div>
 						</div> <span>Forms</span></a>
@@ -67,13 +68,17 @@
 		class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link"
 		style="margin-top: -54px;">
 		<div class="logo-w">
-			<a class="logo" href="index-2.html"><div class="logo-element"></div>
-				<div class="logo-label">Clean Admin</div></a>
+			<a class="logo"
+				href="${pageContext.request.contextPath }/java/student/dashboard"><div
+					class="logo-element"></div>
+				<div class="logo-label">Test Portal</div></a>
 		</div>
 		<div class="logged-user-w avatar-inline">
 			<div class="logged-user-i">
 				<div class="avatar-w">
-					<img alt="" src="img/avatar1.jpg">
+					<img
+						src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+						height="100px" width="100px">
 				</div>
 				<div class="logged-user-info-w">
 					<div class="logged-user-name">${user.ssoId }</div>
@@ -96,15 +101,17 @@
 						<i class="os-icon os-icon-wallet-loaded"></i>
 					</div>
 					<ul>
-						<!-- <li><a href="apps_email.html"><i
-								class="os-icon os-icon-mail-01"></i><span>Incoming Mail</span></a></li> -->
-						<li><a href="${pageContext.request.contextPath }/java/user"><i
+						<li><a
+							href="${pageContext.request.contextPath }/java/student/profile"><i
 								class="os-icon os-icon-user-male-circle2"></i><span>
-									Details</span></a></li>
-						<!-- <li><a href="users_profile_small.html"><i
-								class="os-icon os-icon-coins-4"></i><span>Billing Details</span></a></li>
-						<li><a href="#"><i class="os-icon os-icon-others-43"></i><span>Notifications</span></a></li> -->
-						<li><a href="#"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a></li>
+									Profile Details</span></a></li>
+
+						<li><a data-target="#myModal" data-toggle="modal"><i
+								class="os-icon os-icon-common-07"></i><span>Reset
+									Password</span></a></li>
+
+						<li><a href="${pageContext.request.contextPath }/logout"><i
+								class="os-icon os-icon-signs-11"></i><span>Logout</span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -483,5 +490,114 @@
 		</div>
 	</div> -->
 	</div>
+
+	<!-- MODAL -->
+	<div aria-hidden="true" id="myModal"
+		class="onboarding-modal modal fade animated" role="dialog"
+		tabindex="-1">
+		<div class="modal-dialog modal-centered" role="document">
+			<div class="modal-content text-center">
+				<button aria-label="Close" class="close" data-dismiss="modal"
+					type="button">
+					<!-- <span class="close-label">Skip Intro</span> -->
+					<span class="os-icon os-icon-close"></span>
+				</button>
+				<!-- <div class="onboarding-slider-w">
+				 <div class="onboarding-slide">
+						<div class="onboarding-media">
+							<img alt="" src="img/bigicon2.png" width="200px">
+						</div>
+						<div class="onboarding-content with-gradient">
+							<h4 class="onboarding-title">Example of onboarding screen!</h4>
+							<div class="onboarding-text">This is an example of a
+								multistep onboarding screen, you can use it to introduce your
+								customers to your app, or collect additional information from
+								them before they start using your app.</div>
+						</div>
+					</div> -->
+				<div class="onboarding-slide">
+					<div class="onboarding-media">
+						<img alt="" src="img/bigicon5.png" width="200px">
+					</div>
+					<div class="onboarding-content with-gradient">
+						<h4 class="onboarding-title">Password Change</h4>
+						<!-- <div class="onboarding-text">In this example you can see a
+							form where you can request some additional information from the
+							customer when they land on the app page.</div> -->
+						<form action="${pageContext.request.contextPath }/">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">Your User Name</label><input
+											class="form-control" placeholder="Enter your User name..."
+											value="">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">Your Email Address</label><input
+											class="form-control"
+											placeholder="Enter your Email address..." value="">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">Your Mobile Number</label><input
+											class="form-control"
+											placeholder="Enter your Mobile number..." value="">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">Your New Password</label><input
+											class="form-control" placeholder="Enter your New password..."
+											value="">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12" align="center">
+									<button class="btn btn-primary" type="submit"
+										onclick="getData();">Submit</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- <div class="onboarding-slide">
+						<div class="onboarding-media">
+							<img alt="" src="img/bigicon6.png" width="200px">
+						</div>
+						<div class="onboarding-content with-gradient">
+							<h4 class="onboarding-title">Showcase App Features</h4>
+							<div class="onboarding-text">In this example you can
+								showcase some of the features of your application, it is very
+								handy to make new users aware of your hidden features. You can
+								use boostrap columns to split them up.</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<ul class="features-list">
+										<li>Fully Responsive design</li>
+										<li>Pre-built app layouts</li>
+										<li>Incredible Flexibility</li>
+									</ul>
+								</div>
+								<div class="col-sm-6">
+									<ul class="features-list">
+										<li>Boxed & Full Layouts</li>
+										<li>Based on Bootstrap 4</li>
+										<li>Developer Friendly</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div> 
+				</div>-->
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>

@@ -14,39 +14,30 @@
 		<put-attribute name="body" value="" />
 	</definition>
 
-
-	<!-- LOGIN PAGE -->
-	<definition name="welcome"
-		template="/WEB-INF/TestPortal/view/login-module/loginPage.jsp">
-	</definition>
-
-	<!-- REGISTRATION PAGE -->
-	<definition name="register"
-		template="/WEB-INF/TestPortal/view/login-module/register.jsp">
-	</definition>
-	
-	<!-- FORGOT PASSWORD PAGE -->
-	<definition name="forgotPassword"
-		template="/WEB-INF/TestPortal/view/login-module/forgotPassword.jsp">
-	</definition>
-
-	<!-- VERIFICATION PAGE -->
-	<definition name="otpVerify"
-		template="/WEB-INF/TestPortal/view/login-module/otpVerify.jsp">
-	</definition>
-
-	<!-- FORGOT PASSWORD -->
-	<definition name="forgotPassword"
-		template="/WEB-INF/TestPortal/view/login-module/forgotPassword.jsp">
-	</definition>
-
-
 	<!-- DASHBOARD PAGE -->
-	<definition name="webDashboard"
-		extends="webbase.definition">
-		<put-attribute name="title" value="Dashboard" />
+	<definition name="webDashboard" extends="webbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | WEB DASHBOARD" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/web-department-module/dashboard.jsp" />
+	</definition>
+
+	<!-- STUDENT PROFILE PAGE -->
+	<definition name="webStudProfile"
+		extends="javabase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | PROFILE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/web-department-module/profile-pages/userInformation.jsp" />
+	</definition>
+
+	<!-- UPDATE STUDENT PROFILE PAGE -->
+	<definition name="updateStudProfile"
+		extends="javabase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | UPDATE PROFILE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/web-department-module/profile-pages/updateUserInformation.jsp" />
 	</definition>
 
 </tiles-definitions>

@@ -34,6 +34,9 @@ public class QuestionTypeController {
 	@Autowired
 	private UserService usrService;
 
+	@Autowired
+	private UserService userService;
+
 	public QuestionTypeController() {
 	}
 
@@ -41,7 +44,7 @@ public class QuestionTypeController {
 	public String getQuestionType(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("questionType", new QuestionType());
 		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
-		modelMap.addAttribute("user", usrService.findBySSO(this.getPrincipal()));
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "questionType";
 
 	}
