@@ -34,7 +34,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
-import com.iceico.testportal.Model.AddTest;
 import com.iceico.testportal.Model.Options;
 import com.iceico.testportal.Model.QuestionBank;
 import com.iceico.testportal.Model.QuestionType;
