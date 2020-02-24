@@ -57,12 +57,16 @@ public class User implements Serializable {
 	@Column(name = "position", nullable = true)
 	private String position;
 
-	@Column(name = "gender", nullable = true)
-	private String gender;
-	
 	@Column(name = "dob")
 	private String dob;
+
+	@Column(name = "gender", nullable = false)
+	private String gender;
 	
+	@Column(name = "mobile_number", nullable = false)
+	@Size(min = 10, max = 10, message = "Enter valid 10 digit mobile number")
+	private String mobileNumber;
+
 	@Column(name = "content_type")
 	private String contentType;
 
@@ -71,10 +75,6 @@ public class User implements Serializable {
 
 	@Column(name = "file_name")
 	private String fileName;
-
-	@Column(name = "mobile_number", nullable = false)
-	@Size(min = 10, max = 10, message = "Enter valid 10 digit mobile number")
-	private String mobileNumber;
 
 	@Column(name = "description")
 	@Size(min = 0, max = 255, message = "Description range must be 0-255 charecters only")
@@ -89,64 +89,7 @@ public class User implements Serializable {
 			@JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "user_profile_id") })
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
-	
-	/**
-	 * @return the dob
-	 */
-	public String getDob() {
-		return dob;
-	}
 
-	/**
-	 * @param dob the dob to set
-	 */
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
-
-	/**
-	 * @return the contentType
-	 */
-	public String getContentType() {
-		return contentType;
-	}
-
-	/**
-	 * @param contentType the contentType to set
-	 */
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
-
-	/**
-	 * @return the filePath
-	 */
-	public String getFilePath() {
-		return filePath;
-	}
-
-	/**
-	 * @param filePath the filePath to set
-	 */
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
-
-	/**
-	 * @return the fileName
-	 */
-	public String getFileName() {
-		return fileName;
-	}
-
-	/**
-	 * @param fileName the fileName to set
-	 */
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	
 	/**
 	 * @return the id
 	 */
@@ -245,19 +188,18 @@ public class User implements Serializable {
 		this.position = position;
 	}
 
-
 	/**
-	 * @return the department
+	 * @return the dob
 	 */
-	public Department getDepartment() {
-		return department;
+	public String getDob() {
+		return dob;
 	}
 
 	/**
-	 * @param department the department to set
+	 * @param dob the dob to set
 	 */
-	public void setDepartment(Department department) {
-		this.department = department;
+	public void setDob(String dob) {
+		this.dob = dob;
 	}
 
 	/**
@@ -289,6 +231,48 @@ public class User implements Serializable {
 	}
 
 	/**
+	 * @return the contentType
+	 */
+	public String getContentType() {
+		return contentType;
+	}
+
+	/**
+	 * @param contentType the contentType to set
+	 */
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	/**
+	 * @return the filePath
+	 */
+	public String getFilePath() {
+		return filePath;
+	}
+
+	/**
+	 * @param filePath the filePath to set
+	 */
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	/**
+	 * @return the fileName
+	 */
+	public String getFileName() {
+		return fileName;
+	}
+
+	/**
+	 * @param fileName the fileName to set
+	 */
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	/**
 	 * @return the description
 	 */
 	public String getDescription() {
@@ -300,6 +284,20 @@ public class User implements Serializable {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the department
+	 */
+	public Department getDepartment() {
+		return department;
+	}
+
+	/**
+	 * @param department the department to set
+	 */
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 	/**
@@ -316,6 +314,7 @@ public class User implements Serializable {
 		this.userProfiles = userProfiles;
 	}
 
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

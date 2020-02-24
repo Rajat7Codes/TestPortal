@@ -107,12 +107,12 @@
 						</div>
 						<ul>
 							<li><a
-								href="${pageContext.request.contextPath }/java/student/profile"><i
+								href="${pageContext.request.contextPath }/drive/student/profile"><i
 									class="os-icon os-icon-user-male-circle2"></i><span>
 										Profile Details</span></a></li>
 
 							<li><a data-target="#myModal" data-toggle="modal"><i
-									class="os-icon os-icon-common-07"></i><span>Reset
+									class="os-icon os-icon-common-07"></i><span>Change
 										Password</span></a></li>
 
 							<li><a href="${pageContext.request.contextPath }/logout"><i
@@ -157,11 +157,11 @@
 						<!-- <div class="onboarding-text">In this example you can see a
 							form where you can request some additional information from the
 							customer when they land on the app page.</div> -->
-						<form action="${pageContext.request.contextPath }/java/student/profile/send/token" method="get">
+						<form action="${pageContext.request.contextPath }/">
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="">Your User Name</label><input name="username"
+										<label for="">Your User Name</label><input
 											class="form-control" placeholder="Enter your User name..."
 											value="">
 									</div>
@@ -169,7 +169,7 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="">Your Email Address</label><input
-											name="mailId" class="form-control"
+											class="form-control"
 											placeholder="Enter your Email address..." value="">
 									</div>
 								</div>
@@ -178,14 +178,13 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="">Your Mobile Number</label><input
-											name="mobile" class="form-control"
+											class="form-control"
 											placeholder="Enter your Mobile number..." value="">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="">Your New Password</label><input name="password"
-											type="password"
+										<label for="">Your New Password</label><input
 											class="form-control" placeholder="Enter your New password..."
 											value="">
 									</div>
@@ -193,7 +192,8 @@
 							</div>
 							<div class="row">
 								<div class="col-sm-12" align="center">
-									<button class="btn btn-primary" type="submit">Submit</button>
+									<button class="btn btn-primary" type="submit"
+										onclick="getData();">Submit</button>
 								</div>
 							</div>
 						</form>

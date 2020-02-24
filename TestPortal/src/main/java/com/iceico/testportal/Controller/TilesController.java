@@ -33,22 +33,25 @@ public class TilesController {
 	@RequestMapping("/admin/dashboard")
 	public String adminDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-//		modelMap.addAttribute("user", this.getPrincipal());
 		return "adminDashboard";
 	}
 
-	@RequestMapping("/java/dashboard")
+	@RequestMapping("/java/student/dashboard")
 	public String javaDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-//		modelMap.addAttribute("user", this.getPrincipal());
 		return "javaDashboard";
 	}
 
-	@RequestMapping("/web/dashboard")
+	@RequestMapping("/web/student/dashboard")
 	public String webDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-//		modelMap.addAttribute("user", this.getPrincipal());
 		return "webDashboard";
+	}
+	
+	@RequestMapping("/drive/student/dashboard")
+	public String driveDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "driveDashboard";
 	}
 
 	private String getPrincipal() {

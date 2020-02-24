@@ -1,12 +1,11 @@
+/**
+ * 
+ */
 package com.iceico.testportal.Controller;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Locale;
 
 import javax.imageio.ImageIO;
@@ -21,13 +20,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
@@ -35,31 +31,36 @@ import com.iceico.testportal.Model.User;
 import com.iceico.testportal.Service.UserService;
 
 /**
- * @author Rajat
- * Date : 21 Feb 2020
+ * @author LEKHA BHANGE
+ * @version 0.1
+ * 
+ *          Created Date : 22/02/2020
  *
  */
 @Controller
-public class JavaUserController {
+public class WebStudentController {
+
+	/**
+	 * 
+	 */
+	public WebStudentController() {
+
+	}
 
 	@Autowired
 	private UserService userService;
 
-	public JavaUserController() {
-	}
-
-	@GetMapping("/java/user")
-	public String displayUserInformation(ModelMap modelMap, Locale locale) {
-
+	@GetMapping("/web/student/profile")
+	public String displayStudentInformation(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		return "javaUser";
+		return "webStudProfile";
 	}
-	
-	@PostMapping("/java/user/save")
-	public String saveJavaUser(@RequestParam("jsonData") String jsonData,
+
+	@PostMapping("/web/student/profile/save")
+	public String saveWebStudent(@RequestParam("jsonData") String jsonData,
 			@RequestParam("fileName") MultipartFile fileName, HttpServletRequest httpServletRequest, ModelMap modelMap,
 			Locale locale) throws ParseException {
-		
+
 		String uploadFolder = httpServletRequest.getServletContext().getRealPath("/uploaded");
 
 		File directory = new File(uploadFolder);
@@ -110,32 +111,20 @@ public class JavaUserController {
 		}
 
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		return "redirect:/java/user";
+		return "redirect:/web/student/profile";
 	}
 
-	@GetMapping("/java/user/update")
-	public String editUser( ModelMap modelMap, Locale locale)
-			throws ResourceNotFoundException {
-
+	@GetMapping("/web/student/profile/update")
+	public String editStudent(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		return "updateUser";
+		return "updateStudProfile";
 	}
 
-	@GetMapping("/java/user/delete/{userId}")
+	@GetMapping("/web/student/profile/delete/{userId}")
 	public String deleteUser(@PathVariable("userId") @Valid Long userId, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
 
-		return "redirect:/java/user";
-	}
-
-	@RequestMapping(value = "/getImage/{imagePath}")
-	@ResponseBody
-	public byte[] getImage(@PathVariable String imagePath, HttpServletRequest request) throws IOException {
-
-		String rpath = request.getServletContext().getRealPath("/uploaded") + "/" + imagePath + ".jpg";
-		Path path = Paths.get(rpath);
-		byte[] data = Files.readAllBytes(path);
-		return data;
+		return "redirect:/web/student/profile";
 	}
 
 	/**

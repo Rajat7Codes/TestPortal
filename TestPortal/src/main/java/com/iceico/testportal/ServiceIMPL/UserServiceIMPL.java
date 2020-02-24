@@ -96,14 +96,24 @@ public class UserServiceIMPL implements UserService {
 			if (!user.getPassword().equals(entity.getPassword())) {
 				entity.setPassword(passwordEncoder.encode(user.getPassword()));
 			}
+
+			/*
+			 * UserProfile profile = userProfileService.findByType("STUDENT");
+			 * Set<UserProfile> role = new HashSet<>(); role.add(profile);
+			 * 
+			 * entity.setUserProfiles(role);
+			 */
 			entity.setFirstName(user.getFirstName());
 			entity.setLastName(user.getLastName());
 			entity.setEmail(user.getEmail());
 			entity.setUserProfiles(user.getUserProfiles());
 			entity.setMobileNumber(user.getMobileNumber());
 			entity.setDescription(user.getDescription());
+			entity.setDob(user.getDob());
+			entity.setFileName(user.getFileName());
+			entity.setContentType(user.getContentType());
+			entity.setFilePath(user.getFilePath());
 		}
-
 	}
 
 	@Override
