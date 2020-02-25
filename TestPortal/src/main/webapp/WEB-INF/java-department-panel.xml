@@ -33,7 +33,7 @@
 	</definition>
 
 	<!-- UPDATE STUDENT PROFILE PAGE -->
-	<definition name="updateStudProfile"
+	<definition name="updateJavaStudProfile"
 		extends="javabase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | UPDATE PROFILE" />

@@ -121,7 +121,7 @@ public class JavaStudentController {
 	public String editUser(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
 
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		return "updateStudProfile";
+		return "updateJavaStudProfile";
 	}
 
 	@GetMapping("/java/student/profile/send/token")
