@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -204,7 +205,7 @@ public class QuestionBankController {
 			return questionBankArray;
 		}
 
-		if (type == null & subject == null & marks != 0) {
+		if (type == null & subject == null & marks != 0 || type == null & subject == null & marks == 0) {
 			for (QuestionBank questionBank : questionBankService.questionBankListByMarks(marks)) {
 				JSONObject questionBankObject = new JSONObject();
 				questionBankObject.put("questionBankId", questionBank.getQuestionBankId());
