@@ -11,7 +11,7 @@
 		<div class="mm-logo-buttons-w">
 			<a class="mm-logo"
 				href="${pageContext.request.contextPath }/java/student/dashboard"><img
-				src="img/logo.png"><span>Test Portal</span></a>
+				src="${pageContext.request.contextPath }/static/img/Iceico_round.png"><span>Test Portal</span></a>
 			<div class="mm-buttons">
 				<div class="content-panel-open">
 					<div class="os-icon os-icon-grid-circles"></div>
@@ -53,31 +53,22 @@
 						<li><a href="tables_editable.html">Editable Tables</a></li>
 					</ul></li>
 			</ul>
-			<!-- <div class="mobile-menu-magic">
-			<h4>Light Admin</h4>
-			<p>Clean Bootstrap 4 Template</p>
-			<div class="btn-w">
-				<a class="btn btn-white btn-rounded"
-					href="../themeforest.net/item/light-admin-clean-bootstrap-dashboard-html-template/197601240ec2?ref=Osetin"
-					target="_blank">Purchase Now</a>
-			</div>
-		</div> -->
 		</div>
 	</div>
 	<div
 		class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link"
-		style="margin-top: -54px;">
+		style="margin-top: -63px;">
 		<div class="logo-w">
 			<a class="logo"
-				href="${pageContext.request.contextPath }/java/student/dashboard"><div
-					class="logo-element"></div>
+				href="${pageContext.request.contextPath }/java/student/dashboard">
+				<img
+				src="${pageContext.request.contextPath }/static/img/Iceico_round.png">
 				<div class="logo-label">Test Portal</div></a>
 		</div>
 		<div class="logged-user-w avatar-inline">
 			<div class="logged-user-i">
 				<div class="avatar-w">
-					<img
-						src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+					<img src="${pageContext.request.contextPath }/getImage/${user.fileName}"
 						height="100px" width="100px">
 				</div>
 				<div class="logged-user-info-w">
@@ -90,7 +81,7 @@
 				<div class="logged-user-menu color-style-bright">
 					<div class="logged-user-avatar-info">
 						<div class="avatar-w">
-							<img alt="" src="img/avatar1.jpg">
+							<img alt="" src="${pageContext.request.contextPath }/getImage/${user.fileName}">
 						</div>
 						<div class="logged-user-info-w">
 							<div class="logged-user-name">${user.ssoId }</div>
