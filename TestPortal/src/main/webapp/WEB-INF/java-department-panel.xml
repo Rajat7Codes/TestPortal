@@ -4,19 +4,15 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-	<definition name="javabase.definition"
-		template="/WEB-INF/TestPortal/layout/java-department-layout.jsp">
+	<definition name="javabase.definition" template="/WEB-INF/TestPortal/layout/java-department-layout.jsp">
 		<put-attribute name="title" value="" />
-		<put-attribute name="header"
-			value="/WEB-INF/TestPortal/view/java-department-module/common-pages/header.jsp" />
-		<put-attribute name="sidebar"
-			value="/WEB-INF/TestPortal/view/java-department-module/common-pages/sidebar.jsp" />
+		<put-attribute name="header" value="/WEB-INF/TestPortal/view/java-department-module/common-pages/header.jsp" />
+		<put-attribute name="sidebar" value="/WEB-INF/TestPortal/view/java-department-module/common-pages/sidebar.jsp" />
 		<put-attribute name="body" value="" />
 	</definition>
 
 	<!-- DASHBOARD PAGE -->
-	<definition name="javaDashboard"
-		extends="javabase.definition">
+	<definition name="javaDashboard" extends="javabase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | JAVA DASHBOARD" />
 		<put-attribute name="body"
@@ -24,17 +20,13 @@
 	</definition>
 
 	<!-- STUDENT PROFILE PAGE -->
-	<definition name="javaStudProfile"
-		extends="javabase.definition">
-		<put-attribute name="title"
-			value="TEST PORTAL | PROFILE" />
-		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/java-department-module/profile-pages/userInformation.jsp" />
+	<definition name="javaStudProfile" extends="javabase.definition">
+		<put-attribute name="title" value="TEST PORTAL | PROFILE" />
+		<put-attribute name="body" value="/WEB-INF/TestPortal/view/java-department-module/profile-pages/userInformation.jsp" />
 	</definition>
 
 	<!-- UPDATE STUDENT PROFILE PAGE -->
-	<definition name="updateJavaStudProfile"
-		extends="javabase.definition">
+	<definition name="updateJavaStudProfile" extends="javabase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | UPDATE PROFILE" />
 		<put-attribute name="body"
@@ -42,8 +34,7 @@
 	</definition>
 
 	<!-- CHANGE USER PASSWORD PAGE -->
-	<definition name="changePassword"
-		extends="javabase.definition">
+	<definition name="changePassword" extends="javabase.definition">
 		<put-attribute name="title" value="Change Password" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/login-module/changePassword.jsp" />
