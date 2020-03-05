@@ -24,7 +24,7 @@
 			<div class="element-wrapper">
 				<div class="user-profile">
 					<div class="up-head-w"
-						style="background-image: url(${pageContext.request.contextPath }/static/img/0.jpeg)">
+						style="background-image: url(${pageContext.request.contextPath }/static/img/java-android-banner.jpg)">
 						<!-- <div class="up-social">
 							<a href="#"><i class="os-icon os-icon-twitter"></i></a><a
 								href="#"><i class="os-icon os-icon-facebook"></i></a>
@@ -74,10 +74,7 @@
 									class="os-icon os-icon-link-3"></i><span>Add to Friends</span></a> -->
 								<a class="btn btn-primary btn-sm"
 									href="${pageContext.request.contextPath }/java/student/profile/update"><i
-									class="os-icon os-icon-edit"></i><span>Edit Profile</span></a> <a
-									class="btn btn-primary btn-sm"
-									href="${pageContext.request.contextPath }/java/user/send/token"><i
-									class="os-icon os-icon-edit"></i><span>Change Password</span></a>
+									class="os-icon os-icon-edit"></i><span>Edit Profile</span></a>
 							</div>
 						</div>
 					</div>
@@ -131,140 +128,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="os-tabs-w">
-							<div class="os-tabs-controls">
-								<ul class="nav nav-tabs bigger">
-									<li class="nav-item"><a class="nav-link active"
-										data-toggle="tab" href="#tab_overview">Activity</a></li>
-									<li class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#tab_sales">Daily Sales</a></li>
-								</ul>
-								<ul class="nav nav-pills smaller d-none d-md-flex">
-									<li class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#">Today</a></li>
-									<li class="nav-item"><a class="nav-link active"
-										data-toggle="tab" href="#">7 Days</a></li>
-									<li class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#">14 Days</a></li>
-									<li class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#">Last Month</a></li>
-								</ul>
-							</div>
-							<div class="tab-content">
-								<div class="tab-pane active" id="tab_overview">
-									<div class="timed-activities padded">
-										<div class="timed-activity">
-											<div class="ta-date">
-												<span>21st Jan, 2017</span>
-											</div>
-											<div class="ta-record-w">
-												<div class="ta-record">
-													<div class="ta-timestamp">
-														<strong>11:55</strong> am
-													</div>
-													<div class="ta-activity">
-														Created a post called <a href="#">Register new symbol</a>
-														in Rogue
-													</div>
-												</div>
-												<div class="ta-record">
-													<div class="ta-timestamp">
-														<strong>2:34</strong> pm
-													</div>
-													<div class="ta-activity">
-														Commented on story <a href="#">How to be a leader</a> in <a
-															href="#">Financial</a> category
-													</div>
-												</div>
-												<div class="ta-record">
-													<div class="ta-timestamp">
-														<strong>7:12</strong> pm
-													</div>
-													<div class="ta-activity">
-														Added <a href="#">John Silver</a> as a friend
-													</div>
-												</div>
-												<div class="ta-record">
-													<div class="ta-timestamp">
-														<strong>9:39</strong> pm
-													</div>
-													<div class="ta-activity">
-														Started following user <a href="#">Ben Mosley</a>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="timed-activity">
-											<div class="ta-date">
-												<span>3rd Feb, 2017</span>
-											</div>
-											<div class="ta-record-w">
-												<div class="ta-record">
-													<div class="ta-timestamp">
-														<strong>9:32</strong> pm
-													</div>
-													<div class="ta-activity">
-														Added <a href="#">John Silver</a> as a friend
-													</div>
-												</div>
-												<div class="ta-record">
-													<div class="ta-timestamp">
-														<strong>5:14</strong> pm
-													</div>
-													<div class="ta-activity">
-														Commented on story <a href="#">How to be a leader</a> in <a
-															href="#">Financial</a> category
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="timed-activity">
-											<div class="ta-date">
-												<span>21st Jan, 2017</span>
-											</div>
-											<div class="ta-record-w">
-												<div class="ta-record">
-													<div class="ta-timestamp">
-														<strong>11:55</strong> am
-													</div>
-													<div class="ta-activity">
-														Created a post called <a href="#">Register new symbol</a>
-														in Rogue
-													</div>
-												</div>
-												<div class="ta-record">
-													<div class="ta-timestamp">
-														<strong>2:34</strong> pm
-													</div>
-													<div class="ta-activity">
-														Commented on story <a href="#">How to be a leader</a> in <a
-															href="#">Financial</a> category
-													</div>
-												</div>
-												<div class="ta-record">
-													<div class="ta-timestamp">
-														<strong>9:39</strong> pm
-													</div>
-													<div class="ta-activity">
-														Started following user <a href="#">Ben Mosley</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="tab-pane" id="tab_sales">
-									<div class="el-tablo">
-										<div class="label">Unique Visitors</div>
-										<div class="value">12,537</div>
-									</div>
-									<div class="el-chart-w">
-										<canvas height="150px" id="lineChart" width="600px"></canvas>
-									</div>
-								</div>
-								<div class="tab-pane" id="tab_conversion"></div>
-							</div>
-						</div>
+
+
 					</div>
 				</div>
 			</div>
@@ -426,12 +291,12 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 
-<c:if test="${ passwordChange==false }">
+
+<c:if test="${passwordMsg != \"\" && passwordMsg != null}">
 	<script>
-		alert("Please check your mail to change password");
+		alert('${passwordMsg}');
 	</script>
 </c:if>
 

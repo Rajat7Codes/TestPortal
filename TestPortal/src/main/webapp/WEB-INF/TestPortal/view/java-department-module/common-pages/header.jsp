@@ -77,19 +77,19 @@
 					<span class="os-icon os-icon-close"></span>
 				</button>
 				<div class="onboarding-slide">
-					<div class="onboarding-media">
-						<img alt="" src="img/bigicon5.png" width="200px">
+					<div class="onboarding-media pt-0 w-100">
+						<img alt="" src="${pageContext.request.contextPath }/static/img/security3.jpg" 
+							width="100%" style="
+    background-size: cover;
+    background-repeat: no-repeat;">
 					</div>
-					<div class="onboarding-content with-gradient">
+					<div class="onboarding-content with-gradient pt-4 pb-4">
 						<h4 class="onboarding-title">Password Change</h4>
-						<!-- <div class="onboarding-text">In this example you can see a
-							form where you can request some additional information from the
-							customer when they land on the app page.</div> -->
-						<form action="${pageContext.request.contextPath }/">
+						<form action="${pageContext.request.contextPath }/java/student/profile/send/token" method="get">
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="">Your User Name</label><input
+										<label for="">Your User Name</label><input name="username"
 											class="form-control" placeholder="Enter your User name..."
 											value="">
 									</div>
@@ -97,7 +97,7 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="">Your Email Address</label><input
-											class="form-control"
+											name="mailId" class="form-control"
 											placeholder="Enter your Email address..." value="">
 									</div>
 								</div>
@@ -106,22 +106,22 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="">Your Mobile Number</label><input
-											class="form-control"
+											name="mobile" class="form-control"
 											placeholder="Enter your Mobile number..." value="">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="">Your New Password</label><input
+										<label for="">Your New Password</label><input name="password"
+											type="password"
 											class="form-control" placeholder="Enter your New password..."
 											value="">
 									</div>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-sm-12" align="center">
-									<button class="btn btn-primary" type="submit"
-										onclick="getData();">Submit</button>
+								<div class="col-sm-12 py-3" align="center">
+									<button class="btn btn-primary" type="submit">Submit</button>
 								</div>
 							</div>
 						</form>

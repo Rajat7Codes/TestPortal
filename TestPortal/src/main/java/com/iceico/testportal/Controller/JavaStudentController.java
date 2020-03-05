@@ -32,7 +32,8 @@ import com.iceico.testportal.Service.UserService;
  * 
  * @author RAJAT PATIL
  * @version 0.1
- * @author Rajat Date : 21 Feb 2020 
+ * 
+ *          Created Date : 21 Feb 2020
  * 
  */
 @Controller
@@ -41,14 +42,16 @@ public class JavaStudentController {
 	@Autowired
 	private UserService userService;
 
-	public JavaStudentController() {
-
-	}
-
 	@Autowired
 	private EMailService emailService;
 
 	private String passwordToken = null;
+
+	private String tempPass = null;
+
+	public JavaStudentController() {
+
+	}
 
 	@GetMapping("/java/student/profile")
 	public String displayUserInformation(ModelMap modelMap, Locale locale) {
@@ -118,41 +121,55 @@ public class JavaStudentController {
 	public String editUser(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
 
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		return "updateStudProfile";
+		return "updateJavaStudProfile";
 	}
 
 	@GetMapping("/java/student/profile/send/token")
-	public String sendToken(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
+	public String sendToken(@RequestParam("username") String userName, @RequestParam("mobile") String mobNo,
+			@RequestParam("mailId") String mailId, @RequestParam("password") String password, ModelMap modelMap,
+			Locale locale) throws ResourceNotFoundException {
 
-		String charString = "abcdefghijklmnopqrstuvwxyz0123456789";
-		String randAlphaNum = "";
-		double randRoll;
-		String randChar;
+		User user = this.userService.findBySSO(this.getPrincipal());
 
-		// Generate Random Alphanumberic Token
-		for (double i = 0; i < 30; i++) {
-			randRoll = Math.random();
-			randChar = "";
-			for (int j = 1; j <= 35; j++) {
-				if (randRoll <= (1.0 / 36.0 * j)) {
-					randChar = Character.toString(charString.charAt(j - 1));
-					break;
+		if (user.getSsoId().equals(userName)) {
+			if (user.getMobileNumber().equals(mobNo) && user.getEmail().equals(mailId)) {
+
+				// Generate Random Alphanumberic Token
+				String charString = "abcdefghijklmnopqrstuvwxyz0123456789";
+				String randAlphaNum = "";
+				double randRoll;
+				String randChar;
+
+				for (double i = 0; i < 30; i++) {
+					randRoll = Math.random();
+					randChar = "";
+					for (int j = 1; j <= 35; j++) {
+						if (randRoll <= (1.0 / 36.0 * j)) {
+							randChar = Character.toString(charString.charAt(j - 1));
+							break;
+						}
+					}
+					randAlphaNum += randChar;
 				}
+
+				this.passwordToken = randAlphaNum;
+				this.tempPass = password;
+
+				// Assets Used for Sending Token Via Mail
+				String email = user.getEmail();
+				String subject = "ICEICO Test Portal OTP";
+				String emailMessage = "Hello Student, \n" + " Your link for changing password On ICEICO Test "
+						+ "Portal is" + " http://localhost:9003/java/student/profile/validate/token/" + randAlphaNum;
+
+				// Sends Mail
+				emailService.sendOtpMessage(email, subject, emailMessage);
+				modelMap.addAttribute("passwordMsg", "Check your mail to change password");
+			} else {
+				modelMap.addAttribute("passwordMsg", "Please enter correct user information");
 			}
-			randAlphaNum += randChar;
+		} else {
+			modelMap.addAttribute("passwordMsg", "User Name not found");
 		}
-
-		this.passwordToken = randAlphaNum;
-
-		User user = userService.findBySSO(this.getPrincipal());
-		String email = user.getEmail();
-
-		String subject = "ICEICO Test Portal OTP";
-		String emailMessage = "Hello Student, \n" + " Your link for changing password On ICEICO Test " + "Portal is"
-				+ " http://localhost:9003/java/user/validate/token/" + randAlphaNum;
-		emailService.sendOtpMessage(email, subject, emailMessage);
-
-		modelMap.addAttribute("passwordChange", false);
 		modelMap.addAttribute("user", user);
 		return "javaStudProfile";
 	}
@@ -161,14 +178,16 @@ public class JavaStudentController {
 	public String validateToken(@PathVariable("token") @Valid String token, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
 
-		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		if (token.equals(this.passwordToken) && !token.equals("Used")) {
-			modelMap.addAttribute("tokenMsg", true);
-			return "redirect:/java/change/password";
-		} else {
-			modelMap.addAttribute("tokenMsg", false);
-		}
+		User user = userService.findBySSO(this.getPrincipal());
 
+		if (token.equals(this.passwordToken) && !token.equals("Used")) {
+			user.setPassword(this.tempPass);
+			this.userService.saveUser(user);
+			modelMap.addAttribute("passwordMsg", "Password Changed Successfully");
+		} else {
+			modelMap.addAttribute("passwordMsg", "User Token Invalid");
+		}
+		modelMap.addAttribute("user", user);
 		return "javaStudProfile";
 	}
 
