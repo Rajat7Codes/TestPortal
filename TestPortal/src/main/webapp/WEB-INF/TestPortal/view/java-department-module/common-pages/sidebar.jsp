@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,8 @@
 		<div class="mm-logo-buttons-w">
 			<a class="mm-logo"
 				href="${pageContext.request.contextPath }/java/student/dashboard"><img
-				src="${pageContext.request.contextPath }/static/img/Iceico_round.png"><span>Test Portal</span></a>
+				src="${pageContext.request.contextPath }/static/img/Iceico_round.png"><span>Test
+					Portal</span></a>
 			<div class="mm-buttons">
 				<div class="content-panel-open">
 					<div class="os-icon os-icon-grid-circles"></div>
@@ -24,9 +26,16 @@
 		<div class="menu-and-user">
 			<div class="logged-user-w">
 				<div class="avatar-w">
-					<img
-						src="${pageContext.request.contextPath }/getImage/${user.fileName}"
-						height="100px" width="100px">
+					<c:if test="${user.fileName==null }">
+						<img
+							src="${pageContext.request.contextPath }/static/img/avatar-default-icon.png"
+							height="100px" width="100px">
+					</c:if>
+					<c:if test="${user.fileName!=null }">
+						<img
+							src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+							height="100px" width="100px">
+					</c:if>
 				</div>
 				<div class="logged-user-info-w">
 					<div class="logged-user-name">${user.ssoId }</div>
@@ -63,13 +72,22 @@
 				href="${pageContext.request.contextPath }/java/student/dashboard">
 				<img
 				src="${pageContext.request.contextPath }/static/img/Iceico_round.png">
-				<div class="logo-label">Test Portal</div></a>
+				<div class="logo-label">Test Portal</div>
+			</a>
 		</div>
 		<div class="logged-user-w avatar-inline">
 			<div class="logged-user-i">
 				<div class="avatar-w">
-					<img src="${pageContext.request.contextPath }/getImage/${user.fileName}"
-						height="100px" width="100px">
+					<c:if test="${user.fileName==null }">
+						<img
+							src="${pageContext.request.contextPath }/static/img/avatar-default-icon.png"
+							height="100px" width="100px">
+					</c:if>
+					<c:if test="${user.fileName!=null }">
+						<img
+							src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+							height="100px" width="100px">
+					</c:if>
 				</div>
 				<div class="logged-user-info-w">
 					<div class="logged-user-name">${user.ssoId }</div>
@@ -81,7 +99,16 @@
 				<div class="logged-user-menu color-style-bright">
 					<div class="logged-user-avatar-info">
 						<div class="avatar-w">
-							<img alt="" src="${pageContext.request.contextPath }/getImage/${user.fileName}">
+							<c:if test="${user.fileName==null }">
+								<img
+									src="${pageContext.request.contextPath }/static/img/avatar-default-icon.png"
+									height="100px" width="100px">
+							</c:if>
+							<c:if test="${user.fileName!=null }">
+								<img
+									src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+									height="100px" width="100px">
+							</c:if>
 						</div>
 						<div class="logged-user-info-w">
 							<div class="logged-user-name">${user.ssoId }</div>
@@ -92,10 +119,9 @@
 						<i class="os-icon os-icon-wallet-loaded"></i>
 					</div>
 					<ul>
-						<li><a
-							href="${pageContext.request.contextPath }/java/student/profile"><i
-								class="os-icon os-icon-user-male-circle2"></i><span>
-									Profile Details</span></a></li>
+						<li><a href="#"><i
+								class="os-icon os-icon-user-male-circle2"></i><span>Profile
+									Details</span></a></li>
 
 						<li><a data-target="#myModal" data-toggle="modal"><i
 								class="os-icon os-icon-common-07"></i><span>Reset
@@ -107,6 +133,8 @@
 				</div>
 			</div>
 		</div>
+
+
 		<h1 class="menu-page-header">Page Header</h1>
 		<ul class="main-menu">
 			<li class="sub-header"><span>Layouts</span></li>

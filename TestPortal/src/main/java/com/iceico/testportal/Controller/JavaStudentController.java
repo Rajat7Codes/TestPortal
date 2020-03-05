@@ -32,7 +32,8 @@ import com.iceico.testportal.Service.UserService;
  * 
  * @author RAJAT PATIL
  * @version 0.1
- * @author Rajat Date : 21 Feb 2020
+ * 
+ *          Created Date : 21 Feb 2020
  * 
  */
 @Controller
@@ -45,14 +46,13 @@ public class JavaStudentController {
 	private EMailService emailService;
 
 	private String passwordToken = null;
-	
+
 	private String tempPass = null;
-	
 
 	public JavaStudentController() {
 
 	}
-	
+
 	@GetMapping("/java/student/profile")
 	public String displayUserInformation(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
@@ -133,7 +133,6 @@ public class JavaStudentController {
 
 		if (user.getSsoId().equals(userName)) {
 			if (user.getMobileNumber().equals(mobNo) && user.getEmail().equals(mailId)) {
-			
 
 				// Generate Random Alphanumberic Token
 				String charString = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -152,16 +151,16 @@ public class JavaStudentController {
 					}
 					randAlphaNum += randChar;
 				}
-				
+
 				this.passwordToken = randAlphaNum;
 				this.tempPass = password;
-				
+
 				// Assets Used for Sending Token Via Mail
 				String email = user.getEmail();
 				String subject = "ICEICO Test Portal OTP";
-				String emailMessage = "Hello Student, \n" + " Your link for changing password On ICEICO Test " + "Portal is"
-						+ " http://localhost:9003/java/student/profile/validate/token/" + randAlphaNum;
-				
+				String emailMessage = "Hello Student, \n" + " Your link for changing password On ICEICO Test "
+						+ "Portal is" + " http://localhost:9003/java/student/profile/validate/token/" + randAlphaNum;
+
 				// Sends Mail
 				emailService.sendOtpMessage(email, subject, emailMessage);
 				modelMap.addAttribute("passwordMsg", "Check your mail to change password");
@@ -178,9 +177,9 @@ public class JavaStudentController {
 	@GetMapping("/java/student/profile/validate/token/{token}")
 	public String validateToken(@PathVariable("token") @Valid String token, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
-		
+
 		User user = userService.findBySSO(this.getPrincipal());
-		
+
 		if (token.equals(this.passwordToken) && !token.equals("Used")) {
 			user.setPassword(this.tempPass);
 			this.userService.saveUser(user);
