@@ -290,25 +290,26 @@ public class QuestionBankController {
 
 	/* AJAX CALL FOR GET BY SUBJECT */
 	@SuppressWarnings({ "deprecation", "unchecked" })
-	@RequestMapping(value = "/add/test/filter/subject", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.POST)
-	public @ResponseBody JSONObject filterQuestionListBySubject(@RequestParam("subjectID") Long subjectId)
+	@RequestMapping(value = "/add/test/filter/subject", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
+	public @ResponseBody JSONArray filterQuestionListBySubject(@RequestParam("subjectID") Long subjectId)
 			throws JsonProcessingException, ParseException, ResourceNotFoundException {
 		Subject subject = this.subjectService.getSubjectById(subjectId);
 
-		JSONObject subObject = new JSONObject();
 		JSONArray questionArray = new JSONArray();
-		for (QuestionBank questionsBank : subject.getQuestionBank()) {
 
-			JSONObject queObject = new JSONObject();
-
-			queObject.put("question", questionsBank.getQuestion());
-			queObject.put("questionType", questionsBank.getQuestionType());
-			queObject.put("marks", questionsBank.getQuestionType());
+		System.out.println("questionBank :======++=======:"+subject.getQuestionBank());
+		for(int i=0; i<subject.getQuestionBank().size(); i++) {
+			System.out.println("questionBank :======++=======:"+subject.getQuestionBank().get(i));
+			JSONObject queObject = new JSONObject(); 
+			queObject.put("questionId", subject.getQuestionBank().get(i).getQuestionBankId());
+			queObject.put("question", subject.getQuestionBank().get(i).getQuestion());
+			queObject.put("questionType", subject.getQuestionBank().get(i).getQuestionType().getType());
+			queObject.put("marks", subject.getQuestionBank().get(i).getMarks());
 			questionArray.add(queObject);
 		}
-		subObject.put("questions", questionArray);
 
-		return subObject;
+		System.out.println(questionArray);
+		
+		return questionArray;
 	}
-
 }
