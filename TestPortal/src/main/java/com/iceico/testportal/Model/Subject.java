@@ -42,7 +42,7 @@ public class Subject implements Serializable {
 	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<AddTest> addTest;
 
-	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<QuestionBank> questionBank;
 
 	/**
