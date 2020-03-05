@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="javabase.definition"
+		template="/WEB-INF/TestPortal/layout/java-department-layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/TestPortal/view/java-department-module/common-pages/header.jsp" />
+		<put-attribute name="sidebar"
+			value="/WEB-INF/TestPortal/view/java-department-module/common-pages/sidebar.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+
+	<!-- DASHBOARD PAGE -->
+	<definition name="javaDashboard"
+		extends="javabase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | JAVA DASHBOARD" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-department-module/dashboard.jsp" />
+	</definition>
+
+	<!-- STUDENT PROFILE PAGE -->
+	<definition name="javaStudProfile"
+		extends="javabase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | PROFILE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-department-module/profile-pages/userInformation.jsp" />
+	</definition>
+
+	<!-- UPDATE STUDENT PROFILE PAGE -->
+	<definition name="updateStudProfile"
+		extends="javabase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | UPDATE PROFILE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-department-module/profile-pages/updateUserInformation.jsp" />
+	</definition>
+
+	<!-- CHANGE USER PASSWORD PAGE -->
+	<definition name="changePassword"
+		extends="javabase.definition">
+		<put-attribute name="title" value="Change Password" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/login-module/changePassword.jsp" />
+	</definition>
+	
+</tiles-definitions>

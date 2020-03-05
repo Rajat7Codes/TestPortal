@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,9 +25,16 @@
 		<div class="menu-and-user">
 			<div class="logged-user-w">
 				<div class="avatar-w">
-					<img
-						src="${pageContext.request.contextPath }/getImage/${user.fileName}"
-						height="100px" width="100px">
+					<c:if test="${user.fileName==null }">
+						<img
+							src="${pageContext.request.contextPath }/static/img/avatar-default-icon.png"
+							height="100px" width="100px">
+					</c:if>
+					<c:if test="${user.fileName!=null }">
+						<img
+							src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+							height="100px" width="100px">
+					</c:if>
 				</div>
 				<div class="logged-user-info-w">
 					<div class="logged-user-name">${user.ssoId }</div>
@@ -76,9 +84,16 @@
 		<div class="logged-user-w avatar-inline">
 			<div class="logged-user-i">
 				<div class="avatar-w">
-					<img
-						src="${pageContext.request.contextPath }/getImage/${user.fileName}"
-						height="100px" width="100px">
+					<c:if test="${user.fileName==null }">
+						<img
+							src="${pageContext.request.contextPath }/static/img/avatar-default-icon.png"
+							height="100px" width="100px">
+					</c:if>
+					<c:if test="${user.fileName!=null }">
+						<img
+							src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+							height="100px" width="100px">
+					</c:if>
 				</div>
 				<div class="logged-user-info-w">
 					<div class="logged-user-name">${user.ssoId }</div>
@@ -90,7 +105,16 @@
 				<div class="logged-user-menu color-style-bright">
 					<div class="logged-user-avatar-info">
 						<div class="avatar-w">
-							<img alt="" src="img/avatar1.jpg">
+							<c:if test="${user.fileName==null }">
+								<img
+									src="${pageContext.request.contextPath }/static/img/avatar-default-icon.png"
+									height="100px" width="100px">
+							</c:if>
+							<c:if test="${user.fileName!=null }">
+								<img
+									src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+									height="100px" width="100px">
+							</c:if>
 						</div>
 						<div class="logged-user-info-w">
 							<div class="logged-user-name">${user.ssoId }</div>
@@ -107,7 +131,7 @@
 									Profile Details</span></a></li>
 
 						<li><a data-target="#myModal" data-toggle="modal"><i
-								class="os-icon os-icon-common-07"></i><span>Reset
+								class="os-icon os-icon-common-07"></i><span>Change
 									Password</span></a></li>
 
 						<li><a href="${pageContext.request.contextPath }/logout"><i

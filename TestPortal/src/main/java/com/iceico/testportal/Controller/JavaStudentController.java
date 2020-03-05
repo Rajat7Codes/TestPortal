@@ -29,16 +29,11 @@ import com.iceico.testportal.Service.EMailService;
 import com.iceico.testportal.Service.UserService;
 
 /**
- * <<<<<<<
- * HEAD:TestPortal/src/main/java/com/iceico/testportal/Controller/JavaStudentController.java
  * 
  * @author RAJAT PATIL
  * @version 0.1
+ * @author Rajat Date : 21 Feb 2020 
  * 
- *          Created Date : 21/02/2020 =======
- * @author Rajat Date : 21 Feb 2020 >>>>>>>
- *         4298a52b689a1aa384638e85ef5ce1a3dade56f7:TestPortal/src/main/java/com/iceico/testportal/Controller/JavaUserController.java
- *
  */
 @Controller
 public class JavaStudentController {
@@ -126,7 +121,7 @@ public class JavaStudentController {
 		return "updateStudProfile";
 	}
 
-	@GetMapping("/java/user/send/token")
+	@GetMapping("/java/student/profile/send/token")
 	public String sendToken(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
 
 		String charString = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -162,7 +157,7 @@ public class JavaStudentController {
 		return "javaStudProfile";
 	}
 
-	@GetMapping("/java/user/validate/token/{token}")
+	@GetMapping("/java/student/profile/validate/token/{token}")
 	public String validateToken(@PathVariable("token") @Valid String token, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
 
@@ -191,9 +186,10 @@ public class JavaStudentController {
 		user.setPassword(password);
 		this.userService.saveUser(user);
 		this.passwordToken = "Used";
+		modelMap.addAttribute("passMsg", false);
 
 		modelMap.addAttribute("user", user);
-		return "javaStudProfile";
+		return "redirect:/java/user";
 	}
 
 	@GetMapping("/java/student/profile/delete/{userId}")

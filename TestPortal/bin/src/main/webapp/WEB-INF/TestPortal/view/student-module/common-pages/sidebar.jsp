@@ -5,12 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.logo-element {
+	display: none;
+}
+</style>
 </head>
 <body>
 	<div class="menu-mobile menu-activated-on-click color-scheme-dark">
 		<div class="mm-logo-buttons-w">
-			<a class="mm-logo" href="index-2.html"><img src="img/logo.png"><span>Clean
-					Admin</span></a>
+			<a class="mm-logo" href="index-2.html"><img
+				src="${pageContext.request.contextPath}/static/img/Iceico_round.png"><span>Test
+					Portal</span></a>
 			<div class="mm-buttons">
 				<div class="content-panel-open">
 					<div class="os-icon os-icon-grid-circles"></div>
@@ -23,7 +29,9 @@
 		<div class="menu-and-user">
 			<div class="logged-user-w">
 				<div class="avatar-w">
-					<img alt="" src="img/avatar1.jpg">
+					<img alt=""
+						src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+						height="100px" width="100px">
 				</div>
 				<div class="logged-user-info-w">
 					<div class="logged-user-name">${user.ssoId }</div>
@@ -207,15 +215,19 @@
 		</div>
 	</div>
 	<div
-		class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link" style="margin-top:-54px;">
+		class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link"
+		style="margin-top: -54px;">
 		<div class="logo-w">
+
 			<a class="logo" href="index-2.html"><div class="logo-element"></div>
-				<div class="logo-label">Clean Admin</div></a>
+				<div class="logo-label">Test Portal</div></a>
 		</div>
 		<div class="logged-user-w avatar-inline">
 			<div class="logged-user-i">
 				<div class="avatar-w">
-					<img alt="" src="img/avatar1.jpg">
+					<img alt=""
+						src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+						height="100px" width="100px">
 				</div>
 				<div class="logged-user-info-w">
 					<div class="logged-user-name">${user.ssoId }</div>
@@ -227,7 +239,9 @@
 				<div class="logged-user-menu color-style-bright">
 					<div class="logged-user-avatar-info">
 						<div class="avatar-w">
-							<img alt="" src="img/avatar1.jpg">
+							<img alt=""
+								src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+								height="100px" width="100px">
 						</div>
 						<div class="logged-user-info-w">
 							<div class="logged-user-name">${user.ssoId }</div>
