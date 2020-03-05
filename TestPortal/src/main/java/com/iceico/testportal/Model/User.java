@@ -60,7 +60,7 @@ public class User implements Serializable {
 	@Column(name = "dob")
 	private String dob;
 
-	@Column(name = "gender", nullable = false)
+	@Column(name = "gender", nullable = true)
 	private String gender;
 	
 	@Column(name = "mobile_number", nullable = false)

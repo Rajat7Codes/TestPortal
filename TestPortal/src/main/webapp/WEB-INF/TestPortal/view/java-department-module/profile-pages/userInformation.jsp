@@ -32,9 +32,16 @@
 						<div class="up-main-info">
 							<div class="user-avatar-w">
 								<div class="user-avatar">
-									<img
-										src="${pageContext.request.contextPath }/getImage/${user.fileName}"
-										height="100px" width="100px">
+									<c:if test="${user.fileName==null }">
+										<img
+											src="${pageContext.request.contextPath }/static/img/avatar-default-icon.png"
+											height="100px" width="100px">
+									</c:if>
+									<c:if test="${user.fileName!=null }">
+										<img
+											src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+											height="100px" width="100px">
+									</c:if>
 								</div>
 							</div>
 							<h1 class="up-header" style="text-transform: capitalize;">${user.firstName }&nbsp;${user.lastName }</h1>
@@ -67,7 +74,7 @@
 									class="os-icon os-icon-link-3"></i><span>Add to Friends</span></a> -->
 								<a class="btn btn-primary btn-sm"
 									href="${pageContext.request.contextPath }/java/student/profile/update"><i
-									class="os-icon os-icon-edit"></i><span>Edit Profile</span></a> 
+									class="os-icon os-icon-edit"></i><span>Edit Profile</span></a>
 							</div>
 						</div>
 					</div>
@@ -121,7 +128,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 
 					</div>
 				</div>
@@ -287,9 +294,16 @@
 </body>
 
 
-	<c:if test="${passwordMsg != \"\" && passwordMsg != null}">
+<c:if test="${passwordMsg != \"\" && passwordMsg != null}">
 	<script>
-	alert('${passwordMsg}');
+		alert('${passwordMsg}');
 	</script>
-	</c:if>
+</c:if>
+
+<c:if test="${ passMsg==false }">
+	<script>
+		alert("Password changed successfully");
+	</script>
+</c:if>
+
 </html>

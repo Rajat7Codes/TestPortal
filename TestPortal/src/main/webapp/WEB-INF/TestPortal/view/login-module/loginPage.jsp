@@ -76,13 +76,13 @@
 
 				<div class="form-group">
 					<label for="">Username</label> <input class="form-control"
-						name="ssoId" placeholder="Enter your username">
+						name="ssoId" placeholder="Enter your username" required="required">
 					<div class="pre-icon os-icon os-icon-user-male-circle"></div>
 				</div>
 				<div class="form-group">
 					<label for="">Password</label> <input type="password"
 						name="password" id="password" class="form-control"
-						placeholder="Enter your password">
+						placeholder="Enter your password" required="required">
 					<div class="pre-icon os-icon os-icon-fingerprint"></div>
 				</div>
 				<div class="buttons-w">

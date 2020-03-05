@@ -76,9 +76,6 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12 col-xxxl-6">
-
-
-
 					<div class="element-wrapper">
 						<h6 class="element-header">Unique Visitors Graph</h6>
 						<div class="element-box">
@@ -117,9 +114,6 @@
 							</div>
 						</div>
 					</div>
-
-
-
 				</div>
 				<div class="col-sm-4 d-xxxl-none"></div>
 				<div class="d-none d-xxxl-block col-xxxl-6">
@@ -368,76 +362,6 @@
 								class="os-icon os-icon-others-29"></i></a><a href="#"><span
 								class="extra-tooltip">Upload Video</span><i
 								class="os-icon os-icon-ui-51"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="content-panel">
-			<div class="content-panel-close">
-				<i class="os-icon os-icon-close"></i>
-			</div>
-			<div class="element-wrapper">
-				<h6 class="element-header">Quick Links</h6>
-				<div class="element-box-tp">
-					<div class="el-buttons-list full-width">
-						<a class="btn btn-white btn-sm" href="#"><i
-							class="os-icon os-icon-delivery-box-2"></i><span>Create
-								New Product</span></a><a class="btn btn-white btn-sm" href="#"><i
-							class="os-icon os-icon-window-content"></i><span>Customer
-								Comments</span></a><a class="btn btn-white btn-sm" href="#"><i
-							class="os-icon os-icon-wallet-loaded"></i><span>Store
-								Settings</span></a>
-					</div>
-				</div>
-			</div>
-			<div class="element-wrapper">
-				<h6 class="element-header">Top Selling Today</h6>
-				<div class="element-box">
-					<div class="el-chart-w">
-						<canvas height="120" id="donutChart" width="120"></canvas>
-						<div class="inside-donut-chart-label">
-							<strong>142</strong><span>Total Orders</span>
-						</div>
-					</div>
-					<div class="el-legend condensed">
-						<div class="row">
-							<div class="col-auto col-xxxxl-6 ml-sm-auto mr-sm-auto col-6">
-								<div class="legend-value-w">
-									<div class="legend-pin legend-pin-squared"
-										style="background-color: #6896f9;"></div>
-									<div class="legend-value">
-										<span>Prada</span>
-										<div class="legend-sub-value">14 Pairs</div>
-									</div>
-								</div>
-								<div class="legend-value-w">
-									<div class="legend-pin legend-pin-squared"
-										style="background-color: #85c751;"></div>
-									<div class="legend-value">
-										<span>Maui Jim</span>
-										<div class="legend-sub-value">26 Pairs</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-6 d-lg-none d-xxl-block">
-								<div class="legend-value-w">
-									<div class="legend-pin legend-pin-squared"
-										style="background-color: #806ef9;"></div>
-									<div class="legend-value">
-										<span>Gucci</span>
-										<div class="legend-sub-value">17 Pairs</div>
-									</div>
-								</div>
-								<div class="legend-value-w">
-									<div class="legend-pin legend-pin-squared"
-										style="background-color: #d97b70;"></div>
-									<div class="legend-value">
-										<span>Armani</span>
-										<div class="legend-sub-value">12 Pairs</div>
-									</div>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>

@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.User;
+import com.iceico.testportal.Service.EMailService;
 import com.iceico.testportal.Service.UserService;
 
 /**
@@ -40,15 +41,22 @@ import com.iceico.testportal.Service.UserService;
 @Controller
 public class WebStudentController {
 
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private EMailService emailService;
+
+	private String passwordToken = null;
+	
+	private String tempPass = null;
+	
 	/**
 	 * 
 	 */
 	public WebStudentController() {
 
 	}
-
-	@Autowired
-	private UserService userService;
 
 	@GetMapping("/web/student/profile")
 	public String displayStudentInformation(ModelMap modelMap, Locale locale) {
@@ -117,7 +125,94 @@ public class WebStudentController {
 	@GetMapping("/web/student/profile/update")
 	public String editStudent(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		return "updateStudProfile";
+		return "updateWebStudProfile";
+	}
+	
+	@GetMapping("/web/student/profile/send/token")
+	public String sendToken(@RequestParam("username") String userName, @RequestParam("mobile") String mobNo,
+			@RequestParam("mailId") String mailId, @RequestParam("password") String password, ModelMap modelMap,
+			Locale locale) throws ResourceNotFoundException {
+
+		User user = this.userService.findBySSO(this.getPrincipal());
+
+		if (user.getSsoId().equals(userName)) {
+			if (user.getMobileNumber().equals(mobNo) && user.getEmail().equals(mailId)) {
+
+				// Generate Random Alphanumberic Token
+				String charString = "abcdefghijklmnopqrstuvwxyz0123456789";
+				String randAlphaNum = "";
+				double randRoll;
+				String randChar;
+
+				for (double i = 0; i < 30; i++) {
+					randRoll = Math.random();
+					randChar = "";
+					for (int j = 1; j <= 35; j++) {
+						if (randRoll <= (1.0 / 36.0 * j)) {
+							randChar = Character.toString(charString.charAt(j - 1));
+							break;
+						}
+					}
+					randAlphaNum += randChar;
+				}
+				
+				this.passwordToken = randAlphaNum;
+				this.tempPass = password;
+				
+				// Assets Used for Sending Token Via Mail
+				String email = user.getEmail();
+				String subject = "ICEICO Test Portal OTP";
+				String emailMessage = "Hello Student, \n" + " Your link for changing password On ICEICO Test " + "Portal is"
+						+ " http://localhost:9003/java/student/profile/validate/token/" + randAlphaNum;
+				
+				// Sends Mail
+				emailService.sendOtpMessage(email, subject, emailMessage);
+				modelMap.addAttribute("passwordMsg", "Check your mail to change password");
+			} else {
+				modelMap.addAttribute("passwordMsg", "Please enter correct user information");
+			}
+		} else {
+			modelMap.addAttribute("passwordMsg", "User Name not found");
+		}
+		modelMap.addAttribute("user", user);
+		return "webStudProfile";
+	}
+	
+	@GetMapping("/web/student/profile/validate/token/{token}")
+	public String validateToken(@PathVariable("token") @Valid String token, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		
+		User user = userService.findBySSO(this.getPrincipal());
+		
+		if (token.equals(this.passwordToken) && !token.equals("Used")) {
+			user.setPassword(this.tempPass);
+			this.userService.saveUser(user);
+			modelMap.addAttribute("passwordMsg", "Password Changed Successfully");
+		} else {
+			modelMap.addAttribute("passwordMsg", "User Token Invalid");
+		}
+		modelMap.addAttribute("user", user);
+		return "webStudProfile";
+	}
+
+	@GetMapping("/web/change/password")
+	public String getPassword(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "changePassword";
+	}
+
+	@PostMapping("/web/change/password")
+	public String changePassword(@RequestParam("password") String password, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+
+		User user = this.userService.findBySSO(this.getPrincipal());
+		user.setPassword(password);
+		this.userService.saveUser(user);
+		this.passwordToken = "Used";
+		modelMap.addAttribute("passMsg", false);
+
+		modelMap.addAttribute("user", user);
+		return "redirect:/web/user";
 	}
 
 	@GetMapping("/web/student/profile/delete/{userId}")

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,15 +25,20 @@
 		<div class="menu-and-user">
 			<div class="logged-user-w">
 				<div class="avatar-w">
-					<img alt="" src="img/avatar1.jpg">
+					<c:if test="${user.fileName==null }">
+						<img
+							src="${pageContext.request.contextPath }/static/img/avatar-default-icon.png"
+							height="100px" width="100px">
+					</c:if>
+					<c:if test="${user.fileName!=null }">
+						<img
+							src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+							height="100px" width="100px">
+					</c:if>
 				</div>
 				<div class="logged-user-info-w">
-					<div class="logged-user-name">
-						<%-- ${user.ssoId } --%>
-					</div>
-					<div class="logged-user-role">
-						<%-- ${user.position } --%>
-					</div>
+					<div class="logged-user-name">${user.ssoId }</div>
+					<div class="logged-user-role">${user.position }</div>
 				</div>
 			</div>
 			<ul class="main-menu">
@@ -250,9 +256,16 @@
 		<div class="logged-user-w avatar-inline">
 			<div class="logged-user-i">
 				<div class="avatar-w">
-					<img
-						src="${pageContext.request.contextPath }/getImage/${user.fileName}"
-						height="100px" width="100px">
+					<c:if test="${user.fileName==null }">
+						<img
+							src="${pageContext.request.contextPath }/static/img/avatar-default-icon.png"
+							height="100px" width="100px">
+					</c:if>
+					<c:if test="${user.fileName!=null }">
+						<img
+							src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+							height="100px" width="100px">
+					</c:if>
 				</div>
 				<div class="logged-user-info-w">
 					<div class="logged-user-name">${user.ssoId }</div>
@@ -264,9 +277,16 @@
 				<div class="logged-user-menu color-style-bright">
 					<div class="logged-user-avatar-info">
 						<div class="avatar-w">
-							<img
-								src="${pageContext.request.contextPath }/getImage/${user.fileName}"
-								height="100px" width="100px">
+							<c:if test="${user.fileName==null }">
+								<img
+									src="${pageContext.request.contextPath }/static/img/avatar-default-icon.png"
+									height="100px" width="100px">
+							</c:if>
+							<c:if test="${user.fileName!=null }">
+								<img
+									src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+									height="100px" width="100px">
+							</c:if>
 						</div>
 						<div class="logged-user-info-w">
 							<div class="logged-user-name">${user.ssoId }</div>
@@ -591,7 +611,7 @@
 							<li><a href="users_profile_small.html">Compact Profile</a></li>
 						</ul>
 					</div>
-				</div></li> -->
+				</div></li> 
 
 			<li class="has-sub-menu"><a href="#"><div class="icon-w">
 						<div class="os-icon os-icon-edit-32"></div>
@@ -626,7 +646,7 @@
 							<li><a href="tables_editable.html">Editable Tables</a></li>
 						</ul>
 					</div>
-				</div></li>
+				</div></li>-->
 			<li class="has-sub-menu"><a
 				href="${pageContext.request.contextPath}/admin/addTest"><div
 						class="icon-w">

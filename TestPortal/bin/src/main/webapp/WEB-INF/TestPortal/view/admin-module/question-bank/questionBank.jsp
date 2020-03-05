@@ -12,7 +12,9 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="menu-position-side menu-side-left full-screen"> <!-- onload="myToggle();" -->
+<body class="menu-position-side menu-side-left full-screen"
+	onload="myToggle();">
+	<!-- onload="myToggle();" -->
 	<div class="content-i">
 		<div class="content-box">
 			<div class="row">
@@ -25,20 +27,35 @@
 								enctype="multipart/form-data">
 
 								<form:hidden path="questionBankId" />
+								<form:hidden path="filePath" />
+								<form:hidden path="contentType" />
 								<div style="display: none;" id="typeArray">${questionTypeJson}</div>
 								<h6 class="element-header mb-5">Question Bank</h6>
-
 								<div class="row">
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label>Question Type</label>
-											<form:select class="form-control" name="questionType"
-												onchange="myToggle();" path="questionType" id="questionType"
-												itemLabel="type" multiple="single"
-												items="${questionTypeList }" itemValue="questionTypeId" />
-											<form:errors path="questionType" />
+									<c:if test="${edit == false }">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label>Question Type</label>
+												<form:select class="form-control" name="questionType"
+													onchange="myToggle();" path="questionType"
+													id="questionType" itemLabel="type" multiple="single"
+													items="${questionTypeList }" itemValue="questionTypeId" />
+												<form:errors path="questionType" />
+											</div>
 										</div>
-									</div>
+									</c:if>
+									<c:if test="${edit == true }">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label>Question Type</label>
+												<form:select class="form-control" name="questionType"
+													onchange="myToggle();" path="questionType"
+													id="questionType" itemLabel="type" multiple="single"
+													items="${questionTypeList }" itemValue="questionTypeId" />
+												<form:errors path="questionType" />
+											</div>
+										</div>
+									</c:if>
 
 									<div class="col-sm-6">
 										<div class="form-group">
@@ -69,24 +86,32 @@
 									</div>
 								</c:if> --%>
 								<%-- <c:if test="${imageTypeStatus == true }"> --%>
-									<div class="row">
-										<div class="col-sm-6" id="subDiv">
-											<div class="form-group">
-												<form:label path="subject">Subject</form:label>
-												<form:input path="subject" class="form-control"
-													placeholder="Enter subject" type="text" />
-												<form:errors path="subject"></form:errors>
-											</div>
-										</div>
-										<div class="col-sm-6" id="imageToggle">
-											<div class="form-group">
-												<label>Image Upload</label> <input
-													class="form-control file-upload" type="file" id="imageName"
-													name="imageName" />
-												<form:errors path="imageName"></form:errors>
-											</div>
+								<div class="row">
+									<div class="col-sm-6" id="subDiv">
+										<%-- <div class="form-group">
+											<form:label path="subject">Subject</form:label>
+											<form:input path="subject" class="form-control"
+												placeholder="Enter subject" type="text" />
+											<form:errors path="subject"></form:errors>
+										</div> --%>
+										<div class="form-group">
+											<form:label path="subject">Subject</form:label>
+											<form:select class="form-control" name="questionType"
+												onchange="myToggle();" path="subject" id="subject"
+												itemLabel="subjectName" multiple="single"
+												items="${subjectList }" itemValue="subjectId" />
+											<form:errors path="subject" />
 										</div>
 									</div>
+									<div class="col-sm-6" id="imageToggle">
+										<div class="form-group">
+											<label>Image Upload</label> <input
+												class="form-control file-upload" type="file" id="imageName"
+												name="imageName" />
+											<form:errors path="imageName"></form:errors>
+										</div>
+									</div>
+								</div>
 								<%-- </c:if> --%>
 								<div class="form-group">
 									<form:label path="description"> Description</form:label>
@@ -94,8 +119,9 @@
 									<form:errors path="description"></form:errors>
 								</div>
 
-							<%-- 	<c:if test="${programTypeStatus != true }">
- --%>									<div id="optionsDiv">
+
+								<c:if test="${edit == false }">
+									<div id="optionsDiv">
 										<h6 class="element-header mt-5">Options</h6>
 										<div class="form-inline mt-5">
 											<label> Options :</label><input
@@ -103,11 +129,12 @@
 												placeholder="Option Name" id="optionName"><label
 												class="form-check-label text-center col-sm-3 mb-2"><input
 												class="form-check-input" type="checkbox" id="correct">
-												Correct</label> <i class="btn btn-primary" id="add">Add</i>
+												Correct</label>
+											<button class="btn btn-primary" id="add" type="button">Add</button>
 										</div>
 
 
-										<div class="mb-5">
+										<div class="mt-5">
 											<div class="table-responsive mb-5">
 
 												<table id="allDetailsTableBody"
@@ -126,16 +153,73 @@
 											</div>
 										</div>
 									</div>
-								<%-- </c:if> --%>
-								<%-- 	<c:if test="${imageTypeStatus == false }">
-									<input class="form-control" style="display: none;" type="file"
-										id="imageName" name="imageName" />
 								</c:if>
- --%>								<div class="form-buttons-w text-center">
+								<c:if test="${edit == true }">
+									<div id="optionsDiv">
+										<h6 class="element-header mt-5">Options</h6>
+										<!-- <div class="form-inline mt-5">
+											<label> Options :</label><input
+												class="form-control mb-2 mr-sm-2 mb-sm-0 col-sm-6 ml-5"
+												placeholder="Option Name" id="optionName"><label
+												class="form-check-label text-center col-sm-3 mb-2"><input
+												class="form-check-input" type="checkbox" id="correct">
+												Correct</label> <i class="btn btn-primary" id="add">Add</i>
+										</div> -->
+										<div class="mb-5">
+											<div class="table-responsive mb-5">
+
+												<table id="optTableUpdate"
+													class="table table-striped table-lightfont">
+													<thead>
+														<tr>
+															<!-- <td>Question Bank Id</td> -->
+															<td>Options Id</td>
+															<td>Options</td>
+															<td>Answer</td>
+
+														</tr>
+														<tr style="display: none;">
+															<!-- <th>questionBankId</th> -->
+															<th>optionsId</th>
+															<th>optionName</th>
+															<th>correctAnswer</th>
+
+														</tr>
+													</thead>
+													<tbody id="optionsBodyForUpdate">
+														<c:forEach var="options"
+															items="${questionBank.getOptions() }" varStatus="ind">
+															<tr>
+																<%-- <td><input class="form-control"
+																	value="${options.getQuestionBank().questionBankId}"
+																	disabled="disabled"></td> --%>
+																<td><input class="form-control"
+																	value="${options.optionsId}" disabled="disabled"></td>
+																<td><input class="form-control"
+																	value="${options.optionName}"></td>
+																<td><input class="form-control"
+																	value="${options.correctAnswer }"></td>
+															</tr>
+														</c:forEach>
+
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</c:if>
+								<div class="form-buttons-w text-center pt-5">
 									<input type="text" id="data" name="data" style="display: none;">
-									<!-- <i class="btn" id="jsonBtn" onclick="newPageJson();">Add</i> -->
-									<button class="btn btn-primary" type="submit"
-										onclick="newPageJson();">Submit</button>
+									<!-- <i class="btn" id="jsonBtn" onclick="addToUpdateJson1();">Add</i> -->
+									<!-- <input type="button" onclick="newPageJson();">Cheack -->
+									<c:if test="${edit == true }">
+										<button class="btn btn-primary" type="submit"
+											onclick="addToUpdateJson1();">Update</button>
+									</c:if>
+									<c:if test="${edit == false }">
+										<button class="btn btn-primary" type="submit"
+											onclick="newPageJson();">Submit</button>
+									</c:if>
 								</div>
 							</form:form>
 						</div>
@@ -193,8 +277,10 @@
 													.getElementById("optionName").value;
 
 											if ($("#correct").prop('checked') == true) {
+
 												var answer = document
 														.getElementById("optionName").value;
+												var answer = true;
 											} else {
 												var answer = document
 														.getElementById("optionName").value;
@@ -218,7 +304,7 @@
 		var sellEntryDetArray = [];
 		var sellEntryTable = document.getElementById("optionsBody");
 
-		alert("sellEntryTable===>" + sellEntryTable.rows.length);
+		//alert("sellEntryTable===>" + sellEntryTable.rows.length);
 		for (var i = 0; i < sellEntryTable.rows.length; i++) {
 			//alert("sellEntryTable===>" + sellEntryTable.rows[i].cells[0].innerHTML);
 			var jsonObject = {
@@ -230,11 +316,43 @@
 		}
 		var data = document.getElementById('data');
 		data.value = JSON.stringify(sellEntryDetArray);
-		alert("json array===>" + JSON.stringify(sellEntryDetArray));
+		//alert("json array===>" + JSON.stringify(sellEntryDetArray));
 	}
 </script>
 
+<script type="text/javascript">
+	var jsonArray = [];
+	function addToUpdateJson1() {
+		/* for each table row in table body */
+		var tbl = $('#optTableUpdate tbody tr').map(
+				function(idxRow, ele) {
+					/* start building the retVal object */
+					var retVal = {
+						id : ++idxRow
+					};
+					/* for each cell */
+					var $td = $(ele).find('td').map(
+							function(idxCell, ele) {
+								var input = $(ele).find(':input');
+								/* if cell contains an input or select.... */
+								if (input.length == 1) {
+									var attr = $('#optTableUpdate thead tr th')
+											.eq(idxCell).text();
+									retVal[attr] = input.val();
 
+								} else {
+									var attr = $('#optTableUpdate thead tr th')
+											.eq(idxCell).text();
+									retVal[attr] = $(ele).text();
+								}
+							});
+					return retVal;
+				}).get();
 
-
+		jsonArray.push(tbl);
+		var data = document.getElementById("data");
+		data.value = JSON.stringify(tbl);
+		//alert("update array data =====>>>" + JSON.stringify(tbl))
+	}
+</script>
 </html>

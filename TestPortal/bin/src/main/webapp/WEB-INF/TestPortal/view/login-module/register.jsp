@@ -7,26 +7,6 @@
 <meta charset="UTF-8">
 <title>TEST PORTAL | REGISTER</title>
 
-<%-- <link
-	href="../../../../../fonts.googleapis.com/css6079.css?family=Poppins:300,400,500,600,700"
-	rel="stylesheet" type="text/css" />
-
-<link
-	href="${pageContext.request.contextPath }/static/fonts/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath }/static/fonts/material-design-icons/material-icon.css"
-	rel="stylesheet" type="text/css" />
-
-<link
-	href="${pageContext.request.contextPath }/static/plugins/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/static/css/pages/extra_pages.css">
-
-<link rel="shortcut icon"
-	href="${pageContext.request.contextPath }/static/img/favicon.png" /> --%>
 <link
 	href="${pageContext.request.contextPath}/static/css/main5739.css?version=4.5.0"
 	rel="stylesheet">
@@ -45,7 +25,6 @@ input:focus {
 }
 </style>
 
-
 <link rel="stylesheet"
 	href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css" />
 
@@ -60,17 +39,19 @@ input:focus {
 			</div>
 			<h4 class="auth-header">Create new account</h4>
 			<form id="registerForm" class="reg-form"
-				action="${pageContext.request.contextPath }/register/generate/otp"data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
-					data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
-					data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"
-					
+				action="${pageContext.request.contextPath }/register/generate/otp"
+				data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+				data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+				data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"
 				method="POST" enctype="multipart/form-data">
+
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label> First Name </label> <input id="fname"
-								class="form-control" placeholder="Enter first name" name="fname"
-								type="text">
+							<label> First Name </label> <input id="fname" name="fname"
+								type="text" class="form-control" placeholder="Enter first name"
+								data-bv-regexp="true" data-bv-regexp-regexp="^[a-zA-Z]*$"
+								data-bv-regexp-message="Alphabets without spaces only">
 							<div class="pre-icon os-icon os-icon-user-male-circle"></div>
 						</div>
 					</div>
@@ -78,13 +59,18 @@ input:focus {
 						<div class="form-group">
 							<label> Last Name </label> <input class="form-control"
 								placeholder="Enter last name" id="lname" name="lname"
+								data-bv-regexp="true" data-bv-regexp-regexp="^[a-zA-Z]*$"
+								data-bv-regexp-message="Alphabets without spaces only"
 								type="text">
 						</div>
 					</div>
 				</div>
+				<!-- ^[a-z\s]+$ -->
 				<div class="form-group">
 					<label class="w-100"> Username </label> <input class="form-control"
-						placeholder="Enter username" id="ssoId" name="ssoId" type="text">
+						placeholder="Enter username" id="ssoId" name="ssoId" type="text"
+						data-bv-regexp="true" data-bv-regexp-regexp="^[a-zA-Z]*$"
+						data-bv-regexp-message="Alphabets without spaces only" />
 					<div class="pre-icon os-icon os-icon-user-male-circle"></div>
 				</div>
 				<div class="form-group">
@@ -100,8 +86,7 @@ input:focus {
 					<div class="pre-icon os-icon os-icon-phone"></div>
 				</div>
 				<div class="form-group">
-					<label> Gender</label> 
-					<select class="form-control" id="gender"
+					<label> Gender</label> <select class="form-control" id="gender"
 						name="gender">
 						<option value="Female">Female</option>
 						<option value="Male">Male</option>
@@ -110,11 +95,11 @@ input:focus {
 					<div class="pre-icon os-icon os-icon-user"></div>
 				</div>
 				<div class="form-group">
-					<label> Department</label> 
-					<select class="form-control"
+					<label> Department</label> <select class="form-control"
 						id="department" name="department">
-						<option value="Java">Java</option>
-						<option value="Web">Web</option>
+						<c:forEach var="department" items="${departmentList}">
+							<option value="${department.departmentId}">${department.departmentName}</option>
+						</c:forEach>
 					</select>
 					<div class="pre-icon os-icon os-icon-hierarchy-structure-2">
 					</div>
@@ -122,7 +107,8 @@ input:focus {
 				<div class="form-group">
 					<label>Position</label> <input class="form-control"
 						placeholder="Enter position" id="position" name="position"
-						type="text">
+						type="text" data-bv-regexp="true"
+						data-bv-regexp-regexp="^[a-zA-Z ]*$">
 					<div class="pre-icon os-icon os-icon-users"></div>
 				</div>
 				<div class="row">
@@ -138,57 +124,63 @@ input:focus {
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label>Confirm Password</label> <input id="confirmPassword" name="confirmPassword"
-								class="form-control" placeholder="Password" type="password"
-								data-bv-identical="true" data-bv-identical-field="password"
+							<label>Confirm Password</label> <input id="confirmPassword"
+								name="confirmPassword" class="form-control"
+								placeholder="Password" type="password" data-bv-identical="true"
+								data-bv-identical-field="password"
 								data-bv-identical-message="Password mismatch">
 						</div>
 					</div>
 				</div>
-				<input id="data" name="data">
+				<input id="data" name="data" type="hidden">
 				<div class="mt-3 text-center">
 					<button id="reg" type="submit" class="btn btn-primary form-control"
 						onclick="getFormData();">
 						<b>Register</b>
 					</button>
 				</div>
+				<div class="buttons-w mt-3 text-center">
+					<label class="form-check-label"> <a
+						class="btn btn-outline-light text-dark"
+						href="${pageContext.request.contextPath}/login"> Go To Login </a>
+					</label>
+				</div>
 			</form>
 		</div>
 	</div>
 </body>
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+
+<script type="text/javascript"
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$('#registerForm')
-								.bootstrapValidator(
-										{
-											feedbackIcons : {
-												valid : 'glyphicon glyphicon-ok',
-												invalid : 'glyphicon glyphicon-remove',
-												validating : 'glyphicon glyphicon-refresh'
-											},
-											fields : {
-												password : {
-													validators : {
-														identical : {
-															field : 'password'
-														}
-													}
-												},
-												confirmPassword : {
-													validators : {
-														identical : {
-															field : 'confirmPassword'
-														}
-													}
-												}
-											}
-										});
-					});
+	$(document).ready(function() {
+		$('#registerForm').bootstrapValidator({
+			feedbackIcons : {
+				valid : 'glyphicon glyphicon-ok',
+				invalid : 'glyphicon glyphicon-remove',
+				validating : 'glyphicon glyphicon-refresh'
+			},
+			fields : {
+				password : {
+					validators : {
+						identical : {
+							field : 'password'
+						}
+					}
+				},
+				confirmPassword : {
+					validators : {
+						identical : {
+							field : 'confirmPassword'
+						}
+					}
+				}
+			}
+		});
+	});
 </script>
 
 <script type="text/javascript">
@@ -206,7 +198,6 @@ input:focus {
 		};
 
 		$('#data').val(JSON.stringify(data));
-		alert(JSON.stringify(data));
 	}
 </script>
 
@@ -252,72 +243,5 @@ input:focus {
 		}
 	}
 </script>
-
-
-
-<%-- <script
-	src="${pageContext.request.contextPath }/static/bower_components/jquery/dist/jquery.min.js"></script> --%>
-<%-- <script
-	src="${pageContext.request.contextPath }/static/bower_components/popper.js/dist/umd/popper.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/moment/moment.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/chart.js/dist/Chart.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/select2/dist/js/select2.full.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/ckeditor/ckeditor.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap-validator/dist/validator.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/dropzone/dist/dropzone.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/editable-table/mindmup-editabletable.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/tether/dist/js/tether.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/slick-carousel/slick/slick.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/util.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/alert.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/button.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/carousel.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/collapse.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/dropdown.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/modal.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/tab.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/tooltip.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/bootstrap/js/dist/popover.js"></script>
-<script
-	src="${pageContext.request.contextPath }/static/js/demo_customizer5739.js?version=4.5.0"></script>
-<script
-	src="${pageContext.request.contextPath }/static/js/main5739.js?version=4.5.0"></script>
-
-
- --%>
-
 
 </html>
