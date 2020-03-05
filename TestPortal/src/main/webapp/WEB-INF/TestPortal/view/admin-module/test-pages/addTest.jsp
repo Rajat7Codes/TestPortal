@@ -215,9 +215,9 @@ function filterBySubject() {
 </script>
 
 <!-- Script triggered on load of body -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(document).ready( filterBySubject() );
-</script>
+</script> -->
 
 <!-- Script for changing add btn to added -->
 <script type="text/javascript">
