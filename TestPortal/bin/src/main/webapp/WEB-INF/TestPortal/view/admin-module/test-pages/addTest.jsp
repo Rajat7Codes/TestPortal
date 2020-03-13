@@ -24,6 +24,7 @@
 								method="post">
 
 								<form:hidden path="addTestId" />
+								<input id="questionsJson" name="questionsJson" type="hidden">
 
 								<h6 class="element-header mb-5">Add Test</h6>
 								<div class="row">
@@ -105,19 +106,20 @@
 								</div>
 
 								<!-- table -->
-								<div class="element-wrapper d-none" id="questions-table">
+								<div class="element-wrapper" id="questions-table">
 									<div class="element-box">
 										<h6 class="element-header mb-5">Questions List</h6>
 
 										<div class="table-responsive">
-											<table id="questionListTable" class="table table-striped">
+											<table id="questionListTable"
+												class="table table-striped text-center">
 												<thead>
 													<tr>
 														<th>Sr.No.</th>
 														<th>Question</th>
 														<th>Question Type</th>
 														<th class="text-center">Marks</th>
-														<th class="text-right">Action</th>
+														<th>Action</th>
 													</tr>
 												</thead>
 												<tbody id="tableBody">
@@ -126,7 +128,8 @@
 										</div>
 									</div>
 									<div class="form-buttons-w">
-										<button class="btn btn-secondary" type="submit">Reset</button>
+										<button class="btn btn-secondary" onclick="addCheckbtn()"
+											type="button">Reset</button>
 										<button class="btn btn-primary" type="submit">Submit</button>
 									</div>
 								</div>
@@ -141,6 +144,7 @@
 	</div>
 </body>
 
+<!-- Script for toggling ratioDiv on negative marking change -->
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#negativeMarking").change(function() {
@@ -149,89 +153,100 @@
 	});
 </script>
 
-<!-- AJAX script for subject -->
+<!-- AJAX script for subject change filteration -->
 <script type="text/javascript">
-	$("#subject").change(function() {
-		alert("inside function");
+function filterBySubject() {
 
-		data = {
+	alert("");
+	$('#tableBody tr').remove();
+	data = { "subjectID" : $("#subject").val() };
 
-			"subjectID" : $("#subject").val()
+	$.ajax({
+				type : "GET",
+				contentType : "application/json",
+				url : "${pageContext.request.contextPath}/add/test/filter/subject",
+				data : data,
+				dataType : 'json',
 
-		};
+				cache : false,
 
-		alert(JSON.stringify(data));
+				timeout : 600000,
 
-		$
+				success : function(response) {
+					var trHTML = '';
 
-		.ajax({
+					$
+							.each(
+									response,
+									function(i, item) {
+										trHTML += '<tr><td>'
+												+ item.questionId
+												+ '</td><td>'
+												+ item.question
+												+ '</td><td>'
+												+ item.questionType
+												+ '</td><td>'
+												+ item.marks
+												+ '</td><td>'
+												+ '<button type="button" id="addbtn'
+												+ (item.questionId)
+												+ '" class="btn btn-primary" onclick="add('
+												+ (item.questionId)
+												+ ');"> Add </button> </td> </tr>';
+									});
 
-			type : "POST",
+					$('#tableBody tr td').remove();
+					$('#tableBody').append(trHTML);
 
-			contentType : "application/json",
+				}
 
-			url : "${pageContext.request.contextPath}/add/test/filter/subject",
+			});
 
-			data : data,
+	$("#questions-table")
+			.css("display", "block !important");
+}
+</script>
 
-			dataType : 'json',
+<!-- Script triggered on change of subject -->
+<script type="text/javascript">
+	$("#subject").change( 
+		filterBySubject() 	
+	);
+</script>
 
-			cache : false,
+<!-- Script triggered on load of body -->
+<!-- <script type="text/javascript">
+	$(document).ready( filterBySubject() );
+</script> -->
 
-			timeout : 600000,
+<!-- Script for changing add btn to added -->
+<script type="text/javascript">
+	function add(a) {
+		var addBtn = document.getElementById('addbtn' + a);
+		addBtn.innerText = "Added";
+		addBtn.classList.remove("btn-primary");
+		addBtn.classList.add("btn-success");
+	}
+</script>
 
-			success : function(response) {
-
-				alert(JSON.stringify(response));
-
-				var trHTML = '';
-
-				$.each(
-
-				response.questions,
-
-				function(i, item) {
-
-					trHTML += '<tr><td>' + "&nbsp;"
-
-					+ (i + 1)
-
-					+ '</td><td>'
-
-					+ "&nbsp;"
-
-					+ item.question
-
-					+ '</td><td>'
-
-					+ "&nbsp;"
-
-					+ item.questionType
-
-					+ '</td><td>'
-
-					+ "&nbsp;"
-
-					+ item.marks
-
-					+ '</td><td>'
-
-					+ "&nbsp;"
-
-					+ ''
-
-					+ '</td></tr>';
-
-				});
-
-				$('#questionListTable tr td').remove();
-				$('#questionListTable').append(trHTML);
-
+<!-- Script for sending json to hidden fields -->
+<script type="text/javascript">
+	document.getElementById("addTestForm").onsubmit = function() {
+		var jsonArr = [];
+		var tableBody = document.getElementById("tableBody");
+		var rowCount = tableBody.rows.length;
+		for (var i = 0; i < rowCount; i++) {
+			var addedCheck = tableBody.rows[i].cells[4].children[0].innerHTML;
+			if (addedCheck == "Added") {
+				var jsonobj = {
+					"questionId" : tableBody.rows[i].cells[0].innerHTML
+				}
+				jsonArr.push(jsonobj);
 			}
+		}
 
-		});
-
-		$("#questions-table").css("display", "block !important");
-	});
+		var data = document.getElementById('questionsJson');
+		data.value = JSON.stringify(jsonArr);
+	};
 </script>
 </html>
