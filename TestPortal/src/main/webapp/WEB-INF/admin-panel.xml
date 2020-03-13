@@ -107,6 +107,13 @@
 			value="/WEB-INF/TestPortal/view/admin-module/test-pages/addTest.jsp" />
 	</definition>
 
+	<!--View test -->
+	<definition name="addTestView" extends="adminbase.definition">
+		<put-attribute name="title" value="View Tests" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/test-pages/addTestView.jsp" />
+	</definition>
+
 
 
 </tiles-definitions>
