@@ -722,6 +722,13 @@
 					</div> <span>Add Test</span>
 			</a></li>
 
+			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/admin/add/test/view">
+					<div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span>View Test</span>
+			</a></li>
+
 			<!-- <li class="has-sub-menu"><a href="#"><div class="icon-w">
 						<div class="os-icon os-icon-zap"></div>
 					</div> <span>Icons</span></a>

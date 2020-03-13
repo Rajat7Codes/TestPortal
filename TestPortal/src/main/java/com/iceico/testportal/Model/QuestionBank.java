@@ -27,7 +27,7 @@ import com.iceico.testportal.audit.Auditable.Auditable;
  * @author SAMEER KADGAYE
  * @version 0.1
  * 
- *          Created Date : 14/02/2020
+ * Created Date : 14/02/2020
  *
  */
 @Entity
@@ -70,18 +70,18 @@ public class QuestionBank extends Auditable<String> implements Serializable {
 	@Column(name = "description")
 	private String description;
 
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "question_Type_Id", insertable = true, nullable = true, updatable = true)
 	private QuestionType questionType;
 
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@JoinColumn(name = "add_test_id", insertable = true, nullable = true, updatable = true)
-	private AddTest addTest;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "test_question_id", insertable = true, nullable = true, updatable = true)
+	private TestQuestion testQuestion;
 
 	@OneToMany(mappedBy = "questionBank", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Options> options;
 
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "subject_id", insertable = true, nullable = true, updatable = true)
 	private Subject subject;
 
@@ -95,12 +95,13 @@ public class QuestionBank extends Auditable<String> implements Serializable {
 	 * @param description
 	 * @param questionType
 	 * @param addTest
+	 * @param testQuestion
 	 * @param options
 	 * @param subject
 	 */
 	public QuestionBank(Long questionBankId, String question, Integer marks, String imageName, String filePath,
-			String contentType, String description, QuestionType questionType, AddTest addTest, List<Options> options,
-			Subject subject) {
+			String contentType, String description, QuestionType questionType, AddTest addTest,
+			TestQuestion testQuestion, List<Options> options, Subject subject) {
 		super();
 		this.questionBankId = questionBankId;
 		this.question = question;
@@ -110,7 +111,7 @@ public class QuestionBank extends Auditable<String> implements Serializable {
 		this.contentType = contentType;
 		this.description = description;
 		this.questionType = questionType;
-		this.addTest = addTest;
+		this.testQuestion = testQuestion;
 		this.options = options;
 		this.subject = subject;
 	}
@@ -228,17 +229,17 @@ public class QuestionBank extends Auditable<String> implements Serializable {
 	}
 
 	/**
-	 * @return the addTest
+	 * @return the testQuestion
 	 */
-	public AddTest getAddTest() {
-		return addTest;
+	public TestQuestion getTestQuestion() {
+		return testQuestion;
 	}
 
 	/**
-	 * @param addTest the addTest to set
+	 * @param testQuestion the testQuestion to set
 	 */
-	public void setAddTest(AddTest addTest) {
-		this.addTest = addTest;
+	public void setTestQuestion(TestQuestion testQuestion) {
+		this.testQuestion = testQuestion;
 	}
 
 	/**

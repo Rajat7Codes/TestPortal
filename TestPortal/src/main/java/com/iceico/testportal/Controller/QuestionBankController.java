@@ -293,29 +293,22 @@ public class QuestionBankController {
 	@RequestMapping(value = "/add/test/filter/subject", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	public @ResponseBody JSONArray filterQuestionListBySubject(@RequestParam("subjectID") Long subjectId)
 			throws JsonProcessingException, ParseException, ResourceNotFoundException {
-		System.out.println("id============" + subjectId);
 
 		Subject subject = this.subjectService.getSubjectById(subjectId);
-		System.out.println("=============" + subject.getSubjectName());
-		System.out.println("Q==========" + subject.getQuestionBank().size());
-		for (QuestionBank question : subject.getQuestionBank()) {
-			System.out.println("==========>" + question.getQuestion());
-		}
-
 		JSONArray questionArray = new JSONArray();
 
-//		System.out.println("questionBank :======++=======:"+subject.getQuestionBank());
-//		for(int i=0; i<subject.getQuestionBank().size(); i++) {
-//			System.out.println("questionBank :======++=======:"+subject.getQuestionBank().get(i));
-//			JSONObject queObject = new JSONObject(); 
-//			queObject.put("questionId", subject.getQuestionBank().get(i).getQuestionBankId());
-//			queObject.put("question", subject.getQuestionBank().get(i).getQuestion());
-//			queObject.put("questionType", subject.getQuestionBank().get(i).getQuestionType().getType());
-//			queObject.put("marks", subject.getQuestionBank().get(i).getMarks());
-//			questionArray.add(queObject);
-//		}
-//
-//		System.out.println(questionArray);
+		System.out.println("questionBank :======++=======:"+subject.getQuestionBank());
+		for(int i=0; i<subject.getQuestionBank().size(); i++) {
+			System.out.println("questionBank :======++=======:"+subject.getQuestionBank().get(i));
+			JSONObject queObject = new JSONObject(); 
+			queObject.put("questionId", subject.getQuestionBank().get(i).getQuestionBankId());
+			queObject.put("question", subject.getQuestionBank().get(i).getQuestion());
+			queObject.put("questionType", subject.getQuestionBank().get(i).getQuestionType().getType());
+			queObject.put("marks", subject.getQuestionBank().get(i).getMarks());
+			questionArray.add(queObject);
+		}
+
+		System.out.println(questionArray);
 
 		return questionArray;
 	}
