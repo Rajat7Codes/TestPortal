@@ -83,6 +83,20 @@ public class UserController {
 		return "register";
 	}
 
+	/**
+	 * This method will provide the medium to add a new user.
+	 */
+	@RequestMapping(value = { "/admin/new" }, method = RequestMethod.GET)
+	public String newAdmin(ModelMap model) {
+		User user = new User();
+		model.addAttribute("newUser", user);
+		model.addAttribute("edit", false);
+		model.addAttribute("userList", userService.findAllUsers());
+		model.addAttribute("departmentList", this.departmentService.getDepartmentList());
+		model.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "newAdmin";
+	}
+
 	@RequestMapping(value = { "/admin/user/verify/mail" }, method = RequestMethod.POST)
 	public String verifyUserMail(@RequestParam("emailId") String emailId, @RequestParam("fname") String fName,
 			@RequestParam("lname") String lName, @RequestParam("mobile") String mobile,
