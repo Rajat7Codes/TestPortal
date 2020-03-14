@@ -55,21 +55,21 @@ public class TilesController {
 	}
 
 	/* sample method start test designing */
-	@RequestMapping("/java/student/dashboard/start/test")
+	@RequestMapping("/java/student/start/test")
 	public String startTest(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "startTest";
 	}
 
 	/* sample method start test designing */
-	@RequestMapping("/java/student/dashboard/start/test/image")
+	@RequestMapping("/java/student/start/test/image")
 	public String startTestImage(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "startTestImage";
 	}
 
 	/* sample method start test list designing */
-	@RequestMapping("/java/student/dashboard/test/list")
+	@RequestMapping("/java/student/test/list")
 	public String testList(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "test";
