@@ -19,29 +19,23 @@
 
 </head>
 <body>
-
 	<div class="content-i">
 		<div class="content-box">
 			<div class="row">
 				<div class="col-sm-4">
 					<div class="element-wrapper">
 						<div class="element-box">
-
 							<div class="card text-center">
-
 								<h1>00:00</h1>
-
 							</div>
 							<br>
 							<div class="card text-center form-group">
-
 								<button class="btn btn-warning form-control font-weight-bold"
 									type="submit">SUBMIT TEST</button>
 							</div>
 							<hr>
 							<div class="card text-center">
 								<div class="card-header font-weight-bold">TEST NAME HERE</div>
-
 								<div class="card-body">
 									<div class="form-group">
 										<div class="row">
@@ -83,7 +77,7 @@
 													href="#">3</a>
 											</div>
 											<div class="col-2 p-0">
-												<a class="btn btn-success border border rounded-circle "
+												<a class="btn btn-dark border border rounded-circle "
 													href="#">4</a>
 											</div>
 											<div class="col-2 p-0">
@@ -145,8 +139,12 @@
 									here: what's a questions???? your question here: what's a
 									questions???? your question here: what's a questions????</p>
 							</div>
+							<div class="mx-auto w-100 text-center my-0">
+								<img class="w-50 "
+									src="${pageContext.request.contextPath }/static/img/javaImage.jpg"
+									alt="Your image here..">
+							</div>
 							<div class="form-group p-2">
-
 								<div class="form-check">
 									<label class="form-check-label"> <input type="radio"
 										class="form-check-input" name="optradio">Option 1

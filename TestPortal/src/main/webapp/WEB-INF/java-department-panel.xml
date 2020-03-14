@@ -55,4 +55,17 @@
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/java-department-module/startTest.jsp" />
 	</definition>
+
+	<definition name="startTestImage"
+		extends="javabase.definition">
+		<put-attribute name="title" value="start Test " />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-department-module/startTestImage.jsp" />
+	</definition>
+
+	<definition name="test" extends="javabase.definition">
+		<put-attribute name="title" value="Test" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-department-module/test.jsp" />
+	</definition>
 </tiles-definitions>
