@@ -256,6 +256,7 @@
 
 <script>
 	var code = `${ code }`;
+	var languageIn = `${ lanaguage }`;
 	var a = false;
 	if (code != (null) && code != ("")) {
 		a = true;
@@ -267,6 +268,8 @@
 		/* codeOut = codeOut.split('>').join(">\n"); */
 
 		editor.setValue(codeOut);
+		
+		editor.setMode(languageIn);
 	}
 </script>
 </html>

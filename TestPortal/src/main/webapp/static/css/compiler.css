@@ -37,7 +37,7 @@
     border-bottom: none;
 }
 #editor-menu select {
-    background-color: rgb(16, 31, 63);
+    background-color: rgb(0, 0, 0);
     color: rgb(255, 255, 255);
     margin: 13px;
     margin-left: 70px;
