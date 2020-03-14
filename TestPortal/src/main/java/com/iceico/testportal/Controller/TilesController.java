@@ -53,6 +53,15 @@ public class TilesController {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "driveDashboard";
 	}
+	
+	
+	/* sample method start test designing*/
+	@RequestMapping("/java/student/dashboard/start/test")
+	public String startTest(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "startTest";
+	}
+
 
 	private String getPrincipal() {
 		String userName = null;

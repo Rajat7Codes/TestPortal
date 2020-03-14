@@ -120,6 +120,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/admin-module/adminRegister.jsp" />
 	</definition>
+	
 
 
 
