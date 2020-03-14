@@ -48,14 +48,14 @@ public class CompilerController {
 	}
 	
 	/* sample method start test 2 designing*/
-	@RequestMapping("/java/student/start/test")
+	@RequestMapping("/java/student/start/test/compiler")
 	public String startTest2(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "startTestCompiler";
 	}
 
 
-	@PostMapping("/java/student/start/test")
+	@PostMapping("/java/student/start/test/compiler")
 	public String runCode(ModelMap modelMap, Locale locale, 
 			@RequestParam("code") String code, @RequestParam("language") String languageIn) throws ResourceNotFoundException, ParseException, org.json.simple.parser.ParseException {		
 		
