@@ -58,8 +58,9 @@ public class CompilerController {
 	@PostMapping("/java/student/start/test/compiler")
 	public String runCode(ModelMap modelMap, Locale locale, 
 			@RequestParam("code") String code, @RequestParam("language") String languageIn) throws ResourceNotFoundException, ParseException, org.json.simple.parser.ParseException {		
-		
+
 		modelMap.addAttribute("code", code);
+		modelMap.addAttribute("language", languageIn);
 		
 		String clientId = "6a12fd18773efb45dd8c612433895194"; //Replace with your client ID
 		String clientSecret = "18e0fd8cdd07136086af0f620d57a4af982d04e5c9e29b8274371a6c82b58a94"; //Replace with your client Secret
