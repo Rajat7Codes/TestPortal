@@ -172,6 +172,12 @@
 						</ul>
 					</div>
 				</div></li>
+			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/java/student/dashboard/start/test">
+					<div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span>Start Test</span>
+			</a></li>
 		</ul>
 	</div>
 

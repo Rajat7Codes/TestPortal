@@ -23,7 +23,7 @@
 	<div class="content-i">
 		<div class="content-box">
 			<div class="row">
-				<div class="col-4">
+				<div class="col-sm-4">
 					<div class="element-wrapper">
 						<div class="element-box">
 
@@ -41,40 +41,139 @@
 							<hr>
 							<div class="card text-center">
 								<div class="card-header font-weight-bold">TEST NAME HERE</div>
-								<hr>
+
 								<div class="card-body">
-									<ul class="list-group">
-										<li class="list-group-item font-weight-bold">Question
-											01&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
-											class="badge badge-primary" data-toggle="tooltip"
-											title="marks">4</span>
-										</li>
-										<li class="list-group-item font-weight-bold">Question
-											01&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
-											class="badge badge-primary" data-toggle="tooltip"
-											title="marks">4</span>
-										</li>
-										<li class="list-group-item font-weight-bold">Question
-											02&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
-											class="badge badge-primary" data-toggle="tooltip"
-											title="marks">2</span>
-										</li>
-										<li class="list-group-item font-weight-bold">Question
-											03&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
-											class="badge badge-primary" data-toggle="tooltip"
-											title="marks">4</span>
-										</li>
-										<li class="list-group-item font-weight-bold">Question
-											04&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
-											class="badge badge-primary" data-toggle="tooltip"
-											title="marks">1</span>
-										</li>
-										<li class="list-group-item font-weight-bold">Question
-											05&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
-											class="badge badge-primary" data-toggle="tooltip"
-											title="marks">4</span>
-										</li>
-									</ul>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">1</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-success border border rounded-circle "
+													href="#">2</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">3</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-success border border rounded-circle "
+													href="#">4</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">1</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">1</a>
+											</div>
+											<!-- next -->
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">1</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">2</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">3</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-success border border rounded-circle "
+													href="#">4</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">1</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">1</a>
+											</div>
+											<!-- next -->
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">1</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">2</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">3</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">4</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">1</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-success border border rounded-circle "
+													href="#">1</a>
+											</div>
+											<!-- next -->
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">1</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">2</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">3</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">4</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">1</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">1</a>
+											</div>
+											<!-- next -->
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">1</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">2</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">3</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">4</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">1</a>
+											</div>
+											<div class="col-2 p-0">
+												<a class="btn btn-dark border border rounded-circle "
+													href="#">1</a>
+											</div>
+
+										</div>
+
+
+									</div>
 								</div>
 							</div>
 						</div>
@@ -82,17 +181,54 @@
 				</div>
 
 
-				<div class="col-8">
+				<div class="col-sm-8">
 					<div class="element-wrapper">
 						<div class="element-box">
-							<span class="badge badge-pill badge-dark px-3 py-1">Question
-								01</span> <br>
-							<div class="form-group p-2">
-								<p>your quesdtion here: what's a questions???? your
-									quesdtion here: what's a questions???? your quesdtion here:
-									what's a questions???? your quesdtion here: what's a
-									questions????</p>
+							<div class="row">
+								<div class="col-sm-6">
+									<span class="badge badge-pill badge-dark px-3 py-2">Question
+										01</span>
+								</div>
+								<div class="col-sm-6 text-right">
+									<span class="badge badge-pill badge-dark px-3 py-2 ">2
+										marks </span>
+								</div>
+							</div>
 
+
+							<hr>
+							<div class="form-group p-2 text-justify font-weight-normal">
+								<p>your question here: what's a questions???? your question
+									here: what's a questions???? your question here: what's a
+									questions???? your question here: what's a questions????</p>
+							</div>
+							<div class="form-group p-2">
+
+								<div class="form-check">
+									<label class="form-check-label"> <input type="radio"
+										class="form-check-input" name="optradio">Option 1
+									</label>
+								</div>
+								<div class="form-check">
+									<label class="form-check-label"> <input type="radio"
+										class="form-check-input" name="optradio">Option 2
+									</label>
+								</div>
+								<div class="form-check">
+									<label class="form-check-label"> <input type="radio"
+										class="form-check-input" name="optradio">Option 1
+									</label>
+								</div>
+								<div class="form-check">
+									<label class="form-check-label"> <input type="radio"
+										class="form-check-input border-success" name="optradio">Option
+										2
+									</label>
+								</div>
+							</div>
+							<hr>
+							<div class="form-group text-right">
+								<a class="btn btn-dark font-weight-bold px-4" href="#">next</a>
 							</div>
 						</div>
 					</div>
