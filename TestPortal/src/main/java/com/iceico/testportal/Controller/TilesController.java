@@ -72,7 +72,7 @@ public class TilesController {
 	@RequestMapping("/java/student/test/list")
 	public String testList(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		return "test";
+		return "testList";
 	}
 
 
