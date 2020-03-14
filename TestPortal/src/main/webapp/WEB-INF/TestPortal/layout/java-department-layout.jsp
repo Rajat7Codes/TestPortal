@@ -51,7 +51,7 @@
 	class="menu-position-side menu-side-left full-screen with-content-panel">
 	<div class="all-wrapper with-side-panel solid-bg-all">
 		<tiles:insertAttribute name="header"></tiles:insertAttribute>
-		<div class="layout-w">
+		<div class="layout-w" style="height:100vh;">
 			<tiles:insertAttribute name="sidebar"></tiles:insertAttribute>
 			<div class="content-i">
 				<tiles:insertAttribute name="body"></tiles:insertAttribute>

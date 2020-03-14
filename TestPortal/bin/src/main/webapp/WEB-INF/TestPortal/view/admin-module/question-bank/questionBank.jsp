@@ -290,7 +290,7 @@
 													+ option
 													+ "</td><td>"
 													+ answer
-													+ "</td><td><i class='fa fa-trash' style='color:red;' onclick='deleteRow($(this));'><i></td>/tr>";
+													+ "</td><td><i class='os-icon os-icon-ui-15' style='color:red;' onclick='deleteRow($(this));'><i></td>/tr>";
 
 											$('#optionsBody').append(markup);
 										});

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>JAVA DASHBOARD</title>
+<title>WEB DASHBOARD</title>
 </head>
 <body
 	class="menu-position-side menu-side-left full-screen with-content-panel ">
@@ -14,12 +14,7 @@
 			<div class="row">
 				<div class="col-sm-5">
 					<div class="user-profile compact">
-						<div class="up-head-w"
-							style="background-image: url(${pageContext.request.contextPath }/static/img/cover_photo.jpeg)">
-							<!-- <div class="up-social">
-								<a href="#"><i class="os-icon os-icon-twitter"></i></a><a
-									href="#"><i class="os-icon os-icon-facebook"></i></a>
-							</div> -->
+						<div class="up-head-w" style="background-image: url(${pageContext.request.contextPath }/static/img/web13.jpg)">
 							<div class="up-main-info">
 								<h2 class="up-header" style="">${user.firstName }&nbsp;${user.lastName }</h2>
 								<h6 class="up-sub-header" style="">${user.position }</h6>
@@ -43,7 +38,7 @@
 								</div>
 								<div class="col-sm-6 text-right">
 									<a class="btn btn-primary btn-sm"
-										href="${pageContext.request.contextPath }/java/student/profile"><i
+										href="${pageContext.request.contextPath }/web/student/profile"><i
 										class="os-icon os-icon-user"></i><span>View Profile</span></a>
 								</div>
 							</div>
@@ -114,75 +109,10 @@
 							</div>
 						</div>
 					</div>
-					<div class="element-wrapper">
-						<div class="element-box">
-							<h6 class="element-header">User Activity</h6>
-							<div class="timed-activities compact">
-								<div class="timed-activity">
-									<div class="ta-date">
-										<span>21st Jan, 2017</span>
-									</div>
-									<div class="ta-record-w">
-										<div class="ta-record">
-											<div class="ta-timestamp">
-												<strong>11:55</strong> am
-											</div>
-											<div class="ta-activity">
-												Created a post called <a href="#">Register new symbol</a> in
-												Rogue
-											</div>
-										</div>
-										<div class="ta-record">
-											<div class="ta-timestamp">
-												<strong>2:34</strong> pm
-											</div>
-											<div class="ta-activity">
-												Commented on story <a href="#">How to be a leader</a> in <a
-													href="#">Financial</a> category
-											</div>
-										</div>
-										<div class="ta-record">
-											<div class="ta-timestamp">
-												<strong>7:12</strong> pm
-											</div>
-											<div class="ta-activity">
-												Added <a href="#">John Silver</a> as a friend
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="timed-activity">
-									<div class="ta-date">
-										<span>3rd Feb, 2017</span>
-									</div>
-									<div class="ta-record-w">
-										<div class="ta-record">
-											<div class="ta-timestamp">
-												<strong>9:32</strong> pm
-											</div>
-											<div class="ta-activity">
-												Added <a href="#">John Silver</a> as a friend
-											</div>
-										</div>
-										<div class="ta-record">
-											<div class="ta-timestamp">
-												<strong>5:14</strong> pm
-											</div>
-											<div class="ta-activity">
-												Commented on story <a href="#">How to be a leader</a> in <a
-													href="#">Financial</a> category
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 				<div class="col-sm-7">
 					<div class="element-wrapper">
 						<div class="element-box">
-
 							<form
 								action="${pageContext.request.contextPath }/web/student/profile/save"
 								name="formValidateForm" id="formValidateForm" method="post"
@@ -277,16 +207,9 @@
 									<div class="form-group">
 										<label> About Yourself</label>
 										<textarea class="form-control" rows="3" name="description"
-											id="description"><c:out
-												value="${user.description }" /></textarea>
+											id="description">${user.description }</textarea>
 									</div>
 								</fieldset>
-								<div class="form-check">
-									<label class="form-check-label"><input
-										class="form-check-input" type="checkbox" required="required">I
-										agree to terms and conditions</label>
-								</div>
-
 								<input id="id" name="id" value="${user.id }" type="hidden" /> <input
 									id="ssoId" name="ssoId" value="${user.ssoId }" type="hidden" />
 								<input id="password" name="password" value="${user.password }"
@@ -459,130 +382,8 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div class="content-panel">
-			<div class="content-panel-close">
-				<i class="os-icon os-icon-close"></i>
-			</div>
-			<div class="element-wrapper">
-				<h6 class="element-header">Support Agents</h6>
-				<div class="element-box-tp">
-					<div class="profile-tile">
-						<a class="profile-tile-box" href="users_profile_small.html"><div
-								class="pt-avatar-w">
-								<img alt="" src="img/avatar1.jpg">
-							</div>
-							<div class="pt-user-name">John Mayers</div></a>
-						<div class="profile-tile-meta">
-							<ul>
-								<li>Last Login:<strong>Online Now</strong></li>
-								<li>Tickets:<strong><a
-										href="apps_support_index.html">12</a></strong></li>
-								<li>Response Time:<strong>2 hours</strong></li>
-							</ul>
-							<div class="pt-btn">
-								<a class="btn btn-success btn-sm" href="apps_full_chat.html">Send
-									Message</a>
-							</div>
-						</div>
-					</div>
-					<div class="profile-tile">
-						<a class="profile-tile-box" href="users_profile_small.html"><div
-								class="pt-avatar-w">
-								<img alt="" src="img/avatar3.jpg">
-							</div>
-							<div class="pt-user-name">Ben Gossman</div></a>
-						<div class="profile-tile-meta">
-							<ul>
-								<li>Last Login:<strong>Offline</strong></li>
-								<li>Tickets:<strong><a
-										href="apps_support_index.html">9</a></strong></li>
-								<li>Response Time:<strong>3 hours</strong></li>
-							</ul>
-							<div class="pt-btn">
-								<a class="btn btn-secondary btn-sm" href="apps_full_chat.html">Send
-									Message</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="element-wrapper">
-				<h6 class="element-header">Team Members</h6>
-				<div class="element-box-tp">
-					<div class="input-search-w">
-						<input class="form-control rounded bright"
-							placeholder="Search team members..." type="search">
-					</div>
-					<div class="users-list-w">
-						<div class="user-w with-status status-green">
-							<div class="user-avatar-w">
-								<div class="user-avatar">
-									<img alt="" src="img/avatar1.jpg">
-								</div>
-							</div>
-							<div class="user-name">
-								<h6 class="user-title">John Mayers</h6>
-								<div class="user-role">Account Manager</div>
-							</div>
-							<div class="user-action">
-								<div class="os-icon os-icon-email-forward"></div>
-							</div>
-						</div>
-						<div class="user-w with-status status-green">
-							<div class="user-avatar-w">
-								<div class="user-avatar">
-									<img alt="" src="img/avatar2.jpg">
-								</div>
-							</div>
-							<div class="user-name">
-								<h6 class="user-title">Ben Gossman</h6>
-								<div class="user-role">Administrator</div>
-							</div>
-							<div class="user-action">
-								<div class="os-icon os-icon-email-forward"></div>
-							</div>
-						</div>
-						<div class="user-w with-status status-red">
-							<div class="user-avatar-w">
-								<div class="user-avatar">
-									<img alt="" src="img/avatar3.jpg">
-								</div>
-							</div>
-							<div class="user-name">
-								<h6 class="user-title">Phil Nokorin</h6>
-								<div class="user-role">HR Manger</div>
-							</div>
-							<div class="user-action">
-								<div class="os-icon os-icon-email-forward"></div>
-							</div>
-						</div>
-						<div class="user-w with-status status-green">
-							<div class="user-avatar-w">
-								<div class="user-avatar">
-									<img alt="" src="img/avatar4.jpg">
-								</div>
-							</div>
-							<div class="user-name">
-								<h6 class="user-title">Jenny Miksa</h6>
-								<div class="user-role">Lead Developer</div>
-							</div>
-							<div class="user-action">
-								<div class="os-icon os-icon-email-forward"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
 	</div>
 </body>
-
-<!-- <script type="text/javascript">
-	$(function() {
-		$("#gender").val('${user.gender}');
-	});
-</script> -->
-
 <script type="text/javascript">
 	function getData() {
 		var data = {
