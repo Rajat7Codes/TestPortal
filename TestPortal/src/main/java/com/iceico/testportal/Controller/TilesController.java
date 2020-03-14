@@ -75,6 +75,7 @@ public class TilesController {
 		return "test";
 	}
 
+
 	private String getPrincipal() {
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
