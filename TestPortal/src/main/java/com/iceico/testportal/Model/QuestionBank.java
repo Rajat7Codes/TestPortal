@@ -54,6 +54,18 @@ public class QuestionBank extends Auditable<String> implements Serializable {
 
 	@Column(name = "question")
 	private String question;
+	
+	@Column(name = "sample_input")
+	private String sampleInput;
+	
+	@Column(name = "sample_output")
+	private String sampleOutput;
+	
+	@Column(name = "hidden_input")
+	private String hiddenInput;
+	
+	@Column(name = "hidden_output")
+	private String hiddenOutput;
 
 	@Column(name = "marks")
 	private Integer marks;
@@ -270,4 +282,60 @@ public class QuestionBank extends Auditable<String> implements Serializable {
 		this.subject = subject;
 	}
 
+
+	/**
+	 * @return the sampleInput
+	 */
+	public String getSampleInput() {
+		return sampleInput;
+	}
+
+	/**
+	 * @param sampleInput the sampleInput to set
+	 */
+	public void setSampleInput(String sampleInput) {
+		this.sampleInput = sampleInput;
+	}
+
+	/**
+	 * @return the sampleOutput
+	 */
+	public String getSampleOutput() {
+		return sampleOutput;
+	}
+
+	/**
+	 * @param sampleOutput the sampleOutput to set
+	 */
+	public void setSampleOutput(String sampleOutput) {
+		this.sampleOutput = sampleOutput;
+	}
+
+	/**
+	 * @return the hiddenInput
+	 */
+	public String getHiddenInput() {
+		return hiddenInput;
+	}
+
+	/**
+	 * @param hiddenInput the hiddenInput to set
+	 */
+	public void setHiddenInput(String hiddenInput) {
+		this.hiddenInput = hiddenInput;
+	}
+
+	/**
+	 * @return the hiddenOutput
+	 */
+	public String getHiddenOutput() {
+		return hiddenOutput;
+	}
+
+	/**
+	 * @param hiddenOutput the hiddenOutput to set
+	 */
+	public void setHiddenOutput(String hiddenOutput) {
+		this.hiddenOutput = hiddenOutput;
+	}
 }
