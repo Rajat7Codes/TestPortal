@@ -20,10 +20,10 @@
 		<div class="content-box">
 			<div class="element-wrapper">
 				<div class="element-box">
-					<div class="card border-0">
-						<span class="font-weight-bold">TEST LIST</span>
-					</div>
-					<br>
+					<!-- <div class="card border-0"> -->
+						<!-- <span class="font-weight-bold">TEST LIST</span> -->
+						<h5 class="element-header mb-4">Test List</h5>
+					<!-- </div> -->
 					<table class="table text-center">
 						<thead>
 							<tr>
@@ -35,16 +35,16 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="test" items="${testList }" varStatus="ind">
+							<c:forEach var="test" items="${testList}" varStatus="ind">
 								<tr>
 									<%-- <td>${testList}<td> --%>
 									<td>${ind.index+1}</td>
 									<td>${test.testName }</td>
 									<td>${test.time }</td>
 									<td>${test.date }</td>
-									<td><a
-										href="${pageContext.request.contextPath }/java/student/start/test/${test.addTestId}">start test</a></td>
-
+									<td><a class="text-decoration-none !important"
+										href="${pageContext.request.contextPath }/java/student/start/test/${test.addTestId}">start
+											test</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

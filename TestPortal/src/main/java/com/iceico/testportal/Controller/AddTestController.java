@@ -132,7 +132,6 @@ public class AddTestController {
 	@RequestMapping("/java/student/test/list")
 	public String testList(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
 		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
 		return "testList";
 	}
