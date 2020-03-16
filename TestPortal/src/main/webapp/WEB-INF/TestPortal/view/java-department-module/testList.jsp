@@ -24,36 +24,21 @@
 						<span class="font-weight-bold">TEST LIST</span>
 					</div>
 					<br>
-					<table class="table font-weight-bold text-center">
+					<table class="table text-center">
+					<thead>
+							<tr>
+								<th>Test name</th>
+								<th >Time</th>
+								<th >date</th>
+								<th >Action</th>
+							</tr>
+					</thead>
 						<tbody>
-							<tr class="font-weight-bold">
-								<th class="font-weight-bold">Test name</th>
-								<th class="font-weight-bold">Time</th>
-								<th class="font-weight-bold">date</th>
-								<th class="font-weight-bold">Action</th>
-							</tr>
+							<c:forEach var="testItem" items="${testList}">
 							<tr>
-								<td>Test_name_01</td>
-								<td>05:00 min</td>
-								<td>03/14/2020</td>
-								<td><a class="btn btn-warning font-weight-bold py-0"
-									href="${pageContext.request.contextPath }/java/student/dashboard/start/test">start
-										test</a></td>
+								<td>${testList}<td>
 							</tr>
-							<tr>
-								<td>Test_name_01</td>
-								<td>05:00 min</td>
-								<td>03/14/2020</td>
-								<td><a class="btn btn-warning font-weight-bold py-0"
-									href="#">start test</a></td>
-							</tr>
-							<tr>
-								<td>Test_name_01</td>
-								<td>05:00 min</td>
-								<td>03/14/2020</td>
-								<td><a class="btn btn-warning font-weight-bold py-0"
-									href="#">start test</a></td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

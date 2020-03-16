@@ -4,6 +4,7 @@
 package com.iceico.testportal.Controller;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
+import com.iceico.testportal.Model.AddTest;
+import com.iceico.testportal.Service.AddTestService;
 import com.iceico.testportal.Service.UserService;
 
 /**
@@ -29,6 +32,9 @@ public class TilesController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AddTestService addTestService;
 
 	@RequestMapping("/admin/dashboard")
 	public String adminDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
@@ -72,6 +78,7 @@ public class TilesController {
 	@RequestMapping("/java/student/test/list")
 	public String testList(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
 		return "testList";
 	}
 
