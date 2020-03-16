@@ -29,7 +29,7 @@
 
 							<div class="card text-center">
 
-								<h1>00:00</h1>
+								<h1>${ addTest.time }</h1>
 
 							</div>
 							<br>
@@ -40,85 +40,17 @@
 							</div>
 							<hr>
 							<div class="card text-center">
-								<div class="card-header font-weight-bold">TEST NAME HERE</div>
+								<div class="card-header font-weight-bold">${ addTest.testName }</div>
 
 								<div class="card-body">
 									<div class="form-group">
 										<div class="row">
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">1</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-success border border rounded-circle "
-													href="#">2</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">3</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-success border border rounded-circle "
-													href="#">4</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">1</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">1</a>
-											</div>
-											<!-- next -->
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">1</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">2</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">3</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-success border border rounded-circle "
-													href="#">4</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">1</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">1</a>
-											</div>
-											<!-- next -->
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">1</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">2</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">3</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">4</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">1</a>
-											</div>
-											<div class="col-2 p-0">
-												<a class="btn btn-dark border border rounded-circle "
-													href="#">1</a>
-											</div>
+											<c:forEach varStatus="ind" var="question" items="testQuestions">
+												<div class="col-2 p-0">
+													<button class="btn btn-dark border border rounded-circle"
+														onclick="getQuestion(${question.testQuestionId})">${ind.index}</button>
+												</div>
+											</c:forEach>
 										</div>
 									</div>
 								</div>
@@ -127,7 +59,7 @@
 					</div>
 				</div>
 				<div class="col-sm-8">
-					<div class="element-wrapper">
+					<!-- <div class="element-wrapper">
 						<div class="element-box">
 							<div class="row">
 								<div class="col-sm-6">
@@ -174,7 +106,7 @@
 								<a class="btn btn-dark font-weight-bold px-4" href="#">next</a>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
