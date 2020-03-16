@@ -25,19 +25,27 @@
 					</div>
 					<br>
 					<table class="table text-center">
-					<thead>
+						<thead>
 							<tr>
+								<th>Sr No.</th>
 								<th>Test name</th>
-								<th >Time</th>
-								<th >date</th>
-								<th >Action</th>
+								<th>Time</th>
+								<th>date</th>
+								<th>Action</th>
 							</tr>
-					</thead>
+						</thead>
 						<tbody>
-							<c:forEach var="testItem" items="${testList}">
-							<tr>
-								<td>${testList}<td>
-							</tr>
+							<c:forEach var="test" items="${testList }" varStatus="ind">
+								<tr>
+									<%-- <td>${testList}<td> --%>
+									<td>${ind.index+1}</td>
+									<td>${test.testName }</td>
+									<td>${test.time }</td>
+									<td>${test.date }</td>
+									<td><a
+										href="${pageContext.request.contextPath }/java/student/start/test/${test.addTestId}">start test</a></td>
+
+								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
