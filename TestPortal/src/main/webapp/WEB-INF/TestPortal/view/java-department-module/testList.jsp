@@ -53,7 +53,6 @@
 					</table>
 				</div>
 			</div>
-			2
 		</div>
 	</div>
 </body>
