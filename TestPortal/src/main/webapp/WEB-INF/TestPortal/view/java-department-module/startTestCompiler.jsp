@@ -186,7 +186,7 @@
 							<div class="row container p-0 m-0">
 								<div class="col-sm-12 p-0">
 									<form id="editorForm"
-										action="${pageContext.request.contextPath }/java/student/start/test"
+										action="${pageContext.request.contextPath }/java/student/start/test/compiler"
 										method="post">
 										<div id="code-edit" class="row code-div container mx-auto">
 											<div id="editor-menu">

@@ -190,6 +190,12 @@
 						<div class="os-icon os-icon-edit-32"></div>
 					</div> <span>Start Test (image)</span>
 			</a></li>
+			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/java/student/start/test/compiler">
+					<div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span>Start Test (compiler)</span>
+			</a></li>
 		</ul>
 	</div>
 	<!-- MODAL -->
