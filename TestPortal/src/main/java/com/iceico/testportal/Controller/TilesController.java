@@ -14,7 +14,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
-import com.iceico.testportal.Service.AddTestService;
 import com.iceico.testportal.Service.UserService;
 
 /**
@@ -30,9 +29,6 @@ public class TilesController {
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private AddTestService addTestService;
 
 	@RequestMapping("/admin/dashboard")
 	public String adminDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
@@ -57,6 +53,29 @@ public class TilesController {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "driveDashboard";
 	}
+
+	/* sample method start test designing */
+//	@RequestMapping("/java/student/start/test")
+//	public String startTest(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+//		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+//		return "startTest";
+//	}
+
+	/* sample method start test designing */
+	@RequestMapping("/java/student/start/test/image")
+	public String startTestImage(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "startTestImage";
+	}
+
+	/* sample method start test list designing */
+//	@RequestMapping("/java/student/test/list")
+//	public String testList(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+//		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+//		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+//		return "testList";
+//	}
+
 
 	private String getPrincipal() {
 		String userName = null;

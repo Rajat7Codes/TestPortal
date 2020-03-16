@@ -268,7 +268,7 @@
 		/* codeOut = codeOut.split('>').join(">\n"); */
 
 		editor.setValue(codeOut);
-		
+
 		editor.setMode(languageIn);
 	}
 </script>
