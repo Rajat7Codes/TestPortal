@@ -10,6 +10,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.net.URLDecoder;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +19,11 @@ import java.util.Locale;
 
 import javax.validation.Valid;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -27,7 +31,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.AddTest;
@@ -85,12 +91,11 @@ public class StartTestController {
 		return "startTest";
 	}
 
-	@PostMapping("/java/student/start/test/compiler")
-	public String runCode(ModelMap modelMap, Locale locale, 
-			@RequestParam("code") String code, @RequestParam("language") String languageIn) throws ResourceNotFoundException, ParseException, org.json.simple.parser.ParseException {		
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	@RequestMapping(value="/java/student/start/test/compiler", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
+	public @ResponseBody JSONObject  runCode(
+			 @RequestParam("language") String languageIn,@RequestParam("code") String code) throws ResourceNotFoundException, ParseException, org.json.simple.parser.ParseException {		
 
-		modelMap.addAttribute("code", code);
-		modelMap.addAttribute("language", languageIn);
 		
 		String clientId = "6a12fd18773efb45dd8c612433895194"; //Replace with your client ID
 		String clientSecret = "18e0fd8cdd07136086af0f620d57a4af982d04e5c9e29b8274371a6c82b58a94"; //Replace with your client Secret
@@ -123,10 +128,16 @@ public class StartTestController {
         	language = "php";
         	versionIndex = 1;
         }
+
+        String output = null;
         
 
         try {
-            URL url = new URL("https://api.jdoodle.com/execute");
+
+        	String urlStr = "https://api.jdoodle.com/execute";
+
+            URL url = new URL( urlStr);
+
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");
@@ -138,9 +149,10 @@ public class StartTestController {
             System.out.println("input ===> "+input);
             
             OutputStream outputStream = connection.getOutputStream();
+            
             outputStream.write(input.getBytes());
             outputStream.flush();
-
+            
             if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new RuntimeException("Please check your inputs : HTTP error code : "+ connection.getResponseCode());
             }
@@ -148,12 +160,10 @@ public class StartTestController {
             BufferedReader bufferedReader;
             bufferedReader = new BufferedReader(new InputStreamReader((connection.getInputStream())));
 
-            String output;
             while ((output = bufferedReader.readLine()) != null) {
                 System.out.println("Output ====> "+output);
                 JSONObject outJson = new JSONObject();
                 outJson = (JSONObject) new JSONParser().parse(output);
-                modelMap.addAttribute("output1", outJson.get("output"));
             }
             
 
@@ -165,8 +175,9 @@ public class StartTestController {
             e.printStackTrace();
         }
 
-		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		return "startTest";
+		JSONObject ad = new JSONObject();
+		ad.put("output", output);
+		return ad;
 	}
 
 	private String getPrincipal() {
