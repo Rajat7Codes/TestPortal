@@ -61,7 +61,7 @@
 											<c:forEach varStatus="ind" var="question"
 												items="${ addTest.testQuestions }">
 												<div class="col-2 p-0">
-													<button class="btn btn-dark border border rounded-circle"
+													<button class="btn btn-dark border border rounded-circle" id="q${question.questionId}"
 														onclick="getQuestion(${question.questionId})">${ind.index+1}</button>
 												</div>
 											</c:forEach>
@@ -76,7 +76,7 @@
 					<div class="element-wrapper">
 						<c:forEach var="testQuestion" varStatus="ind"
 							items="${ testQuestions }">
-							<div class="element-box questionsDiv"
+							<div class="element-box questionsDiv mt-0"
 								id="questionsDiv${testQuestion.questionBankId}"
 								style="display: none">
 								<div class="row">
@@ -125,9 +125,9 @@
 									<!--Compiler-->
 									<div class="row container p-0 m-0">
 										<div class="col-sm-12 p-0">
-											<form id="editorForm"
+											<%-- <form id="editorForm"
 												action="${pageContext.request.contextPath }/java/student/start/test/compiler"
-												method="post">
+												method="post"> --%>
 												<div id="code-edit" class="row code-div container mx-auto">
 													<div id="editor-menu">
 														<select name="language" class="options" id="prolang">
@@ -141,7 +141,7 @@
 															<option value="dracula">Dark</option>
 															<option value="xcode">Light</option>
 														</select> <input type="text" hidden name="code" id="hiddencode">
-														<button id="run" type="submit">
+														<button id="run" onclick="xm()" type="button">
 															<img id="run-img"
 																src="${pageContext.request.contextPath }/static/img/compiler/run.png">
 														</button>
@@ -153,7 +153,7 @@
 												
 											</script>
 												</div>
-											</form>
+											<%-- </form> --%>
 										</div>
 										<div class="col-sm-12">
 											<p>${ output1 }</p>
@@ -192,12 +192,46 @@
 	function getQuestion( questionId) {
 		let questionsToBeShown = document.getElementById("questionsDiv"+questionId);
 		let questionsNotToBeShown = document.getElementsByClassName("questionsDiv");
-		for(let i=0; i<questionsNotToBeShown.length; i++)
+		for(let i=0; i<questionsNotToBeShown.length; i++) {
 			questionsNotToBeShown[i].style.display = "none";
+			
+		}
 			
 		questionsToBeShown.style.display = "block";
 	}
 </script>
+
+
+
+<script type="text/javascript">
+function xm() {
+	var code = editor.session.getValue();
+	var language = document.getElementById("prolang").value;
+
+
+  var dataJ = {
+  	language: language,
+    code: code
+  };
+
+  $.ajax({
+    type: "GET",
+    url: "${pageContext.request.contextPath}/java/student/start/test/compiler",
+    contentType : "application/json",
+	data : dataJ,
+	cache : false,
+	timeout : 600000,
+    success: function(e) {
+      console.log(e);
+    },
+    error: function(e) {
+      console.log(e.statusText);
+    }
+  });
+}
+</script>
+
+
 
 
 <!-- Script for Countdown -->
