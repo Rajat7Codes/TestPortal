@@ -1,15 +1,9 @@
-/**
+/*
  * 
  */
+
 package com.iceico.testportal.Controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +21,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,6 +33,7 @@ import com.iceico.testportal.Model.Options;
 import com.iceico.testportal.Model.QuestionBank;
 import com.iceico.testportal.Model.TestQuestion;
 import com.iceico.testportal.Service.AddTestService;
+import com.iceico.testportal.Service.CompilerService;
 import com.iceico.testportal.Service.QuestionBankService;
 import com.iceico.testportal.Service.UserService;
 
@@ -62,6 +56,9 @@ public class StartTestController {
 
 	@Autowired
 	private QuestionBankService questionBankService;
+
+	@Autowired
+	private CompilerService compilerService;
 
 	/* Test List page */
 	@RequestMapping("/java/student/test/list")
@@ -90,94 +87,20 @@ public class StartTestController {
 		return "startTest";
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "deprecation" })
 	@RequestMapping(value = "/java/student/start/test/compiler", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	public @ResponseBody JSONObject runCode(@RequestParam("language") String languageIn,
 			@RequestParam("code") String code)
 			throws ResourceNotFoundException, ParseException, org.json.simple.parser.ParseException {
 
-		String clientId = "6a12fd18773efb45dd8c612433895194"; // Replace with your client ID
-		String clientSecret = "18e0fd8cdd07136086af0f620d57a4af982d04e5c9e29b8274371a6c82b58a94"; // Replace with your
-																									// client Secret
-		String script = code;
-		String language = null;
-		int versionIndex = 0;
+		System.out.println("languageIn =========> " + languageIn);
 
-		String a = "\"";
-		String b = "\\\"";
-		script = script.replace(a, b);
+		String output = compilerService.runCode(languageIn, code);
+		JSONObject outObj = (JSONObject) new JSONParser().parse(output);
 
-		// Python Configuration
-		if (languageIn.equalsIgnoreCase("Python"))
-			language = "python3";
+		System.out.println("===========>" + outObj.get("output"));
 
-		// Java Configuration
-		if (languageIn.equalsIgnoreCase("Java")) {
-			language = "java";
-			versionIndex = 1;
-		}
-
-		// JavaScript Configuration
-		if (languageIn.equalsIgnoreCase("Javascript")) {
-			language = "nodejs";
-			versionIndex = 1;
-		}
-
-		// Php Configuration
-		if (languageIn.equalsIgnoreCase("Php")) {
-			script = script.replace("echo", " echo");
-			language = "php";
-			versionIndex = 1;
-		}
-
-		String output = null;
-
-		try {
-
-			String urlStr = "https://api.jdoodle.com/execute";
-
-			URL url = new URL(urlStr);
-
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			connection.setDoOutput(true);
-			connection.setRequestMethod("POST");
-			connection.setRequestProperty("Content-Type", "application/json");
-
-			String input = "{\"clientId\": \"" + clientId + "\",\"clientSecret\":\"" + clientSecret + "\",\"script\":\""
-					+ script + "\",\"language\":\"" + language + "\",\"versionIndex\": " + versionIndex + "} ";
-
-			System.out.println("input ===> " + input);
-
-			OutputStream outputStream = connection.getOutputStream();
-
-			outputStream.write(input.getBytes());
-			outputStream.flush();
-
-			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				throw new RuntimeException(
-						"Please check your inputs : HTTP error code : " + connection.getResponseCode());
-			}
-
-			BufferedReader bufferedReader;
-			bufferedReader = new BufferedReader(new InputStreamReader((connection.getInputStream())));
-
-			while ((output = bufferedReader.readLine()) != null) {
-				System.out.println("Output ====> " + output);
-				JSONObject outJson = new JSONObject();
-				outJson = (JSONObject) new JSONParser().parse(output);
-			}
-
-			connection.disconnect();
-
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		JSONObject ad = new JSONObject();
-		ad.put("output", output);
-		return ad;
+		return null;
 	}
 
 	@SuppressWarnings({ "deprecation" })
@@ -205,12 +128,6 @@ public class StartTestController {
 		}
 
 		return null;
-	}
-
-	@GetMapping("/java/student/test/result")
-	public String giveResult(ModelMap modelMap, Locale locale) {
-		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		return "result";
 	}
 
 	private String getPrincipal() {
