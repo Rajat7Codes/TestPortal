@@ -133,8 +133,6 @@
 										<button class="btn btn-primary" type="submit">Submit</button>
 									</div>
 								</div>
-
-
 							</form:form>
 						</div>
 					</div>
