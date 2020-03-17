@@ -211,16 +211,16 @@ function xm() {
 	var language = document.getElementById("prolang").value;
 
 
-  var dataJ = {
-  	language: language,
-    code: code
-  };
+  var dataJ = 
 
   $.ajax({
     type: "GET",
     url: "${pageContext.request.contextPath}/java/student/start/test/compiler",
     contentType : "application/json",
-	data : dataJ,
+	data :{
+	  	language: document.getElementById("prolang").value,
+	    code: code
+	  },
 	cache : false,
 	timeout : 600000,
     success: function(e) {
@@ -305,7 +305,7 @@ var allAnswers = [];
 <!-- Script for Countdown -->
 <script>
 /* window.onbeforeunload = function () {return false;} */
-	var timer2 = /* ${ addTest.time }+ */"00:10";
+	var timer2 = /* ${ addTest.time }+ */"59:59";
 	var interval = setInterval(function() {
 
 		var timer = timer2.split(':');
