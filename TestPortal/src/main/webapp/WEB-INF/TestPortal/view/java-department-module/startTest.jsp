@@ -204,8 +204,6 @@
 	}
 </script>
 
-
-
 <script type="text/javascript">
 function xm() {
 	var code = editor.session.getValue();
@@ -234,6 +232,7 @@ function xm() {
 }
 </script>
 
+<<<<<<< HEAD
 
 <!-- Script for Next Question -->
 <script type="text/javascript">
