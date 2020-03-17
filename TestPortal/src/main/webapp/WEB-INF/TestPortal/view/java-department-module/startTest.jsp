@@ -45,14 +45,6 @@
 									<div class="countdown"></div>
 								</h1>
 							</div>
-
-							<!-- <div id="result"></div> -->
-							<!-- TRIAL INTERVAL -->
-							<!-- 	<a href="#" onclick="SaveTime()">Save Current Time</a> | <a
-								href="#" onclick="retrieveTime()">Retrieve Saved Time</a>
- -->
-
-
 							<br>
 							<div class="card text-center form-group">
 
@@ -240,54 +232,11 @@ function xm() {
 }
 </script>
 
-<!--TRIAL INTERVAL  -->
-<!-- <script type="text/javascript">
-function SaveTime(){
-	var date = new Date();
-	var timeObj = { sec:date.getSeconds(), min:date.getMinutes(), hr:date.getHours() };
-	localStorage.setItem("timeObj", JSON.stringify(timeObj));
-	$('#result').append(JSON.stringify(timeObj)+' -- > Saved<br />' );
-	}
-
-	function retrieveTime(){
-	var timeObj = JSON.parse(localStorage.getItem("timeObj"));
-	//You have the time with you now
-	//You have the time with you now
-	$('#result').append(timeObj.hr+':'+timeObj.min+':'+timeObj.sec+' Retrieved<br />');
-	}
-
-</script>
- -->
-
-<!-- <script>
-// Check browser support
-if (typeof(Storage) !== "undefined") {
-  // Store
-  localStorage.setItem("date", new Date());
-  // Retrieve
-  document.getElementById("result").innerHTML = localStorage.getItem("date");
-} else {
-  document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-}
-</script>
- -->
-
-<!-- 
-<script>
 
 
-window.onbeforeunload = function() {
-	
-	alert("checking....");
-}
-/* function myFunction(){ */
-	
-/* } */
 
-</script> -->
 <!-- Script for Next Question -->
 <script type="text/javascript">
-
 var allAnswers = [];
 	function addJson( qId, index) {
 		var json = document.getElementById("answersJson");
@@ -355,8 +304,7 @@ var allAnswers = [];
 </script>
 <!-- Script for Countdown -->
 <script>
-/* window.onbeforeunload = function () {return false;} */
-	var timer2 = /* ${ addTest.time }+ */"00:10";
+	var timer2 = /* ${ addTest.time }+ */"00:60";
 	var interval = setInterval(function() {
 
 		var timer = timer2.split(':');
@@ -377,10 +325,25 @@ var allAnswers = [];
 		//minutes = (minutes < 10) ?  minutes : minutes;
 		$('.countdown').html(minutes + ':' + seconds);
 		timer2 = minutes + ':' + seconds;
-		/* --- */
-		 localStorage.setItem("timerr", timer2);
-		 document.getElementById("result").innerHTML = localStorage.getItem("timerr");
-		                                        
 	}, 1000);
+</script>
+
+<!-- F5 button and ctrl+r (reload) disabled-->
+<script type="text/javascript">
+ document.onkeydown = function(event)
+ {	
+ switch (event.keyCode) {
+ case 116: //F5 button
+ event.returnValue = false;
+ event.keyCode = 0;
+ return false;
+ case 82: //R button
+ if (event.ctrlKey) {
+ event.returnValue = false;
+ event.keyCode = 0;
+ return false;
+ }
+ }
+ }
 </script>
 </html>
