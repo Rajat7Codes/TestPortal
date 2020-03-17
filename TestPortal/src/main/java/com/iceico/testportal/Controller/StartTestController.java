@@ -131,6 +131,12 @@ public class StartTestController {
 		return null;
 	}
 
+	@RequestMapping("/java/student/test/result")
+	public String testResult(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "result";
+	}
+
 	private String getPrincipal() {
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
