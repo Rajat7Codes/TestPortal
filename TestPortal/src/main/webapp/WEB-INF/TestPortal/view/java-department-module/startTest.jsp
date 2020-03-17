@@ -45,10 +45,6 @@
 									<div class="countdown"></div>
 								</h1>
 							</div>
-<<<<<<< HEAD
-=======
-
->>>>>>> edb5e9923b894cd77ad7faa022c65cd747e59e0b
 							<br>
 							<div class="card text-center form-group">
 
@@ -236,12 +232,6 @@ function xm() {
 }
 </script>
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> edb5e9923b894cd77ad7faa022c65cd747e59e0b
 <!-- Script for Next Question -->
 <script type="text/javascript">
 var allAnswers = [];
