@@ -45,6 +45,10 @@
 									<div class="countdown"></div>
 								</h1>
 							</div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> edb5e9923b894cd77ad7faa022c65cd747e59e0b
 							<br>
 							<div class="card text-center form-group">
 
@@ -232,9 +236,12 @@ function xm() {
 }
 </script>
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> edb5e9923b894cd77ad7faa022c65cd747e59e0b
 <!-- Script for Next Question -->
 <script type="text/javascript">
 var allAnswers = [];
@@ -280,7 +287,6 @@ var allAnswers = [];
 <!-- Script for Submitting test -->
 <script type="text/javascript">
 	function submitForm() {	
-		alert("===========>"+document.getElementById("answersJson").value);
 		var dataJ = {
 			 QnA : document.getElementById("answersJson").value
 		};
@@ -294,10 +300,12 @@ var allAnswers = [];
 			cache : false,
 			timeout : 600000,
 			   success: function(e) {
-			     window.location="${pageContext.request.contextPath}/java/student/test/list"
+					window.alert("Test Submitted Successfully");
+			     	window.location="${pageContext.request.contextPath}/java/student/test/list"
 			   },
 			   error: function(e) {
-				     window.location="${pageContext.request.contextPath}/java/student/test/list"
+					window.alert("Test Submission Failed");
+				    window.location="${pageContext.request.contextPath}/java/student/test/list"
 			   }
 			 }); 
 	}
@@ -314,12 +322,13 @@ var allAnswers = [];
 		--seconds;
 		minutes = (seconds < 0) ? --minutes : minutes;
 		if (minutes < 0) {
-			seconds=0;
-			if(seconds == 0){
-				submitForm();
-				seconds=1;
-			}
+
 		}
+		
+		if(minutes==0&&seconds==0) {
+			submitForm();
+		}
+		
 		seconds = (seconds < 0) ? 59 : seconds;
 		seconds = (seconds < 10) ? '0' + seconds : seconds;
 		//minutes = (minutes < 10) ?  minutes : minutes;
