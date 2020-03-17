@@ -179,6 +179,12 @@
 					</div> <span> Test List</span>
 			</a></li>
 			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/java/student/test/result">
+					<div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span> Test Result</span>
+			</a></li>
+			<li class="has-sub-menu"><a
 				href="${pageContext.request.contextPath }/java/student/start/test">
 					<div class="icon-w">
 						<div class="os-icon os-icon-edit-32"></div>

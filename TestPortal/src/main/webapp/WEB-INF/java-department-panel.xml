@@ -72,11 +72,20 @@
 			value="/WEB-INF/TestPortal/view/java-department-module/startTestImage.jsp" />
 	</definition>
 
-	<!-- sample page for TEST Lists -->
+	<!-- page for TEST Lists -->
 	<definition name="testList" extends="javabase.definition">
 		<put-attribute name="title" value="Test List" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/java-department-module/testList.jsp" />
 	</definition>
+
+
+	<!-- view page for Test result -->
+	<definition name="result" extends="javabase.definition">
+		<put-attribute name="title" value="Result" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-department-module/result.jsp" />
+	</definition>
+
 
 </tiles-definitions>
