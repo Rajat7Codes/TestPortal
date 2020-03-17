@@ -45,6 +45,7 @@
 									<div class="countdown"></div>
 								</h1>
 							</div>
+
 							<br>
 							<div class="card text-center form-group">
 
@@ -301,9 +302,6 @@ var allAnswers = [];
 			 }); 
 	}
 </script>
-
-
-
 <!-- Script for Countdown -->
 <script>
 /* window.onbeforeunload = function () {return false;} */
@@ -329,6 +327,10 @@ var allAnswers = [];
 		//minutes = (minutes < 10) ?  minutes : minutes;
 		$('.countdown').html(minutes + ':' + seconds);
 		timer2 = minutes + ':' + seconds;
+		/* --- */
+		 localStorage.setItem("timerr", timer2);
+		 document.getElementById("result").innerHTML = localStorage.getItem("timerr");
+		                                        
 	}, 1000);
 </script>
 </html>
