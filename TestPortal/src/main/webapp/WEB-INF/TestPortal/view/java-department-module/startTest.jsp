@@ -46,13 +46,6 @@
 								</h1>
 							</div>
 
-							<!-- <div id="result"></div> -->
-							<!-- TRIAL INTERVAL -->
-							<!-- 	<a href="#" onclick="SaveTime()">Save Current Time</a> | <a
-								href="#" onclick="retrieveTime()">Retrieve Saved Time</a>
- -->
-
-
 							<br>
 							<div class="card text-center form-group">
 
@@ -240,51 +233,6 @@ function xm() {
 }
 </script>
 
-<!--TRIAL INTERVAL  -->
-<!-- <script type="text/javascript">
-function SaveTime(){
-	var date = new Date();
-	var timeObj = { sec:date.getSeconds(), min:date.getMinutes(), hr:date.getHours() };
-	localStorage.setItem("timeObj", JSON.stringify(timeObj));
-	$('#result').append(JSON.stringify(timeObj)+' -- > Saved<br />' );
-	}
-
-	function retrieveTime(){
-	var timeObj = JSON.parse(localStorage.getItem("timeObj"));
-	//You have the time with you now
-	//You have the time with you now
-	$('#result').append(timeObj.hr+':'+timeObj.min+':'+timeObj.sec+' Retrieved<br />');
-	}
-
-</script>
- -->
-
-<!-- <script>
-// Check browser support
-if (typeof(Storage) !== "undefined") {
-  // Store
-  localStorage.setItem("date", new Date());
-  // Retrieve
-  document.getElementById("result").innerHTML = localStorage.getItem("date");
-} else {
-  document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-}
-</script>
- -->
-
-<!-- 
-<script>
-
-
-window.onbeforeunload = function() {
-	
-	alert("checking....");
-}
-/* function myFunction(){ */
-	
-/* } */
-
-</script> -->
 <!-- Script for Next Question -->
 <script type="text/javascript">
 
@@ -331,7 +279,6 @@ var allAnswers = [];
 <!-- Script for Submitting test -->
 <script type="text/javascript">
 	function submitForm() {	
-		alert("===========>"+document.getElementById("answersJson").value);
 		var dataJ = {
 			 QnA : document.getElementById("answersJson").value
 		};
@@ -345,10 +292,12 @@ var allAnswers = [];
 			cache : false,
 			timeout : 600000,
 			   success: function(e) {
-			     window.location="${pageContext.request.contextPath}/java/student/test/list"
+					window.alert("Test Submitted Successfully");
+			     	window.location="${pageContext.request.contextPath}/java/student/test/list"
 			   },
 			   error: function(e) {
-				     window.location="${pageContext.request.contextPath}/java/student/test/list"
+					window.alert("Test Submission Failed");
+				    window.location="${pageContext.request.contextPath}/java/student/test/list"
 			   }
 			 }); 
 	}
@@ -366,12 +315,13 @@ var allAnswers = [];
 		--seconds;
 		minutes = (seconds < 0) ? --minutes : minutes;
 		if (minutes < 0) {
-			seconds=0;
-			if(seconds == 0){
-				submitForm();
-				seconds=1;
-			}
+
 		}
+		
+		if(minutes==0&&seconds==0) {
+			submitForm();
+		}
+		
 		seconds = (seconds < 0) ? 59 : seconds;
 		seconds = (seconds < 10) ? '0' + seconds : seconds;
 		//minutes = (minutes < 10) ?  minutes : minutes;

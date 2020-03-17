@@ -14,6 +14,7 @@ import java.net.URLEncoder;
 import java.net.URLDecoder;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -37,6 +38,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.AddTest;
+import com.iceico.testportal.Model.Options;
 import com.iceico.testportal.Model.QuestionBank;
 import com.iceico.testportal.Model.TestQuestion;
 import com.iceico.testportal.Service.AddTestService;
@@ -63,7 +65,6 @@ public class StartTestController {
 	
 	@Autowired
 	private QuestionBankService questionBankService;
-
 
 	/* Test List page */
 	@RequestMapping("/java/student/test/list")
@@ -187,6 +188,22 @@ public class StartTestController {
 	public @ResponseBody JSONObject  endTest( @RequestParam("QnA") String qnA) throws ResourceNotFoundException, ParseException, org.json.simple.parser.ParseException {
 		
 		System.out.println("==========>" + qnA);
+		JSONParser parser = new JSONParser();
+		JSONArray allAnswers = (JSONArray) parser.parse(qnA);
+		
+		HashMap<QuestionBank, Options> submittedAns = new HashMap<QuestionBank, Options>();
+		
+		for(int i=0; i<allAnswers.size(); i++) {
+			JSONObject answer = (JSONObject) allAnswers.get(i);
+			QuestionBank question = this.questionBankService.getQuestionBankById( Long.parseLong(answer.get("questionId")+""));
+			Options option = null;
+			for(Options opt: question.getOptions()) {
+				if(opt.getOptionsId()==Long.parseLong(answer.get("optionId")+"")) {
+					option = opt;
+				}
+			}
+			submittedAns.put(question, option);
+		}
 		
 		return null;
 	}
