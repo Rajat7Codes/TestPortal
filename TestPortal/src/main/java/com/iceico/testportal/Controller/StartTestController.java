@@ -179,6 +179,24 @@ public class StartTestController {
 		ad.put("output", output);
 		return ad;
 	}
+	
+	
+	
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	@RequestMapping(value="/java/student/end/test", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
+	public @ResponseBody JSONObject  endTest( @RequestParam("QnA") String qnA) throws ResourceNotFoundException, ParseException, org.json.simple.parser.ParseException {
+		
+		System.out.println("==========>" + qnA);
+		
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	private String getPrincipal() {
 		String userName = null;
