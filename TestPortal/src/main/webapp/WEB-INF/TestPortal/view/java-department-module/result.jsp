@@ -25,26 +25,29 @@
 					<div class="element-content">
 						<div class="row">
 							<div class="col-sm-3 ">
-								<span class="element-box el-tablo bg-light"><div class="label text-dark">Total
-										Marks</div>
+								<span class="element-box el-tablo bg-light"><div
+										class="label text-dark">Total Marks</div>
 									<div class="font-weight-bold">20</div> </span>
 							</div>
 							<div class="col-sm-3 ">
-								<span class="element-box el-tablo bg-light"><div class="label text-dark">Marks
-										Obtained</div>
+								<span class="element-box el-tablo bg-light"><div
+										class="label text-dark">Marks Obtained</div>
 									<div class="font-weight-bold">10</div> </span>
 							</div>
 							<div class="col-sm-3 ">
-								<span class="element-box el-tablo bg-light"><div class="label text-dark">Attempts</div>
+								<span class="element-box el-tablo bg-light"><div
+										class="label text-dark">Attempts</div>
 									<div class="font-weight-bold">2</div> </span>
 							</div>
 							<div class="col-sm-3">
-								<span class="element-box el-tablo bg-light"><div class="label text-dark">Result</div>
+								<span class="element-box el-tablo bg-light"><div
+										class="label text-dark">Result</div>
 									<div class="font-weight-bold">PASS</div> </span>
 							</div>
 
 						</div>
 					</div>
+					<br>
 					<div>
 						<table class="table text-center">
 							<thead>
@@ -67,7 +70,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>
