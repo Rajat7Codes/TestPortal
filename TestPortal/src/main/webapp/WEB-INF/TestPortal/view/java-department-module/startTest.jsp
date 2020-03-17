@@ -50,11 +50,11 @@
 							<div class="card text-center form-group">
 
 								<button class="btn btn-warning form-control font-weight-bold"
-									type="submit">SUBMIT TEST</button>
+									type="submit" onclick="submitForm();">SUBMIT TEST</button>
 							</div>
 							<hr>
 							<div class="card text-center">
-								<div class="card-header font-weight-bold">${ addTest.testName }</div>
+								<div class="card-header font-weight-bold" id="testNamehere">${ addTest.testName }</div>
 
 								<div class="card-body">
 									<div class="form-group">
@@ -87,8 +87,10 @@
 											${ind.index+1}</span>
 									</div>
 									<div class="col-sm-6 text-right">
-										<span class="badge badge-pill badge-dark px-3 py-2 ">${testQuestion.marks}
-											marks </span>
+										<span class="badge badge-pill badge-dark px-3 py-2 "> <span
+											id="marks${testQuestion.questionBankId}">${testQuestion.marks}</span>
+											marks
+										</span>
 									</div>
 								</div>
 								<hr>
@@ -239,7 +241,10 @@ function xm() {
 var allAnswers = [];
 	function addJson( qId, index) {
 		var json = document.getElementById("answersJson");
-
+		var testName= "${ addTest.testName }";
+		//alert("testMarks =========>>>"+testMarks);
+		
+		
 		if(document.querySelector('input[name="optradio'+qId+'"]:checked')!=null) {
 			let questionDiv = document.getElementById("q"+qId);
 			questionDiv.className = ' btn btn-success btn-rounded';
@@ -247,7 +252,7 @@ var allAnswers = [];
 			var oId = document.querySelector('input[name="optradio'+qId+'"]:checked').value;
 			
 			if(allAnswers.length==0) {
-				allAnswers.push({ "questionId": qId, "optionId": oId});
+				allAnswers.push({ "questionId": qId, "optionId": oId, "marks": document.getElementById("marks"+qId).innerText});
 			}
 			var flag=-1;
 			for(var i=0; i<allAnswers.length; i++) {
@@ -257,7 +262,7 @@ var allAnswers = [];
 			}
 			
 			if(flag==-1) {
-				allAnswers.push({ "questionId": qId, "optionId": oId});
+				allAnswers.push({ "questionId": qId, "optionId": oId, "marks": document.getElementById("marks"+qId).innerText});
 			} else {
 				allAnswers[flag]["optionId"] = oId;
 			}
@@ -280,7 +285,9 @@ var allAnswers = [];
 <script type="text/javascript">
 	function submitForm() {	
 		var dataJ = {
-			 QnA : document.getElementById("answersJson").value
+			 QnA : document.getElementById("answersJson").value,
+			 testName : "${ addTest.testName }",
+				 testId : ${ addTest.addTestId }
 		};
 		
 		 $.ajax({
@@ -292,11 +299,11 @@ var allAnswers = [];
 			cache : false,
 			timeout : 600000,
 			   success: function(e) {
-					window.alert("Test Submitted Successfully");
+					window.alert("Test Submitted Failed");
 			     	window.location="${pageContext.request.contextPath}/java/student/test/list"
 			   },
 			   error: function(e) {
-					window.alert("Test Submission Failed");
+					window.alert("Test Submission Successfully");
 				    window.location="${pageContext.request.contextPath}/java/student/test/list"
 			   }
 			 }); 
@@ -305,7 +312,7 @@ var allAnswers = [];
 <!-- Script for Countdown -->
 <script>
 /* window.onbeforeunload = function () {return false;} */
-	var timer2 = /* ${ addTest.time }+ */"30:00";
+	var timer2 = /* ${ addTest.time }+ */"00:30";
 	var interval = setInterval(function() {
 
 		var timer = timer2.split(':');
@@ -329,7 +336,7 @@ var allAnswers = [];
 		timer2 = minutes + ':' + seconds;
 		/* --- */
 		 localStorage.setItem("timerr", timer2);
-		 document.getElementById("result").innerHTML = localStorage.getItem("timerr");
+		 /* document.getElementById("result").innerHTML = localStorage.getItem("timerr"); */
 		                                        
 	}, 1000);
 </script>
