@@ -138,40 +138,9 @@
 		<h1 class="menu-page-header">Page Header</h1>
 		<ul class="main-menu">
 			<li class="sub-header"><span>Layouts</span></li>
-			<li class="has-sub-menu"><a href="#"><div class="icon-w">
-						<div class="os-icon os-icon-edit-32"></div>
-					</div> <span>Forms</span></a>
-				<div class="sub-menu-w">
-					<div class="sub-menu-header">Forms</div>
-					<div class="sub-menu-icon">
-						<i class="os-icon os-icon-edit-32"></i>
-					</div>
-					<div class="sub-menu-i">
-						<ul class="sub-menu">
-							<li><a href="forms_regular.html">Regular Forms</a></li>
-							<li><a href="forms_validation.html">Form Validation</a></li>
-							<li><a href="forms_wizard.html">Form Wizard</a></li>
-							<li><a href="forms_uploads.html">File Uploads</a></li>
-							<li><a href="forms_wisiwig.html">Wisiwig Editor</a></li>
-						</ul>
-					</div>
-				</div></li>
-			<li class="has-sub-menu"><a href="#"><div class="icon-w">
-						<div class="os-icon os-icon-grid"></div>
-					</div> <span>Tables</span></a>
-				<div class="sub-menu-w">
-					<div class="sub-menu-header">Tables</div>
-					<div class="sub-menu-icon">
-						<i class="os-icon os-icon-grid"></i>
-					</div>
-					<div class="sub-menu-i">
-						<ul class="sub-menu">
-							<li><a href="tables_regular.html">Regular Tables</a></li>
-							<li><a href="tables_datatables.html">Data Tables</a></li>
-							<li><a href="tables_editable.html">Editable Tables</a></li>
-						</ul>
-					</div>
-				</div></li>
+
+
+
 			<li class="has-sub-menu"><a
 				href="${pageContext.request.contextPath }/java/student/test/list">
 					<div class="icon-w">
@@ -179,23 +148,12 @@
 					</div> <span> Test List</span>
 			</a></li>
 			<li class="has-sub-menu"><a
-				href="${pageContext.request.contextPath }/java/student/start/test">
+				href="${pageContext.request.contextPath }/java/student/test/result">
 					<div class="icon-w">
 						<div class="os-icon os-icon-edit-32"></div>
-					</div> <span>Start Test</span>
+					</div> <span> Test Result</span>
 			</a></li>
-			<li class="has-sub-menu"><a
-				href="${pageContext.request.contextPath }/java/student/start/test/image">
-					<div class="icon-w">
-						<div class="os-icon os-icon-edit-32"></div>
-					</div> <span>Start Test (image)</span>
-			</a></li>
-			<li class="has-sub-menu"><a
-				href="${pageContext.request.contextPath }/java/student/start/test/compiler">
-					<div class="icon-w">
-						<div class="os-icon os-icon-edit-32"></div>
-					</div> <span>Start Test (compiler)</span>
-			</a></li>
+
 		</ul>
 	</div>
 	<!-- MODAL -->
