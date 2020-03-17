@@ -79,4 +79,14 @@
 			value="/WEB-INF/TestPortal/view/java-department-module/testList.jsp" />
 	</definition>
 
+	<!-- Test Result Module -->
+	<definition name="testResult" extends="javabase.definition">
+		<put-attribute name="title" value="Test Result" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-department-module/testResult.jsp" />
+	</definition>
+
+
+
+
 </tiles-definitions>

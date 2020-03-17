@@ -356,7 +356,7 @@ var allAnswers = [];
 <!-- Script for Countdown -->
 <script>
 /* window.onbeforeunload = function () {return false;} */
-	var timer2 = /* ${ addTest.time }+ */"00:10";
+	var timer2 = /* ${ addTest.time }+ */"30:00";
 	var interval = setInterval(function() {
 
 		var timer = timer2.split(':');
