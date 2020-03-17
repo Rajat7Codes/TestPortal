@@ -302,7 +302,7 @@ var allAnswers = [];
 </script>
 <!-- Script for Countdown -->
 <script>
-	var timer2 = ${ addTest.time }+":60";
+	var timer2 = ${ addTest.time }+":00";
 	var interval = setInterval(function() {
 
 		var timer = timer2.split(':');

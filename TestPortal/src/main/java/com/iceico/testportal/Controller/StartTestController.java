@@ -39,11 +39,12 @@ import com.iceico.testportal.Service.UserService;
 
 /**
  * @author Rajat
- * @version 0.1 Creation Date: 16/03/2020
- *
+ * @version 0.1 
+ * Creation Date: 16/03/2020
  */
 @Controller
 public class StartTestController {
+	
 	public StartTestController() {
 
 	}
