@@ -22,26 +22,6 @@
 				<div class="element-box">
 					<h5 class="element-header mb-4">Test Result</h5>
 
-					<!-- 	<div class="element-wrapper">
-						<div class="element-box-tp">
-
-							<div class="row">
-								<div class="col-sm-3">Total Marks</div>
-								<div class="col-sm-3">Marks Obtained</div>
-								<div class="col-sm-3">Attempts</div>
-								<div class="col-sm-3">Result</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-3 type='input'">Total Marks</div>
-								<div class="col-sm-3">Marks Obtained</div>
-								<div class="col-sm-3">Attempts</div>
-								<div class="col-sm-3">Result</div>
-							</div>
-
-						</div>
-					</div> -->
-
-
 					<div class="element-content">
 						<div class="row">
 							<div class="col-sm-3 ">
