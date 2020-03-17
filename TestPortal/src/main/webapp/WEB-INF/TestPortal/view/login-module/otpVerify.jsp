@@ -57,7 +57,7 @@
 
 				<div id="data" style="display: none;">${data }</div>
 				<input id="emailOtp" name="emailOtp" value="${emailOtp }"
-					type="hidden"><input id="finalJson" name="finalJson"
+					type="text"><input id="finalJson" name="finalJson"
 					type="hidden">
 				<div class="mt-3 text-center">
 					<div class="row">
@@ -84,6 +84,7 @@
 	function submitOtp() {
 
 		var data = $("#data").html();
+		alert("data" +data);
 
 		var object = {
 			"emailOtp" : $("#emailOtp").val(),
