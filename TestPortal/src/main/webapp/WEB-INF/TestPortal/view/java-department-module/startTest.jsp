@@ -45,7 +45,6 @@
 									<div class="countdown"></div>
 								</h1>
 							</div>
-
 							<br>
 							<div class="card text-center form-group">
 
@@ -235,7 +234,6 @@ function xm() {
 
 <!-- Script for Next Question -->
 <script type="text/javascript">
-
 var allAnswers = [];
 	function addJson( qId, index) {
 		var json = document.getElementById("answersJson");
@@ -304,8 +302,7 @@ var allAnswers = [];
 </script>
 <!-- Script for Countdown -->
 <script>
-/* window.onbeforeunload = function () {return false;} */
-	var timer2 = /* ${ addTest.time }+ */"59:59";
+	var timer2 = ${ addTest.time }+":60";
 	var interval = setInterval(function() {
 
 		var timer = timer2.split(':');
@@ -327,10 +324,25 @@ var allAnswers = [];
 		//minutes = (minutes < 10) ?  minutes : minutes;
 		$('.countdown').html(minutes + ':' + seconds);
 		timer2 = minutes + ':' + seconds;
-		/* --- */
-		 localStorage.setItem("timerr", timer2);
-		 document.getElementById("result").innerHTML = localStorage.getItem("timerr");
-		                                        
 	}, 1000);
+</script>
+
+<!-- F5 button and ctrl+r (reload) disabled-->
+<script type="text/javascript">
+ document.onkeydown = function(event)
+ {	
+ switch (event.keyCode) {
+ case 116: //F5 button
+ event.returnValue = false;
+ event.keyCode = 0;
+ return false;
+ case 82: //R button
+ if (event.ctrlKey) {
+ event.returnValue = false;
+ event.keyCode = 0;
+ return false;
+ }
+ }
+ }
 </script>
 </html>
