@@ -67,13 +67,13 @@ public class User implements Serializable {
 	@Size(min = 10, max = 10, message = "Enter valid 10 digit mobile number")
 	private String mobileNumber;
 
-	@Column(name = "content_type")
+	@Column(name = "content_type", nullable = true)
 	private String contentType;
 
-	@Column(name = "file_path")
+	@Column(name = "file_path", nullable = true)
 	private String filePath;
 
-	@Column(name = "file_name")
+	@Column(name = "file_name", nullable = true)
 	private String fileName;
 
 	@Column(name = "description")

@@ -172,9 +172,32 @@
 						</ul>
 					</div>
 				</div></li>
+			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/java/student/test/list">
+					<div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span> Test List</span>
+			</a></li>
+			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/java/student/start/test">
+					<div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span>Start Test</span>
+			</a></li>
+			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/java/student/start/test/image">
+					<div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span>Start Test (image)</span>
+			</a></li>
+			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/java/student/start/test/compiler">
+					<div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span>Start Test (compiler)</span>
+			</a></li>
 		</ul>
 	</div>
-
 	<!-- MODAL -->
 	<div aria-hidden="true" id="myModal"
 		class="onboarding-modal modal fade animated" role="dialog"

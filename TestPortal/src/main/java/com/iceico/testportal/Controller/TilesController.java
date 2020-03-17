@@ -47,12 +47,35 @@ public class TilesController {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "webDashboard";
 	}
-	
+
 	@RequestMapping("/drive/student/dashboard")
 	public String driveDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "driveDashboard";
 	}
+
+	/* sample method start test designing */
+//	@RequestMapping("/java/student/start/test")
+//	public String startTest(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+//		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+//		return "startTest";
+//	}
+
+	/* sample method start test designing */
+	@RequestMapping("/java/student/start/test/image")
+	public String startTestImage(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "startTestImage";
+	}
+
+	/* sample method start test list designing */
+//	@RequestMapping("/java/student/test/list")
+//	public String testList(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+//		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+//		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+//		return "testList";
+//	}
+
 
 	private String getPrincipal() {
 		String userName = null;

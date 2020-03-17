@@ -15,9 +15,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * @author puja
+ * @author Rajat
  *
  */
 
@@ -41,7 +45,9 @@ public class AddTest implements Serializable {
 
 	@Column(name = "time")
 	private Integer time;
-
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "date")
 	private Date date;
 
@@ -51,45 +57,21 @@ public class AddTest implements Serializable {
 	@Column(name = "ratio")
 	private Integer ratio;
 
+	@Column(name = "delete_flag")
+	private Boolean isDeleted;
+
 	@Column(name = "instructions")
 	private String instructions;
 
 	@Column(name = "passing_percent")
 	private float passingPercent;
 
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "subject_id", insertable = true, nullable = true, updatable = true)
 	private Subject subject;
 
-	@OneToMany(mappedBy = "addTest", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<QuestionBank> questionBank;
-
-	/**
-	 * @param addTestId
-	 * @param testName
-	 * @param time
-	 * @param date
-	 * @param negativeMarking
-	 * @param ratio
-	 * @param instructions
-	 * @param passingPercent
-	 * @param subject
-	 * @param questionBank
-	 */
-	public AddTest(Long addTestId, String testName, Integer time, Date date, Boolean negativeMarking, Integer ratio,
-			String instructions, float passingPercent, Subject subject, List<QuestionBank> questionBank) {
-		super();
-		this.addTestId = addTestId;
-		this.testName = testName;
-		this.time = time;
-		this.date = date;
-		this.negativeMarking = negativeMarking;
-		this.ratio = ratio;
-		this.instructions = instructions;
-		this.passingPercent = passingPercent;
-		this.subject = subject;
-		this.questionBank = questionBank;
-	}
+	@OneToMany(mappedBy = "addTest", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY, orphanRemoval = true)
+	private List<TestQuestion> testQuestions;
 
 	/**
 	 * @return the addTestId
@@ -176,6 +158,20 @@ public class AddTest implements Serializable {
 	}
 
 	/**
+	 * @return the isDeleted
+	 */
+	public Boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+	/**
+	 * @param isDeleted the isDeleted to set
+	 */
+	public void setIsDeleted(Boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	/**
 	 * @return the instructions
 	 */
 	public String getInstructions() {
@@ -218,17 +214,17 @@ public class AddTest implements Serializable {
 	}
 
 	/**
-	 * @return the questionBank
+	 * @return the testQuestions
 	 */
-	public List<QuestionBank> getQuestionBank() {
-		return questionBank;
+	public List<TestQuestion> getTestQuestions() {
+		return testQuestions;
 	}
 
 	/**
-	 * @param questionBank the questionBank to set
+	 * @param testQuestions the testQuestions to set
 	 */
-	public void setQuestionBank(List<QuestionBank> questionBank) {
-		this.questionBank = questionBank;
+	public void setTestQuestions(List<TestQuestion> testQuestions) {
+		this.testQuestions = testQuestions;
 	}
-
+	
 }

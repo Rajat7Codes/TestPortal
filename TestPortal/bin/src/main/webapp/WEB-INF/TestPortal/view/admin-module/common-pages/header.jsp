@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,6 +51,13 @@
 				</div>
 			</div> -->
 			<div
+				class="top-icon top-users os-dropdown-trigger os-dropdown-position-left">
+				<div class="icon-w">
+					<a href="${pageContext.request.contextPath }/admin/department"><i
+						class="os-icon os-icon-ui-93"></i></a>
+				</div>
+			</div>
+			<div
 				class="top-icon top-settings os-dropdown-trigger os-dropdown-position-left">
 				<i class="os-icon os-icon-ui-46"></i>
 				<div class="os-dropdown">
@@ -72,16 +80,31 @@
 			<div class="logged-user-w">
 				<div class="logged-user-i">
 					<div class="avatar-w">
-						<img
-							src="${pageContext.request.contextPath }/getImage/${user.fileName}"
-							height="100px" width="100px">
+						<c:if test="${user.fileName==null }">
+							<img
+								src="${pageContext.request.contextPath }/static/img/avatar-default-icon.png"
+								height="100px" width="100px">
+						</c:if>
+						<c:if test="${user.fileName!=null }">
+							<img
+								src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+								height="100px" width="100px">
+						</c:if>
 					</div>
-					<div class="logged-user-menu color-style-bright">
+					<div class="logged-user-menu color-style-bright"
+						style="width: 350%">
 						<div class="logged-user-avatar-info">
 							<div class="avatar-w">
-								<img
-									src="${pageContext.request.contextPath }/getImage/${user.fileName}"
-									height="100px" width="100px">
+								<c:if test="${user.fileName==null }">
+									<img
+										src="${pageContext.request.contextPath }/static/img/avatar-default-icon.png"
+										height="100px" width="100px">
+								</c:if>
+								<c:if test="${user.fileName!=null }">
+									<img
+										src="${pageContext.request.contextPath }/getImage/${user.fileName}"
+										height="100px" width="100px">
+								</c:if>
 							</div>
 							<div class="logged-user-info-w">
 								<div class="logged-user-name">${user.ssoId }</div>

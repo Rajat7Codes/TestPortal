@@ -48,7 +48,7 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>Question Type</label>
-												<form:select class="form-control" name="questionType"
+												<form:select class="w-75" name="questionType"
 													onchange="myToggle();" path="questionType"
 													id="questionType" itemLabel="type" multiple="single"
 													items="${questionTypeList }" itemValue="questionTypeId" />
@@ -119,6 +119,84 @@
 									<form:errors path="description"></form:errors>
 								</div>
 
+								<!-- Sample Input Output -->
+								<div id="codeDiv" style="display: none">
+									<div class="col-12 row">
+										<div class="form-group w-75">
+											<label>Sample Input</label>
+											<form:textarea class="form-control" rows="3"
+												path="sampleInput"></form:textarea>
+											<form:errors path="sampleInput" />
+										</div>
+										<div class="form-group w-25 m-auto text-center">
+											<button class="btn btn-dark rounded-circle"
+												data-target="#onboardingTextModal" data-toggle="modal"
+												type="button"><i data-toggle="tooltip"  title="Example Input" class="fa fa-question"></i> </button>
+											<div aria-hidden="true"
+												class="onboarding-modal modal fade animated"
+												id="onboardingTextModal" role="dialog" tabindex="-1">
+												<div class="modal-dialog modal-centered" role="document">
+													<div class="modal-content text-center">
+														<button aria-label="Close" class="close"
+															data-dismiss="modal" type="button">
+															<span class="os-icon os-icon-close"></span>
+														</button>
+														<div class="onboarding-content with-gradient">
+															<h4 class="onboarding-title">Example of Sample Input!</h4>
+															<div class="onboarding-text">3<br>This<br>Is<br>Example</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 row">
+										<div class="form-group w-75">
+											<label>Sample Output</label>
+											<form:textarea class="form-control" rows="3"
+												path="sampleOutput"></form:textarea>
+											<form:errors path="sampleOutput" />
+										</div>
+										<div class="form-group w-25 m-auto text-center">
+											<button class="btn btn-dark rounded-circle"
+												data-target="#onboardingTextModal1" data-toggle="modal"
+												type="button"><i data-toggle="tooltip"  title="Example Output" class="fa fa-question"></i> </button>
+											<div aria-hidden="true"
+												class="onboarding-modal modal fade animated"
+												id="onboardingTextModal1" role="dialog" tabindex="-1">
+												<div class="modal-dialog modal-centered" role="document">
+													<div class="modal-content text-center">
+														<button aria-label="Close" class="close"
+															data-dismiss="modal" type="button">
+															<span class="os-icon os-icon-close"></span>
+														</button>
+														<div class="onboarding-content with-gradient">
+															<h4 class="onboarding-title">Example of Sample Output!</h4>
+															<div class="onboarding-text">Example</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<!-- Hidden Input Output -->
+									<div class="col-12 p-0 row">
+										<div class="form-group col-6">
+											<label>Hidden Input</label>
+											<form:textarea class="form-control" rows="3"
+												path="hiddenInput"></form:textarea>
+											<form:errors path="hiddenInput" />
+										</div>
+										<div class="form-group col-6 p-0">
+											<label>Hidden Output</label>
+											<form:textarea class="form-control" rows="3"
+												path="hiddenOutput"></form:textarea>
+											<form:errors path="hiddenOutput" />
+										</div>
+									</div>
+								</div>
+
 
 								<c:if test="${edit == false }">
 									<div id="optionsDiv">
@@ -153,18 +231,11 @@
 											</div>
 										</div>
 									</div>
+
 								</c:if>
 								<c:if test="${edit == true }">
 									<div id="optionsDiv">
 										<h6 class="element-header mt-5">Options</h6>
-										<!-- <div class="form-inline mt-5">
-											<label> Options :</label><input
-												class="form-control mb-2 mr-sm-2 mb-sm-0 col-sm-6 ml-5"
-												placeholder="Option Name" id="optionName"><label
-												class="form-check-label text-center col-sm-3 mb-2"><input
-												class="form-check-input" type="checkbox" id="correct">
-												Correct</label> <i class="btn btn-primary" id="add">Add</i>
-										</div> -->
 										<div class="mb-5">
 											<div class="table-responsive mb-5">
 
@@ -259,8 +330,10 @@
 				}
 				if (programType == true) {
 					document.getElementById('optionsDiv').style.display = 'none';
+					document.getElementById('codeDiv').style.display = "block";
 				} else {
 					document.getElementById('optionsDiv').style.display = 'block';
+					document.getElementById('codeDiv').style.display = "none";
 				}
 			}
 		}

@@ -107,6 +107,21 @@
 			value="/WEB-INF/TestPortal/view/admin-module/test-pages/addTest.jsp" />
 	</definition>
 
+	<!--View test -->
+	<definition name="addTestView" extends="adminbase.definition">
+		<put-attribute name="title" value="View Tests" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/test-pages/addTestView.jsp" />
+	</definition>
+
+	<!-- Add admin -->
+	<definition name="newAdmin" extends="adminbase.definition">
+		<put-attribute name="title" value="Add Admin" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/adminRegister.jsp" />
+	</definition>
+	
+
 
 
 </tiles-definitions>

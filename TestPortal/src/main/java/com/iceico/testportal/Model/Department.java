@@ -41,6 +41,9 @@ public class Department implements Serializable {
 
 	@Column(name = "status")
 	private boolean status;
+
+	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<User> user;
 	
 	/**
 	 * @return the user
@@ -55,9 +58,6 @@ public class Department implements Serializable {
 	public void setUser(List<User> user) {
 		this.user = user;
 	}
-
-	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<User> user;
 
 	/**
 	 * @param departmentId

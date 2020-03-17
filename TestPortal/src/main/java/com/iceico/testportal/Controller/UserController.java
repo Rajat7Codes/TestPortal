@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.iceico.testportal.Exceptions.ResourceNotFoundException;
+import com.iceico.testportal.Model.Department;
 import com.iceico.testportal.Model.User;
 import com.iceico.testportal.Model.UserProfile;
 import com.iceico.testportal.Service.DepartmentService;
@@ -81,6 +83,20 @@ public class UserController {
 		model.addAttribute("departmentList", this.departmentService.getDepartmentList());
 		model.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "register";
+	}
+
+	/**
+	 * This method will provide the medium to add a new user.
+	 */
+	@RequestMapping(value = { "/admin/new" }, method = RequestMethod.GET)
+	public String newAdmin(ModelMap model) {
+		User user = new User();
+		model.addAttribute("newUser", user);
+		model.addAttribute("edit", false);
+		model.addAttribute("userList", userService.findAllUsers());
+		model.addAttribute("departmentList", this.departmentService.getDepartmentList());
+		model.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "newAdmin";
 	}
 
 	@RequestMapping(value = { "/admin/user/verify/mail" }, method = RequestMethod.POST)
@@ -141,6 +157,45 @@ public class UserController {
 		modelMap.addAttribute("user", getPrincipal());
 		return null;
 	}
+	
+	@RequestMapping(value = { "/admin/save" }, method = RequestMethod.POST)
+	public String registerAdmin(@RequestParam("fname") String fName, @RequestParam("lname") String lName, @RequestParam("ssoId") String ssoId, 
+			@RequestParam("gender") String gender, @RequestParam("mobile") String mobile, @RequestParam("password") String password, @RequestParam("position") String position,
+			@RequestParam("emailId") String emailId, @RequestParam("department") Long departmentId, ModelMap modelMap) throws ParseException, ResourceNotFoundException {
+		
+		User user = new User();
+		user.setFirstName(fName);
+		user.setLastName(lName);
+		user.setGender(gender);
+		user.setMobileNumber(mobile);
+		user.setEmail(emailId);
+		Department department = this.departmentService.getDepartmentById(departmentId);
+		user.setDepartment(this.departmentService.getDepartmentById(departmentId));
+		user.setPassword(password);
+		user.setSsoId(ssoId);
+
+		System.out.println("First Name ========> "+fName);
+		System.out.println("Last Name ========> "+lName);
+		System.out.println("Gender ========> "+gender);
+		System.out.println("Mobile No ========> "+mobile);
+		System.out.println("Email ========> "+emailId);
+		System.out.println("Department Id ========> "+departmentId);
+		System.out.println("Department Name ========> "+this.departmentService.getDepartmentById(departmentId).getDepartmentName());
+		System.out.println("Password ========> "+password);
+		System.out.println("SSO ID ========> "+ssoId);
+
+		UserProfile profile = this.userProfileService.findByType(department.getDepartmentName()+"ADMIN");
+		Set<UserProfile> role = new HashSet<UserProfile>();
+		role.add(profile);
+		user.setUserProfiles(role);
+
+		this.userService.saveUser(user);
+		modelMap.addAttribute("user", getPrincipal());
+		
+		return "redirect:/admin/new";
+	}
+	
+	
 
 	/**
 	 * This method will be called on form submission, handling POST request for
