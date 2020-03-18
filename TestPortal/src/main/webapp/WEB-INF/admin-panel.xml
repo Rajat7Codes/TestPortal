@@ -108,7 +108,8 @@
 	</definition>
 
 	<!--View test -->
-	<definition name="addTestView" extends="adminbase.definition">
+	<definition name="addTestView"
+		extends="adminbase.definition">
 		<put-attribute name="title" value="View Tests" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/admin-module/test-pages/addTestView.jsp" />
@@ -120,8 +121,21 @@
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/admin-module/adminRegister.jsp" />
 	</definition>
-	
 
 
+	<!--DESIGN PAGE FOR RESULT -->
+	<definition name="adminResult"
+		extends="adminbase.definition">
+		<put-attribute name="title" value="Admin Result" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/result.jsp" />
+	</definition>
 
+
+	<!--DESIGN PAGE FOR TEST RESULT LIST -->
+	<definition name="testResult" extends="adminbase.definition">
+		<put-attribute name="title" value="Test Result" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/testResult.jsp" />
+	</definition>
 </tiles-definitions>

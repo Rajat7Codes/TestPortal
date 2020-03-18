@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Test List</title>
+<title>Test Result</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
@@ -14,7 +14,7 @@
 		<div class="content-box">
 			<div class="element-wrapper">
 				<div class="element-box">
-					<h5 class="element-header mb-4">Test List</h5>
+					<h5 class="element-header mb-4">Test Results</h5>
 					<table class="table text-center">
 						<thead>
 							<tr>

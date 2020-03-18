@@ -209,6 +209,7 @@
 							<div class="os-icon os-icon-edit-32"></div>
 						</div> <span>Add Test</span></a></li>
 
+
 				<!-- <li class="has-sub-menu"><a href="#"><div class="icon-w">
 							<div class="os-icon os-icon-zap"></div>
 						</div> <span>Icons</span></a>
@@ -728,6 +729,19 @@
 						<div class="os-icon os-icon-edit-32"></div>
 					</div> <span>View Test</span>
 			</a></li>
+
+			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/admin/test/result"><div
+						class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span>Result(Admin)</span></a></li>
+
+			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/admin/test/result/list"><div
+						class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span>Test Result</span></a></li>
+
 
 			<!-- <li class="has-sub-menu"><a href="#"><div class="icon-w">
 						<div class="os-icon os-icon-zap"></div>
