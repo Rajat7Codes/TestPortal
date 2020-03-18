@@ -47,7 +47,7 @@
 									<div class="col-sm-4 col-xxxl-3">
 										<a class="element-box el-tablo" href="#"><div
 												class="label">New Customers</div>
-											<div class="value">125</div>
+											<div class="value">786</div>
 											<div class="trending trending-down-basic">
 												<span>9%</span><i class="os-icon os-icon-arrow-down"></i>
 											</div></a>
