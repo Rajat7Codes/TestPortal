@@ -731,12 +731,6 @@
 			</a></li>
 
 			<li class="has-sub-menu"><a
-				href="${pageContext.request.contextPath }/admin/test/result"><div
-						class="icon-w">
-						<div class="os-icon os-icon-edit-32"></div>
-					</div> <span> view result</span></a></li>
-
-			<li class="has-sub-menu"><a
 				href="${pageContext.request.contextPath }/admin/test/result/list"><div
 						class="icon-w">
 						<div class="os-icon os-icon-edit-32"></div>

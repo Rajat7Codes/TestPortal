@@ -123,14 +123,14 @@
 	</definition>
 
 
-	<!--DESIGN PAGE FOR RESULT -->
+	<!-- RESULT PAGE -->
 	<definition name="viewResult" extends="adminbase.definition">
 		<put-attribute name="title" value="View Result" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/admin-module/result.jsp" />
 	</definition>
 
-	<!--DESIGN PAGE FOR TEST RESULT LIST -->
+	<!-- TEST RESULT -->
 	<definition name="testResult" extends="adminbase.definition">
 		<put-attribute name="title" value="Test Result" />
 		<put-attribute name="body"

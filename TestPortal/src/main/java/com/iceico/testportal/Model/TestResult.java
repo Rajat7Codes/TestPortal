@@ -47,7 +47,7 @@ public class TestResult extends Auditable<String> implements Serializable {
 	@Column(name = "test_result_id")
 	private Long testResultId;
 
-	@Column(name = "test_id")
+	@Column(name = "test_id", nullable = true)
 	private Long testId;
 
 	@Column(name = "test_name")

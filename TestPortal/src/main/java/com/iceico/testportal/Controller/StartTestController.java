@@ -182,6 +182,7 @@ public class StartTestController {
 		testResult.setTestName(testName);
 		testResult.setTotalMarks(totalMarks);
 		testResult.setDate( Calendar.getInstance().getTime());
+		testResult.setTestId(testId);
 		this.testResultService.saveTestResult(testResult);
 
 		return null;
