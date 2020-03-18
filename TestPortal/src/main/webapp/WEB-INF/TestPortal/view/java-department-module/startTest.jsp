@@ -30,9 +30,137 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.7/ace.js"
 	type="text/javascript" charset="utf-8"></script>
+	
+	
+
+<style type="text/css">
+	/* Absolute Center Spinner */
+.loading {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: visible;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Transparent Overlay */
+.loading:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,2555,255,0.8);
+}
+
+/* :not(:required) hides these rules from IE9 and below */
+.loading:not(:required) {
+  /* hide "loading..." text */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.loading:not(:required):after {
+  content: '';
+  display: block;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+  margin-top: -0.5em;
+  -webkit-animation: spinner 1500ms infinite linear;
+  -moz-animation: spinner 1500ms infinite linear;
+  -ms-animation: spinner 1500ms infinite linear;
+  -o-animation: spinner 1500ms infinite linear;
+  animation: spinner 1500ms infinite linear;
+  border-radius: 0.5em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+  box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+}
+
+/* Animation */
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+</style>
+
+<%-- <script src="${pageContext.request.contextPath }/static/js/jquery.form.min.js"
+	type="text/javascript" charset="utf-8"></script> --%>
 
 </head>
 <body>
+<div id="loading" class="loading" style="display: none; background-color: white">Loading&#8230;</div>
 	<input type="hidden" id="answersJson">
 	<div class="content-i">
 		<div class="content-box">
@@ -145,6 +273,7 @@
 														<option value="dracula">Dark</option>
 														<option value="xcode">Light</option>
 													</select> <input type="text" hidden name="code" id="hiddencode">
+													<input type="hidden" id="quesId" value="${testQuestion.questionBankId}">
 													<button id="run" onclick="xm()" type="button">
 														<img id="run-img"
 															src="${pageContext.request.contextPath }/static/img/compiler/run.png">
@@ -210,11 +339,13 @@
 function xm() {
 	var code = editor.session.getValue();
 	var language = document.getElementById("prolang").value;
+	var quesId = document.getElementById("quesId").value;
 
 
   var dataJ = {
   	language: language,
-    code: code
+    code: code,
+    quesId: quesId
   };
 
   $.ajax({
@@ -224,11 +355,15 @@ function xm() {
 	data : dataJ,
 	cache : false,
 	timeout : 600000,
+	beforeSend: function(){
+		document.getElementById("loading").style.display = "block";
+	},
     success: function(e) {
-      console.log(e);
+		document.getElementById("loading").style.display = "none";
+      	alert("Test case "+e.testCase+"\n Output : "+e.output);
     },
     error: function(e) {
-      console.log(e.statusText);
+     	
     }
   });
 }
@@ -317,11 +452,11 @@ var allAnswers = [];
 			cache : false,
 			timeout : 600000,
 			success: function(e) {
-				window.alert("Test Submitted Failed");
+				window.alert("Test Submission Failed");
 			 	window.location="${pageContext.request.contextPath}/java/student/test/list"
 			},
 			error: function(e) {
-				window.alert("Test Submission Successfully");
+				window.alert("Test Submitted Successfully");
 			    window.location="${pageContext.request.contextPath}/java/student/test/list"
 			}
 		}); 
