@@ -28,6 +28,8 @@ public class UserProfileDaoIMPL extends AbstractDao<Integer, UserProfile> implem
 	public UserProfile findByType(String type) {
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("type", type));
+		System.out.println("userProfileDao ==============> Type ================>>" + crit.uniqueResult());
+		
 		return (UserProfile) crit.uniqueResult();
 	}
 
