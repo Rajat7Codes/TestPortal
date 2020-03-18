@@ -94,13 +94,23 @@ public class StartTestController {
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@RequestMapping(value = "/java/student/start/test/compiler", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	public @ResponseBody JSONObject runCode(@RequestParam("language") String languageIn,
-			@RequestParam("code") String code)
+			@RequestParam("code") String code, @RequestParam("quesId") Long quesId)
 			throws ResourceNotFoundException, ParseException, org.json.simple.parser.ParseException {
 
-		String response = this.compilerService.runCode(languageIn, code);
+		QuestionBank question = this.questionBankService.getQuestionBankById(quesId);
+		String response = this.compilerService.runCodeWithInput(languageIn, code, question.getSampleInput());
 		JSONObject resObj = (JSONObject) new JSONParser().parse(response);
-		System.out.println( resObj.get("output"));
-		return resObj;
+		
+		JSONObject outObj = new JSONObject();
+
+		if( resObj.get("output").equals(question.getSampleOutput()) || ("\n"+resObj.get("output")).equals(question.getSampleOutput())) {
+			outObj.put( "testCase", "successfull");
+		} else {
+			outObj.put( "testCase", "failed");
+		}
+		outObj.put( "output", resObj.get("output"));
+
+		return outObj;
 	}
 
 	@SuppressWarnings({ "unchecked", "deprecation" })
@@ -129,7 +139,6 @@ public class StartTestController {
 			
 			// Checks if question type is coding 
 			if(question.getQuestionType().getProgramType()) {
-//				if(  question.getHiddenInput() == question.);
 			
 				System.out.println("================= In Program type code =================");
 				String code = answer.get("code")+"";
@@ -137,10 +146,7 @@ public class StartTestController {
 				String input = question.getHiddenInput();
 				
 				String response = this.compilerService.runCodeWithInput(lang, code, input);
-				System.out.println("Response = "+response);
 				JSONObject resObj = (JSONObject) new JSONParser().parse(response);
-				System.out.println("Generated O/P============>"+ resObj.get("output"));
-				System.out.println("Hidden O/P============>"+ question.getHiddenOutput());
 				if( question.getHiddenOutput().equals( resObj.get("output")) ||  question.getHiddenOutput().equals( "\n"+resObj.get("output"))) {
 					obtainedMarks += Integer.parseInt(answer.get("marks").toString());
 				} 
