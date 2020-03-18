@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
@@ -126,6 +127,21 @@ public class AddTestController {
 			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 			return "redirect:/admin/add/test";
 		}
+	}
+
+	/* sample method result page designing of admin section */
+	@RequestMapping("/admin/test/result")
+	public String adminResult(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "adminResult";
+	}
+
+	/* result page of admin section */
+	@RequestMapping("/admin/test/result/list")
+	public String testResult(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+		return "testResult";
 	}
 
 	private String getPrincipal() {

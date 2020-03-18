@@ -3,16 +3,9 @@
  */
 package com.iceico.testportal.Controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -40,7 +33,9 @@ import com.iceico.testportal.Model.QuestionBank;
 import com.iceico.testportal.Model.TestQuestion;
 import com.iceico.testportal.Model.TestResult;
 import com.iceico.testportal.Service.AddTestService;
+import com.iceico.testportal.Service.CompilerService;
 import com.iceico.testportal.Service.QuestionBankService;
+import com.iceico.testportal.Service.TestResultService;
 import com.iceico.testportal.Service.UserService;
 
 /**
@@ -62,6 +57,12 @@ public class StartTestController {
 
 	@Autowired
 	private QuestionBankService questionBankService;
+
+	@Autowired
+	private CompilerService compilerService;
+
+	@Autowired
+	private TestResultService testResultService;
 
 	/* Test List page */
 	@RequestMapping("/java/student/test/list")
@@ -96,88 +97,10 @@ public class StartTestController {
 			@RequestParam("code") String code)
 			throws ResourceNotFoundException, ParseException, org.json.simple.parser.ParseException {
 
-		String clientId = "6a12fd18773efb45dd8c612433895194"; // Replace with your client ID
-		String clientSecret = "18e0fd8cdd07136086af0f620d57a4af982d04e5c9e29b8274371a6c82b58a94"; // Replace with your
-																									// client Secret
-		String script = code;
-		String language = null;
-		int versionIndex = 0;
-
-		String a = "\"";
-		String b = "\\\"";
-		script = script.replace(a, b);
-
-		// Python Configuration
-		if (languageIn.equalsIgnoreCase("Python"))
-			language = "python3";
-
-		// Java Configuration
-		if (languageIn.equalsIgnoreCase("Java")) {
-			language = "java";
-			versionIndex = 1;
-		}
-
-		// JavaScript Configuration
-		if (languageIn.equalsIgnoreCase("Javascript")) {
-			language = "nodejs";
-			versionIndex = 1;
-		}
-
-		// Php Configuration
-		if (languageIn.equalsIgnoreCase("Php")) {
-			script = script.replace("echo", " echo");
-			language = "php";
-			versionIndex = 1;
-		}
-
-		String output = null;
-
-		try {
-
-			String urlStr = "https://api.jdoodle.com/execute";
-
-			URL url = new URL(urlStr);
-
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			connection.setDoOutput(true);
-			connection.setRequestMethod("POST");
-			connection.setRequestProperty("Content-Type", "application/json");
-
-			String input = "{\"clientId\": \"" + clientId + "\",\"clientSecret\":\"" + clientSecret + "\",\"script\":\""
-					+ script + "\",\"language\":\"" + language + "\",\"versionIndex\": " + versionIndex + "} ";
-
-			System.out.println("input ===> " + input);
-
-			OutputStream outputStream = connection.getOutputStream();
-
-			outputStream.write(input.getBytes());
-			outputStream.flush();
-
-			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				throw new RuntimeException(
-						"Please check your inputs : HTTP error code : " + connection.getResponseCode());
-			}
-
-			BufferedReader bufferedReader;
-			bufferedReader = new BufferedReader(new InputStreamReader((connection.getInputStream())));
-
-			while ((output = bufferedReader.readLine()) != null) {
-				System.out.println("Output ====> " + output);
-				JSONObject outJson = new JSONObject();
-				outJson = (JSONObject) new JSONParser().parse(output);
-			}
-
-			connection.disconnect();
-
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		JSONObject ad = new JSONObject();
-		ad.put("output", output);
-		return ad;
+		String response = this.compilerService.runCode(languageIn, code);
+		JSONObject resObj = (JSONObject) new JSONParser().parse(response);
+		System.out.println( resObj.get("output"));
+		return resObj;
 	}
 
 	@SuppressWarnings({ "unchecked", "deprecation" })
@@ -186,53 +109,75 @@ public class StartTestController {
 			@RequestParam("testId") Long testId, ModelMap modelMap)
 			throws ResourceNotFoundException, ParseException, org.json.simple.parser.ParseException {
 
-		System.out.println("==========>" + qnA);
-		System.out.println("testName ==========>>>" + testName);
-		System.out.println("testId ==========>>>" + testId);
-
-		int totalMarks = 0;
+		double totalMarks = 0;
+		
 		TestResult testResult = new TestResult();
 		for (TestQuestion testQuestion : this.addTestService.getAddTestById(testId).getTestQuestions()) {
 			totalMarks += this.questionBankService.getQuestionBankById(testQuestion.getQuestionId()).getMarks();
 		}
-		System.out.println("total =============>>>" + totalMarks);
+		
 		JSONParser parser = new JSONParser();
 		JSONArray allAnswers = (JSONArray) parser.parse(qnA);
-		HashMap<QuestionBank, Options> submittedAns = new HashMap<QuestionBank, Options>();
-		Integer obtaintedMarks = 0;
+		
+		double obtainedMarks = 0;
 		int attempted = allAnswers.size();
-		int passingCriteria = this.addTestService.getAddTestById(testId).getRatio();
-
-		System.out.println("passingCriteria ========>>");
-
-		int result = 0;
 
 		for (int i = 0; i < allAnswers.size(); i++) {
 			JSONObject answer = (JSONObject) allAnswers.get(i);
-			QuestionBank question = this.questionBankService
-					.getQuestionBankById(Long.parseLong(answer.get("questionId") + ""));
-			Options option = null;
-			for (Options opt : question.getOptions()) {
-				if (opt.getOptionsId() == Long.parseLong(answer.get("optionId") + "")) {
-					option = opt;
-					Boolean userAnswer = opt.getCorrectAnswer();
-					if (userAnswer == true) {
-						System.out.println("User Correct Answer ===>>" + userAnswer);
-						Boolean userCorrectAnswer = opt.getCorrectAnswer();
-						modelMap.addAttribute("userCorrectAnswer", userCorrectAnswer);
-						obtaintedMarks += Integer.parseInt(answer.get("marks").toString());
-						System.out.println("Marks per Question Wise ==========>>>" + obtaintedMarks);
-
-					} else {
-						System.err.println("User Wrong Answer ===>>" + userAnswer);
-						Boolean userWrongAnswer = opt.getCorrectAnswer();
-						modelMap.addAttribute("userCorrectAnswer", userWrongAnswer);
+			QuestionBank question = this.questionBankService.getQuestionBankById(Long.parseLong(answer.get("questionId") + ""));
+			
+			
+			// Checks if question type is coding 
+			if(question.getQuestionType().getProgramType()) {
+//				if(  question.getHiddenInput() == question.);
+			
+				System.out.println("================= In Program type code =================");
+				String code = answer.get("code")+"";
+				String lang = answer.get("lang")+"";
+				String input = question.getHiddenInput();
+				
+				String response = this.compilerService.runCodeWithInput(lang, code, input);
+				System.out.println("Response = "+response);
+				JSONObject resObj = (JSONObject) new JSONParser().parse(response);
+				System.out.println("Generated O/P============>"+ resObj.get("output"));
+				System.out.println("Hidden O/P============>"+ question.getHiddenOutput());
+				if( question.getHiddenOutput().equals( resObj.get("output")) ||  question.getHiddenOutput().equals( "\n"+resObj.get("output"))) {
+					obtainedMarks += Integer.parseInt(answer.get("marks").toString());
+				} 
+			} else {
+				for (Options opt : question.getOptions()) {
+					if (opt.getOptionsId() == Long.parseLong(answer.get("optionId") + "")) {
+						Boolean userAnswer = opt.getCorrectAnswer();
+						if (userAnswer == true) {
+//							Boolean userCorrectAnswer = opt.getCorrectAnswer();
+//							modelMap.addAttribute("userCorrectAnswer", userCorrectAnswer);
+							obtainedMarks += Integer.parseInt(answer.get("marks").toString());
+						} else {
+//							Boolean userWrongAnswer = opt.getCorrectAnswer();
+//							modelMap.addAttribute("userCorrectAnswer", userWrongAnswer);
+						}
 					}
 				}
 			}
-			submittedAns.put(question, option);
-
+			
 		}
+
+		// Below code returns whether user is failed or passed
+		double passingCriteria = this.addTestService.getAddTestById(testId).getPassingPercent();
+		double per = (obtainedMarks/totalMarks)*100;
+		String result = null;
+		if(per>=passingCriteria) result = "PASS";
+		else result = "FAIL";
+
+		// Saving TestResult
+		testResult.setAttempted(attempted);
+		testResult.setObtainedMarks(obtainedMarks);
+		testResult.setResultStatus(result);
+		testResult.setTestName(testName);
+		testResult.setTotalMarks(totalMarks);
+		testResult.setDate( Calendar.getInstance().getTime());
+		this.testResultService.saveTestResult(testResult);
+
 		return null;
 	}
 

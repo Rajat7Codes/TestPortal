@@ -134,7 +134,7 @@
 												method="post"> --%>
 											<div id="code-edit" class="row code-div container mx-auto">
 												<div id="editor-menu">
-													<select name="language" class="options" id="prolang">
+													<select name="language" class="options codeopt${testQuestion.questionBankId}" id="prolang">
 														<option value="java">Java</option>
 														<!-- <option value="python">Python</option> -->
 														<option value="c">C</option>
@@ -153,9 +153,7 @@
 												<div id="editor"></div>
 												<script
 													src="${pageContext.request.contextPath }/static/js/compiler.js"
-													type="text/javascript">
-												
-											</script>
+													type="text/javascript"></script>
 											</div>
 											<%-- </form> --%>
 										</div>
@@ -207,6 +205,7 @@
 	}
 </script>
 
+<!-- Script for Running Output -->
 <script type="text/javascript">
 function xm() {
 	var code = editor.session.getValue();
@@ -267,10 +266,31 @@ var allAnswers = [];
 				allAnswers[flag]["optionId"] = oId;
 			}
 
-			json.value = JSON.stringify(allAnswers);
 		} else {
-			
+			if( document.getElementsByClassName("codeopt"+qId[0]!=null)) {
+				let questionDiv = document.getElementById("q"+qId);
+				questionDiv.className = ' btn btn-success btn-rounded';
+				
+				if(allAnswers.length==0) {
+					allAnswers.push({ "questionId": qId,  "code": editor.session.getValue(), "lang": document.getElementById("prolang").value,  "marks": document.getElementById("marks"+qId).innerText});
+				}
+				var flag=-1;
+				for(var i=0; i<allAnswers.length; i++) {
+					if(allAnswers[i]["questionId"] == qId) {
+						flag=i;
+					} 
+				}
+				
+				if(flag==-1) {
+					allAnswers.push({ "questionId": qId,  "code": editor.session.getValue(), "lang": document.getElementById("prolang").value,  "marks": document.getElementById("marks"+qId).innerText});
+				} else {
+					allAnswers[flag]["code"] = editor.session.getValue();
+					allAnswers[flag]["lang"] = document.getElementById("prolang").value;
+				}
+			}
 		}
+
+		json.value = JSON.stringify(allAnswers);
 		
 		if(document.getElementsByClassName("question"+(index+1))[0]!=null) {
 			document.getElementsByClassName("question"+index)[0].style.display = "none";
@@ -279,8 +299,6 @@ var allAnswers = [];
 	}
 </script>
 
-
-
 <!-- Script for Submitting test -->
 <script type="text/javascript">
 	function submitForm() {	
@@ -288,32 +306,32 @@ var allAnswers = [];
 			 QnA : document.getElementById("answersJson").value,
 			 testName : "${ addTest.testName }",
 				 testId : ${ addTest.addTestId }
-				 
 		};
-		
-		 $.ajax({
-		   type: "GET",
-		   url: "${pageContext.request.contextPath}/java/student/end/test",
-		   contentType : "application/json",
+	
+		$.ajax({
+			type: "GET",
+			url: "${pageContext.request.contextPath}/java/student/end/test",
+		   	contentType : "application/json",
 			data : dataJ,
 			dataType : 'json',
 			cache : false,
 			timeout : 600000,
-			   success: function(e) {
-					window.alert("Test Submitted Failed");
-			     	window.location="${pageContext.request.contextPath}/java/student/test/list"
-			   },
-			   error: function(e) {
-					window.alert("Test Submission Successfully");
-				    window.location="${pageContext.request.contextPath}/java/student/test/list"
-			   }
-			 }); 
+			success: function(e) {
+				window.alert("Test Submitted Failed");
+			 	window.location="${pageContext.request.contextPath}/java/student/test/list"
+			},
+			error: function(e) {
+				window.alert("Test Submission Successfully");
+			    window.location="${pageContext.request.contextPath}/java/student/test/list"
+			}
+		}); 
 	}
 </script>
+
 <!-- Script for Countdown -->
-<script>
+<script type="text/javascript">
 /* window.onbeforeunload = function () {return false;} */
-	var timer2 = /* ${ addTest.time }+ */"00:30";
+	var timer2 = /* ${ addTest.time }+ */"30:25";
 	var interval = setInterval(function() {
 
 		var timer = timer2.split(':');
@@ -341,4 +359,5 @@ var allAnswers = [];
 		                                        
 	}, 1000);
 </script>
+
 </html>
