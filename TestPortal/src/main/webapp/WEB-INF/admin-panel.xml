@@ -124,13 +124,11 @@
 
 
 	<!--DESIGN PAGE FOR RESULT -->
-	<definition name="adminResult"
-		extends="adminbase.definition">
-		<put-attribute name="title" value="Admin Result" />
+	<definition name="viewResult" extends="adminbase.definition">
+		<put-attribute name="title" value="View Result" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/admin-module/result.jsp" />
 	</definition>
-
 
 	<!--DESIGN PAGE FOR TEST RESULT LIST -->
 	<definition name="testResult" extends="adminbase.definition">

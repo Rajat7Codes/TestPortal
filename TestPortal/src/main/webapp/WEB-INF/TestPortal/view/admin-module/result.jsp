@@ -21,20 +21,29 @@
 							<div class="col-sm-2 ">
 								<span class="element-box el-tablo bg-white">
 									<div class="label text-dark">Date</div>
-									<div class="font-weight-bold">3-18-2020</div>
+									<div class="font-weight-bold">${dateValue}</div>
 								</span>
 							</div>
 							<div class="col-sm-2 ">
 								<span class="element-box el-tablo bg-white">
 									<div class="label text-dark">Marks</div>
-									<div class="font-weight-bold">20</div>
+									<div class="font-weight-bold">m</div>
 								</span>
 							</div>
 
 							<div class="col-sm-2 ">
 								<span class="element-box el-tablo bg-white">
 									<div class="label text-dark">isNegative</div>
-									<div class="font-weight-bold">No</div>
+									<div class="font-weight-bold">
+
+										<c:if test="${test.negativeMarking==true}">
+											<div class="">Yes</div>
+										</c:if>
+										<c:if test="${test.negativeMarking==false}">
+											<div class="">No</div>
+										</c:if>
+										</td>
+									</div>
 								</span>
 							</div>
 							<div class="col-sm-2">

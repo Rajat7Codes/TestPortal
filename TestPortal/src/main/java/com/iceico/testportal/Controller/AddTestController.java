@@ -130,10 +130,23 @@ public class AddTestController {
 	}
 
 	/* sample method result page designing of admin section */
-	@RequestMapping("/admin/test/result")
-	public String adminResult(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
-		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		return "adminResult";
+	/*
+	 * @RequestMapping("/admin/test/result") public String viewResult(ModelMap
+	 * modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+	 * modelMap.addAttribute("user",
+	 * this.userService.findBySSO(this.getPrincipal()));
+	 * modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+	 * return "viewResult"; }
+	 */
+
+	@GetMapping("/admin/test/result/{addTestId}")
+	public String viewResult(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		AddTest addTest = this.addTestService.getAddTestById(addTestId);
+		modelMap.addAttribute("test", addTest);
+		modelMap.addAttribute("dateValue", new SimpleDateFormat("dd/MM/YYYY").format(addTest.getDate()));
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "viewResult";
 	}
 
 	/* result page of admin section */
