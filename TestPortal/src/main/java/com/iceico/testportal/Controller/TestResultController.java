@@ -27,7 +27,7 @@ public class TestResultController {
 	public String getTestResultPage(ModelMap modelMap) {
 		modelMap.addAttribute("testResult", new TestResult());
 		modelMap.addAttribute("edit", false);
-		return "testResult";
+		return "";
 	}
 	
 	

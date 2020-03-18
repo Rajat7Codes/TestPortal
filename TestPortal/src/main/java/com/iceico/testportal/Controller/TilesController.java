@@ -76,19 +76,6 @@ public class TilesController {
 //		return "testList";
 //	}
 
-	/* sample method result page designing of admin section */
-	@RequestMapping("/admin/test/result")
-	public String adminResult(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
-		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		return "adminResult";
-	}
-
-	/* sample method result page designing of admin section */
-	@RequestMapping("/admin/test/result/list")
-	public String testResult(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
-		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		return "testResult";
-	}
 
 	private String getPrincipal() {
 		String userName = null;
