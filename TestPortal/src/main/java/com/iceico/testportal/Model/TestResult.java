@@ -50,8 +50,11 @@ public class TestResult extends Auditable<String> implements Serializable {
 	@Column(name = "test_name")
 	private String testName;
 
-	@Column(name = "marks")
-	private Double Marks;
+	@Column(name = "obtained_marks")
+	private Double obtainedMarks;
+
+	@Column(name = "total_marks")
+	private Double totalMarks;
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -70,18 +73,20 @@ public class TestResult extends Auditable<String> implements Serializable {
 	/**
 	 * @param testResultId
 	 * @param testName
-	 * @param marks
+	 * @param obtainedMarks
+	 * @param totalMarks
 	 * @param date
 	 * @param negativeMarks
 	 * @param attempted
 	 * @param resultStatus
 	 */
-	public TestResult(Long testResultId, String testName, Double marks, Date date, Double negativeMarks,
-			Integer attempted, String resultStatus) {
+	public TestResult(Long testResultId, String testName, Double obtainedMarks, Double totalMarks, Date date,
+			Double negativeMarks, Integer attempted, String resultStatus) {
 		super();
 		this.testResultId = testResultId;
 		this.testName = testName;
-		Marks = marks;
+		this.obtainedMarks = obtainedMarks;
+		this.totalMarks = totalMarks;
 		this.date = date;
 		this.negativeMarks = negativeMarks;
 		Attempted = attempted;
@@ -117,17 +122,31 @@ public class TestResult extends Auditable<String> implements Serializable {
 	}
 
 	/**
-	 * @return the marks
+	 * @return the obtainedMarks
 	 */
-	public Double getMarks() {
-		return Marks;
+	public Double getObtainedMarks() {
+		return obtainedMarks;
 	}
 
 	/**
-	 * @param marks the marks to set
+	 * @param obtainedMarks the obtainedMarks to set
 	 */
-	public void setMarks(Double marks) {
-		Marks = marks;
+	public void setObtainedMarks(Double obtainedMarks) {
+		this.obtainedMarks = obtainedMarks;
+	}
+
+	/**
+	 * @return the totalMarks
+	 */
+	public Double getTotalMarks() {
+		return totalMarks;
+	}
+
+	/**
+	 * @param totalMarks the totalMarks to set
+	 */
+	public void setTotalMarks(Double totalMarks) {
+		this.totalMarks = totalMarks;
 	}
 
 	/**
@@ -185,4 +204,5 @@ public class TestResult extends Auditable<String> implements Serializable {
 	public void setResultStatus(String resultStatus) {
 		this.resultStatus = resultStatus;
 	}
+
 }

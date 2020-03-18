@@ -288,6 +288,7 @@ var allAnswers = [];
 			 QnA : document.getElementById("answersJson").value,
 			 testName : "${ addTest.testName }",
 				 testId : ${ addTest.addTestId }
+				 
 		};
 		
 		 $.ajax({

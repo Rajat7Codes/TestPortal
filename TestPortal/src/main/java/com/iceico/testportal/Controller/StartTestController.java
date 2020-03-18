@@ -38,6 +38,7 @@ import com.iceico.testportal.Model.AddTest;
 import com.iceico.testportal.Model.Options;
 import com.iceico.testportal.Model.QuestionBank;
 import com.iceico.testportal.Model.TestQuestion;
+import com.iceico.testportal.Model.TestResult;
 import com.iceico.testportal.Service.AddTestService;
 import com.iceico.testportal.Service.QuestionBankService;
 import com.iceico.testportal.Service.UserService;
@@ -189,26 +190,27 @@ public class StartTestController {
 		System.out.println("testName ==========>>>" + testName);
 		System.out.println("testId ==========>>>" + testId);
 
-		int total = 0;
+		int totalMarks = 0;
+		TestResult testResult = new TestResult();
 		for (TestQuestion testQuestion : this.addTestService.getAddTestById(testId).getTestQuestions()) {
-
-			total += this.questionBankService.getQuestionBankById(testQuestion.getQuestionId()).getMarks();
-
+			totalMarks += this.questionBankService.getQuestionBankById(testQuestion.getQuestionId()).getMarks();
 		}
-
-		System.out.println("total =============>>>" + total);
-
+		System.out.println("total =============>>>" + totalMarks);
 		JSONParser parser = new JSONParser();
 		JSONArray allAnswers = (JSONArray) parser.parse(qnA);
-
 		HashMap<QuestionBank, Options> submittedAns = new HashMap<QuestionBank, Options>();
-
 		Integer obtaintedMarks = 0;
+		int attempted = allAnswers.size();
+		int passingCriteria = this.addTestService.getAddTestById(testId).getRatio();
+
+		System.out.println("passingCriteria ========>>");
+
+		int result = 0;
+
 		for (int i = 0; i < allAnswers.size(); i++) {
 			JSONObject answer = (JSONObject) allAnswers.get(i);
 			QuestionBank question = this.questionBankService
 					.getQuestionBankById(Long.parseLong(answer.get("questionId") + ""));
-
 			Options option = null;
 			for (Options opt : question.getOptions()) {
 				if (opt.getOptionsId() == Long.parseLong(answer.get("optionId") + "")) {
@@ -218,7 +220,6 @@ public class StartTestController {
 						System.out.println("User Correct Answer ===>>" + userAnswer);
 						Boolean userCorrectAnswer = opt.getCorrectAnswer();
 						modelMap.addAttribute("userCorrectAnswer", userCorrectAnswer);
-
 						obtaintedMarks += Integer.parseInt(answer.get("marks").toString());
 						System.out.println("Marks per Question Wise ==========>>>" + obtaintedMarks);
 
@@ -230,6 +231,7 @@ public class StartTestController {
 				}
 			}
 			submittedAns.put(question, option);
+
 		}
 		return null;
 	}
