@@ -38,7 +38,7 @@
 										<td>${test.passingPercent }</td>
 										<td>${test.subject.subjectName }</td>
 										<td><a class="text-decoration-none !important"
-											href="${pageContext.request.contextPath }/admin/test/result/${test.addTestId}">view
+											href="${pageContext.request.contextPath }/admin/test/result/">view
 												result</a></td>
 									</tr>
 								</c:if>
