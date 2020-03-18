@@ -11,4 +11,5 @@ import org.json.simple.parser.ParseException;
  */
 public interface CompilerService {
 	public String runCode( String language, String script) throws ParseException;
+	public String runCodeWithInput(String languageIn, String script, String input) throws ParseException;
 }
