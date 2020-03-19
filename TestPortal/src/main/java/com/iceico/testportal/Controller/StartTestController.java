@@ -40,7 +40,8 @@ import com.iceico.testportal.Service.UserService;
 
 /**
  * @author Rajat
- * @version 0.1 Creation Date: 16/03/2020
+ * @version 0.1 Creation Date: 16/03/2020 modified by: Puja modification date:
+ *          19/03/2020
  */
 @Controller
 public class StartTestController {
@@ -101,7 +102,6 @@ public class StartTestController {
 		JSONObject resObj = (JSONObject) new JSONParser().parse(response);
 
 		JSONObject outObj = new JSONObject();
-		
 
 		if (question.getSampleOutput().equals(resObj.get("output"))
 				|| question.getSampleOutput().equals("\n" + resObj.get("output"))) {
@@ -123,7 +123,7 @@ public class StartTestController {
 		double totalMarks = 0;
 
 		AddTest addTest = this.addTestService.getAddTestById(testId);
-		
+
 		TestResult testResult = new TestResult();
 		for (TestQuestion testQuestion : this.addTestService.getAddTestById(testId).getTestQuestions()) {
 			totalMarks += this.questionBankService.getQuestionBankById(testQuestion.getQuestionId()).getMarks();
@@ -133,6 +133,8 @@ public class StartTestController {
 		JSONArray allAnswers = (JSONArray) parser.parse(qnA);
 
 		double obtainedMarks = 0;
+		double wm = 0;
+		double twm = 0;
 		int attempted = allAnswers.size();
 
 		for (int i = 0; i < allAnswers.size(); i++) {
@@ -153,7 +155,9 @@ public class StartTestController {
 				if (question.getHiddenOutput().equals(resObj.get("output"))
 						|| question.getHiddenOutput().equals("\n" + resObj.get("output"))) {
 					obtainedMarks += Integer.parseInt(answer.get("marks").toString());
+					System.out.println(obtainedMarks);
 				}
+
 			} else {
 				for (Options opt : question.getOptions()) {
 					if (opt.getOptionsId() == Long.parseLong(answer.get("optionId") + "")) {
@@ -162,23 +166,46 @@ public class StartTestController {
 							obtainedMarks += Integer.parseInt(answer.get("marks").toString());
 						} else {
 							// Below code check whether question has negative marking or not
-							if( addTest.getNegativeMarking()) {
-								obtainedMarks -= addTest.getRatio()*Integer.parseInt(answer.get("marks").toString());
+							if (addTest.getNegativeMarking()) {
+								String ratio = addTest.getRatio();
+								System.out.println("ration========>" + addTest.getRatio());
+								String array[] = ratio.split("/");
+								int r = 0;
+								for (String temp : array) {
+									array[r] = temp;
+									r++;
+								}
+								System.out.println(array[0]);
+								System.out.println(array[1]);
+
+								wm = Integer.parseInt(answer.get("marks").toString());
+								System.out.println("original marks of wrong question ============>" + wm);
+								wm = wm * (Integer.parseInt(array[0]));
+								System.out.println(" multiplied by numerator============>" + wm);
+								wm = wm / (Integer.parseInt(array[1]));
+								System.out.println(" divided by denominator============>" + wm);
+								twm += wm;
 							}
 						}
 					}
 				}
 			}
-		}
 
-		
-		
+		}
+		obtainedMarks -= twm;
+		System.out.println("marks without deduction" + obtainedMarks);
+		System.out.println("twm=>" + twm);
+		System.out.println("marks after deduction" + obtainedMarks);
+
 		// Below code returns whether user is failed or passed
 		double passingCriteria = this.addTestService.getAddTestById(testId).getPassingPercent();
 		double per = (obtainedMarks / totalMarks) * 100;
 		String result = null;
-		if (per >= passingCriteria) result = "PASS";
-		else result = "FAIL";
+
+		if (per >= passingCriteria)
+			result = "PASS";
+		else
+			result = "FAIL";
 
 		// Saving TestResult
 		testResult.setAttempted(attempted);
@@ -188,6 +215,7 @@ public class StartTestController {
 		testResult.setTotalMarks(totalMarks);
 		testResult.setDate(Calendar.getInstance().getTime());
 		testResult.setTestId(testId);
+		testResult.setUserId(this.userService.findBySSO(this.getPrincipal()).getId());
 		this.testResultService.saveTestResult(testResult);
 
 		return null;
