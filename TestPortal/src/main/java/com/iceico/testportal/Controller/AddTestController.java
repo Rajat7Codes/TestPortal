@@ -29,9 +29,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.AddTest;
+import com.iceico.testportal.Model.QuestionBank;
 import com.iceico.testportal.Model.TestQuestion;
+import com.iceico.testportal.Model.TestResult;
+import com.iceico.testportal.Model.User;
 import com.iceico.testportal.Service.AddTestService;
+import com.iceico.testportal.Service.QuestionBankService;
 import com.iceico.testportal.Service.SubjectService;
+import com.iceico.testportal.Service.TestResultService;
 import com.iceico.testportal.Service.UserService;
 
 /**
@@ -49,6 +54,12 @@ public class AddTestController {
 
 	@Autowired
 	private SubjectService subjectService;
+
+	@Autowired
+	private QuestionBankService questionBankService;
+
+	@Autowired
+	private TestResultService testResultService;
 
 	@Autowired
 	private UserService userService;
@@ -117,12 +128,12 @@ public class AddTestController {
 				addedQuestions.add(testQuestions);
 				System.out.println("+++++++++++++>>>>>>>> " + obj.get("questionId"));
 			}
-
+			System.out.println("********************* Saving in process....one step behind!!!");
 			System.out.println("+++++++++++++>>>>>>>> " + addedQuestions);
-
 			addTest.setTestQuestions(addedQuestions);
 			addTest.setIsDeleted(false);
 			this.addTestService.saveAddTest(addTest);
+			System.out.println("********************* Saved!!!");
 
 			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 			return "redirect:/admin/add/test";
@@ -144,6 +155,45 @@ public class AddTestController {
 			throws ResourceNotFoundException {
 		AddTest addTest = this.addTestService.getAddTestById(addTestId);
 		modelMap.addAttribute("test", addTest);
+
+		int marks = 0;
+		for (TestQuestion question : addTest.getTestQuestions()) {
+			QuestionBank questionBank = this.questionBankService.getQuestionBankById(question.getQuestionId());
+			marks += questionBank.getMarks();
+		}
+		int attempted = 0;
+		int passed = 0;
+		int failed = 0;
+		List<String[]> list = new ArrayList<String[]>();
+		for (TestResult testResult : this.testResultService.getTestResultList()) {
+			if (addTestId == testResult.getTestId()) {
+				if (testResult.getResultStatus().equals("PASS")) {
+
+					passed++;
+				} else {
+					failed++;
+				}
+				attempted++;
+			}
+			for (User user : this.userService.findAllUsers()) {
+				if (testResult.getUserId() == user.getId()) {
+					String array[] = new String[5];
+					array[0] = user.getFirstName() + " " + user.getLastName();
+
+					array[1] = testResult.getResultStatus();
+					array[2] = new SimpleDateFormat("dd/MM/YYYY").format(testResult.getDate());
+
+					list.add(array);
+				}
+			}
+
+		}
+		System.out.println(list);
+		modelMap.addAttribute("userList", list);
+		modelMap.addAttribute("marks", marks);
+		modelMap.addAttribute("attempted", attempted);
+		modelMap.addAttribute("passed", passed);
+		modelMap.addAttribute("failed", failed);
 		modelMap.addAttribute("dateValue", new SimpleDateFormat("dd/MM/YYYY").format(addTest.getDate()));
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "viewResult";
@@ -153,7 +203,9 @@ public class AddTestController {
 	@RequestMapping("/admin/test/result/list")
 	public String testResult(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		modelMap.addAttribute("test", new AddTest());
 		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+
 		return "testResult";
 	}
 

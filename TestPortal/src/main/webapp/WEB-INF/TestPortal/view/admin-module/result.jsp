@@ -25,9 +25,9 @@
 								</span>
 							</div>
 							<div class="col-sm-2 ">
-								<span class="element-box el-tablo bg-white">
+								<span class="element-box el-tablo bg-3white">
 									<div class="label text-dark">Marks</div>
-									<div class="font-weight-bold">m</div>
+									<div class="font-weight-bold">${marks}</div>
 								</span>
 							</div>
 
@@ -49,20 +49,20 @@
 							<div class="col-sm-2">
 								<span class="element-box el-tablo bg-white">
 									<div class="label text-dark">Attempted</div>
-									<div class="font-weight-bold">5</div>
+									<div class="font-weight-bold">${ attempted}</div>
 								</span>
 							</div>
 							<div class="col-sm-2">
 								<span class="element-box el-tablo bg-white">
 									<div class="label text-dark">Passed</div>
-									<div class="font-weight-bold">2</div>
+									<div class="font-weight-bold">${passed }</div>
 								</span>
 							</div>
 
 							<div class="col-sm-2">
 								<span class="element-box el-tablo bg-white">
 									<div class="label text-dark">Failed</div>
-									<div class="font-weight-bold">3</div>
+									<div class="font-weight-bold">${failed}</div>
 								</span>
 							</div>
 						</div>
@@ -72,19 +72,22 @@
 						<table class="table text-center">
 							<thead>
 								<tr>
-									<th>Id</th>
+									<th>Sr. No.</th>
 									<th>Student Name</th>
 									<th>Result</th>
 									<th>Date</th>
-									<th>Attempts</th>
 								</tr>
 							</thead>
 							<tbody>
-								<td>1</td>
-								<td>Anonymous</td>
-								<td>Pass</td>
-								<td>3-18-2020</td>
-								<td>2</td>
+								<c:forEach var="user" items="${userList}" varStatus="ind">
+
+									<tr>
+										<td>${ind.index+1}</td>
+										<td>${user[0]}</td>
+										<td>${user[1]}</td>
+										<td>${user[2]}</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>

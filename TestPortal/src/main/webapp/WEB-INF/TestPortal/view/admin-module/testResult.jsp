@@ -33,7 +33,7 @@
 									<tr>
 										<td>${ind.index+1}</td>
 										<td>${test.testName }</td>
-										<td>${test.date }</td>
+										<td>${test.date}</td>
 										<td>${test.time }</td>
 										<td>${test.passingPercent }</td>
 										<td>${test.subject.subjectName }</td>
