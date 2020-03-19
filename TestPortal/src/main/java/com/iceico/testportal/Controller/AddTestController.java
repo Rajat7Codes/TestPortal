@@ -128,12 +128,12 @@ public class AddTestController {
 				addedQuestions.add(testQuestions);
 				System.out.println("+++++++++++++>>>>>>>> " + obj.get("questionId"));
 			}
-
+			System.out.println("********************* Saving in process....one step behind!!!");
 			System.out.println("+++++++++++++>>>>>>>> " + addedQuestions);
-
 			addTest.setTestQuestions(addedQuestions);
 			addTest.setIsDeleted(false);
 			this.addTestService.saveAddTest(addTest);
+			System.out.println("********************* Saved!!!");
 
 			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 			return "redirect:/admin/add/test";
