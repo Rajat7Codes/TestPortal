@@ -50,6 +50,9 @@ public class TestResult extends Auditable<String> implements Serializable {
 	@Column(name = "test_id", nullable = true)
 	private Long testId;
 
+	@Column(name = "user_id", nullable = true)
+	private Integer userId;
+
 	@Column(name = "test_name")
 	private String testName;
 
@@ -76,6 +79,7 @@ public class TestResult extends Auditable<String> implements Serializable {
 	/**
 	 * @param testResultId
 	 * @param testId
+	 * @param userId
 	 * @param testName
 	 * @param obtainedMarks
 	 * @param totalMarks
@@ -84,11 +88,12 @@ public class TestResult extends Auditable<String> implements Serializable {
 	 * @param attempted
 	 * @param resultStatus
 	 */
-	public TestResult(Long testResultId, Long testId, String testName, Double obtainedMarks, Double totalMarks,
-			Date date, Double negativeMarks, Integer attempted, String resultStatus) {
+	public TestResult(Long testResultId, Long testId, Integer userId, String testName, Double obtainedMarks,
+			Double totalMarks, Date date, Double negativeMarks, Integer attempted, String resultStatus) {
 		super();
 		this.testResultId = testResultId;
 		this.testId = testId;
+		this.userId = userId;
 		this.testName = testName;
 		this.obtainedMarks = obtainedMarks;
 		this.totalMarks = totalMarks;
@@ -124,6 +129,20 @@ public class TestResult extends Auditable<String> implements Serializable {
 	 */
 	public void setTestId(Long testId) {
 		this.testId = testId;
+	}
+
+	/**
+	 * @return the userId
+	 */
+	public Integer getUserId() {
+		return userId;
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	/**
