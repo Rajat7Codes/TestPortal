@@ -42,7 +42,7 @@
 								<div class="row">
 									<div class="col-sm-4 col-xxxl-3">
 										<a class="element-box el-tablo" href="#"><div
-												class="label">Products Sold</div>
+												class="label">Users</div>
 											<div class="value">57</div>
 											<div class="trending trending-up-basic">
 												<span>12%</span><i class="os-icon os-icon-arrow-up2"></i>
@@ -50,15 +50,15 @@
 									</div>
 									<div class="col-sm-4 col-xxxl-3">
 										<a class="element-box el-tablo" href="#"><div
-												class="label">Gross Profit</div>
-											<div class="value">$457</div>
+												class="label">Test</div>
+											<div class="value">56</div>
 											<div class="trending trending-down-basic">
 												<span>12%</span><i class="os-icon os-icon-arrow-down"></i>
 											</div></a>
 									</div>
 									<div class="col-sm-4 col-xxxl-3">
 										<a class="element-box el-tablo" href="#"><div
-												class="label">New Customers</div>
+												class="label">Questions</div>
 											<div class="value">786</div>
 											<div class="trending trending-down-basic">
 												<span>9%</span><i class="os-icon os-icon-arrow-down"></i>
@@ -368,10 +368,10 @@
 				<div class="row">
 					<div class="col-sm-12 col-xxxl-9">
 						<div class="element-wrapper">
-							<h6 class="element-header">Unique Visitors Graph</h6>
+							<h6 class="element-header">Top 10 Students</h6>
 							<div class="element-box">
 								<div class="os-tabs-w">
-									<div class="os-tabs-controls">
+									<!-- <div class="os-tabs-controls">
 										<ul class="nav nav-tabs smaller">
 											<li class="nav-item"><a class="nav-link active"
 												data-toggle="tab" href="#tab_overview">Overview</a></li>
@@ -388,15 +388,17 @@
 											<li class="nav-item"><a class="nav-link"
 												data-toggle="tab" href="#">Last Month</a></li>
 										</ul>
-									</div>
+									</div> -->
 									<div class="tab-content">
 										<div class="tab-pane active" id="tab_overview">
 											<div class="el-tablo bigger">
-												<div class="label">Unique Visitors</div>
-												<div class="value">12,537</div>
+												<div class="label">Top Ten Students</div>
+												<div class="value">10</div>
 											</div>
 											<div class="el-chart-w">
-												<canvas height="150px" id="lineChart" width="600px"></canvas>
+												<!-- <canvas height="150px" id="lineChart" width="600px"></canvas> -->
+												<canvas id="myChart" width=200" height="100"
+													class="chartjs-render-monitor" style="display: block;"></canvas>
 											</div>
 										</div>
 										<div class="tab-pane" id="tab_sales"></div>
@@ -989,7 +991,6 @@
 						'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
 						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
 						'rgba(255, 159, 64, 1)' ],
-				borderWidth : 2
 
 			} ]
 		},
@@ -1013,7 +1014,6 @@
 						'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
 						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
 						'rgba(255, 159, 64, 1)' ],
-				borderWidth : 2
 
 			} ]
 		},

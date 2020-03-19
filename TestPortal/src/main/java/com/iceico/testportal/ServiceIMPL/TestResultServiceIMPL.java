@@ -3,10 +3,13 @@
  */
 package com.iceico.testportal.ServiceIMPL;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +36,13 @@ public class TestResultServiceIMPL implements TestResultService {
 	@Autowired
 	private TestResultRepository testResultRepository;
 
+	@Autowired
+	private EntityManager entityManager;
+
+	private Session getSession() {
+		return entityManager.unwrap(Session.class);
+	}
+
 	@Override
 	public void saveTestResult(TestResult testResult) {
 		this.testResultRepository.save(testResult);
@@ -48,5 +58,27 @@ public class TestResultServiceIMPL implements TestResultService {
 		return this.testResultRepository.findById(testResultId)
 				.orElseThrow(() -> new ResourceNotFoundException("testResultId not found" + testResultId));
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TestResult> getTodaysAllResultStatusList(Date date) {
+
+		
+		return this.getSession().createQuery("select resultStatus from TestResult where date=:date ")
+				.setParameter("date", date).getResultList();
+	}
+
+	/*
+	 * @SuppressWarnings("unchecked")
+	 * 
+	 * @Override public List<TestResult> getTodaysAllResultStatusList() { return
+	 * this.getSession().createQuery("select resultStatus from TestResult").
+	 * getResultList(); }
+	 * 
+	 * @Override public List<TestResult> getMonthlyAllResultStatusList() { return
+	 * null; }
+	 * 
+	 * @Override public List<TestResult> getTopTenStudentResult() { return null; }
+	 */
 
 }

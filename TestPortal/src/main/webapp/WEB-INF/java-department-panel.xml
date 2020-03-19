@@ -80,8 +80,6 @@
 	</definition>
 
 
-
-
 	<!-- view page for Test result -->
 	<definition name="result" extends="javabase.definition">
 		<put-attribute name="title" value="Result" />
