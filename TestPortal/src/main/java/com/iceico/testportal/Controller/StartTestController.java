@@ -142,6 +142,7 @@ public class StartTestController {
 			QuestionBank question = this.questionBankService
 					.getQuestionBankById(Long.parseLong(answer.get("questionId") + ""));
 
+			wm = Integer.parseInt(answer.get("marks").toString());
 			// Checks if question type is coding
 			if (question.getQuestionType().getProgramType()) {
 
@@ -155,7 +156,28 @@ public class StartTestController {
 				if (question.getHiddenOutput().equals(resObj.get("output"))
 						|| question.getHiddenOutput().equals("\n" + resObj.get("output"))) {
 					obtainedMarks += Integer.parseInt(answer.get("marks").toString());
-					System.out.println(obtainedMarks);
+					System.out.println(obtainedMarks);	
+				} else {
+					// Below code check whether question has negative marking or not
+					if (addTest.getNegativeMarking()) {
+						String ratio = addTest.getRatio();
+						System.out.println("ration========>" + addTest.getRatio());
+						String array[] = ratio.split("/");
+						int r = 0;
+						for (String temp : array) {
+							array[r] = temp;
+							r++;
+						}
+						System.out.println(array[0]);
+						System.out.println(array[1]);
+
+						System.out.println("original marks of wrong question ============>" + wm);
+						wm = wm * (Integer.parseInt(array[0]));
+						System.out.println(" multiplied by numerator============>" + wm);
+						wm = wm / (Integer.parseInt(array[1]));
+						System.out.println(" divided by denominator============>" + wm);
+						twm += wm;
+					}
 				}
 
 			} else {
@@ -178,7 +200,6 @@ public class StartTestController {
 								System.out.println(array[0]);
 								System.out.println(array[1]);
 
-								wm = Integer.parseInt(answer.get("marks").toString());
 								System.out.println("original marks of wrong question ============>" + wm);
 								wm = wm * (Integer.parseInt(array[0]));
 								System.out.println(" multiplied by numerator============>" + wm);
