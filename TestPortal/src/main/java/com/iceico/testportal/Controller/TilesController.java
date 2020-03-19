@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
+import com.iceico.testportal.Service.TestResultService;
 import com.iceico.testportal.Service.UserService;
 
 /**
@@ -30,9 +31,22 @@ public class TilesController {
 	@Autowired
 	private UserService userService;
 
+	/*
+	 * @Autowired private DashboardService dashboardService;
+	 */
+
+	@Autowired
+	private TestResultService testResultService;
+
 	@RequestMapping("/admin/dashboard")
 	public String adminDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+
+		/*
+		 * for (TestResult testResult :
+		 * this.testResultService.getTodaysAllResultStatusList(new Date())) {
+		 * System.out.println("Result ======>>>>  " + testResult.getResultStatus()); }
+		 */
 		return "adminDashboard";
 	}
 
@@ -76,6 +90,13 @@ public class TilesController {
 //		return "testList";
 //	}
 
+	/* per student wise performance */
+	/*
+	 * @GetMapping("/java/student/performance/${userId}") public String
+	 * getStudentPerformance(@PathVariable("userId") ) {
+	 * 
+	 * return "studentPerformance"; }
+	 */
 
 	private String getPrincipal() {
 		String userName = null;

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +10,16 @@
 <meta content="Tamerlan Soziev" name="author">
 <meta content="Admin dashboard html template" name="description">
 <meta content="width=device-width,initial-scale=1" name="viewport">
+
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/static/bower_components/chart.js/dist/Chart.min.js"></script>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <body
 	class="menu-position-side menu-side-left full-screen with-content-panel">
@@ -30,7 +42,7 @@
 								<div class="row">
 									<div class="col-sm-4 col-xxxl-3">
 										<a class="element-box el-tablo" href="#"><div
-												class="label">Products Sold</div>
+												class="label">Users</div>
 											<div class="value">57</div>
 											<div class="trending trending-up-basic">
 												<span>12%</span><i class="os-icon os-icon-arrow-up2"></i>
@@ -38,16 +50,16 @@
 									</div>
 									<div class="col-sm-4 col-xxxl-3">
 										<a class="element-box el-tablo" href="#"><div
-												class="label">Gross Profit</div>
-											<div class="value">$457</div>
+												class="label">Test</div>
+											<div class="value">56</div>
 											<div class="trending trending-down-basic">
 												<span>12%</span><i class="os-icon os-icon-arrow-down"></i>
 											</div></a>
 									</div>
 									<div class="col-sm-4 col-xxxl-3">
 										<a class="element-box el-tablo" href="#"><div
-												class="label">New Customers</div>
-											<div class="value">125</div>
+												class="label">Questions</div>
+											<div class="value">786</div>
 											<div class="trending trending-down-basic">
 												<span>9%</span><i class="os-icon os-icon-arrow-down"></i>
 											</div></a>
@@ -66,7 +78,11 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-8 col-xxxl-6">
+
+
+
+
+					<!-- <div class="col-sm-8 col-xxxl-6">
 						<div class="element-wrapper">
 							<h6 class="element-header">New Orders</h6>
 							<div class="element-box">
@@ -152,13 +168,58 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-sm-4 d-xxxl-none">
+					</div> -->
+
+					<!-- <div class="col-sm-6 d-xxxl-none">
 						<div class="element-wrapper">
 							<h6 class="element-header">Top Selling Today</h6>
 							<div class="element-box">
 								<div class="el-chart-w">
-									<canvas height="120" id="donutChart" width="120"></canvas>
+									<canvas id="myChart" width="400" height="400"></canvas>
+								</div>
+							</div>
+						</div>
+					</div> -->
+
+					<div class="col-sm-6 d-xxxl-none">
+						<div class="element-wrapper">
+							<h6 class="element-header">Today Performance</h6>
+							<div class="element-box">
+								<div class="el-chart-w">
+									<canvas id="myPieChart1" width="400" height="400"></canvas>
+									<div class="inside-donut-chart-label">
+										<strong>142</strong><span>Total Orders</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-6 d-xxxl-none">
+						<div class="element-wrapper">
+							<h6 class="element-header">Monthly Performance</h6>
+							<div class="element-box">
+								<div class="el-chart-w">
+									<canvas id="myPieChart2" width="400" height="400"
+										class="chartjs-render-monitor" style="display: block;"></canvas>
+									<div class="inside-donut-chart-label">
+										<strong>142</strong><span>Total Orders</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+					<!-- <div class="col-sm-6 d-xxxl-none">
+						<div class="element-wrapper">
+							<h6 class="element-header">Top Selling Today</h6>
+							<div class="element-box">
+								<div class="el-chart-w">
+									<canvas height="178" id="donutChart" width="178"
+										class="chartjs-render-monitor"
+										style="display: block; width: 178px; height: 178px;"></canvas>
 									<div class="inside-donut-chart-label">
 										<strong>142</strong><span>Total Orders</span>
 									</div>
@@ -205,7 +266,11 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
+
+
+
+
 					<div class="d-none d-xxxl-block col-xxxl-6">
 						<div class="element-wrapper">
 							<div class="element-actions">
@@ -303,10 +368,10 @@
 				<div class="row">
 					<div class="col-sm-12 col-xxxl-9">
 						<div class="element-wrapper">
-							<h6 class="element-header">Unique Visitors Graph</h6>
+							<h6 class="element-header">Top 10 Students</h6>
 							<div class="element-box">
 								<div class="os-tabs-w">
-									<div class="os-tabs-controls">
+									<!-- <div class="os-tabs-controls">
 										<ul class="nav nav-tabs smaller">
 											<li class="nav-item"><a class="nav-link active"
 												data-toggle="tab" href="#tab_overview">Overview</a></li>
@@ -323,15 +388,17 @@
 											<li class="nav-item"><a class="nav-link"
 												data-toggle="tab" href="#">Last Month</a></li>
 										</ul>
-									</div>
+									</div> -->
 									<div class="tab-content">
 										<div class="tab-pane active" id="tab_overview">
 											<div class="el-tablo bigger">
-												<div class="label">Unique Visitors</div>
-												<div class="value">12,537</div>
+												<div class="label">Top Ten Students</div>
+												<div class="value">10</div>
 											</div>
 											<div class="el-chart-w">
-												<canvas height="150px" id="lineChart" width="600px"></canvas>
+												<!-- <canvas height="150px" id="lineChart" width="600px"></canvas> -->
+												<canvas id="myChart" width=200" height="100"
+													class="chartjs-render-monitor" style="display: block;"></canvas>
 											</div>
 										</div>
 										<div class="tab-pane" id="tab_sales"></div>
@@ -876,4 +943,83 @@
 		<div class="display-type"></div>
 	</div> -->
 </body>
+
+<script>
+	var ctx = document.getElementById('myChart');
+	var myChart = new Chart(ctx, {
+		type : 'bar',
+		data : {
+			labels : [ 'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange' ],
+			datasets : [ {
+				label : '# of Votes',
+				data : [ 12, 19, 3, 5, 2, 3 ],
+				backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+						'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)',
+						'rgba(255, 159, 64, 0.2)' ],
+				borderColor : [ 'rgba(255, 99, 132, 1)',
+						'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)' ],
+				borderWidth : 1
+			} ]
+		},
+		options : {
+			scales : {
+				yAxes : [ {
+					ticks : {
+						beginAtZero : true
+					}
+				} ]
+			}
+		}
+	});
+</script>
+<script>
+	var ctx = document.getElementById('myPieChart1');
+	var myChart = new Chart(ctx, {
+		type : 'doughnut',
+		data : {
+			/* labels : [ 'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange' ], */
+			datasets : [ {
+				label : '# of Votes',
+				data : [ 12, 19, 3, 5, 2, 3 ],
+				backgroundColor : [ 'rgba(255, 99, 132)', 'rgba(54, 162, 235)',
+						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
+						'rgba(153, 102, 255)', 'rgba(255, 159, 64)' ],
+				borderColor : [ 'rgba(255, 99, 132, 1)',
+						'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)' ],
+
+			} ]
+		},
+
+	});
+</script>
+
+<script>
+	var ctx = document.getElementById('myPieChart2');
+	var myChart = new Chart(ctx, {
+		type : 'doughnut',
+		data : {
+			/* labels : [ 'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange' ], */
+			datasets : [ {
+				label : '# of Votes',
+				data : [ 12, 19, 3, 5, 2, 3 ],
+				backgroundColor : [ 'rgba(255, 99, 132)', 'rgba(54, 162, 235)',
+						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
+						'rgba(153, 102, 255)', 'rgba(255, 159, 64)' ],
+				borderColor : [ 'rgba(255, 99, 132, 1)',
+						'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)' ],
+
+			} ]
+		},
+
+	});
+</script>
+
+
 </html>

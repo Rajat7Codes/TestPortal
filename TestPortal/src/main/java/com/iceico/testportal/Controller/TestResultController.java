@@ -3,6 +3,8 @@
  */
 package com.iceico.testportal.Controller;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,5 +31,5 @@ public class TestResultController {
 		modelMap.addAttribute("edit", false);
 		return "result";
 	}
-	
+
 }
