@@ -74,6 +74,7 @@
 								<tr>
 									<th>Sr. No.</th>
 									<th>Student Name</th>
+									<th>Marks</th>
 									<th>Result</th>
 									<th>Date</th>
 								</tr>
@@ -83,8 +84,10 @@
 									<tr>
 										<td>${ind.index+1}</td>
 										<td>${user[0]}</td>
+										<td>${user[3]}</td>
 										<td>${user[1]}</td>
 										<td>${user[2]}</td>
+
 									</tr>
 								</c:forEach>
 							</tbody>
