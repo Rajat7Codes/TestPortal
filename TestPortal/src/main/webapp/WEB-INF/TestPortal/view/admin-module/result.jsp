@@ -80,7 +80,6 @@
 							</thead>
 							<tbody>
 								<c:forEach var="user" items="${userList}" varStatus="ind">
-
 									<tr>
 										<td>${ind.index+1}</td>
 										<td>${user[0]}</td>
