@@ -55,7 +55,7 @@ public class AddTest implements Serializable {
 	private Boolean negativeMarking;
 
 	@Column(name = "ratio")
-	private Integer ratio;
+	private String ratio;
 
 	@Column(name = "delete_flag")
 	private Boolean isDeleted;
@@ -72,6 +72,36 @@ public class AddTest implements Serializable {
 
 	@OneToMany(mappedBy = "addTest", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<TestQuestion> testQuestions;
+	
+	/**
+	 * @param addTestId
+	 * @param testName
+	 * @param time
+	 * @param date
+	 * @param negativeMarking
+	 * @param ratio
+	 * @param isDeleted
+	 * @param instructions
+	 * @param passingPercent
+	 * @param subject
+	 * @param testQuestions
+	 */
+	public AddTest(Long addTestId, String testName, Integer time, Date date, Boolean negativeMarking, String ratio,
+			Boolean isDeleted, String instructions, float passingPercent, Subject subject,
+			List<TestQuestion> testQuestions) {
+		super();
+		this.addTestId = addTestId;
+		this.testName = testName;
+		this.time = time;
+		this.date = date;
+		this.negativeMarking = negativeMarking;
+		this.ratio = ratio;
+		this.isDeleted = isDeleted;
+		this.instructions = instructions;
+		this.passingPercent = passingPercent;
+		this.subject = subject;
+		this.testQuestions = testQuestions;
+	}
 
 	/**
 	 * @return the addTestId
@@ -146,14 +176,14 @@ public class AddTest implements Serializable {
 	/**
 	 * @return the ratio
 	 */
-	public Integer getRatio() {
+	public String getRatio() {
 		return ratio;
 	}
 
 	/**
 	 * @param ratio the ratio to set
 	 */
-	public void setRatio(Integer ratio) {
+	public void setRatio(String ratio) {
 		this.ratio = ratio;
 	}
 

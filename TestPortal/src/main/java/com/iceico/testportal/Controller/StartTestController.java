@@ -41,7 +41,6 @@ import com.iceico.testportal.Service.UserService;
 /**
  * @author Rajat
  * @version 0.1 Creation Date: 16/03/2020
- *
  */
 @Controller
 public class StartTestController {
@@ -100,79 +99,85 @@ public class StartTestController {
 		QuestionBank question = this.questionBankService.getQuestionBankById(quesId);
 		String response = this.compilerService.runCodeWithInput(languageIn, code, question.getSampleInput());
 		JSONObject resObj = (JSONObject) new JSONParser().parse(response);
-		
-		JSONObject outObj = new JSONObject();
 
-		if( resObj.get("output").equals(question.getSampleOutput()) || ("\n"+resObj.get("output")).equals(question.getSampleOutput())) {
-			outObj.put( "testCase", "successfull");
+		JSONObject outObj = new JSONObject();
+		
+
+		if (question.getSampleOutput().equals(resObj.get("output"))
+				|| question.getSampleOutput().equals("\n" + resObj.get("output"))) {
+			outObj.put("testCase", "successfull");
 		} else {
-			outObj.put( "testCase", "failed");
+			outObj.put("testCase", "failed");
 		}
-		outObj.put( "output", resObj.get("output"));
+		outObj.put("output", resObj.get("output"));
 
 		return outObj;
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "deprecation" })
 	@RequestMapping(value = "/java/student/end/test", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	public @ResponseBody JSONObject endTest(@RequestParam("QnA") String qnA, @RequestParam("testName") String testName,
 			@RequestParam("testId") Long testId, ModelMap modelMap)
 			throws ResourceNotFoundException, ParseException, org.json.simple.parser.ParseException {
 
 		double totalMarks = 0;
+
+		AddTest addTest = this.addTestService.getAddTestById(testId);
 		
 		TestResult testResult = new TestResult();
 		for (TestQuestion testQuestion : this.addTestService.getAddTestById(testId).getTestQuestions()) {
 			totalMarks += this.questionBankService.getQuestionBankById(testQuestion.getQuestionId()).getMarks();
 		}
-		
+
 		JSONParser parser = new JSONParser();
 		JSONArray allAnswers = (JSONArray) parser.parse(qnA);
-		
+
 		double obtainedMarks = 0;
 		int attempted = allAnswers.size();
 
 		for (int i = 0; i < allAnswers.size(); i++) {
 			JSONObject answer = (JSONObject) allAnswers.get(i);
-			QuestionBank question = this.questionBankService.getQuestionBankById(Long.parseLong(answer.get("questionId") + ""));
-			
-			
-			// Checks if question type is coding 
-			if(question.getQuestionType().getProgramType()) {
-			
+			QuestionBank question = this.questionBankService
+					.getQuestionBankById(Long.parseLong(answer.get("questionId") + ""));
+
+			// Checks if question type is coding
+			if (question.getQuestionType().getProgramType()) {
+
 				System.out.println("================= In Program type code =================");
-				String code = answer.get("code")+"";
-				String lang = answer.get("lang")+"";
+				String code = answer.get("code") + "";
+				String lang = answer.get("lang") + "";
 				String input = question.getHiddenInput();
-				
+
 				String response = this.compilerService.runCodeWithInput(lang, code, input);
 				JSONObject resObj = (JSONObject) new JSONParser().parse(response);
-				if( question.getHiddenOutput().equals( resObj.get("output")) ||  question.getHiddenOutput().equals( "\n"+resObj.get("output"))) {
+				if (question.getHiddenOutput().equals(resObj.get("output"))
+						|| question.getHiddenOutput().equals("\n" + resObj.get("output"))) {
 					obtainedMarks += Integer.parseInt(answer.get("marks").toString());
-				} 
+				}
 			} else {
 				for (Options opt : question.getOptions()) {
 					if (opt.getOptionsId() == Long.parseLong(answer.get("optionId") + "")) {
 						Boolean userAnswer = opt.getCorrectAnswer();
 						if (userAnswer == true) {
-//							Boolean userCorrectAnswer = opt.getCorrectAnswer();
-//							modelMap.addAttribute("userCorrectAnswer", userCorrectAnswer);
 							obtainedMarks += Integer.parseInt(answer.get("marks").toString());
 						} else {
-//							Boolean userWrongAnswer = opt.getCorrectAnswer();
-//							modelMap.addAttribute("userCorrectAnswer", userWrongAnswer);
+							// Below code check whether question has negative marking or not
+							if( addTest.getNegativeMarking()) {
+								obtainedMarks -= addTest.getRatio()*Integer.parseInt(answer.get("marks").toString());
+							}
 						}
 					}
 				}
 			}
-			
 		}
 
+		
+		
 		// Below code returns whether user is failed or passed
 		double passingCriteria = this.addTestService.getAddTestById(testId).getPassingPercent();
-		double per = (obtainedMarks/totalMarks)*100;
+		double per = (obtainedMarks / totalMarks) * 100;
 		String result = null;
-		if(per>=passingCriteria) result = "PASS";
+		if (per >= passingCriteria) result = "PASS";
 		else result = "FAIL";
 
 		// Saving TestResult
@@ -181,7 +186,7 @@ public class StartTestController {
 		testResult.setResultStatus(result);
 		testResult.setTestName(testName);
 		testResult.setTotalMarks(totalMarks);
-		testResult.setDate( Calendar.getInstance().getTime());
+		testResult.setDate(Calendar.getInstance().getTime());
 		testResult.setTestId(testId);
 		this.testResultService.saveTestResult(testResult);
 
