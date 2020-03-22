@@ -18,7 +18,6 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/static/bower_components/chart.js/dist/Chart.min.js"></script>
 
-
 </head>
 <body
 	class="menu-position-side menu-side-left full-screen with-content-panel">
@@ -28,16 +27,16 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="element-wrapper">
-						<div class="element-actions">
+						<!-- <div class="element-actions">
 							<form class="form-inline justify-content-sm-end">
 								<select class="form-control form-control-sm"><option
 										value="Pending">Today</option>
 									<option value="Active">Last Week</option>
 									<option value="Cancelled">Last 30 Days</option></select>
 							</form>
-						</div>
+						</div> -->
 
-						<h6 class="element-header">Sales Dashboard</h6>
+						<!-- <h6 class="element-header">Sales Dashboard</h6>
 						<div class="element-content">
 							<div class="row">
 								<div class="col-sm-4 col-xxxl-3">
@@ -73,7 +72,9 @@
 										</div></a>
 								</div>
 							</div>
-						</div>
+						</div> -->
+
+
 					</div>
 				</div>
 			</div>

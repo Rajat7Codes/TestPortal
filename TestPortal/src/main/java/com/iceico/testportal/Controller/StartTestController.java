@@ -216,6 +216,7 @@ public class StartTestController {
 		testResult.setDate(Calendar.getInstance().getTime());
 		testResult.setTestId(testId);
 		testResult.setUserId(this.userService.findBySSO(this.getPrincipal()).getId());
+		testResult.setPercentage(per);
 		this.testResultService.saveTestResult(testResult);
 
 		return null;

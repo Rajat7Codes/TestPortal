@@ -37,31 +37,31 @@
 										<option value="Cancelled">Last 30 Days</option></select>
 								</form>
 							</div>
-							<h6 class="element-header">Sales Dashboard</h6>
+							<h6 class="element-header">Admin Dashboard</h6>
 							<div class="element-content">
 								<div class="row">
 									<div class="col-sm-4 col-xxxl-3">
 										<a class="element-box el-tablo" href="#"><div
 												class="label">Users</div>
-											<div class="value">57</div>
+											<div class="value">${totalJavaUsersCount }</div>
 											<div class="trending trending-up-basic">
-												<span>12%</span><i class="os-icon os-icon-arrow-up2"></i>
+												<!-- <span>12%</span><i class="os-icon os-icon-arrow-up2"></i> -->
 											</div></a>
 									</div>
 									<div class="col-sm-4 col-xxxl-3">
 										<a class="element-box el-tablo" href="#"><div
 												class="label">Test</div>
-											<div class="value">56</div>
+											<div class="value">${OverallTestCount }</div>
 											<div class="trending trending-down-basic">
-												<span>12%</span><i class="os-icon os-icon-arrow-down"></i>
+												<!-- <span>12%</span><i class="os-icon os-icon-arrow-down"></i> -->
 											</div></a>
 									</div>
 									<div class="col-sm-4 col-xxxl-3">
 										<a class="element-box el-tablo" href="#"><div
 												class="label">Questions</div>
-											<div class="value">786</div>
+											<div class="value">${totalQuestionsCount }</div>
 											<div class="trending trending-down-basic">
-												<span>9%</span><i class="os-icon os-icon-arrow-down"></i>
+												<!-- <span>9%</span><i class="os-icon os-icon-arrow-down"></i> -->
 											</div></a>
 									</div>
 									<div class="d-none d-xxxl-block col-xxxl-3">
@@ -78,10 +78,6 @@
 					</div>
 				</div>
 				<div class="row">
-
-
-
-
 					<!-- <div class="col-sm-8 col-xxxl-6">
 						<div class="element-wrapper">
 							<h6 class="element-header">New Orders</h6>
@@ -188,13 +184,13 @@
 								<div class="el-chart-w">
 									<canvas id="myPieChart1" width="400" height="400"></canvas>
 									<div class="inside-donut-chart-label">
-										<strong>142</strong><span>Total Orders</span>
+										<strong>${todayTotalTestCount }</strong><span>Total
+											Tests</span>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
 					<div class="col-sm-6 d-xxxl-none">
 						<div class="element-wrapper">
 							<h6 class="element-header">Monthly Performance</h6>
@@ -203,15 +199,13 @@
 									<canvas id="myPieChart2" width="400" height="400"
 										class="chartjs-render-monitor" style="display: block;"></canvas>
 									<div class="inside-donut-chart-label">
-										<strong>142</strong><span>Total Orders</span>
+										<strong>${monthlyTotalTestCount }</strong><span>Total
+											Tests</span>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
-
-
 					<!-- <div class="col-sm-6 d-xxxl-none">
 						<div class="element-wrapper">
 							<h6 class="element-header">Top Selling Today</h6>
@@ -267,10 +261,6 @@
 							</div>
 						</div>
 					</div> -->
-
-
-
-
 					<div class="d-none d-xxxl-block col-xxxl-6">
 						<div class="element-wrapper">
 							<div class="element-actions">
@@ -397,7 +387,7 @@
 											</div>
 											<div class="el-chart-w">
 												<!-- <canvas height="150px" id="lineChart" width="600px"></canvas> -->
-												<canvas id="myChart" width=200" height="100"
+												<canvas id="myChart" width="200" height="100"
 													class="chartjs-render-monitor" style="display: block;"></canvas>
 											</div>
 										</div>
@@ -761,6 +751,7 @@
 				<div class="content-panel-close">
 					<i class="os-icon os-icon-close"></i>
 				</div>
+
 				<div class="element-wrapper">
 					<h6 class="element-header">Quick Links</h6>
 					<div class="element-box-tp">
@@ -775,7 +766,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="element-wrapper">
+
+				<!-- <div class="element-wrapper">
 					<h6 class="element-header">Support Agents</h6>
 					<div class="element-box-tp">
 						<div class="profile-tile">
@@ -797,6 +789,8 @@
 								</div>
 							</div>
 						</div>
+						
+						
 						<div class="profile-tile">
 							<a class="profile-tile-box" href="users_profile_small.html"><div
 									class="pt-avatar-w">
@@ -816,9 +810,16 @@
 								</div>
 							</div>
 						</div>
+						
+						
 					</div>
-				</div>
-				<div class="element-wrapper">
+				</div> -->
+
+
+
+
+
+				<!-- <div class="element-wrapper">
 					<h6 class="element-header">Recent Activity</h6>
 					<div class="element-box-tp">
 						<div class="activity-boxes-w">
@@ -872,8 +873,13 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="element-wrapper">
+				</div> -->
+
+
+
+
+
+				<!-- <div class="element-wrapper">
 					<h6 class="element-header">Team Members</h6>
 					<div class="element-box-tp">
 						<div class="input-search-w">
@@ -935,7 +941,12 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
+
+
+
+
+
 			</div>
 		</div>
 	</div>
@@ -949,30 +960,50 @@
 	var myChart = new Chart(ctx, {
 		type : 'bar',
 		data : {
-			labels : [ 'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange' ],
+			labels : [ 'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','Orange','Orange','Orange','Orange' ],
 			datasets : [ {
-				label : '# of Votes',
-				data : [ 12, 19, 3, 5, 2, 3 ],
-				backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-						'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)',
-						'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)',
-						'rgba(255, 159, 64, 0.2)' ],
+				label : '# Percentage (%)',
+				barPercentage : 0.4,
+
+				data : ${topTenPercentages},
+				backgroundColor : [ 'rgba(255, 99, 132)', 'rgba(54, 162, 235)',
+						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
+						'rgba(153, 102, 255)', 'rgba(255, 159, 64)','rgba(255, 99, 132)', 'rgba(54, 162, 235)',
+						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
+						'rgba(153, 102, 255)', 'rgba(255, 159, 64)','rgba(255, 99, 132)', 'rgba(54, 162, 235)',
+						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
+						'rgba(153, 102, 255)', 'rgba(255, 159, 64)','rgba(255, 99, 132)', 'rgba(54, 162, 235)',
+						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
+						'rgba(153, 102, 255)', 'rgba(255, 159, 64)' ],
 				borderColor : [ 'rgba(255, 99, 132, 1)',
+						'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)', 'rgba(255, 99, 132, 1)',
+						'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)' ,'rgba(255, 99, 132, 1)',
+						'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)' ,'rgba(255, 99, 132, 1)',
 						'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
 						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
 						'rgba(255, 159, 64, 1)' ],
 				borderWidth : 1
 			} ]
 		},
+
 		options : {
 			scales : {
 				yAxes : [ {
 					ticks : {
-						beginAtZero : true
+						beginAtZero : true,
+						responsive : true,
+						maintainAspectRatio : true
 					}
 				} ]
 			}
 		}
+
 	});
 </script>
 <script>
@@ -980,44 +1011,40 @@
 	var myChart = new Chart(ctx, {
 		type : 'doughnut',
 		data : {
-			/* labels : [ 'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange' ], */
+			labels : [ 'Pass', 'Fail' ],
 			datasets : [ {
 				label : '# of Votes',
-				data : [ 12, 19, 3, 5, 2, 3 ],
-				backgroundColor : [ 'rgba(255, 99, 132)', 'rgba(54, 162, 235)',
+				data : ${todayPassFailStudentCount},
+				backgroundColor : [ 'rgba(54, 162, 235)','rgba(255, 99, 132)',
 						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
 						'rgba(153, 102, 255)', 'rgba(255, 159, 64)' ],
-				borderColor : [ 'rgba(255, 99, 132, 1)',
-						'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+				borderColor : [ 'rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)',
+						 'rgba(255, 206, 86, 1)',
 						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
 						'rgba(255, 159, 64, 1)' ],
 
 			} ]
 		},
-
 	});
 </script>
-
 <script>
 	var ctx = document.getElementById('myPieChart2');
 	var myChart = new Chart(ctx, {
 		type : 'doughnut',
 		data : {
-			/* labels : [ 'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange' ], */
+			labels : [ 'Pass', 'Fail' ],
 			datasets : [ {
 				label : '# of Votes',
-				data : [ 12, 19, 3, 5, 2, 3 ],
-				backgroundColor : [ 'rgba(255, 99, 132)', 'rgba(54, 162, 235)',
+				data : ${monthlyPassFailStudentCount},
+				backgroundColor : [  'rgba(54, 162, 235)', 'rgba(255, 99, 132)',
 						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
 						'rgba(153, 102, 255)', 'rgba(255, 159, 64)' ],
-				borderColor : [ 'rgba(255, 99, 132, 1)',
-						'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+				borderColor : [ 
+						'rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)',
 						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
 						'rgba(255, 159, 64, 1)' ],
-
 			} ]
 		},
-
 	});
 </script>
 
