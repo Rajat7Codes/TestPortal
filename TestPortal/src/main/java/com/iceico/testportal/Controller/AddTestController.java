@@ -166,6 +166,7 @@ public class AddTestController {
 		int failed = 0;
 		List<String[]> list = new ArrayList<String[]>();
 		for (TestResult testResult : this.testResultService.getTestResultList()) {
+
 			if (addTestId == testResult.getTestId()) {
 				if (testResult.getResultStatus().equals("PASS")) {
 
@@ -173,20 +174,21 @@ public class AddTestController {
 				} else {
 					failed++;
 				}
-				attempted++;
 			}
 			for (User user : this.userService.findAllUsers()) {
 				if (testResult.getUserId() == user.getId()) {
-					String array[] = new String[5];
-					array[0] = user.getFirstName() + " " + user.getLastName();
-
-					array[1] = testResult.getResultStatus();
-					array[2] = new SimpleDateFormat("dd/MM/YYYY").format(testResult.getDate());
-
-					list.add(array);
+					if (addTestId == testResult.getTestId()) {
+						String array[] = new String[5];
+						array[0] = user.getFirstName() + " " + user.getLastName();
+						
+						array[1] = testResult.getResultStatus();
+						array[2] = new SimpleDateFormat("dd/MM/YYYY").format(testResult.getDate());
+						array[3] = testResult.getObtainedMarks().toString().replace(".0", "");
+						list.add(array);
+						attempted++;
+					}
 				}
 			}
-
 		}
 		System.out.println(list);
 		modelMap.addAttribute("userList", list);
