@@ -27,18 +27,22 @@
 						</thead>
 						<tbody>
 							<c:forEach var="test" items="${testList}" varStatus="ind">
-								<c:if test="${ test.isDeleted==false }">
+
+								<c:if test="${ test.isDeleted!= true }">
+
 									<tr>
 										<td>${ind.index+1}</td>
-										<td>${test.testName }</td>
-										<td>${test.time }</td>
-										<td>${test.date }</td>
+										<td>${test.testName}</td>
+										<td>${test.date}</td>
+										<td>${test.time}</td>
 										<td><a class="text-decoration-none !important"
 											href="${pageContext.request.contextPath }/java/student/start/test/${test.addTestId}">start
 												test</a></td>
 									</tr>
+
 								</c:if>
 							</c:forEach>
+
 						</tbody>
 					</table>
 				</div>

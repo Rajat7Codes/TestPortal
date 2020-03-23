@@ -159,6 +159,12 @@
 						<div class="os-icon os-icon-edit-32"></div>
 					</div> <span> Test History</span>
 			</a></li>
+			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/java/student/student/individual/performance">
+					<div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span> My Performance</span>
+			</a></li>
 
 		</ul>
 	</div>
@@ -223,6 +229,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

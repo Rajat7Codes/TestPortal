@@ -40,7 +40,7 @@ public class TestResult extends Auditable<String> implements Serializable {
 	 * 
 	 */
 	public TestResult() {
-		
+
 	}
 
 	@Id
@@ -80,6 +80,9 @@ public class TestResult extends Auditable<String> implements Serializable {
 	@Column(name = "answers_given")
 	private String answersGiven;
 
+	@Column(name = "percentage")
+	private Double percentage;
+
 	/**
 	 * @param testResultId
 	 * @param testId
@@ -91,9 +94,11 @@ public class TestResult extends Auditable<String> implements Serializable {
 	 * @param negativeMarks
 	 * @param attempted
 	 * @param resultStatus
+	 * @param percentage
 	 */
 	public TestResult(Long testResultId, Long testId, Integer userId, String testName, Double obtainedMarks,
-			Double totalMarks, Date date, Double negativeMarks, Integer attempted, String resultStatus) {
+			Double totalMarks, Date date, Double negativeMarks, Integer attempted, String resultStatus,
+			Double percentage) {
 		super();
 		this.testResultId = testResultId;
 		this.testId = testId;
@@ -105,6 +110,7 @@ public class TestResult extends Auditable<String> implements Serializable {
 		this.negativeMarks = negativeMarks;
 		Attempted = attempted;
 		this.resultStatus = resultStatus;
+		this.percentage = percentage;
 	}
 
 	/**
@@ -259,6 +265,20 @@ public class TestResult extends Auditable<String> implements Serializable {
 	 */
 	public void setAnswersGiven(String answersGiven) {
 		this.answersGiven = answersGiven;
+	}
+
+	/**
+	 * @return the percentage
+	 */
+	public Double getPercentage() {
+		return percentage;
+	}
+
+	/**
+	 * @param percentage the percentage to set
+	 */
+	public void setPercentage(Double percentage) {
+		this.percentage = percentage;
 	}
 
 }
