@@ -237,15 +237,12 @@ public class TilesController {
 			 * 
 			 * }
 			 */
-			
+
 			if (testResult1.getUserId() == currentUserId) {
 				System.out.println("User Id Inner ==========>>>" + percentage);
-				
-				
 
 			}
 		}
-
 		todayPassFailStudentsCount.add(todayPassStudents.size());
 		todayPassFailStudentsCount.add(todayFailStudents.size());
 
