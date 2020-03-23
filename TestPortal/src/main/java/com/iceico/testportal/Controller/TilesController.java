@@ -156,12 +156,15 @@ public class TilesController {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 
 		/* START student dashboard releated stuff */
-
 		Date date = new Date();
 		LocalDate currentdate = LocalDate.now();
 		Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(currentdate.withDayOfMonth(1).toString());
 		Date lastDate = new SimpleDateFormat("yyyy-MM-dd")
 				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
+
+		Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
+		System.out.println("currentUserId ==============>>>" + currentUserId);
+
 		/* All Question Count */
 		List<QuestionBank> questionBankList = this.questionBankService.getQuestionBankList();
 		/* All Added Test Count */
@@ -178,7 +181,7 @@ public class TilesController {
 				if (!users.equals("Admin")) {
 					if (!userPro.getDepartment().getDepartmentName().equals("WEB")) {
 						userListCount.add(UserId);
-						System.out.println("users ==============>>>" + users);
+						// System.out.println("users ==============>>>" + users);
 						modelMap.addAttribute("totalJavaUsersCount", userListCount.size());
 					}
 				}
@@ -219,6 +222,26 @@ public class TilesController {
 			}
 		}
 
+		/* pass fail for each end */
+
+		for (TestResult testResult1 : todayTestResult) {
+			for (int i = 0; i < todayTestResult.size(); i++) {
+				// System.out.println("pecentages ==========>>> " + todayTestResult.get(i));
+			}
+
+			Double percentage = testResult1.getPercentage();
+			System.out.println("UserId === " + testResult1.getUserId() + "   pecentages ==" + percentage);
+			/*
+			 * if (percentage ==) {
+			 * 
+			 * }
+			 */
+
+			if (testResult1.getUserId() == currentUserId) {
+				System.out.println("User Id Inner ==========>>>" + percentage);
+
+			}
+		}
 		todayPassFailStudentsCount.add(todayPassStudents.size());
 		todayPassFailStudentsCount.add(todayFailStudents.size());
 

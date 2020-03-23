@@ -180,7 +180,6 @@ public class AddTestController {
 					if (addTestId == testResult.getTestId()) {
 						String array[] = new String[5];
 						array[0] = user.getFirstName() + " " + user.getLastName();
-						
 						array[1] = testResult.getResultStatus();
 						array[2] = new SimpleDateFormat("dd/MM/YYYY").format(testResult.getDate());
 						array[3] = testResult.getObtainedMarks().toString().replace(".0", "");

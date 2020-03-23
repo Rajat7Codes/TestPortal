@@ -40,8 +40,7 @@ import com.iceico.testportal.Service.UserService;
 
 /**
  * @author Rajat
- * @version 0.1 Creation Date: 16/03/2020 modified by: Puja modification date:
- *          19/03/2020
+ * @version 0.1 Creation Date: 16/03/2020
  */
 @Controller
 public class StartTestController {
@@ -162,6 +161,7 @@ public class StartTestController {
 						String ratio = addTest.getRatio();
 						System.out.println("ratio========>" + addTest.getRatio());
 						String array[] = ratio.split("/");
+						wm = Integer.parseInt(answer.get("marks").toString());
 						int r = 0;
 						for (String temp : array) {
 							array[r] = temp;
@@ -176,6 +176,7 @@ public class StartTestController {
 						wm = wm / (Integer.parseInt(array[1]));
 						System.out.println(" divided by denominator============>" + wm);
 						twm += wm;
+						System.out.println(" twm============>" + twm);
 					}
 				}
 
@@ -188,6 +189,7 @@ public class StartTestController {
 						} else {
 							// Below code check whether question has negative marking or not
 							if (addTest.getNegativeMarking()) {
+								wm = Integer.parseInt(answer.get("marks").toString());
 								String ratio = addTest.getRatio();
 								System.out.println("ration========>" + addTest.getRatio());
 								String array[] = ratio.split("/");
@@ -205,6 +207,7 @@ public class StartTestController {
 								wm = wm / (Integer.parseInt(array[1]));
 								System.out.println(" divided by denominator============>" + wm);
 								twm += wm;
+								System.out.println(" twm============>" + twm);
 							}
 						}
 					}
@@ -212,8 +215,8 @@ public class StartTestController {
 			}
 
 		}
-		obtainedMarks -= twm;
 		System.out.println("marks without deduction" + obtainedMarks);
+		obtainedMarks -= twm;
 		System.out.println("twm=>" + twm);
 		System.out.println("marks after deduction" + obtainedMarks);
 
@@ -222,10 +225,13 @@ public class StartTestController {
 		double per = (obtainedMarks / totalMarks) * 100;
 		String result = null;
 
-		if (per >= passingCriteria)
+		if (per >= passingCriteria) {
 			result = "PASS";
-		else
+
+		} else {
 			result = "FAIL";
+
+		}
 
 		// Saving TestResult
 		testResult.setAttempted(attempted);
@@ -238,7 +244,6 @@ public class StartTestController {
 		testResult.setUserId(this.userService.findBySSO(this.getPrincipal()).getId());
 		testResult.setPercentage(per);
 		this.testResultService.saveTestResult(testResult);
-
 		return null;
 	}
 
