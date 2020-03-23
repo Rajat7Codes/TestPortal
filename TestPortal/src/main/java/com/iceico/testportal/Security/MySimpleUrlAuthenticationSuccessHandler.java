@@ -57,6 +57,8 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 		boolean isDepartmentJava = false;
 		boolean isDepartmentWeb = false;
 		boolean isDriveStudent = false;
+		boolean isJavaAdmin = false;
+		boolean isWebAdmin = false;
 
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
@@ -76,6 +78,12 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_DRIVE")) {
 				isDriveStudent = true;
 				break;
+			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_JAVA_ADMIN")) {
+				isJavaAdmin = true;
+				break;
+			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_WEB_ADMIN")) {
+				isWebAdmin = true;
+				break;
 			}
 		}
 
@@ -89,6 +97,10 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 			return "/web/student/dashboard";
 		} else if (isDriveStudent) {
 			return "/drive/student/dashboard";
+		} else if (isJavaAdmin) {
+			return "/drive/java/admin/dashboard";
+		} else if (isWebAdmin) {
+			return "/drive/web/admin/dashboard";
 		} else {
 			throw new IllegalStateException();
 		}
