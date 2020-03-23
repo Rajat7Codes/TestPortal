@@ -66,7 +66,6 @@ public class StartTestController {
 	/* Test List page */
 	@RequestMapping("/java/student/test/list")
 	public String testList(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
-
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
 		return "testList";
@@ -226,15 +225,11 @@ public class StartTestController {
 		double per = (obtainedMarks / totalMarks) * 100;
 		String result = null;
 
-		int testAttempt = 0;
-
 		if (per >= passingCriteria) {
-			testAttempt = testResult.getTestAttempt() + 1;
 			result = "PASS";
 
 		} else {
 			result = "FAIL";
-			testAttempt = testResult.getTestAttempt() + 1;
 
 		}
 
@@ -247,9 +242,7 @@ public class StartTestController {
 		testResult.setDate(Calendar.getInstance().getTime());
 		testResult.setTestId(testId);
 		testResult.setUserId(this.userService.findBySSO(this.getPrincipal()).getId());
-		testResult.setTestAttempt(testAttempt);
 		testResult.setPercentage(per);
-
 		this.testResultService.saveTestResult(testResult);
 		return null;
 	}

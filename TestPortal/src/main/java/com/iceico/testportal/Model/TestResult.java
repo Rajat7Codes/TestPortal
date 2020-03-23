@@ -76,9 +76,6 @@ public class TestResult extends Auditable<String> implements Serializable {
 	@Column(name = "result_status")
 	private String resultStatus;
 
-	@Column(name = "test_attempt")
-	private int TestAttempt;
-
 	@Column(name = "percentage")
 	private Double percentage;
 
@@ -93,11 +90,10 @@ public class TestResult extends Auditable<String> implements Serializable {
 	 * @param negativeMarks
 	 * @param attempted
 	 * @param resultStatus
-	 * @param testAttempt
 	 * @param percentage
 	 */
 	public TestResult(Long testResultId, Long testId, Integer userId, String testName, Double obtainedMarks,
-			Double totalMarks, Date date, Double negativeMarks, Integer attempted, String resultStatus, int testAttempt,
+			Double totalMarks, Date date, Double negativeMarks, Integer attempted, String resultStatus,
 			Double percentage) {
 		super();
 		this.testResultId = testResultId;
@@ -110,7 +106,6 @@ public class TestResult extends Auditable<String> implements Serializable {
 		this.negativeMarks = negativeMarks;
 		Attempted = attempted;
 		this.resultStatus = resultStatus;
-		TestAttempt = testAttempt;
 		this.percentage = percentage;
 	}
 
@@ -252,20 +247,6 @@ public class TestResult extends Auditable<String> implements Serializable {
 	 */
 	public void setResultStatus(String resultStatus) {
 		this.resultStatus = resultStatus;
-	}
-
-	/**
-	 * @return the testAttempt
-	 */
-	public int getTestAttempt() {
-		return TestAttempt;
-	}
-
-	/**
-	 * @param testAttempt the testAttempt to set
-	 */
-	public void setTestAttempt(int testAttempt) {
-		TestAttempt = testAttempt;
 	}
 
 	/**

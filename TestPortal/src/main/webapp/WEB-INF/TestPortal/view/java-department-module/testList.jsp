@@ -43,19 +43,6 @@
 								</c:if>
 							</c:forEach>
 
-							<%-- 	<c:forEach var="list" items="${listOflist}" varStatus="ind">
-								<c:if test="${ list[4] == false }">
-										<tr>
-											<td>${ind.index+1}</td>
-											<td>${list[0][0]}</td>
-											<td>${list[1]}</td>
-											<td>${list[2]}</td>
-											<td><a class="text-decoration-none !important"
-												href="${pageContext.request.contextPath }/java/student/start/test/${list[3]}">start
-													test</a></td>
-										</tr>
-								</c:if>
-							</c:forEach> --%>
 						</tbody>
 					</table>
 				</div>
