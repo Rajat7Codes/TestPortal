@@ -248,6 +248,8 @@ public class StartTestController {
 		testResult.setTestId(testId);
 		testResult.setUserId(this.userService.findBySSO(this.getPrincipal()).getId());
 		testResult.setTestAttempt(testAttempt);
+		testResult.setPercentage(per);
+
 		this.testResultService.saveTestResult(testResult);
 		return null;
 	}

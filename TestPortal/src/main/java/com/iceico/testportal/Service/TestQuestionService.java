@@ -14,9 +14,8 @@ import com.iceico.testportal.Model.TestQuestion;
  * @author Rajat
  *
  */
-@Service
 public interface TestQuestionService {
-	
+
 	public void saveTestQuestion(TestQuestion testQuestion);
 
 	public void deleteTestQuestion(Long testQuestionId);

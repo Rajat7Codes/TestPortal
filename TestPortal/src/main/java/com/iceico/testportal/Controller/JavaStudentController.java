@@ -3,6 +3,11 @@ package com.iceico.testportal.Controller;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.imageio.ImageIO;
@@ -24,7 +29,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
+import com.iceico.testportal.Model.TestResult;
 import com.iceico.testportal.Model.User;
+import com.iceico.testportal.Service.DashboardService;
 import com.iceico.testportal.Service.EMailService;
 import com.iceico.testportal.Service.UserService;
 
@@ -44,6 +51,9 @@ public class JavaStudentController {
 
 	@Autowired
 	private EMailService emailService;
+
+	@Autowired
+	private DashboardService dashboardService;
 
 	private String passwordToken = null;
 
@@ -216,6 +226,38 @@ public class JavaStudentController {
 			throws ResourceNotFoundException {
 
 		return "redirect:/java/student/profile";
+	}
+
+	@GetMapping("/java/student/student/individual/performance")
+	public String studentIndividualPerformance(ModelMap modelMap, Locale locale) throws java.text.ParseException {
+		Date date = new Date();
+		LocalDate currentdate = LocalDate.now();
+		Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(currentdate.withDayOfMonth(1).toString());
+		Date lastDate = new SimpleDateFormat("yyyy-MM-dd")
+				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
+		List<Double> getTodayPercentage = new ArrayList<Double>();
+		List<Double> getStudentTodayTestMarks = new ArrayList<Double>();
+		List<Double> getStudentMonthlyTestMarks = new ArrayList<Double>();
+		List<Double> getMonthlyPercentage = new ArrayList<Double>();
+		Integer userId = this.userService.findBySSO(this.getPrincipal()).getId();
+		for (TestResult testMonthly : this.dashboardService.getMonthlysPerformancePercentageAll(startDate, lastDate)) {
+			if (userId == testMonthly.getUserId()) {
+				getStudentMonthlyTestMarks.add(testMonthly.getObtainedMarks());
+				getMonthlyPercentage.add(testMonthly.getPercentage());
+				modelMap.addAttribute("percentageMonthly", getMonthlyPercentage);
+				modelMap.addAttribute("testMonthly", getStudentMonthlyTestMarks);
+			}
+		}
+		for (TestResult testToday : this.dashboardService.getTodaysPerformancePercentageAll(date)) {
+			if (userId == testToday.getUserId()) {
+				getStudentTodayTestMarks.add(testToday.getObtainedMarks());
+				getTodayPercentage.add(testToday.getPercentage());
+				modelMap.addAttribute("percentageToday", getTodayPercentage);
+				modelMap.addAttribute("testToday", getStudentTodayTestMarks);
+			}
+		}
+
+		return "studentIndividualPerformance";
 	}
 
 	/**

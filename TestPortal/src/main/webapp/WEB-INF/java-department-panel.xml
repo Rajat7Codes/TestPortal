@@ -87,5 +87,13 @@
 			value="/WEB-INF/TestPortal/view/java-department-module/result.jsp" />
 	</definition>
 
+	<!-- My Performance page for Test result -->
+	<definition name="studentIndividualPerformance"
+		extends="javabase.definition">
+		<put-attribute name="title" value="Student Individual Performance" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-department-module/studentIndividualPerformance.jsp" />
+	</definition>
+
 
 </tiles-definitions>
