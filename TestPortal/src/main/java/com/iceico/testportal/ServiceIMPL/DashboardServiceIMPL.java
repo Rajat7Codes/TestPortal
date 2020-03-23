@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.iceico.testportal.Model.TestResult;
 import com.iceico.testportal.Repository.TestResultRepository;
 import com.iceico.testportal.Service.DashboardService;
+import com.iceico.testportal.Service.TestResultService;
 
 /**
  * @author sameer
@@ -33,6 +34,12 @@ public class DashboardServiceIMPL implements DashboardService {
 
 	@Autowired
 	private EntityManager entityManager;
+
+	@Autowired
+	private TestResultRepository testResultRepository;
+
+	@Autowired
+	private TestResultService testResultService;
 
 	private Session getSession() {
 		return entityManager.unwrap(Session.class);
@@ -66,6 +73,13 @@ public class DashboardServiceIMPL implements DashboardService {
 				.createQuery("from TestResult where date BETWEEN :startDate AND :lastDate ORDER BY percentage DESC")
 				.setParameter("startDate", startDate).setParameter("lastDate", lastDate).setMaxResults(10)
 				.getResultList();
+	}
+
+	@Override
+	public TestResult getCurrentRankOfStudent(Long testResultId) {
+		return null;
+		// return this.getSession().createQuery("from TestResult where
+		// testResultId=:testResultId");
 	}
 
 }

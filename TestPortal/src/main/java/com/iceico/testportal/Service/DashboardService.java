@@ -26,4 +26,8 @@ public interface DashboardService {
 
 	public List<TestResult> getTopTenStudentListMonthly(Date startDate, Date lastDate);
 
+	/* For Find Rank Per Student wise */
+
+	public TestResult getCurrentRankOfStudent(Long testResultId);
+
 }
