@@ -39,7 +39,7 @@ public class TestResult extends Auditable<String> implements Serializable {
 	 * 
 	 */
 	public TestResult() {
-		
+
 	}
 
 	@Id

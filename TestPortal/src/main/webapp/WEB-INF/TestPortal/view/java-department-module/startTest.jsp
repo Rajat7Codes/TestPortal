@@ -30,128 +30,264 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.7/ace.js"
 	type="text/javascript" charset="utf-8"></script>
-	
-	
+
+
+
+
 
 <style type="text/css">
-	/* Absolute Center Spinner */
+/* Absolute Center Spinner */
 .loading {
-  position: fixed;
-  z-index: 999;
-  height: 2em;
-  width: 2em;
-  overflow: visible;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+	position: fixed;
+	z-index: 999;
+	height: 2em;
+	width: 2em;
+	overflow: visible;
+	margin: auto;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
 }
 
 /* Transparent Overlay */
 .loading:before {
-  content: '';
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255,2555,255,0.8);
+	content: '';
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 2555, 255, 0.8);
 }
 
 /* :not(:required) hides these rules from IE9 and below */
-.loading:not(:required) {
-  /* hide "loading..." text */
-  font: 0/0 a;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0;
+.loading:not (:required ) {
+	/* hide "loading..." text */
+	font: 0/0 a;
+	color: transparent;
+	text-shadow: none;
+	background-color: transparent;
+	border: 0;
 }
 
-.loading:not(:required):after {
-  content: '';
-  display: block;
-  font-size: 10px;
-  width: 1em;
-  height: 1em;
-  margin-top: -0.5em;
-  -webkit-animation: spinner 1500ms infinite linear;
-  -moz-animation: spinner 1500ms infinite linear;
-  -ms-animation: spinner 1500ms infinite linear;
-  -o-animation: spinner 1500ms infinite linear;
-  animation: spinner 1500ms infinite linear;
-  border-radius: 0.5em;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
-  box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+.loading:not (:required ):after {
+	content: '';
+	display: block;
+	font-size: 10px;
+	width: 1em;
+	height: 1em;
+	margin-top: -0.5em;
+	-webkit-animation: spinner 1500ms infinite linear;
+	-moz-animation: spinner 1500ms infinite linear;
+	-ms-animation: spinner 1500ms infinite linear;
+	-o-animation: spinner 1500ms infinite linear;
+	animation: spinner 1500ms infinite linear;
+	border-radius: 0.5em;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75)
+		1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75)
+		-1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5)
+		-1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0,
+		rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+	box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em
+		1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em
+		1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75)
+		-1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0,
+		rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
 }
 
 /* Animation */
+@
+-webkit-keyframes spinner { 0% {
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
 
-@-webkit-keyframes spinner {
-  0% {
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+100%
+{
+-webkit-transform
+:
+ 
+rotate
+(360deg);
+
+    
+-moz-transform
+:
+ 
+rotate
+(360deg);
+
+    
+-ms-transform
+:
+ 
+rotate
+(360deg);
+
+    
+-o-transform
+:
+ 
+rotate
+(360deg);
+
+    
+transform
+:
+ 
+rotate
+(360deg);
+
+  
 }
-@-moz-keyframes spinner {
-  0% {
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
 }
-@-o-keyframes spinner {
-  0% {
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+@
+-moz-keyframes spinner { 0% {
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
 }
-@keyframes spinner {
-  0% {
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+
+100%
+{
+-webkit-transform
+:
+ 
+rotate
+(360deg);
+
+    
+-moz-transform
+:
+ 
+rotate
+(360deg);
+
+    
+-ms-transform
+:
+ 
+rotate
+(360deg);
+
+    
+-o-transform
+:
+ 
+rotate
+(360deg);
+
+    
+transform
+:
+ 
+rotate
+(360deg);
+
+  
+}
+}
+@
+-o-keyframes spinner { 0% {
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
+
+100%
+{
+-webkit-transform
+:
+ 
+rotate
+(360deg);
+
+    
+-moz-transform
+:
+ 
+rotate
+(360deg);
+
+    
+-ms-transform
+:
+ 
+rotate
+(360deg);
+
+    
+-o-transform
+:
+ 
+rotate
+(360deg);
+
+    
+transform
+:
+ 
+rotate
+(360deg);
+
+  
+}
+}
+@
+keyframes spinner { 0% {
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
+100%
+{
+-webkit-transform
+:
+ 
+rotate
+(360deg);
+
+    
+-moz-transform
+:
+ 
+rotate
+(360deg);
+
+    
+-ms-transform
+:
+ 
+rotate
+(360deg);
+
+    
+-o-transform
+:
+ 
+rotate
+(360deg);
+
+    
+transform
+:
+ 
+rotate
+(360deg);
+
+  
+}
 }
 </style>
 
@@ -160,7 +296,8 @@
 
 </head>
 <body>
-<div id="loading" class="loading" style="display: none; background-color: white">Loading&#8230;</div>
+	<div id="loading" class="loading"
+		style="display: none; background-color: white">Loading&#8230;</div>
 	<input type="hidden" id="answersJson">
 	<div class="content-i">
 		<div class="content-box">
@@ -258,11 +395,13 @@
 									<div class="row container p-0 m-0">
 										<div class="col-sm-12 p-0">
 											<%-- <form id="editorForm"
-												action="${pageContext.request.contextPath }/java/student/start/test/compiler"
-												method="post"> --%>
+	action="${pageContext.request.contextPath }/java/student/start/test/compiler"
+	method="post"> --%>
 											<div id="code-edit" class="row code-div container mx-auto">
 												<div id="editor-menu">
-													<select name="language" class="options codeopt${testQuestion.questionBankId}" id="prolang">
+													<select name="language"
+														class="options codeopt${testQuestion.questionBankId}"
+														id="prolang">
 														<option value="java">Java</option>
 														<!-- <option value="python">Python</option> -->
 														<option value="c">C</option>
@@ -273,7 +412,8 @@
 														<option value="dracula">Dark</option>
 														<option value="xcode">Light</option>
 													</select> <input type="text" hidden name="code" id="hiddencode">
-													<input type="hidden" id="quesId" value="${testQuestion.questionBankId}">
+													<input type="hidden" id="quesId"
+														value="${testQuestion.questionBankId}">
 													<button id="run" onclick="xm()" type="button">
 														<img id="run-img"
 															src="${pageContext.request.contextPath }/static/img/compiler/run.png">
@@ -323,14 +463,16 @@
 <!-- Script for Question Changing -->
 <script type="text/javascript">
 	function getQuestion( questionId) {
-		let questionsToBeShown = document.getElementById("questionsDiv"+questionId);
-		let questionsNotToBeShown = document.getElementsByClassName("questionsDiv");
-		for(let i=0; i<questionsNotToBeShown.length; i++) {
-			questionsNotToBeShown[i].style.display = "none";
-			
-		}
-			
-		questionsToBeShown.style.display = "block";
+	let questionsToBeShown = document.getElementById("questionsDiv"+questionId);
+	let questionsNotToBeShown = document.getElementsByClassName("questionsDiv");
+	for(let i=0; i<questionsNotToBeShown.length; i++) {
+	questionsNotToBeShown[i].style.display = "none";
+	
+
+	}
+	
+
+	questionsToBeShown.style.display = "block";
 	}
 </script>
 
@@ -356,14 +498,15 @@ function xm() {
 	cache : false,
 	timeout : 600000,
 	beforeSend: function(){
-		document.getElementById("loading").style.display = "block";
+	document.getElementById("loading").style.display = "block";
 	},
     success: function(e) {
-		document.getElementById("loading").style.display = "none";
+	document.getElementById("loading").style.display = "none";
       	alert("Test case "+e.testCase+"\n Output : "+e.output);
     },
     error: function(e) {
      	
+
     }
   });
 }
@@ -374,92 +517,101 @@ function xm() {
 
 var allAnswers = [];
 	function addJson( qId, index) {
-		var json = document.getElementById("answersJson");
-		var testName= "${ addTest.testName }";
-		//alert("testMarks =========>>>"+testMarks);
-		
-		
-		if(document.querySelector('input[name="optradio'+qId+'"]:checked')!=null) {
-			let questionDiv = document.getElementById("q"+qId);
-			questionDiv.className = ' btn btn-success btn-rounded';
-			
-			var oId = document.querySelector('input[name="optradio'+qId+'"]:checked').value;
-			
-			if(allAnswers.length==0) {
-				allAnswers.push({ "questionId": qId, "optionId": oId, "marks": document.getElementById("marks"+qId).innerText});
-			}
-			var flag=-1;
-			for(var i=0; i<allAnswers.length; i++) {
-				if(allAnswers[i]["questionId"] == qId) {
-					flag=i;
-				} 
-			}
-			
-			if(flag==-1) {
-				allAnswers.push({ "questionId": qId, "optionId": oId, "marks": document.getElementById("marks"+qId).innerText});
-			} else {
-				allAnswers[flag]["optionId"] = oId;
-			}
+	var json = document.getElementById("answersJson");
+	var testName= "${ addTest.testName }";
+	//alert("testMarks =========>>>"+testMarks);
+	
 
-		} else {
-			if( document.getElementsByClassName("codeopt"+qId[0]!=null)) {
-				let questionDiv = document.getElementById("q"+qId);
-				questionDiv.className = ' btn btn-success btn-rounded';
-				
-				if(allAnswers.length==0) {
-					allAnswers.push({ "questionId": qId,  "code": editor.session.getValue(), "lang": document.getElementById("prolang").value,  "marks": document.getElementById("marks"+qId).innerText});
-				}
-				var flag=-1;
-				for(var i=0; i<allAnswers.length; i++) {
-					if(allAnswers[i]["questionId"] == qId) {
-						flag=i;
-					} 
-				}
-				
-				if(flag==-1) {
-					allAnswers.push({ "questionId": qId,  "code": editor.session.getValue(), "lang": document.getElementById("prolang").value,  "marks": document.getElementById("marks"+qId).innerText});
-				} else {
-					allAnswers[flag]["code"] = editor.session.getValue();
-					allAnswers[flag]["lang"] = document.getElementById("prolang").value;
-				}
-			}
-		}
+	
 
-		json.value = JSON.stringify(allAnswers);
-		
-		if(document.getElementsByClassName("question"+(index+1))[0]!=null) {
-			document.getElementsByClassName("question"+index)[0].style.display = "none";
-			document.getElementsByClassName("question"+(index+1))[0].style.display = "block";
-		}
+	if(document.querySelector('input[name="optradio'+qId+'"]:checked')!=null) {
+	let questionDiv = document.getElementById("q"+qId);
+	questionDiv.className = ' btn btn-success btn-rounded';
+	
+
+	var oId = document.querySelector('input[name="optradio'+qId+'"]:checked').value;
+	
+
+	if(allAnswers.length==0) {
+	allAnswers.push({ "questionId": qId, "optionId": oId, "marks": document.getElementById("marks"+qId).innerText});
+	}
+	var flag=-1;
+	for(var i=0; i<allAnswers.length; i++) {
+	if(allAnswers[i]["questionId"] == qId) {
+	flag=i;
+	} 
+	}
+	
+
+	if(flag==-1) {
+	allAnswers.push({ "questionId": qId, "optionId": oId, "marks": document.getElementById("marks"+qId).innerText});
+	} else {
+	allAnswers[flag]["optionId"] = oId;
+	}
+
+	} else {
+	if( document.getElementsByClassName("codeopt"+qId[0]!=null)) {
+	let questionDiv = document.getElementById("q"+qId);
+	questionDiv.className = ' btn btn-success btn-rounded';
+	
+
+	if(allAnswers.length==0) {
+	allAnswers.push({ "questionId": qId,  "code": editor.session.getValue(), "lang": document.getElementById("prolang").value,  "marks": document.getElementById("marks"+qId).innerText});
+	}
+	var flag=-1;
+	for(var i=0; i<allAnswers.length; i++) {
+	if(allAnswers[i]["questionId"] == qId) {
+	flag=i;
+	} 
+	}
+	
+
+	if(flag==-1) {
+	allAnswers.push({ "questionId": qId,  "code": editor.session.getValue(), "lang": document.getElementById("prolang").value,  "marks": document.getElementById("marks"+qId).innerText});
+	} else {
+	allAnswers[flag]["code"] = editor.session.getValue();
+	allAnswers[flag]["lang"] = document.getElementById("prolang").value;
+	}
+	}
+	}
+
+	json.value = JSON.stringify(allAnswers);
+	
+
+	if(document.getElementsByClassName("question"+(index+1))[0]!=null) {
+	document.getElementsByClassName("question"+index)[0].style.display = "none";
+	document.getElementsByClassName("question"+(index+1))[0].style.display = "block";
+	}
 	}
 </script>
 
 <!-- Script for Submitting test -->
 <script type="text/javascript">
 	function submitForm() {	
-		var dataJ = {
-			 QnA : document.getElementById("answersJson").value,
-			 testName : "${ addTest.testName }",
-				 testId : ${ addTest.addTestId }
-		};
+	var dataJ = {
+	 QnA : document.getElementById("answersJson").value,
+	 testName : "${ addTest.testName }",
+	 testId : ${ addTest.addTestId }
+	};
 	
-		$.ajax({
-			type: "GET",
-			url: "${pageContext.request.contextPath}/java/student/end/test",
-		   	contentType : "application/json",
-			data : dataJ,
-			dataType : 'json',
-			cache : false,
-			timeout : 600000,
-			success: function(e) {
-				window.alert("Test Submission Failed");
-			 	window.location="${pageContext.request.contextPath}/java/student/test/list"
-			},
-			error: function(e) {
-				window.alert("Test Submitted Successfully");
-			    window.location="${pageContext.request.contextPath}/java/student/test/list"
-			}
-		}); 
+
+	$.ajax({
+	type: "GET",
+	url: "${pageContext.request.contextPath}/java/student/end/test",
+	   	contentType : "application/json",
+	data : dataJ,
+	dataType : 'json',
+	cache : false,
+	timeout : 600000,
+	success: function(e) {
+	window.alert("Test Submission Failed");
+	 	window.location="${pageContext.request.contextPath}/java/student/test/list"
+	},
+	error: function(e) {
+	window.alert("Test Submitted Successfully");
+	    window.location="${pageContext.request.contextPath}/java/student/test/list"
+	}
+	}); 
 	}
 </script>
 
@@ -469,29 +621,32 @@ var allAnswers = [];
 	var timer2 = /* ${ addTest.time }+ */"30:25";
 	var interval = setInterval(function() {
 
-		var timer = timer2.split(':');
-		//by parsing integer, I avoid all extra string processing
-		var minutes = parseInt(timer[0], 10);
-		var seconds = parseInt(timer[1], 10);
-		--seconds;
-		minutes = (seconds < 0) ? --minutes : minutes;
-		if (minutes < 0) {
+	var timer = timer2.split(':');
+	//by parsing integer, I avoid all extra string processing
+	var minutes = parseInt(timer[0], 10);
+	var seconds = parseInt(timer[1], 10);
+	--seconds;
+	minutes = (seconds < 0) ? --minutes : minutes;
+	if (minutes < 0) {
 
-		}
-		
-		if(minutes==0&&seconds==0) {
-			submitForm();
-		}
-		
-		seconds = (seconds < 0) ? 59 : seconds;
-		seconds = (seconds < 10) ? '0' + seconds : seconds;
-		//minutes = (minutes < 10) ?  minutes : minutes;
-		$('.countdown').html(minutes + ':' + seconds);
-		timer2 = minutes + ':' + seconds;
-		/* --- */
-		 localStorage.setItem("timerr", timer2);
-		 /* document.getElementById("result").innerHTML = localStorage.getItem("timerr"); */
-		                                        
+	}
+	
+
+	if(minutes==0&&seconds==0) {
+	submitForm();
+	}
+	
+
+	seconds = (seconds < 0) ? 59 : seconds;
+	seconds = (seconds < 10) ? '0' + seconds : seconds;
+	//minutes = (minutes < 10) ?  minutes : minutes;
+	$('.countdown').html(minutes + ':' + seconds);
+	timer2 = minutes + ':' + seconds;
+	/* --- */
+	 localStorage.setItem("timerr", timer2);
+	 /* document.getElementById("result").innerHTML = localStorage.getItem("timerr"); */
+	                                        
+
 	}, 1000);
 </script>
 
