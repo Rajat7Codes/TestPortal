@@ -79,7 +79,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-8 col-xxxl-9">
+				<div class="col-sm-10 col-xxxl-9">
 					<div class="element-wrapper">
 						<h6 class="element-header">Todays Performance</h6>
 						<div class="element-box">
@@ -103,7 +103,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-8 col-xxxl-9">
+				<div class="col-sm-10 col-xxxl-9">
 					<div class="element-wrapper">
 						<h6 class="element-header">Monthly Performance</h6>
 						<div class="element-box">

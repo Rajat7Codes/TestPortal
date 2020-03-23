@@ -6,6 +6,7 @@ package com.iceico.testportal.ServiceIMPL;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.TestQuestion;
@@ -16,6 +17,7 @@ import com.iceico.testportal.Service.TestQuestionService;
  * @author Rajat
  *
  */
+@Service
 public class TestQuestionServiceIMPL implements TestQuestionService {
 
 	@Autowired

@@ -59,4 +59,13 @@ public class DashboardServiceIMPL implements DashboardService {
 				.setParameter("date", date).setMaxResults(10).getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TestResult> getTopTenStudentListMonthly(Date startDate, Date lastDate) {
+		return this.getSession()
+				.createQuery("from TestResult where date BETWEEN :startDate AND :lastDate ORDER BY percentage DESC")
+				.setParameter("startDate", startDate).setParameter("lastDate", lastDate).setMaxResults(10)
+				.getResultList();
+	}
+
 }

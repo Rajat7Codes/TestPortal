@@ -14,125 +14,93 @@
 <meta content="Tamerlan Soziev" name="author">
 <meta content="Admin dashboard html template" name="description">
 <meta content="width=device-width,initial-scale=1" name="viewport">
-
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/static/bower_components/chart.js/dist/Chart.min.js"></script>
-
-
 </head>
 <body
-	class="menu-position-side menu-side-left full-screen with-content-panel">
+	class="menu-position-side menu-side-left full-screen with-content-panel ">
 
 	<div class="content-i">
 		<div class="content-box">
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="element-wrapper">
-						<div class="element-actions">
+						<!-- <div class="element-actions">
 							<form class="form-inline justify-content-sm-end">
 								<select class="form-control form-control-sm"><option
 										value="Pending">Today</option>
 									<option value="Active">Last Week</option>
 									<option value="Cancelled">Last 30 Days</option></select>
 							</form>
-						</div>
+						</div> -->
 
-						<h6 class="element-header">Sales Dashboard</h6>
+						<h6 class="element-header">Student Dashboard</h6>
 						<div class="element-content">
 							<div class="row">
 								<div class="col-sm-4 col-xxxl-3">
-									<a class="element-box el-tablo" href="#"><div class="label">Products
-											Sold</div>
-										<div class="value">57</div>
+									<a class="element-box el-tablo" href="#"><div class="label">Total
+											Students</div>
+										<div class="value">${totalJavaUsersCount }</div>
 										<div class="trending trending-up-basic">
-											<span>12%</span><i class="os-icon os-icon-arrow-up2"></i>
+											<!-- <span>12%</span><i class="os-icon os-icon-arrow-up2"></i> -->
 										</div></a>
 								</div>
 								<div class="col-sm-4 col-xxxl-3">
-									<a class="element-box el-tablo" href="#"><div class="label">Gross
-											Profit</div>
-										<div class="value">$457</div>
+									<a class="element-box el-tablo" href="#"><div class="label">Total
+											Test</div>
+										<div class="value">${totalTestList }</div>
 										<div class="trending trending-down-basic">
-											<span>12%</span><i class="os-icon os-icon-arrow-down"></i>
+											<!-- <span>12%</span><i class="os-icon os-icon-arrow-down"></i> -->
 										</div></a>
 								</div>
 								<div class="col-sm-4 col-xxxl-3">
-									<a class="element-box el-tablo" href="#"><div class="label">New
-											Customers</div>
-										<div class="value">125</div>
+									<a class="element-box el-tablo" href="#"><div class="label">Total
+											Questions</div>
+										<div class="value">${testQuestions }</div>
 										<div class="trending trending-down-basic">
-											<span>9%</span><i class="os-icon os-icon-arrow-down"></i>
+											<!-- <span>9%</span><i class="os-icon os-icon-arrow-down"></i> -->
 										</div></a>
 								</div>
-								<div class="d-none d-xxxl-block col-xxxl-3">
+								<!-- <div class="d-none d-xxxl-block col-xxxl-3">
 									<a class="element-box el-tablo" href="#"><div class="label">Refunds
 											Processed</div>
 										<div class="value">$294</div>
 										<div class="trending trending-up-basic">
 											<span>12%</span><i class="os-icon os-icon-arrow-up2"></i>
 										</div></a>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-8 col-xxxl-9">
-					<div class="element-wrapper">
-						<h6 class="element-header">Todays Performance</h6>
-						<div class="element-box">
-							<div class="os-tabs-w">
-								<div class="tab-content">
-									<div class="tab-pane active" id="tab_overview">
-										<div class="el-tablo bigger">
-											<div class="label">Result Graph</div>
-											<!-- <div class="value">10</div> -->
-										</div>
-										<div class="el-chart-w">
-											<!-- <canvas height="150px" id="lineChart" width="600px"></canvas> -->
-											<canvas id="myChart" width=200 " height="100"
-												class="chartjs-render-monitor" style="display: block;"></canvas>
-										</div>
-									</div>
-									<div class="tab-pane" id="tab_sales"></div>
-									<div class="tab-pane" id="tab_conversion"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-8 col-xxxl-9">
-					<div class="element-wrapper">
-						<h6 class="element-header">Monthly Performance</h6>
-						<div class="element-box">
-							<div class="os-tabs-w">
-								<div class="tab-content">
-									<div class="tab-pane active" id="tab_overview">
-										<div class="el-tablo bigger">
-											<div class="label">Result Graph</div>
-											<!-- <div class="value">10</div> -->
-										</div>
-										<div class="el-chart-w">
-											<!-- <canvas height="150px" id="lineChart" width="600px"></canvas> -->
-											<canvas id="myChart1" width=200 " height="100"
-												class="chartjs-render-monitor" style="display: block;"></canvas>
-										</div>
-									</div>
-									<div class="tab-pane" id="tab_sales"></div>
-									<div class="tab-pane" id="tab_conversion"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
+			<%-- <div class="row">
 				<div class="col-sm-12 col-xxxl-6">
+
+
+
 					<div class="element-wrapper">
-						<h6 class="element-header">Performance Graph</h6>
+						<h6 class="element-header">Unique Visitors Graph</h6>
 						<div class="element-box">
 							<div class="os-tabs-w">
+								<div class="os-tabs-controls">
+									<ul class="nav nav-tabs smaller">
+										<li class="nav-item"><a class="nav-link active"
+											data-toggle="tab" href="#tab_overview">Overview</a></li>
+										<li class="nav-item"><a class="nav-link"
+											data-toggle="tab" href="#tab_sales">Sales</a></li>
+									</ul>
+									<ul class="nav nav-pills smaller d-none d-md-flex">
+										<li class="nav-item"><a class="nav-link"
+											data-toggle="tab" href="#">Today</a></li>
+										<li class="nav-item"><a class="nav-link active"
+											data-toggle="tab" href="#">7 Days</a></li>
+										<li class="nav-item"><a class="nav-link"
+											data-toggle="tab" href="#">14 Days</a></li>
+										<li class="nav-item"><a class="nav-link"
+											data-toggle="tab" href="#">Last Month</a></li>
+									</ul>
+								</div>
 								<div class="tab-content">
 									<div class="tab-pane active" id="tab_overview">
 										<div class="el-tablo bigger">
@@ -141,8 +109,6 @@
 										</div>
 										<div class="el-chart-w">
 											<canvas height="150px" id="lineChart" width="600px"></canvas>
-											<canvas id="myChart" width="250" height="120"
-												class="chartjs-render-monitor" style="display: block;"></canvas>
 										</div>
 									</div>
 									<div class="tab-pane" id="tab_sales"></div>
@@ -151,6 +117,9 @@
 							</div>
 						</div>
 					</div>
+
+
+
 				</div>
 				<div class="col-sm-4 d-xxxl-none"></div>
 				<div class="d-none d-xxxl-block col-xxxl-6">
@@ -247,6 +216,120 @@
 					</div>
 				</div>
 			</div>
+ --%>
+
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="element-wrapper">
+						<h6 class="element-header">Today Top 10 Students</h6>
+						<div class="element-box-tp">
+							<div class="table-responsive">
+								<table
+									class="table table-bordered table-lg table-v2 table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">Sr No.</th>
+											<th>Students</th>
+											<th>Date</th>
+											<th>Test Name</th>
+											<th>Total Marks</th>
+											<th>Obtained Marks</th>
+											<th>Percentage</th>
+											<th>Status</th>
+											<!-- <th>Actions</th> -->
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="test" items="${testResultStudentToday}"
+											varStatus="ind">
+											<tr>
+												<td class="text-center">${ind.index+1}</td>
+												<td>${userService.findById(test.userId).getFirstName() }</td>
+												<td>${test.date }</td>
+												<td>${test.testName }</td>
+												<td>${test.totalMarks }</td>
+												<td>${test.obtainedMarks }</td>
+												<td>${test.percentage }</td>
+												<td class="text-center">${test.resultStatus }</div></td>
+												<!-- <td class="row-actions"><a href="#"><i
+													class="os-icon os-icon-ui-49"></i></a><a href="#"><i
+													class="os-icon os-icon-grid-10"></i></a><a class="danger"
+												href="#"><i class="os-icon os-icon-ui-15"></i></a></td> -->
+											</tr>
+										</c:forEach>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="element-wrapper">
+						<h6 class="element-header">Monthly Top 10 Students</h6>
+						<div class="element-box-tp">
+							<div class="table-responsive">
+								<table
+									class="table table-bordered table-lg table-v2 table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">Sr No.</th>
+											<th>Students</th>
+											<th>Date</th>
+											<th>Test Name</th>
+											<th>Total Marks</th>
+											<th>Obtained Marks</th>
+											<th>Percentage</th>
+											<th>Status</th>
+											<!-- <th>Actions</th> -->
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="test" items="${testResultStudentMonthly}"
+											varStatus="ind">
+											<tr>
+												<td class="text-center">${ind.index+1}</td>
+												<td>${userService.findById(test.userId).getFirstName() }</td>
+												<td>${test.date }</td>
+												<td>${test.testName }</td>
+												<td>${test.totalMarks }</td>
+												<td>${test.obtainedMarks }</td>
+												<td>${test.percentage }</td>
+												<td class="text-center">${test.resultStatus }</div></td>
+												<!-- <td class="row-actions"><a href="#"><i
+													class="os-icon os-icon-ui-49"></i></a><a href="#"><i
+													class="os-icon os-icon-grid-10"></i></a><a class="danger"
+												href="#"><i class="os-icon os-icon-ui-15"></i></a></td> -->
+											</tr>
+										</c:forEach>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			<div class="floated-colors-btn second-floated-btn">
 				<div class="os-toggler-w">
 					<div class="os-toggler-i">
@@ -399,582 +482,179 @@
 								class="os-icon os-icon-others-29"></i></a><a href="#"><span
 								class="extra-tooltip">Upload Video</span><i
 								class="os-icon os-icon-ui-51"></i></a>
-
-							<div id="mon">${percentageToday}</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="content-panel">
+			<!-- <div class="content-panel-close">
+				<i class="os-icon os-icon-close"></i>
+			</div>
+			<div class="element-wrapper">
+				<h6 class="element-header">Quick Links</h6>
+				<div class="element-box-tp">
+					<div class="el-buttons-list full-width">
+						<a class="btn btn-white btn-sm" href="#"><i
+							class="os-icon os-icon-delivery-box-2"></i><span>Create
+								New Product</span></a><a class="btn btn-white btn-sm" href="#"><i
+							class="os-icon os-icon-window-content"></i><span>Customer
+								Comments</span></a><a class="btn btn-white btn-sm" href="#"><i
+							class="os-icon os-icon-wallet-loaded"></i><span>Store
+								Settings</span></a>
+					</div>
+				</div>
+			</div> -->
+			<div class="element-wrapper">
+				<h6 class="element-header">Today Student Result Status</h6>
+				<div class="element-box">
+					<div class="el-chart-w">
+						<canvas id="todayStudentPieChart" width="150" height="250"
+							class="chartjs-render-monitor" style="display: block;"></canvas>
+						<div class="inside-donut-chart-label">
+							<strong>${todayStudentPassFailStatusTotalCount}</strong><span>Total
+								Students</span>
+						</div>
+					</div>
+					<!-- <div class="el-legend condensed">
+						<div class="row">
+							<div class="col-auto col-xxxxl-6 ml-sm-auto mr-sm-auto col-6">
+								<div class="legend-value-w">
+									<div class="legend-pin legend-pin-squared"
+										style="background-color: #6896f9;"></div>
+									<div class="legend-value">
+										<span>Prada</span>
+										<div class="legend-sub-value">14 Pairs</div>
+									</div>
+								</div>
+								<div class="legend-value-w">
+									<div class="legend-pin legend-pin-squared"
+										style="background-color: #85c751;"></div>
+									<div class="legend-value">
+										<span>Maui Jim</span>
+										<div class="legend-sub-value">26 Pairs</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-6 d-lg-none d-xxl-block">
+								<div class="legend-value-w">
+									<div class="legend-pin legend-pin-squared"
+										style="background-color: #806ef9;"></div>
+									<div class="legend-value">
+										<span>Gucci</span>
+										<div class="legend-sub-value">17 Pairs</div>
+									</div>
+								</div>
+								<div class="legend-value-w">
+									<div class="legend-pin legend-pin-squared"
+										style="background-color: #d97b70;"></div>
+									<div class="legend-value">
+										<span>Armani</span>
+										<div class="legend-sub-value">12 Pairs</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> -->
+				</div>
+
+				<h6 class="element-header">Monthly Student Result Status</h6>
+				<div class="element-box">
+					<div class="el-chart-w">
+						<canvas id="monthlyStudentPieChart" width="150" height="250"
+							class="chartjs-render-monitor" style="display: block;"></canvas>
+						<div class="inside-donut-chart-label">
+							<strong>${monthlyStudentPassFailStatusTotalCount}</strong><span>Total
+								Students</span>
+						</div>
+					</div>
+					<!-- <div class="el-legend condensed">
+						<div class="row">
+							<div class="col-auto col-xxxxl-6 ml-sm-auto mr-sm-auto col-6">
+								<div class="legend-value-w">
+									<div class="legend-pin legend-pin-squared"
+										style="background-color: #6896f9;"></div>
+									<div class="legend-value">
+										<span>Prada</span>
+										<div class="legend-sub-value">14 Pairs</div>
+									</div>
+								</div>
+								<div class="legend-value-w">
+									<div class="legend-pin legend-pin-squared"
+										style="background-color: #85c751;"></div>
+									<div class="legend-value">
+										<span>Maui Jim</span>
+										<div class="legend-sub-value">26 Pairs</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-6 d-lg-none d-xxl-block">
+								<div class="legend-value-w">
+									<div class="legend-pin legend-pin-squared"
+										style="background-color: #806ef9;"></div>
+									<div class="legend-value">
+										<span>Gucci</span>
+										<div class="legend-sub-value">17 Pairs</div>
+									</div>
+								</div>
+								<div class="legend-value-w">
+									<div class="legend-pin legend-pin-squared"
+										style="background-color: #d97b70;"></div>
+									<div class="legend-value">
+										<span>Armani</span>
+										<div class="legend-sub-value">12 Pairs</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> -->
+				</div>
+
+
+
+
+			</div>
+		</div>
 	</div>
 </body>
 <script>
-	var ctx = document.getElementById('myChart');
+	var ctx = document.getElementById('todayStudentPieChart');
 	var myChart = new Chart(ctx, {
-		type : 'bar',
+		type : 'doughnut',
 		data : {
-			labels : ${testToday},
+			labels : [ 'Pass', 'Fail' ],
 			datasets : [ {
-
-				label : 'Percentage',
-				data : ${percentageToday},
-				backgroundColor : [ 'rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)',  'rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)', 'rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)',  'rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)', 'rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)',  'rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)', 'rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)',  'rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)', 'rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)'],
-				borderColor : [ 'rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)','rgba(255, 99, 132)',
-						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-						'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-						'rgba(255, 159, 64)' ],
-				borderWidth : 1
+				label : '# of Votes',
+				data : ${todayStudentPassFailStatus},
+				backgroundColor : [ 'rgba(54, 162, 235)', 'rgba(255, 99, 132)',
+						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
+						'rgba(153, 102, 255)', 'rgba(255, 159, 64)' ],
+				borderColor : [ 'rgba(54, 162, 235, 1)',
+						'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)' ],
 			} ]
 		},
-		options : {
-			scales : {
-				yAxes : [ {
-					ticks : {
-						beginAtZero : true
-					}
-				} ]
-			}
-		}
 	});
 </script>
 <script>
-    var arr = document.getElementById('mon');
-	var ctx = document.getElementById('myChart1');
-	var dynamicColors = function() {
-        var r = Math.floor(Math.random() * 255);
-        var g = Math.floor(Math.random() * 255);
-        var b = Math.floor(Math.random() * 255);
-        return "rgb(" + r + "," + g + "," + b + ")";
-     };
+	var ctx = document.getElementById('monthlyStudentPieChart');
 	var myChart = new Chart(ctx, {
-		type : 'bar',
+		type : 'doughnut',
 		data : {
-			labels : ${testMonthly},
+			labels : [ 'Pass', 'Fail' ],
 			datasets : [ {
-
-				label : 'Percentage',
-				data :${percentageMonthly},
-				backgroundColor : [ 'rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)',  'rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)', 'rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)',  'rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)', 'rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)',  'rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)', 'rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)',  'rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)', 'rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)'],
-			borderColor : [ 'rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)','rgba(255, 99, 132)',
-					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
-					'rgba(75, 192, 192)', 'rgba(153, 102, 255)',
-					'rgba(255, 159, 64)'],
-				borderWidth : 1
+				label : '# of Votes',
+				data : ${monthlyStudentPassFailStatus},
+				backgroundColor : [ 'rgba(54, 162, 235)', 'rgba(255, 99, 132)',
+						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
+						'rgba(153, 102, 255)', 'rgba(255, 159, 64)' ],
+				borderColor : [ 'rgba(54, 162, 235, 1)',
+						'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)' ],
 			} ]
 		},
-		options : {
-			scales : {
-				yAxes : [ {
-					ticks : {
-						beginAtZero : true
-					}
-				} ]
-			}
-		}
 	});
 </script>
 </html>
