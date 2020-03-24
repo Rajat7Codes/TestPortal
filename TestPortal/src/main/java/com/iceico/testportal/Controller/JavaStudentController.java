@@ -181,7 +181,7 @@ public class JavaStudentController {
 			modelMap.addAttribute("passwordMsg", "User Name not found");
 		}
 		modelMap.addAttribute("user", user);
-		return "javaStudProfile";
+		return "javaDashboard";
 	}
 
 	@GetMapping("/java/student/profile/validate/token/{token}")
@@ -198,7 +198,7 @@ public class JavaStudentController {
 			modelMap.addAttribute("passwordMsg", "User Token Invalid");
 		}
 		modelMap.addAttribute("user", user);
-		return "javaStudProfile";
+		return "javaDashboard";
 	}
 
 	@GetMapping("/java/change/password")

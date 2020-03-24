@@ -262,6 +262,8 @@ public class TilesController {
 		modelMap.addAttribute("totalTestList", totalTestList.size());
 
 		modelMap.addAttribute("userService", userService);
+
+		System.out.println("bjkjbkjb"+userService.findBySSO(this.getPrincipal()).getFirstName());
 		return "javaDashboard";
 	}
 
