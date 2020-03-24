@@ -61,9 +61,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<td>question here..</td>
-								<td>your option</td>
-								<td>correct option</td>
+								
 							</tbody>
 						</table>
 					</div>

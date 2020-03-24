@@ -149,6 +149,7 @@ public class StartTestController {
 			throws ResourceNotFoundException, ParseException, org.json.simple.parser.ParseException {
 
 		double totalMarks = 0;
+		String yourAnswers = null;
 
 		AddTest addTest = this.addTestService.getAddTestById(testId);
 
@@ -180,6 +181,11 @@ public class StartTestController {
 
 				String response = this.compilerService.runCodeWithInput(lang, code, input);
 				JSONObject resObj = (JSONObject) new JSONParser().parse(response);
+				
+				if( yourAnswers == null) yourAnswers += resObj.get("output");
+				else yourAnswers += ","+resObj.get("output");
+				
+				
 				if (question.getHiddenOutput().equals(resObj.get("output"))
 						|| question.getHiddenOutput().equals("\n" + resObj.get("output"))) {
 					obtainedMarks += Integer.parseInt(answer.get("marks").toString());
@@ -211,8 +217,12 @@ public class StartTestController {
 
 			} else {
 				for (Options opt : question.getOptions()) {
+				
 					if (opt.getOptionsId() == Long.parseLong(answer.get("optionId") + "")) {
 						Boolean userAnswer = opt.getCorrectAnswer();
+						if( yourAnswers == null) yourAnswers += opt.getOptionName();
+						else yourAnswers += ","+opt.getOptionName();
+
 						if (userAnswer == true) {
 							obtainedMarks += Integer.parseInt(answer.get("marks").toString());
 						} else {
@@ -270,6 +280,7 @@ public class StartTestController {
 		testResult.setTotalMarks(totalMarks);
 		testResult.setDate(Calendar.getInstance().getTime());
 		testResult.setTestId(testId);
+		testResult.setAnswersGiven(yourAnswers);
 		testResult.setUserId(this.userService.findBySSO(this.getPrincipal()).getId());
 		testResult.setPercentage(per);
 		this.testResultService.saveTestResult(testResult);

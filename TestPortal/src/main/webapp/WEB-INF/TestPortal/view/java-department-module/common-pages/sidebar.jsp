@@ -154,6 +154,12 @@
 					</div> <span> Test Result</span>
 			</a></li>
 			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/java/student/test/history">
+					<div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span> Test History</span>
+			</a></li>
+			<li class="has-sub-menu"><a
 				href="${pageContext.request.contextPath }/java/student/student/individual/performance">
 					<div class="icon-w">
 						<div class="os-icon os-icon-edit-32"></div>

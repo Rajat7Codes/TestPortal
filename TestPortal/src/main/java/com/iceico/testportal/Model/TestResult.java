@@ -5,6 +5,7 @@ package com.iceico.testportal.Model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -75,6 +76,9 @@ public class TestResult extends Auditable<String> implements Serializable {
 
 	@Column(name = "result_status")
 	private String resultStatus;
+	
+	@Column(name = "answers_given")
+	private String answersGiven;
 
 	@Column(name = "percentage")
 	private Double percentage;
@@ -247,6 +251,20 @@ public class TestResult extends Auditable<String> implements Serializable {
 	 */
 	public void setResultStatus(String resultStatus) {
 		this.resultStatus = resultStatus;
+	}
+
+	/**
+	 * @return the answersGiven
+	 */
+	public String getAnswersGiven() {
+		return answersGiven;
+	}
+
+	/**
+	 * @param answersGiven the answersGiven to set
+	 */
+	public void setAnswersGiven(String answersGiven) {
+		this.answersGiven = answersGiven;
 	}
 
 	/**

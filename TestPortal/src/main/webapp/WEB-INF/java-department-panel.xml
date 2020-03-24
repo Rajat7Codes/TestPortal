@@ -96,4 +96,20 @@
 	</definition>
 
 
+	<!-- Test History page -->
+	<definition name="testHistory" extends="javabase.definition">
+		<put-attribute name="title" value="Result" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-department-module/testHistory.jsp" />
+	</definition>
+
+
+	<!-- Test History Each page -->
+	<definition name="testHistoryEach" extends="javabase.definition">
+		<put-attribute name="title" value="Result" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-department-module/testHistoryEach.jsp" />
+	</definition>
+
+
 </tiles-definitions>

@@ -37,7 +37,7 @@
 						<h6 class="element-header">Student Dashboard</h6>
 						<div class="element-content">
 							<div class="row">
-								<div class="col-sm-4 col-xxxl-3">
+								<div class="col-sm-3 col-xxxl-3">
 									<a class="element-box el-tablo" href="#"><div class="label">Total
 											Students</div>
 										<div class="value">${totalJavaUsersCount }</div>
@@ -45,7 +45,7 @@
 											<!-- <span>12%</span><i class="os-icon os-icon-arrow-up2"></i> -->
 										</div></a>
 								</div>
-								<div class="col-sm-4 col-xxxl-3">
+								<div class="col-sm-3 col-xxxl-3">
 									<a class="element-box el-tablo" href="#"><div class="label">Total
 											Test</div>
 										<div class="value">${totalTestList }</div>
@@ -53,12 +53,20 @@
 											<!-- <span>12%</span><i class="os-icon os-icon-arrow-down"></i> -->
 										</div></a>
 								</div>
-								<div class="col-sm-4 col-xxxl-3">
+								<div class="col-sm-3 col-xxxl-3">
 									<a class="element-box el-tablo" href="#"><div class="label">Total
 											Questions</div>
 										<div class="value">${testQuestions }</div>
 										<div class="trending trending-down-basic">
 											<!-- <span>9%</span><i class="os-icon os-icon-arrow-down"></i> -->
+										</div></a>
+								</div>
+								<div class="col-sm-3 col-xxxl-3">
+									<a class="element-box el-tablo" href="#"><div class="label">Individual
+											Rank</div>
+										<div class="value">${totalJavaUsersCount }</div>
+										<div class="trending trending-up-basic">
+											<!-- <span>12%</span><i class="os-icon os-icon-arrow-up2"></i> -->
 										</div></a>
 								</div>
 								<!-- <div class="d-none d-xxxl-block col-xxxl-3">
