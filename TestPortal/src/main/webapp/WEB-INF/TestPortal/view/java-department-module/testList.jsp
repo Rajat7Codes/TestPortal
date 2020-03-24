@@ -41,7 +41,6 @@
 								</c:if>
 							</c:forEach>
 						</tbody>
-
 						<%-- 
 						<tbody>
 							<c:forEach var="test" items="${testList}" varStatus="ind">
@@ -61,7 +60,5 @@
 					</table>
 				</div>
 			</div>
-		</div>
-	</div>
 </body>
 </html>
