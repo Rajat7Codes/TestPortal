@@ -37,7 +37,7 @@
 						<h6 class="element-header">Student Dashboard</h6>
 						<div class="element-content">
 							<div class="row">
-								<div class="col-sm-3 col-xxxl-3">
+								<div class="col-sm-4 col-xxxl-3">
 									<a class="element-box el-tablo" href="#"><div class="label">Total
 											Students</div>
 										<div class="value">${totalJavaUsersCount }</div>
@@ -45,7 +45,7 @@
 											<!-- <span>12%</span><i class="os-icon os-icon-arrow-up2"></i> -->
 										</div></a>
 								</div>
-								<div class="col-sm-3 col-xxxl-3">
+								<div class="col-sm-4 col-xxxl-3">
 									<a class="element-box el-tablo" href="#"><div class="label">Total
 											Test</div>
 										<div class="value">${totalTestList }</div>
@@ -53,7 +53,7 @@
 											<!-- <span>12%</span><i class="os-icon os-icon-arrow-down"></i> -->
 										</div></a>
 								</div>
-								<div class="col-sm-3 col-xxxl-3">
+								<div class="col-sm-4 col-xxxl-3">
 									<a class="element-box el-tablo" href="#"><div class="label">Total
 											Questions</div>
 										<div class="value">${testQuestions }</div>
@@ -61,14 +61,14 @@
 											<!-- <span>9%</span><i class="os-icon os-icon-arrow-down"></i> -->
 										</div></a>
 								</div>
-								<div class="col-sm-3 col-xxxl-3">
+								<%-- <div class="col-sm-3 col-xxxl-3">
 									<a class="element-box el-tablo" href="#"><div class="label">Individual
 											Rank</div>
-										<div class="value">${totalJavaUsersCount }</div>
+										<div class="value">${rank }</div>
 										<div class="trending trending-up-basic">
 											<!-- <span>12%</span><i class="os-icon os-icon-arrow-up2"></i> -->
 										</div></a>
-								</div>
+								</div> --%>
 								<!-- <div class="d-none d-xxxl-block col-xxxl-3">
 									<a class="element-box el-tablo" href="#"><div class="label">Refunds
 											Processed</div>
@@ -230,14 +230,14 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="element-wrapper">
-						<h6 class="element-header">Today Top 10 Students</h6>
+						<h6 class="element-header">Today Students Result</h6>
 						<div class="element-box-tp">
 							<div class="table-responsive">
 								<table
 									class="table table-bordered table-lg table-v2 table-striped">
 									<thead>
 										<tr>
-											<th class="text-center">Sr No.</th>
+											<th class="text-center">Rank</th>
 											<th>Students</th>
 											<th>Date</th>
 											<th>Test Name</th>
@@ -284,7 +284,7 @@
 									class="table table-bordered table-lg table-v2 table-striped">
 									<thead>
 										<tr>
-											<th class="text-center">Sr No.</th>
+											<th class="text-center">Rank</th>
 											<th>Students</th>
 											<th>Date</th>
 											<th>Test Name</th>

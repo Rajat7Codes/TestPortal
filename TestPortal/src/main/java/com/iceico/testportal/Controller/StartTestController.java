@@ -225,12 +225,12 @@ public class StartTestController {
 		double per = (obtainedMarks / totalMarks) * 100;
 		String result = null;
 
+		Integer rank = 0;
+
 		if (per >= passingCriteria) {
 			result = "PASS";
-
 		} else {
 			result = "FAIL";
-
 		}
 
 		// Saving TestResult

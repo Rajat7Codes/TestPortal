@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.AddTest;
 import com.iceico.testportal.Model.QuestionBank;
-import com.iceico.testportal.Model.TestQuestion;
 import com.iceico.testportal.Model.TestResult;
 import com.iceico.testportal.Model.User;
 import com.iceico.testportal.Service.AddTestService;
@@ -140,14 +139,19 @@ public class TilesController {
 
 		/* Today top ten result */
 		List<Double> topTenStudentsPercentages = new ArrayList<Double>();
-		List<String> topTenStudentsNames = new ArrayList<String>();
+		List<Integer> topTenStudentsUserId = new ArrayList<Integer>();
 		for (TestResult tResult : this.dashboardService.getTopTenStudentList(date)) {
 			// System.out.println("top ====>>" + tResult.getPercentage());
 			topTenStudentsPercentages.add(tResult.getPercentage());
-			topTenStudentsNames.add(tResult.getCreatedBy());
+			topTenStudentsUserId.add(tResult.getUserId());
 		}
 		modelMap.addAttribute("topTenPercentages", topTenStudentsPercentages);
-		modelMap.addAttribute("topTenStudentsNames", topTenStudentsNames);
+		modelMap.addAttribute("topTenStudentsUserId", topTenStudentsUserId);
+		modelMap.addAttribute("testResultStudentMonthly",
+				this.dashboardService.getTopTenStudentListMonthly(startDate, lastDate));
+
+		modelMap.addAttribute("testResultStudentToday", this.dashboardService.getTopTenStudentList(date));
+		modelMap.addAttribute("userService", userService);
 		/* End Today top ten result */
 		return "adminDashboard";
 	}
@@ -224,25 +228,15 @@ public class TilesController {
 		}
 
 		/* pass fail for each end */
-
-		for (TestResult testResult1 : todayTestResult) {
-			for (int i = 0; i < todayTestResult.size(); i++) {
-				// System.out.println("pecentages ==========>>> " + todayTestResult.get(i));
-			}
-
-			Double percentage = testResult1.getPercentage();
-			System.out.println("UserId === " + testResult1.getUserId() + "   pecentages ==" + percentage);
-			/*
-			 * if (percentage ==) {
-			 * 
-			 * }
-			 */
-
-			if (testResult1.getUserId() == currentUserId) {
-				System.out.println("User Id Inner ==========>>>" + percentage);
-
-			}
-		}
+		/*
+		 * Integer index = 0; for (TestResult testResult1 : todayTestResult) {
+		 * 
+		 * Double percentage = testResult1.getPercentage(); if (testResult1.getUserId()
+		 * == currentUserId) { for (int i = 1; i < todayTestResult.size(); i++) { Double
+		 * currentUserPercentage = testResult1.getPercentage(); if
+		 * (currentUserPercentage >= percentage) { index = i;
+		 * modelMap.addAttribute("rank", index); } } } }
+		 */
 		todayPassFailStudentsCount.add(todayPassStudents.size());
 		todayPassFailStudentsCount.add(todayFailStudents.size());
 
@@ -254,9 +248,9 @@ public class TilesController {
 
 		modelMap.addAttribute("monthlyStudentPassFailStatus", monthlyPassFailStudentsCount);
 		modelMap.addAttribute("monthlyStudentPassFailStatusTotalCount", monthlyTestResult.size());
+		modelMap.addAttribute("testResultStudentToday", this.dashboardService.getRankWiseStudentListAll(date));
 		modelMap.addAttribute("testResultStudentMonthly",
 				this.dashboardService.getTopTenStudentListMonthly(startDate, lastDate));
-		modelMap.addAttribute("testResultStudentToday", this.dashboardService.getTopTenStudentList(date));
 
 		modelMap.addAttribute("testQuestions", questionBankList.size());
 		modelMap.addAttribute("totalTestList", totalTestList.size());
