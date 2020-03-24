@@ -78,10 +78,10 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_DRIVE")) {
 				isDriveStudent = true;
 				break;
-			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_JAVA_ADMIN")) {
+			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_JAVAADMIN")) {
 				isJavaAdmin = true;
 				break;
-			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_WEB_ADMIN")) {
+			} else if (grantedAuthority.getAuthority().equalsIgnoreCase("ROLE_WEBADMIN")) {
 				isWebAdmin = true;
 				break;
 			}

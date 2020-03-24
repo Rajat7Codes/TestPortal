@@ -35,9 +35,7 @@
 									data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"
 									method="POST" enctype="multipart/form-data">
 
-									<div class="form-desc mb-0">
-										<h6 class="">New Admin</h6>
-									</div>
+									<h6 class="element-header mb-5">New Admin</h6>
 
 									<div class="row">
 										<div class="col-sm-6">
@@ -84,7 +82,6 @@
 											</div>
 										</div>
 										<div class="col-sm-6">
-
 											<div class="form-group">
 												<label> Gender</label> <select class="form-control"
 													id="gender" name="gender">
@@ -160,7 +157,7 @@
 										<thead>
 
 										</thead>
-										<tbody id="tableBody">											
+										<tbody id="tableBody">
 
 										</tbody>
 									</table>
