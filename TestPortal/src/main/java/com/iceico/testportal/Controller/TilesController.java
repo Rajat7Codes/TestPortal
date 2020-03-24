@@ -256,6 +256,8 @@ public class TilesController {
 		modelMap.addAttribute("totalTestList", totalTestList.size());
 
 		modelMap.addAttribute("userService", userService);
+
+		System.out.println("bjkjbkjb"+userService.findBySSO(this.getPrincipal()).getFirstName());
 		return "javaDashboard";
 	}
 
@@ -269,6 +271,19 @@ public class TilesController {
 	public String driveDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "driveDashboard";
+	}
+
+	@RequestMapping("/java/admin/dashboard")
+	public String javaAdminDashboard(ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "javaAdminDashboard";
+	}
+
+	@RequestMapping("/web/admin/dashboard")
+	public String webAdminDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "webAdminDashboard";
 	}
 
 	/* sample method start test designing */

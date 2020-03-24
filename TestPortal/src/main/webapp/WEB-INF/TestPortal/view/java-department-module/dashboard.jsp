@@ -625,6 +625,18 @@
 		</div>
 	</div>
 </body>
+<c:if test="${passwordMsg != \"\" && passwordMsg != null}">
+	<script>
+		alert('${passwordMsg}');
+	</script>
+</c:if>
+
+<c:if test="${ passMsg==false }">
+	<script>
+		alert("Password changed successfully");
+	</script>
+</c:if>
+
 <script>
 	var ctx = document.getElementById('todayStudentPieChart');
 	var myChart = new Chart(ctx, {

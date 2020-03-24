@@ -604,12 +604,12 @@ var allAnswers = [];
 	cache : false,
 	timeout : 600000,
 	success: function(e) {
-	window.alert("Test Submission Failed");
-	 	window.location="${pageContext.request.contextPath}/java/student/test/list"
+		window.alert("Test Submission Successfully");
+	 	window.location="${pageContext.request.contextPath}/java/student/view/test/result/"+e["testId"]
 	},
-	error: function(e) {
-	window.alert("Test Submitted Successfully");
-	    window.location="${pageContext.request.contextPath}/java/student/test/list"
+	error: function(e) {]
+		window.alert("Test Submitted Successfully");
+	    window.location="${pageContext.request.contextPath}/java/student/view/test/result/"+e["testId"]
 	}
 	}); 
 	}
@@ -618,7 +618,7 @@ var allAnswers = [];
 <!-- Script for Countdown -->
 <script type="text/javascript">
 /* window.onbeforeunload = function () {return false;} */
-	var timer2 = /* ${ addTest.time }+ */"30:25";
+	var timer2 = ${ addTest.time }+":00";
 	var interval = setInterval(function() {
 
 	var timer = timer2.split(':');
