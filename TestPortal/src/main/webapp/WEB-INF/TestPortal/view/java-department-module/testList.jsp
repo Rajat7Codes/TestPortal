@@ -25,11 +25,27 @@
 								<th>Action</th>
 							</tr>
 						</thead>
+
+						<tbody>
+							<c:forEach var="test" items="${list}" varStatus="ind">
+								<c:if test="${test[0] != true }">
+									<tr>
+										<td>${ind.index+1}</td>
+										<td>${test[1]}</td>
+										<td>${test[2]}</td>
+										<td>${test[3]}</td>
+										<td><a class="text-decoration-none !important"
+											href="${pageContext.request.contextPath }/java/student/start/test/${test[4]}">start
+												test</a></td>
+									</tr>
+								</c:if>
+							</c:forEach>
+						</tbody>
+
+						<%-- 
 						<tbody>
 							<c:forEach var="test" items="${testList}" varStatus="ind">
-
 								<c:if test="${ test.isDeleted!= true }">
-
 									<tr>
 										<td>${ind.index+1}</td>
 										<td>${test.testName}</td>
@@ -39,11 +55,9 @@
 											href="${pageContext.request.contextPath }/java/student/start/test/${test.addTestId}">start
 												test</a></td>
 									</tr>
-
 								</c:if>
 							</c:forEach>
-
-						</tbody>
+						</tbody> --%>
 					</table>
 				</div>
 			</div>
