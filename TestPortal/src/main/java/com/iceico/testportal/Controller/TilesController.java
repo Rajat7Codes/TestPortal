@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.AddTest;
 import com.iceico.testportal.Model.QuestionBank;
-import com.iceico.testportal.Model.TestQuestion;
 import com.iceico.testportal.Model.TestResult;
 import com.iceico.testportal.Model.User;
 import com.iceico.testportal.Service.AddTestService;
@@ -277,6 +276,19 @@ public class TilesController {
 	public String driveDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "driveDashboard";
+	}
+
+	@RequestMapping("/java/admin/dashboard")
+	public String javaAdminDashboard(ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "javaAdminDashboard";
+	}
+
+	@RequestMapping("/web/admin/dashboard")
+	public String webAdminDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "webAdminDashboard";
 	}
 
 	/* sample method start test designing */

@@ -32,6 +32,7 @@ import com.iceico.testportal.Model.Options;
 import com.iceico.testportal.Model.QuestionBank;
 import com.iceico.testportal.Model.TestQuestion;
 import com.iceico.testportal.Model.TestResult;
+import com.iceico.testportal.Model.User;
 import com.iceico.testportal.Service.AddTestService;
 import com.iceico.testportal.Service.CompilerService;
 import com.iceico.testportal.Service.QuestionBankService;
@@ -66,9 +67,37 @@ public class StartTestController {
 	/* Test List page */
 	@RequestMapping("/java/student/test/list")
 	public String testList(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+
+		List<List<String>> listOfTest = new ArrayList<List<String>>();
+		String status = null;
+		for (AddTest addTest : this.addTestService.getAddTestList()) {
+			for (TestResult testResult : this.testResultService.getTestResultList()) {
+
+				for (User user : this.userService.findAllUsers()) {
+					if (addTest.getAddTestId() == testResult.getTestId()) {
+						//check for given test
+						if (testResult.getUserId() == user.getId()) {
+							status = testResult.getResultStatus();
+
+							List<String> test = new ArrayList<String>();
+							test.add(addTest.getIsDeleted() + "");
+							test.add(addTest.getTestName());
+							test.add(addTest.getTime() + "");
+							test.add(addTest.getDate() + "");
+							test.add(addTest.getAddTestId() + "");
+							test.add(status);
+							listOfTest.add(test);
+							System.out.println("=============>" + listOfTest);
+						}
+					}
+				}
+			}
+		}
+		modelMap.addAttribute("list", listOfTest);
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
 		return "testList";
+
 	}
 
 	/* Start Test page */
