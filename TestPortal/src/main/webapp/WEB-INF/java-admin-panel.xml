@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="adminbase.definition"
+		template="/WEB-INF/TestPortal/layout/java-admin-layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/TestPortal/view/java-admin-module/common-pages/header.jsp" />
+		<put-attribute name="sidebar"
+			value="/WEB-INF/TestPortal/view/java-admin-module/common-pages/sidebar.jsp" />
+		<put-attribute name="body" value="" />
+		<!-- <put-attribute name="footer" value="/WEB-INF/TestPortal/view/admin-module/common-pages/footer.jsp" 
+			/> -->
+	</definition>
+
+	<!-- DASHBOARD PAGE -->
+	<definition name="javaAdminDashboard"
+	extends="adminbase.definition">
+		<put-attribute name="title" value="Dashboard" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/dashboard.jsp" />
+	</definition>
+
+</tiles-definitions>
