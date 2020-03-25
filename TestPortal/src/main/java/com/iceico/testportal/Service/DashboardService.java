@@ -21,6 +21,8 @@ public interface DashboardService {
 	public List<TestResult> getMonthlysPerformancePercentageAll(Date startDate, Date lastDate);
 
 	/* End Java Department dashboard */
+	
+	public List<TestResult> getRankWiseStudentListAll(Date date);
 
 	public List<TestResult> getTopTenStudentList(Date date);
 
