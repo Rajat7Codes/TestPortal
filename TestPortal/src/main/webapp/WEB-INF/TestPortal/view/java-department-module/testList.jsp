@@ -12,6 +12,7 @@
 <body>
 	<div class="content-i">
 		<div class="content-box">
+			<%-- 
 			<div class="element-wrapper">
 				<div class="element-box">
 					<h5 class="element-header mb-4">Test List</h5>
@@ -41,7 +42,7 @@
 								</c:if>
 							</c:forEach>
 						</tbody>
-						<%-- 
+						
 						<tbody>
 							<c:forEach var="test" items="${testList}" varStatus="ind">
 								<c:if test="${ test.isDeleted!= true }">
@@ -56,9 +57,133 @@
 									</tr>
 								</c:if>
 							</c:forEach>
-						</tbody> --%>
+						</tbody>
 					</table>
 				</div>
+
+			</div> --%>
+
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="padded-lg">
+						<div class="projects-list">
+							<div class="project-box">
+								<div class="project-head">
+									<div class="project-title">
+										<h5>Test 01</h5>
+									</div>
+								</div>
+								<div class="project-info">
+									<div class="row align-items-center">
+										<div class="col-sm-12">
+											<div class="row">
+												<div class="col-4">
+													<div class="el-tablo highlight">
+														<div class="label font-weight-bold  ">Total time</div>
+														<h5 class="text-primary font-weight-bold">15</h5>
+													</div>
+												</div>
+												<div class="col-4">
+													<div class="el-tablo highlight">
+														<div class="label font-weight-bold ">Test uploaded
+															date</div>
+														<h5 class="text-primary font-weight-bold">03/25/2020</h5>
+													</div>
+												</div>
+												<div class="col-4">
+													<div class="el-tablo highlight text-center">
+														<div class="label font-weight-bold mb-1">click below
+															start test</div>
+														<span class="badge badge-pill  badge-primary px-3 py-1">
+															start test</span>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="project-box">
+								<div class="project-head">
+									<div class="project-title">
+										<h5>Test 02</h5>
+									</div>
+								</div>
+								<div class="project-info">
+									<div class="row align-items-center">
+										<div class="col-sm-12">
+											<div class="row">
+												<div class="col-4">
+													<div class="el-tablo highlight">
+														<div class="label font-weight-bold  ">Total time</div>
+														<h5 class="text-primary font-weight-bold">15</h5>
+													</div>
+												</div>
+												<div class="col-4">
+													<div class="el-tablo highlight">
+														<div class="label font-weight-bold ">Test uploaded
+															date</div>
+														<h5 class="text-primary font-weight-bold">03/25/2020</h5>
+													</div>
+												</div>
+												<div class="col-4">
+													<div class="el-tablo highlight text-center">
+														<div class="label font-weight-bold mb-1">click below
+															start test</div>
+														<span class="badge badge-pill  badge-primary px-3 py-1">
+															start test</span>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="project-box">
+								<div class="project-head">
+									<div class="project-title">
+										<h5>Test 03</h5>
+									</div>
+								</div>
+								<div class="project-info">
+									<div class="row align-items-center">
+										<div class="col-sm-12">
+											<div class="row">
+												<div class="col-4">
+													<div class="el-tablo highlight">
+														<div class="label font-weight-bold  ">Total time</div>
+														<h5 class="text-primary font-weight-bold">15</h5>
+													</div>
+												</div>
+												<div class="col-4">
+													<div class="el-tablo highlight">
+														<div class="label font-weight-bold ">Test uploaded
+															date</div>
+														<h5 class="text-primary font-weight-bold">03/25/2020</h5>
+													</div>
+												</div>
+												<div class="col-4">
+													<div class="el-tablo highlight text-center">
+														<div class="label font-weight-bold mb-1">click below
+															start test</div>
+														<span class="badge badge-pill  badge-primary px-3 py-1">
+															start test</span>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
 			</div>
+		</div>
+	</div>
 </body>
 </html>
