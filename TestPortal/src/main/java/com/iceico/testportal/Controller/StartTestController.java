@@ -120,7 +120,7 @@ public class StartTestController {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "startTest";
 	}
-
+	
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@RequestMapping(value = "/java/student/start/test/compiler", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	public @ResponseBody JSONObject runCode(@RequestParam("language") String languageIn,
@@ -269,12 +269,12 @@ public class StartTestController {
 		double per = (obtainedMarks / totalMarks) * 100;
 		String result = null;
 
+		Integer rank = 0;
+
 		if (per >= passingCriteria) {
 			result = "PASS";
-
 		} else {
 			result = "FAIL";
-
 		}
 
 		// Saving TestResult
@@ -289,7 +289,10 @@ public class StartTestController {
 		testResult.setUserId(this.userService.findBySSO(this.getPrincipal()).getId());
 		testResult.setPercentage(per);
 		this.testResultService.saveTestResult(testResult);
-		return null;
+		
+		JSONObject obj = new JSONObject();
+		obj.put( "testId", testResult.getTestResultId());
+		return obj;
 	}
 
 	private String getPrincipal() {

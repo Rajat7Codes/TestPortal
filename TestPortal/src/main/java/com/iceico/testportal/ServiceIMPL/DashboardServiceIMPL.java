@@ -82,4 +82,11 @@ public class DashboardServiceIMPL implements DashboardService {
 		// testResultId=:testResultId");
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TestResult> getRankWiseStudentListAll(Date date) {
+		return this.getSession().createQuery("from TestResult where date=:date ORDER BY percentage DESC")
+				.setParameter("date", date).getResultList();
+	}
+
 }
