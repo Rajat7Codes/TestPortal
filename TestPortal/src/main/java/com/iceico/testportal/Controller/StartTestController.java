@@ -41,7 +41,9 @@ import com.iceico.testportal.Service.UserService;
 
 /**
  * @author Rajat
- * @version 0.1 Creation Date: 16/03/2020
+ * @version 0.1
+ * 
+ *          Created Date: 16/03/2020
  */
 @Controller
 public class StartTestController {
@@ -75,7 +77,7 @@ public class StartTestController {
 
 				for (User user : this.userService.findAllUsers()) {
 					if (addTest.getAddTestId() == testResult.getTestId()) {
-						//check for given test
+						// check for given test
 						if (testResult.getUserId() == user.getId()) {
 							status = testResult.getResultStatus();
 
@@ -181,11 +183,12 @@ public class StartTestController {
 
 				String response = this.compilerService.runCodeWithInput(lang, code, input);
 				JSONObject resObj = (JSONObject) new JSONParser().parse(response);
-				
-				if( yourAnswers == null) yourAnswers += resObj.get("output");
-				else yourAnswers += ","+resObj.get("output");
-				
-				
+
+				if (yourAnswers == null)
+					yourAnswers += resObj.get("output");
+				else
+					yourAnswers += "," + resObj.get("output");
+
 				if (question.getHiddenOutput().equals(resObj.get("output"))
 						|| question.getHiddenOutput().equals("\n" + resObj.get("output"))) {
 					obtainedMarks += Integer.parseInt(answer.get("marks").toString());
@@ -217,11 +220,13 @@ public class StartTestController {
 
 			} else {
 				for (Options opt : question.getOptions()) {
-				
+
 					if (opt.getOptionsId() == Long.parseLong(answer.get("optionId") + "")) {
 						Boolean userAnswer = opt.getCorrectAnswer();
-						if( yourAnswers == null) yourAnswers += opt.getOptionName();
-						else yourAnswers += ","+opt.getOptionName();
+						if (yourAnswers == null)
+							yourAnswers += opt.getOptionName();
+						else
+							yourAnswers += "," + opt.getOptionName();
 
 						if (userAnswer == true) {
 							obtainedMarks += Integer.parseInt(answer.get("marks").toString());
