@@ -22,4 +22,5 @@ public interface AddTestService {
 
 	public AddTest getAddTestById(Long addTestId) throws ResourceNotFoundException;
 
+	/* public List<AddTest> getTestDepartmentWise(String department); */
 }

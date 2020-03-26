@@ -11,9 +11,9 @@
 	<div class="menu-mobile menu-activated-on-click color-scheme-dark">
 		<div class="mm-logo-buttons-w">
 			<a class="mm-logo"
-				href="${pageContext.request.contextPath }/java/student/dashboard"><img
+				href="${pageContext.request.contextPath }/web/student/dashboard"><img
 				src="${pageContext.request.contextPath }/static/img/Iceico_round.png"><span>Test
-					Portal</span></a>
+					Portal</span> </a>
 			<div class="mm-buttons">
 				<div class="content-panel-open">
 					<div class="os-icon os-icon-grid-circles"></div>

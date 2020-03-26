@@ -31,8 +31,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.TestResult;
 import com.iceico.testportal.Model.User;
+import com.iceico.testportal.Service.AddTestService;
 import com.iceico.testportal.Service.DashboardService;
 import com.iceico.testportal.Service.EMailService;
+import com.iceico.testportal.Service.QuestionBankService;
+import com.iceico.testportal.Service.TestQuestionService;
+import com.iceico.testportal.Service.TestResultService;
+import com.iceico.testportal.Service.UserProfileService;
 import com.iceico.testportal.Service.UserService;
 
 /**
@@ -55,6 +60,21 @@ public class JavaStudentController {
 	@Autowired
 	private DashboardService dashboardService;
 
+	@Autowired
+	private TestResultService testResultService;
+
+	@Autowired
+	private QuestionBankService questionBankService;
+
+	@Autowired
+	private UserProfileService userProfileService;
+
+	@Autowired
+	private TestQuestionService testQuestionService;
+
+	@Autowired
+	private AddTestService addTestService;
+
 	private String passwordToken = null;
 
 	private String tempPass = null;
@@ -65,6 +85,31 @@ public class JavaStudentController {
 
 	@GetMapping("/java/student/profile")
 	public String displayUserInformation(ModelMap modelMap, Locale locale) {
+
+		Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
+		/* All Result List Pass & Fail Up Till Now */
+		List<String> studentTotalPassCountUpTillNow = new ArrayList<String>();
+		List<String> studentTotalFailCountUpTillNow = new ArrayList<String>();
+		List<String> studentTotalTestAttemptedCount = new ArrayList<String>();
+
+		/* Start Total Pass Fail Up Till Now Count Department Wise */
+		for (TestResult allTestResult : this.testResultService.getTestResultList()) {
+			Integer userId = allTestResult.getUserId();
+			if (currentUserId == userId) {
+				studentTotalTestAttemptedCount.add(allTestResult.getResultStatus());
+				if (allTestResult.getResultStatus().equals("PASS")) {
+					studentTotalPassCountUpTillNow.add(allTestResult.getResultStatus());
+				}
+				if (allTestResult.getResultStatus().equals("FAIL")) {
+					studentTotalFailCountUpTillNow.add(allTestResult.getResultStatus());
+				}
+			}
+		}
+		modelMap.addAttribute("studentTotalTestAttemptedCount", studentTotalTestAttemptedCount.size());
+		modelMap.addAttribute("studentTotalPassCountUpTillNow", studentTotalPassCountUpTillNow.size());
+		modelMap.addAttribute("studentTotalFailCountUpTillNow", studentTotalFailCountUpTillNow.size());
+		/* End Total Pass Fail Up Till Now Count Department Wise */
+
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "javaStudProfile";
 	}
@@ -129,6 +174,29 @@ public class JavaStudentController {
 
 	@GetMapping("/java/student/profile/update")
 	public String editUser(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
+		Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
+		/* All Result List Pass & Fail Up Till Now */
+		List<String> studentTotalPassCountUpTillNow = new ArrayList<String>();
+		List<String> studentTotalFailCountUpTillNow = new ArrayList<String>();
+		List<String> studentTotalTestAttemptedCount = new ArrayList<String>();
+
+		/* Start Total Pass Fail Up Till Now Count Department Wise */
+		for (TestResult allTestResult : this.testResultService.getTestResultList()) {
+			Integer userId = allTestResult.getUserId();
+			if (currentUserId == userId) {
+				studentTotalTestAttemptedCount.add(allTestResult.getResultStatus());
+				if (allTestResult.getResultStatus().equals("PASS")) {
+					studentTotalPassCountUpTillNow.add(allTestResult.getResultStatus());
+				}
+				if (allTestResult.getResultStatus().equals("FAIL")) {
+					studentTotalFailCountUpTillNow.add(allTestResult.getResultStatus());
+				}
+			}
+		}
+		modelMap.addAttribute("studentTotalTestAttemptedCount", studentTotalTestAttemptedCount.size());
+		modelMap.addAttribute("studentTotalPassCountUpTillNow", studentTotalPassCountUpTillNow.size());
+		modelMap.addAttribute("studentTotalFailCountUpTillNow", studentTotalFailCountUpTillNow.size());
+		/* End Total Pass Fail Up Till Now Count Department Wise */
 
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "updateJavaStudProfile";

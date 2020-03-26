@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
 		<div class="mm-logo-buttons-w">
 			<a class="mm-logo"
 				href="${pageContext.request.contextPath }/admin/dashboard"><img
-				src="img/logo.png"><span>Test Portal</span></a>
+				src="img/logo.png"><span>Test</span></a>
 			<div class="mm-buttons">
 				<div class="content-panel-open">
 					<div class="os-icon os-icon-grid-circles"></div>
@@ -795,3 +795,4 @@
 	</div>
 </body>
 </html>
+ --%>

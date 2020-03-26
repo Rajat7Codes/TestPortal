@@ -51,14 +51,18 @@
 										</div></a>
 								</div>
 								<div class="col-sm-4 col-xxxl-3">
-									<a class="element-box el-tablo" href="#"><div class="label">Test</div>
+									<a class="element-box el-tablo"
+										href="${pageContext.request.contextPath }/admin/add/test/view"><div
+											class="label">Test</div>
 										<div class="value">${OverallTestCount }</div>
 										<div class="trending trending-down-basic">
 											<!-- <span>12%</span><i class="os-icon os-icon-arrow-down"></i> -->
 										</div></a>
 								</div>
 								<div class="col-sm-4 col-xxxl-3">
-									<a class="element-box el-tablo" href="#"><div class="label">Questions</div>
+									<a class="element-box el-tablo"
+										href="${pageContext.request.contextPath }/admin/question/bank"><div
+											class="label">Questions</div>
 										<div class="value">${totalQuestionsCount }</div>
 										<div class="trending trending-down-basic">
 											<!-- <span>9%</span><i class="os-icon os-icon-arrow-down"></i> -->

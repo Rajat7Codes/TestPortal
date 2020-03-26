@@ -136,4 +136,23 @@
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/admin-module/testResult.jsp" />
 	</definition>
+
+	<!-- ADMIN PROFILE DETAILS -->
+
+	<definition name="adminStudProfile"
+		extends="adminbase.definition">
+		<put-attribute name="title" value="Test Result" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/profile-pages/adminInformation.jsp" />
+	</definition>
+
+
+	<definition name="updateAdminProfile"
+		extends="adminbase.definition">
+		<put-attribute name="title" value="Test Result" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/profile-pages/updateAdminInformation.jsp" />
+	</definition>
+
+
 </tiles-definitions>

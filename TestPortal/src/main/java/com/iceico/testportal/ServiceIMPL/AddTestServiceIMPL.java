@@ -5,8 +5,10 @@ package com.iceico.testportal.ServiceIMPL;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,13 @@ public class AddTestServiceIMPL implements AddTestService {
 
 	@Autowired
 	private AddTestRepository addTestRepository;
+
+	@Autowired
+	private EntityManager entityManager;
+
+	private Session getSession() {
+		return entityManager.unwrap(Session.class);
+	}
 
 	@Override
 	public void saveAddTest(AddTest addTest) {
@@ -46,5 +55,11 @@ public class AddTestServiceIMPL implements AddTestService {
 		return this.addTestRepository.findById(addTestId)
 				.orElseThrow(() -> new ResourceNotFoundException("addTestId not found" + addTestId));
 	}
+
+	/*
+	 * @Override public List<AddTest> getTestDepartmentWise(String department) {
+	 * return
+	 * this.getSession().createNativeQuery("select * from tab_add_test where "); }
+	 */
 
 }

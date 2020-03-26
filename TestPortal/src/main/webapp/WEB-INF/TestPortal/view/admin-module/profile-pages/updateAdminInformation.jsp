@@ -49,14 +49,14 @@
 								<div class="row m-b">
 									<div class="col-sm-6 b-r b-b">
 										<div class="el-tablo centered padded-v">
-											<div class="value">${studentTotalTestAttemptedCount }</div>
-											<div class="label">Total Test Attempted</div>
+											<div class="value">25</div>
+											<div class="label">Products Sold</div>
 										</div>
 									</div>
 									<div class="col-sm-6 b-b">
 										<div class="el-tablo centered padded-v">
-											<div class="value">${studentTotalPassCountUpTillNow }</div>
-											<div class="label">Total Pass Test</div>
+											<div class="value">315</div>
+											<div class="label">Friends</div>
 										</div>
 									</div>
 								</div>
@@ -115,7 +115,7 @@
 					<div class="element-wrapper">
 						<div class="element-box">
 							<form
-								action="${pageContext.request.contextPath }/java/student/profile/save"
+								action="${pageContext.request.contextPath }/admin/profile/save"
 								name="formValidateForm" id="formValidateForm" method="post"
 								enctype="multipart/form-data">
 
