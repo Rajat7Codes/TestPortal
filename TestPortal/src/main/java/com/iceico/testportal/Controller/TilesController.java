@@ -135,7 +135,7 @@ public class TilesController {
 		modelMap.addAttribute("monthlyTotalTestCount",
 				this.dashboardService.getMonthlysPerformancePercentageAll(startDate, lastDate).size());
 		modelMap.addAttribute("monthlyPassFailStudentCount", monthlyCountPassFailStudents);
-		modelMap.addAttribute("OverallTestCount", this.testResultService.getTestResultList().size());
+		modelMap.addAttribute("OverallTestCount", this.addTestService.getAddTestList().size());
 
 		/* Today top ten result */
 		List<Double> topTenStudentsPercentages = new ArrayList<Double>();
@@ -168,12 +168,13 @@ public class TilesController {
 				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
 
 		Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
-		System.out.println("currentUserId ==============>>>" + currentUserId);
+		// System.out.println("currentUserId ==============>>>" + currentUserId);
 
 		/* All Question Count */
 		List<QuestionBank> questionBankList = this.questionBankService.getQuestionBankList();
 		/* All Added Test Count */
 		List<AddTest> totalTestList = this.addTestService.getAddTestList();
+		
 
 		/* Total Student Count List */
 		String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
@@ -193,6 +194,20 @@ public class TilesController {
 			}
 		}
 		/* END Total Student Count List */
+
+		
+		/* FOR CALCULATE TOTAL TEST COUNT DEPARTMENT WISE */
+
+		for (User userPro : this.userService.findAllUsers()) {
+			if (currentAdminDepartment.equals("JAVA")) {
+
+				modelMap.addAttribute("totalTestCountThis", totalTestList.size());
+
+			}
+
+		}
+
+		/* End HERE FOR CALCULATE TOTAL TEST COUNT DEPARTMENT WISE */
 
 		/* Today Wise */
 		List<TestResult> todayTestResult = this.dashboardService.getTodaysPerformancePercentageAll(date);
@@ -257,7 +272,7 @@ public class TilesController {
 
 		modelMap.addAttribute("userService", userService);
 
-		System.out.println("bjkjbkjb"+userService.findBySSO(this.getPrincipal()).getFirstName());
+		System.out.println("bjkjbkjb" + userService.findBySSO(this.getPrincipal()).getFirstName());
 		return "javaDashboard";
 	}
 

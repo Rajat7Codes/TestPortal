@@ -19,9 +19,9 @@
 					<div class="row">
 						<div class="col-sm-12 element-header">
 							<h6 class="">Question Bank View</h6>
-							<a class="btn btn-primary float-right"
+							<%-- <a class="btn btn-primary float-right"
 								href="<c:url value="/admin/question/bank/new" />">Question
-								Bank New</a>
+								Bank New</a> --%>
 							<!-- <button class="btn btn-primary float-right" type="button"></button> -->
 						</div>
 

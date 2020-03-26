@@ -18,7 +18,7 @@
 
 	<!-- DASHBOARD PAGE -->
 	<definition name="javaAdminDashboard"
-	extends="adminbase.definition">
+		extends="adminbase.definition">
 		<put-attribute name="title" value="Dashboard" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/java-admin-module/dashboard.jsp" />

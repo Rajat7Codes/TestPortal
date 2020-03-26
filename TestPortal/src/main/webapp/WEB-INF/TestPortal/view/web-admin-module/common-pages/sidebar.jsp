@@ -12,7 +12,8 @@
 		<div class="mm-logo-buttons-w">
 			<a class="mm-logo"
 				href="${pageContext.request.contextPath }/admin/dashboard"><img
-				src="img/logo.png"><span>Test Portal</span></a>
+				src="${pageContext.request.contextPath }/static/img/Iceico_round.png"><span>Test
+					Portal</span></a>
 			<div class="mm-buttons">
 				<div class="content-panel-open">
 					<div class="os-icon os-icon-grid-circles"></div>
@@ -250,9 +251,11 @@
 		style="margin-top: -54px;">
 		<div class="logo-w">
 			<a class="logo"
-				href="${pageContext.request.contextPath }/admin/dashboard"><div
-					class="logo-element"></div>
-				<div class="logo-label">Test Portal</div></a>
+				href="${pageContext.request.contextPath }/admin/dashboard"> <img
+				src="${pageContext.request.contextPath }/static/img/Iceico_round.png"
+				class="pb-1">
+				<div class="logo-label">Test Portal</div>
+			</a>
 		</div>
 		<div class="logged-user-w avatar-inline">
 			<div class="logged-user-i">
@@ -298,7 +301,8 @@
 						<i class="os-icon os-icon-wallet-loaded"></i>
 					</div>
 					<ul>
-						<li><a href="#"><i
+						<li><a
+							href="${pageContext.request.contextPath }/admin/profile"><i
 								class="os-icon os-icon-user-male-circle2"></i><span>Profile
 									Details</span></a></li>
 
@@ -420,7 +424,7 @@
 
 		<h1 class="menu-page-header">Page Header</h1>
 		<ul class="main-menu">
-			<li class="sub-header"><span>Layouts</span></li>
+			<!-- <li class="sub-header"><span>Layouts</span></li> -->
 
 			<!-- <li class="selected has-sub-menu"><a href="index-2.html"><div
 						class="icon-w">
@@ -648,11 +652,11 @@
 						</ul>
 					</div>
 				</div></li>-->
-			<li class="has-sub-menu"><a
+			<%-- <li class="has-sub-menu"><a
 				href="${pageContext.request.contextPath}/admin/addTest"><div
 						class="icon-w">
 						<div class="os-icon os-icon-grid"></div>
-					</div> <span>Test</span></a></li>
+					</div> <span>Test</span></a></li> --%>
 
 
 			<!-- 	<li class="has-sub-menu"><a href="#"><div class="icon-w">
@@ -709,28 +713,28 @@
 					</div>
 				</div></li>
 
-			<li class="has-sub-menu"><a
+			<li class=""><a
 				href="${pageContext.request.contextPath }/admin/question/bank/search">
 					<div class="icon-w">
 						<div class="os-icon os-icon-edit-32"></div>
 					</div> <span>Search Master</span>
 			</a></li>
 
-			<li class="has-sub-menu"><a
+			<li class=""><a
 				href="${pageContext.request.contextPath }/admin/add/test">
 					<div class="icon-w">
 						<div class="os-icon os-icon-edit-32"></div>
 					</div> <span>Add Test</span>
 			</a></li>
 
-			<li class="has-sub-menu"><a
+			<li class=""><a
 				href="${pageContext.request.contextPath }/admin/add/test/view">
 					<div class="icon-w">
 						<div class="os-icon os-icon-edit-32"></div>
 					</div> <span>View Test</span>
 			</a></li>
 
-			<li class="has-sub-menu"><a
+			<li class=""><a
 				href="${pageContext.request.contextPath }/admin/test/result/list"><div
 						class="icon-w">
 						<div class="os-icon os-icon-edit-32"></div>

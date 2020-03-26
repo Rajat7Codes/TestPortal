@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.iceico.testportal.audit.Auditable.Auditable;
 
 /**
  * @author Rajat
@@ -27,7 +31,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "tab_add_test")
-public class AddTest implements Serializable {
+@EntityListeners(AuditingEntityListener.class)
+public class AddTest extends Auditable<String> implements Serializable {
 
 	private static final long serialVersionUID = 1705449679883875529L;
 
@@ -45,7 +50,7 @@ public class AddTest implements Serializable {
 
 	@Column(name = "time")
 	private Integer time;
-	
+
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "date")
@@ -70,9 +75,10 @@ public class AddTest implements Serializable {
 	@JoinColumn(name = "subject_id", insertable = true, nullable = true, updatable = true)
 	private Subject subject;
 
-	@OneToMany(mappedBy = "addTest", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToMany(mappedBy = "addTest", cascade = { CascadeType.PERSIST,
+			CascadeType.REMOVE }, fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<TestQuestion> testQuestions;
-	
+
 	/**
 	 * @param addTestId
 	 * @param testName
@@ -256,5 +262,5 @@ public class AddTest implements Serializable {
 	public void setTestQuestions(List<TestQuestion> testQuestions) {
 		this.testQuestions = testQuestions;
 	}
-	
+
 }

@@ -21,6 +21,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -42,6 +44,7 @@ import com.iceico.testportal.Model.Subject;
 import com.iceico.testportal.Service.QuestionBankService;
 import com.iceico.testportal.Service.QuestionTypeService;
 import com.iceico.testportal.Service.SubjectService;
+import com.iceico.testportal.Service.UserService;
 
 /**
  * @author SAMEER KADGAYE
@@ -68,6 +71,8 @@ public class QuestionBankController {
 
 	@Autowired
 	private SubjectService subjectService;
+	@Autowired
+	private UserService userService;
 
 	@SuppressWarnings("unchecked")
 	@GetMapping("/admin/question/bank/new")
@@ -90,6 +95,7 @@ public class QuestionBankController {
 		}
 		modelMap.addAttribute("questionTypeJson", jsonArray);
 		modelMap.addAttribute("edit", false);
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "questionBank";
 	}
 
@@ -141,12 +147,13 @@ public class QuestionBankController {
 				e.printStackTrace();
 			}
 		}
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "redirect:/admin/question/bank";
 	}
 
 	@GetMapping("/admin/question/bank")
 	public String viewQuestionBankPage(ModelMap modelMap, Locale locale) {
-
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		modelMap.addAttribute("questionBankList", this.questionBankService.getQuestionBankList());
 		return "questionBankView";
 	}
@@ -154,6 +161,7 @@ public class QuestionBankController {
 	@GetMapping("/admin/question/bank/edit/{questionBankId}")
 	public String editQuestionBankPage(@PathVariable("questionBankId") @Valid Long questionBankId, ModelMap modelMap,
 			Locale locale) throws ResourceNotFoundException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		modelMap.addAttribute("questionBank", this.questionBankService.getQuestionBankById(questionBankId));
 		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
 		modelMap.addAttribute("questionBankList", this.questionBankService.getQuestionBankList());
@@ -165,7 +173,7 @@ public class QuestionBankController {
 	@GetMapping("/admin/question/bank/search")
 	public String searchQuestions(@ModelAttribute("questionBank") @Valid QuestionBank questionBank, ModelMap modelMap,
 			Locale locale) {
-
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		modelMap.addAttribute("questionBankList", this.questionBankService.getQuestionBankList());
 		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
@@ -285,6 +293,7 @@ public class QuestionBankController {
 			}
 			return questionBankArray;
 		}
+
 		return questionBankArray;
 	}
 
@@ -297,10 +306,10 @@ public class QuestionBankController {
 		Subject subject = this.subjectService.getSubjectById(subjectId);
 		JSONArray questionArray = new JSONArray();
 
-		System.out.println("questionBank :======++=======:"+subject.getQuestionBank());
-		for(int i=0; i<subject.getQuestionBank().size(); i++) {
-			System.out.println("questionBank :======++=======:"+subject.getQuestionBank().get(i));
-			JSONObject queObject = new JSONObject(); 
+		System.out.println("questionBank :======++=======:" + subject.getQuestionBank());
+		for (int i = 0; i < subject.getQuestionBank().size(); i++) {
+			System.out.println("questionBank :======++=======:" + subject.getQuestionBank().get(i));
+			JSONObject queObject = new JSONObject();
 			queObject.put("questionId", subject.getQuestionBank().get(i).getQuestionBankId());
 			queObject.put("question", subject.getQuestionBank().get(i).getQuestion());
 			queObject.put("questionType", subject.getQuestionBank().get(i).getQuestionType().getType());
@@ -312,4 +321,17 @@ public class QuestionBankController {
 
 		return questionArray;
 	}
+
+	private String getPrincipal() {
+		String userName = null;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (principal instanceof UserDetails) {
+			userName = ((UserDetails) principal).getUsername();
+		} else {
+			userName = principal.toString();
+		}
+		return userName;
+	}
+
 }

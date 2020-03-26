@@ -73,7 +73,7 @@
 								<!-- <a class="btn btn-primary btn-sm" href="#"><i
 									class="os-icon os-icon-link-3"></i><span>Add to Friends</span></a> -->
 								<a class="btn btn-primary btn-sm"
-									href="${pageContext.request.contextPath }/java/student/profile/update"><i
+									href="${pageContext.request.contextPath }/admin/profile/update"><i
 									class="os-icon os-icon-edit"></i><span>Edit Profile</span></a>
 							</div>
 						</div>
@@ -91,22 +91,22 @@
 									</div>
 									<div class="col-sm-6 b-b b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">${studentTotalTestAttemptedCount }</div>
-											<div class="label">Total Test Attempted</div>
+											<div class="value">47.5K</div>
+											<div class="label">Followers</div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-6 b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">${studentTotalPassCountUpTillNow }</div>
-											<div class="label">Total Pass Result</div>
+											<div class="value">$95</div>
+											<div class="label">Daily Earnings</div>
 										</div>
 									</div>
 									<div class="col-sm-6 b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">${studentTotalFailCountUpTillNow }</div>
-											<div class="label">Total Fail Results</div>
+											<div class="value">12</div>
+											<div class="label">Products</div>
 										</div>
 									</div>
 								</div>

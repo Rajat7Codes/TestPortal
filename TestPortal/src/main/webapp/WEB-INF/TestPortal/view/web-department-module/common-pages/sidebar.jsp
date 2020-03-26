@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,7 +11,8 @@
 		<div class="mm-logo-buttons-w">
 			<a class="mm-logo"
 				href="${pageContext.request.contextPath }/web/student/dashboard"><img
-				src="${pageContext.request.contextPath }/static/img/Iceico_round.png"><span>Test Portal</span></a>
+				src="${pageContext.request.contextPath }/static/img/Iceico_round.png"><span>Test
+					Portal</span></a>
 			<div class="mm-buttons">
 				<div class="content-panel-open">
 					<div class="os-icon os-icon-grid-circles"></div>
@@ -63,7 +64,8 @@
 				href="${pageContext.request.contextPath }/web/student/dashboard">
 				<img
 				src="${pageContext.request.contextPath }/static/img/Iceico_round.png">
-				<div class="logo-label">Test Portal</div></a>
+				<div class="logo-label">Test Portal</div>
+			</a>
 		</div>
 		<div class="logged-user-w avatar-inline">
 			<div class="logged-user-i">
@@ -213,4 +215,4 @@
 		</div>
 	</div>
 </body>
-</html>
+</html> --%>
