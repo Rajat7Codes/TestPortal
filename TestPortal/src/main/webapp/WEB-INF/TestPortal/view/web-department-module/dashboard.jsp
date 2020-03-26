@@ -117,9 +117,6 @@
 							</div>
 						</div>
 					</div>
-
-
-
 				</div>
 				<div class="col-sm-4 d-xxxl-none"></div>
 				<div class="d-none d-xxxl-block col-xxxl-6">
@@ -323,10 +320,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="floated-chat-btn">
+			
+			
+			
+			<!-- <div class="floated-chat-btn">
 				<i class="os-icon os-icon-mail-07"></i><span>Demo Chat</span>
-			</div>
-			<div class="floated-chat-w">
+			</div> -->
+			<!-- <div class="floated-chat-w">
 				<div class="floated-chat-i">
 					<div class="chat-close">
 						<i class="os-icon os-icon-close"></i>
@@ -371,7 +371,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 		<div class="content-panel">
 			<div class="content-panel-close">

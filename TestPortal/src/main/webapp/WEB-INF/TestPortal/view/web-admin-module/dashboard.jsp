@@ -37,7 +37,7 @@
 										<option value="Cancelled">Last 30 Days</option></select>
 								</form>
 							</div>
-							<h6 class="element-header">Admin Dashboard</h6>
+							<h6 class="element-header">Web Admin Dashboard</h6>
 							<div class="element-content">
 								<div class="row">
 									<div class="col-sm-4 col-xxxl-3">

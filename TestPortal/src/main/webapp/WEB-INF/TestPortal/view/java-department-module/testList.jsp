@@ -12,6 +12,7 @@
 <body>
 	<div class="content-i">
 		<div class="content-box">
+			<%-- 
 			<div class="element-wrapper">
 				<div class="element-box">
 					<h5 class="element-header mb-4">Test List</h5>
@@ -41,8 +42,7 @@
 								</c:if>
 							</c:forEach>
 						</tbody>
-
-						<%-- 
+						
 						<tbody>
 							<c:forEach var="test" items="${testList}" varStatus="ind">
 								<c:if test="${ test.isDeleted!= true }">
@@ -57,8 +57,65 @@
 									</tr>
 								</c:if>
 							</c:forEach>
-						</tbody> --%>
+						</tbody>
 					</table>
+				</div>
+
+			</div> --%>
+
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="padded-lg">
+						<div class="projects-list">
+							<c:forEach var="test" items="${list}" varStatus="ind">
+								<c:if test="${test[0] != true }">
+									<div class="project-box">
+										<div class="project-head">
+											<div class="project-title">
+												<h5>${test[1]}</h5>
+											</div>
+										</div>
+										<div class="project-info">
+											<div class="row align-items-center">
+												<div class="col-sm-12">
+													<div class="row">
+														<div class="col-4">
+															<div class="el-tablo highlight">
+																<div class="label font-weight-bold  ">Total time</div>
+																<h5 class="text-primary font-weight-bold">${test[2]}</h5>
+															</div>
+														</div>
+														<div class="col-4">
+															<div class="el-tablo highlight">
+																<div class="label font-weight-bold ">Test uploaded
+																	date</div>
+																<h5 class="text-primary font-weight-bold">${test[3]}</h5>
+															</div>
+														</div>
+														<div class="col-4">
+															<div class="el-tablo highlight text-center">
+																<div class="label font-weight-bold mb-1">click
+																	below start test</div>
+
+																<a class="badge badge-pill  badge-primary px-3 py-1"
+																	href="${pageContext.request.contextPath }/java/student/start/test/${test[4]}">start
+																	test</a>
+
+
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
+
+
+
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

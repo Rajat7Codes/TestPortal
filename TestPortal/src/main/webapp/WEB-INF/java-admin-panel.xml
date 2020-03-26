@@ -16,6 +16,7 @@
 			/> -->
 	</definition>
 
+
 	<!-- DASHBOARD PAGE -->
 	<definition name="javaAdminDashboard"
 		extends="adminbase.definition">
@@ -23,5 +24,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/java-admin-module/dashboard.jsp" />
 	</definition>
+
+
+	<!-- DASHBOARD PAGE <definition name="javaAdminDashboard" extends="adminbase.definition"> 
+		<put-attribute name="title" value="TEST PORTAL | JAVA ADMIN DASHBOARD" /> 
+		<put-attribute name="body" value="/webapp/WEB-INF/TestPortal/view/java-admin-module/dashboard.jsp" 
+		/> </definition> -->
 
 </tiles-definitions>

@@ -146,10 +146,6 @@ public class StudentModuleController {
 			HttpServletRequest httpServletRequest)
 			throws ParseException, NumberFormatException, ResourceNotFoundException {
 
-		// System.out.println("finalJson <<<<===============>>>>> "+sdata);
-		// System.out.println("<<<<============= verifyEmailOtp ============>>>>>" +
-		// verifyEmailOtp);
-
 		String character = sdata.substring(sdata.length() - 1, sdata.length());
 		if (character.equals(",")) {
 			sdata = sdata.substring(0, sdata.length() - 1);
@@ -158,7 +154,6 @@ public class StudentModuleController {
 		JSONParser jsonParser = new JSONParser();
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(sdata);
 		String emailOtp = jsonObject.get("emailOtp").toString();
-		// System.out.println(">>>>>======== emailOtp =========<<<<<<" + emailOtp);
 
 		String jobj = jsonObject.get("data").toString();
 		JSONObject data = (JSONObject) jsonParser.parse(jobj);
@@ -170,23 +165,8 @@ public class StudentModuleController {
 			Department department = this.departmentService
 					.getDepartmentById(Long.parseLong(data.get("department").toString()));
 
-			/*
-			 * System.out.println("obj depart =========>>"+Long.parseLong(data.get(
-			 * "department").toString())); System.out.println("department ========>>" +
-			 * department);
-			 * System.out.println("Main Department name =========>>>>>"+department.
-			 * getDepartmentName());
-			 */
-		//	String depName = department.getDepartmentName();
-
-			// System.out.println("profile if start =============>>>");
-			// System.out.println("===========>> Department Name
-			// ==================="+userProfileService.findByType(depName));
-
 			profile = userProfileService.findByType(department.getDepartmentName());
-			// System.out.println("Profie ==========>" + profile);
 			profile.setType(department.getDepartmentName());
-			// System.out.println("profile if end =============>>>");
 
 			Set<UserProfile> role = new HashSet<>();
 			role.add(profile);

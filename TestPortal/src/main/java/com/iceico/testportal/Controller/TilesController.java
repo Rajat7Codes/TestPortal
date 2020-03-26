@@ -77,8 +77,6 @@ public class TilesController {
 				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
 		String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
 				.getDepartmentName();
-		// System.out.println("Current admin department ==========>>>" +
-		// currentAdminDepartment);
 
 		/* questions Count */
 		List<QuestionBank> questionBanks = this.questionBankService.getQuestionBankList();
@@ -139,19 +137,13 @@ public class TilesController {
 
 		/* Today top ten result */
 		List<Double> topTenStudentsPercentages = new ArrayList<Double>();
-		List<Integer> topTenStudentsUserId = new ArrayList<Integer>();
+		List<String> topTenStudentsNames = new ArrayList<String>();
 		for (TestResult tResult : this.dashboardService.getTopTenStudentList(date)) {
-			// System.out.println("top ====>>" + tResult.getPercentage());
 			topTenStudentsPercentages.add(tResult.getPercentage());
-			topTenStudentsUserId.add(tResult.getUserId());
+			topTenStudentsNames.add(tResult.getCreatedBy());
 		}
 		modelMap.addAttribute("topTenPercentages", topTenStudentsPercentages);
-		modelMap.addAttribute("topTenStudentsUserId", topTenStudentsUserId);
-		modelMap.addAttribute("testResultStudentMonthly",
-				this.dashboardService.getTopTenStudentListMonthly(startDate, lastDate));
-
-		modelMap.addAttribute("testResultStudentToday", this.dashboardService.getTopTenStudentList(date));
-		modelMap.addAttribute("userService", userService);
+		modelMap.addAttribute("topTenStudentsNames", topTenStudentsNames);
 		/* End Today top ten result */
 		return "adminDashboard";
 	}
@@ -168,13 +160,13 @@ public class TilesController {
 				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
 
 		Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
+
 		// System.out.println("currentUserId ==============>>>" + currentUserId);
 
 		/* All Question Count */
 		List<QuestionBank> questionBankList = this.questionBankService.getQuestionBankList();
 		/* All Added Test Count */
 		List<AddTest> totalTestList = this.addTestService.getAddTestList();
-		
 
 		/* Total Student Count List */
 		String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
@@ -187,7 +179,6 @@ public class TilesController {
 				if (!users.equals("Admin")) {
 					if (!userPro.getDepartment().getDepartmentName().equals("WEB")) {
 						userListCount.add(UserId);
-						// System.out.println("users ==============>>>" + users);
 						modelMap.addAttribute("totalJavaUsersCount", userListCount.size());
 					}
 				}
@@ -195,7 +186,6 @@ public class TilesController {
 		}
 		/* END Total Student Count List */
 
-		
 		/* FOR CALCULATE TOTAL TEST COUNT DEPARTMENT WISE */
 
 		for (User userPro : this.userService.findAllUsers()) {
@@ -243,15 +233,17 @@ public class TilesController {
 		}
 
 		/* pass fail for each end */
-		/*
-		 * Integer index = 0; for (TestResult testResult1 : todayTestResult) {
-		 * 
-		 * Double percentage = testResult1.getPercentage(); if (testResult1.getUserId()
-		 * == currentUserId) { for (int i = 1; i < todayTestResult.size(); i++) { Double
-		 * currentUserPercentage = testResult1.getPercentage(); if
-		 * (currentUserPercentage >= percentage) { index = i;
-		 * modelMap.addAttribute("rank", index); } } } }
-		 */
+
+		for (TestResult testResult1 : todayTestResult) {
+			for (int i = 0; i < todayTestResult.size(); i++) {
+			}
+
+			Double percentage = testResult1.getPercentage();
+
+			if (testResult1.getUserId() == currentUserId) {
+
+			}
+		}
 		todayPassFailStudentsCount.add(todayPassStudents.size());
 		todayPassFailStudentsCount.add(todayFailStudents.size());
 
@@ -263,9 +255,9 @@ public class TilesController {
 
 		modelMap.addAttribute("monthlyStudentPassFailStatus", monthlyPassFailStudentsCount);
 		modelMap.addAttribute("monthlyStudentPassFailStatusTotalCount", monthlyTestResult.size());
-		modelMap.addAttribute("testResultStudentToday", this.dashboardService.getRankWiseStudentListAll(date));
 		modelMap.addAttribute("testResultStudentMonthly",
 				this.dashboardService.getTopTenStudentListMonthly(startDate, lastDate));
+		modelMap.addAttribute("testResultStudentToday", this.dashboardService.getTopTenStudentList(date));
 
 		modelMap.addAttribute("testQuestions", questionBankList.size());
 		modelMap.addAttribute("totalTestList", totalTestList.size());

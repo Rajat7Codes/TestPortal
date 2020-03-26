@@ -296,7 +296,7 @@ public class JavaStudentController {
 		return "redirect:/java/student/profile";
 	}
 
-	@GetMapping("/java/student/student/individual/performance")
+	@GetMapping("/java/student/individual/performance")
 	public String studentIndividualPerformance(ModelMap modelMap, Locale locale) throws java.text.ParseException {
 		Date date = new Date();
 		LocalDate currentdate = LocalDate.now();
@@ -324,6 +324,7 @@ public class JavaStudentController {
 				modelMap.addAttribute("testToday", getStudentTodayTestMarks);
 			}
 		}
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 
 		return "studentIndividualPerformance";
 	}
