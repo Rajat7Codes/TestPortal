@@ -72,6 +72,24 @@ public class AddTestController {
 		return "addTest";
 	}
 
+// Add Test for Java Department
+	@GetMapping("/java/admin/add/test")
+	public String getTestForJava(ModelMap modelMap, Locale locale) {
+		modelMap.addAttribute("addTest", new AddTest());
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "addTestForJava";
+	}
+
+	// Add Test for Web Department
+	@GetMapping("/web/admin/add/test")
+	public String getTestForWeb(ModelMap modelMap, Locale locale) {
+		modelMap.addAttribute("addTest", new AddTest());
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "addTestForWeb";
+	}
+
 	@GetMapping("/admin/add/test/edit/{addTestId}")
 	public String editTest(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
@@ -137,6 +155,84 @@ public class AddTestController {
 
 			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 			return "redirect:/admin/add/test";
+		}
+	}
+
+	// save test for java department
+	@PostMapping("/java/admin/add/test/save")
+	public String saveTestForJava(@RequestParam("questionsJson") String questions,
+			@ModelAttribute("addTest") @Valid AddTest addTest, BindingResult bindingResult, ModelMap modelMap,
+			Locale locale) throws ParseException, ResourceNotFoundException {
+		if (bindingResult.hasErrors()) {
+			modelMap.addAttribute("addTest", new AddTest());
+			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+			System.out.println("*********************Not Saved!!!");
+			System.out.println("***********" + bindingResult.getAllErrors());
+			return "addTest";
+		} else {
+
+			List<TestQuestion> addedQuestions = new ArrayList<TestQuestion>();
+
+			JSONParser parser = new JSONParser();
+			JSONArray questionArray = (JSONArray) parser.parse(questions);
+
+			for (int i = 0; i < questionArray.size(); i++) {
+				TestQuestion testQuestions = new TestQuestion();
+				JSONObject obj = (JSONObject) questionArray.get(i);
+				testQuestions.setQuestionId(Long.parseLong(obj.get("questionId") + ""));
+				testQuestions.setAddTest(addTest);
+				addedQuestions.add(testQuestions);
+				System.out.println("+++++++++++++>>>>>>>> " + obj.get("questionId"));
+			}
+			System.out.println("********************* Saving in process....one step behind!!!");
+			System.out.println("+++++++++++++>>>>>>>> " + addedQuestions);
+			addTest.setTestQuestions(addedQuestions);
+			addTest.setIsDeleted(false);
+			this.addTestService.saveAddTest(addTest);
+			System.out.println("********************* Saved!!!");
+
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+			return "redirect:/java/admin/add/test";
+		}
+	}
+
+	// save test for java department
+	@PostMapping("/web/admin/add/test/save")
+	public String saveTestForWeb(@RequestParam("questionsJson") String questions,
+			@ModelAttribute("addTest") @Valid AddTest addTest, BindingResult bindingResult, ModelMap modelMap,
+			Locale locale) throws ParseException, ResourceNotFoundException {
+		if (bindingResult.hasErrors()) {
+			modelMap.addAttribute("addTest", new AddTest());
+			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+			System.out.println("*********************Not Saved!!!");
+			System.out.println("***********" + bindingResult.getAllErrors());
+			return "addTest";
+		} else {
+
+			List<TestQuestion> addedQuestions = new ArrayList<TestQuestion>();
+
+			JSONParser parser = new JSONParser();
+			JSONArray questionArray = (JSONArray) parser.parse(questions);
+
+			for (int i = 0; i < questionArray.size(); i++) {
+				TestQuestion testQuestions = new TestQuestion();
+				JSONObject obj = (JSONObject) questionArray.get(i);
+				testQuestions.setQuestionId(Long.parseLong(obj.get("questionId") + ""));
+				testQuestions.setAddTest(addTest);
+				addedQuestions.add(testQuestions);
+				System.out.println("+++++++++++++>>>>>>>> " + obj.get("questionId"));
+			}
+			System.out.println("********************* Saving in process....one step behind!!!");
+			System.out.println("+++++++++++++>>>>>>>> " + addedQuestions);
+			addTest.setTestQuestions(addedQuestions);
+			addTest.setIsDeleted(false);
+			this.addTestService.saveAddTest(addTest);
+			System.out.println("********************* Saved!!!");
+
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+			return "redirect:/web/admin/add/test";
 		}
 	}
 

@@ -19,8 +19,20 @@
 	<!-- DASHBOARD PAGE -->
 	<definition name="webAdminDashboard"
 		extends="adminbase.definition">
-		<put-attribute name="title" value="Dashboard Web" />
+		<put-attribute name="title"
+			value="TEST PORTAL| WEB ADMIN DASHBOARD" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/web-admin-module/dashboard.jsp" />
 	</definition>
+
+
+
+	<!--Add test -->
+	<definition name="addTestForWeb"
+		extends="adminbase.definition">
+		<put-attribute name="title" value="Add Test For Web" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/web-admin-module/test-pages/addTest.jsp" />
+	</definition>
+
 </tiles-definitions>

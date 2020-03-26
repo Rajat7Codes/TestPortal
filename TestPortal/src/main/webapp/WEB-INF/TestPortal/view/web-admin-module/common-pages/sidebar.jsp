@@ -204,10 +204,12 @@
 					</ul></li>
 
 				<li class="has-sub-menu"><a
-					href="${pageContext.request.contextPath }/admin/add/test"><div
+					href="${pageContext.request.contextPath }/web/admin/add/test"><div
 							class="icon-w">
 							<div class="os-icon os-icon-edit-32"></div>
 						</div> <span>Add Test</span></a></li>
+
+
 
 
 				<!-- <li class="has-sub-menu"><a href="#"><div class="icon-w">
@@ -717,11 +719,13 @@
 			</a></li>
 
 			<li class="has-sub-menu"><a
-				href="${pageContext.request.contextPath }/admin/add/test">
+				href="${pageContext.request.contextPath }/web/admin/add/test">
 					<div class="icon-w">
 						<div class="os-icon os-icon-edit-32"></div>
 					</div> <span>Add Test</span>
 			</a></li>
+
+
 
 			<li class="has-sub-menu"><a
 				href="${pageContext.request.contextPath }/admin/add/test/view">

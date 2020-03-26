@@ -98,9 +98,9 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 		} else if (isDriveStudent) {
 			return "/drive/student/dashboard";
 		} else if (isJavaAdmin) {
-			return "/drive/java/admin/dashboard";
+			return "/java/admin/dashboard";
 		} else if (isWebAdmin) {
-			return "/drive/web/admin/dashboard";
+			return "/web/admin/dashboard";
 		} else {
 			throw new IllegalStateException();
 		}
