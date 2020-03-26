@@ -77,8 +77,6 @@ public class TilesController {
 				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
 		String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
 				.getDepartmentName();
-		// System.out.println("Current admin department ==========>>>" +
-		// currentAdminDepartment);
 
 		/* questions Count */
 		List<QuestionBank> questionBanks = this.questionBankService.getQuestionBankList();
@@ -141,7 +139,6 @@ public class TilesController {
 		List<Double> topTenStudentsPercentages = new ArrayList<Double>();
 		List<String> topTenStudentsNames = new ArrayList<String>();
 		for (TestResult tResult : this.dashboardService.getTopTenStudentList(date)) {
-			// System.out.println("top ====>>" + tResult.getPercentage());
 			topTenStudentsPercentages.add(tResult.getPercentage());
 			topTenStudentsNames.add(tResult.getCreatedBy());
 		}
@@ -163,7 +160,6 @@ public class TilesController {
 				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
 
 		Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
-		System.out.println("currentUserId ==============>>>" + currentUserId);
 
 		/* All Question Count */
 		List<QuestionBank> questionBankList = this.questionBankService.getQuestionBankList();
@@ -181,7 +177,6 @@ public class TilesController {
 				if (!users.equals("Admin")) {
 					if (!userPro.getDepartment().getDepartmentName().equals("WEB")) {
 						userListCount.add(UserId);
-						// System.out.println("users ==============>>>" + users);
 						modelMap.addAttribute("totalJavaUsersCount", userListCount.size());
 					}
 				}
@@ -226,19 +221,11 @@ public class TilesController {
 
 		for (TestResult testResult1 : todayTestResult) {
 			for (int i = 0; i < todayTestResult.size(); i++) {
-				// System.out.println("pecentages ==========>>> " + todayTestResult.get(i));
 			}
 
 			Double percentage = testResult1.getPercentage();
-			System.out.println("UserId === " + testResult1.getUserId() + "   pecentages ==" + percentage);
-			/*
-			 * if (percentage ==) {
-			 * 
-			 * }
-			 */
 
 			if (testResult1.getUserId() == currentUserId) {
-				System.out.println("User Id Inner ==========>>>" + percentage);
 
 			}
 		}

@@ -166,40 +166,32 @@ public class UserController {
 			@RequestParam("department") Long departmentId, ModelMap modelMap)
 			throws ParseException, ResourceNotFoundException {
 
+		Department department = this.departmentService.getDepartmentById(departmentId);
+		UserProfile profile = null;
+
+		// below code is for setting the role according to department
+		if (department.getDepartmentName().equals("JAVA")) {
+			profile = this.userProfileService.findByType("JAVAADMIN");
+			profile.setType("JAVAADMIN");
+		} else if (department.getDepartmentName().equals("WEB")) {
+			profile = this.userProfileService.findByType("WEBADMIN");
+			profile.setType("WEBADMIN");
+		}
+
 		User user = new User();
 		user.setFirstName(fName);
 		user.setLastName(lName);
 		user.setGender(gender);
 		user.setMobileNumber(mobile);
 		user.setEmail(emailId);
-		Department department = this.departmentService.getDepartmentById(departmentId);
-		user.setDepartment(this.departmentService.getDepartmentById(departmentId));
+		user.setDepartment(department);
 		user.setPassword(password);
 		user.setSsoId(ssoId);
 
-		System.out.println("First Name ========> " + fName);
-		System.out.println("Last Name ========> " + lName);
-		System.out.println("Gender ========> " + gender);
-		System.out.println("Mobile No ========> " + mobile);
-		System.out.println("Email ========> " + emailId);
-		System.out.println("Department Id ========> " + departmentId);
-		System.out.println("Department Name ========> "
-				+ this.departmentService.getDepartmentById(departmentId).getDepartmentName());
-		System.out.println("Password ========> " + password);
-		System.out.println("SSO ID ========> " + ssoId);
+		Set<UserProfile> role = new HashSet<UserProfile>();
+		role.add(profile);
+		user.setUserProfiles(role);
 
-		// below code is for setting the role according to department
-		if (user.getDepartment().getDepartmentName() == "JAVA") {
-			UserProfile profile = this.userProfileService.findByType("JAVAADMIN");
-			Set<UserProfile> role = new HashSet<UserProfile>();
-			role.add(profile);
-			user.setUserProfiles(role);
-		} else if (user.getDepartment().getDepartmentName() == "WEB") {
-			UserProfile profile = this.userProfileService.findByType("WEBADMIN");
-			Set<UserProfile> role = new HashSet<UserProfile>();
-			role.add(profile);
-			user.setUserProfiles(role);
-		}
 		this.userService.saveUser(user);
 		modelMap.addAttribute("user", getPrincipal());
 
