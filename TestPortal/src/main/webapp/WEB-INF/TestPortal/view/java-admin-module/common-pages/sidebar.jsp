@@ -204,7 +204,7 @@
 					</ul></li>
 
 				<li class="has-sub-menu"><a
-					href="${pageContext.request.contextPath }/admin/add/test"><div
+					href="${pageContext.request.contextPath }/java/admin/add/test"><div
 							class="icon-w">
 							<div class="os-icon os-icon-edit-32"></div>
 						</div> <span>Add Test</span></a></li>
@@ -717,11 +717,18 @@
 			</a></li>
 
 			<li class="has-sub-menu"><a
-				href="${pageContext.request.contextPath }/admin/add/test">
+				href="${pageContext.request.contextPath }/java/admin/add/test">
 					<div class="icon-w">
 						<div class="os-icon os-icon-edit-32"></div>
 					</div> <span>Add Test</span>
 			</a></li>
+
+
+			<li class="has-sub-menu"><a
+				href="${pageContext.request.contextPath }/java/admin/add/test"><div
+						class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span>Add Test</span></a></li>
 
 			<li class="has-sub-menu"><a
 				href="${pageContext.request.contextPath }/admin/add/test/view">
