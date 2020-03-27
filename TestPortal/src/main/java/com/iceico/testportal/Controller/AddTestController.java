@@ -116,7 +116,12 @@ public class AddTestController {
 		} else {
 
 			List<TestQuestion> addedQuestions = new ArrayList<TestQuestion>();
+			Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
+			System.out.println("currentUserId   =============>>>>" + currentUserId);
+			String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
+					.getDepartmentName();
 
+			System.out.println("currentAdminDepartment ============>>>>>>>>>  " + currentAdminDepartment);
 			JSONParser parser = new JSONParser();
 			JSONArray questionArray = (JSONArray) parser.parse(questions);
 
@@ -132,6 +137,8 @@ public class AddTestController {
 			System.out.println("+++++++++++++>>>>>>>> " + addedQuestions);
 			addTest.setTestQuestions(addedQuestions);
 			addTest.setIsDeleted(false);
+			addTest.setUserId(currentUserId);
+			addTest.setDepartmentName(currentAdminDepartment);
 			this.addTestService.saveAddTest(addTest);
 			System.out.println("********************* Saved!!!");
 

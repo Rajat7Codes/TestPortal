@@ -71,6 +71,12 @@ public class AddTest extends Auditable<String> implements Serializable {
 	@Column(name = "passing_percent")
 	private float passingPercent;
 
+	@Column(name = "user_id")
+	private Integer userId;
+
+	@Column(name = "department_name")
+	private String departmentName;
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "subject_id", insertable = true, nullable = true, updatable = true)
 	private Subject subject;
@@ -89,12 +95,14 @@ public class AddTest extends Auditable<String> implements Serializable {
 	 * @param isDeleted
 	 * @param instructions
 	 * @param passingPercent
+	 * @param userId
+	 * @param departmentName
 	 * @param subject
 	 * @param testQuestions
 	 */
 	public AddTest(Long addTestId, String testName, Integer time, Date date, Boolean negativeMarking, String ratio,
-			Boolean isDeleted, String instructions, float passingPercent, Subject subject,
-			List<TestQuestion> testQuestions) {
+			Boolean isDeleted, String instructions, float passingPercent, Integer userId, String departmentName,
+			Subject subject, List<TestQuestion> testQuestions) {
 		super();
 		this.addTestId = addTestId;
 		this.testName = testName;
@@ -105,6 +113,8 @@ public class AddTest extends Auditable<String> implements Serializable {
 		this.isDeleted = isDeleted;
 		this.instructions = instructions;
 		this.passingPercent = passingPercent;
+		this.userId = userId;
+		this.departmentName = departmentName;
 		this.subject = subject;
 		this.testQuestions = testQuestions;
 	}
@@ -236,6 +246,34 @@ public class AddTest extends Auditable<String> implements Serializable {
 	}
 
 	/**
+	 * @return the userId
+	 */
+	public Integer getUserId() {
+		return userId;
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	/**
+	 * @return the departmentName
+	 */
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	/**
+	 * @param departmentName the departmentName to set
+	 */
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+
+	/**
 	 * @return the subject
 	 */
 	public Subject getSubject() {
@@ -262,5 +300,4 @@ public class AddTest extends Auditable<String> implements Serializable {
 	public void setTestQuestions(List<TestQuestion> testQuestions) {
 		this.testQuestions = testQuestions;
 	}
-
 }
