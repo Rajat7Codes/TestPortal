@@ -3,11 +3,6 @@ package com.iceico.testportal.Controller;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import javax.imageio.ImageIO;
@@ -29,9 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
-import com.iceico.testportal.Model.TestResult;
 import com.iceico.testportal.Model.User;
-import com.iceico.testportal.Service.DashboardService;
 import com.iceico.testportal.Service.EMailService;
 import com.iceico.testportal.Service.UserService;
 
@@ -52,9 +45,6 @@ public class JavaStudentController {
 	@Autowired
 	private EMailService emailService;
 
-	@Autowired
-	private DashboardService dashboardService;
-
 	private String passwordToken = null;
 
 	private String tempPass = null;
@@ -63,12 +53,15 @@ public class JavaStudentController {
 
 	}
 
+	
+	/* JAVA STUDENT PROFILE */
 	@GetMapping("/java/student/profile")
 	public String displayUserInformation(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "javaStudProfile";
 	}
 
+	/* JAVA STUDENT PROFILE SAVE */
 	@PostMapping("/java/student/profile/save")
 	public String saveJavaUser(@RequestParam("jsonData") String jsonData,
 			@RequestParam("fileName") MultipartFile fileName, HttpServletRequest httpServletRequest, ModelMap modelMap,
@@ -127,6 +120,7 @@ public class JavaStudentController {
 		return "redirect:/java/student/profile";
 	}
 
+	/* JAVA STUDENT PROFILE UPDATE */	
 	@GetMapping("/java/student/profile/update")
 	public String editUser(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
 
@@ -134,6 +128,7 @@ public class JavaStudentController {
 		return "updateJavaStudProfile";
 	}
 
+	/* SEND VERIFICATION LINK FOR CHANGE PASSWORD */
 	@GetMapping("/java/student/profile/send/token")
 	public String sendToken(@RequestParam("username") String userName, @RequestParam("mobile") String mobNo,
 			@RequestParam("mailId") String mailId, @RequestParam("password") String password, ModelMap modelMap,
@@ -184,6 +179,7 @@ public class JavaStudentController {
 		return "javaDashboard";
 	}
 
+	/* VERIFY SENT VRIFICATION LINK */
 	@GetMapping("/java/student/profile/validate/token/{token}")
 	public String validateToken(@PathVariable("token") @Valid String token, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
@@ -201,12 +197,14 @@ public class JavaStudentController {
 		return "javaDashboard";
 	}
 
+	/* CHANGE PASSWORD */
 	@GetMapping("/java/change/password")
 	public String getPassword(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "changePassword";
 	}
 
+	/* CHANGE PASSWORD */
 	@PostMapping("/java/change/password")
 	public String changePassword(@RequestParam("password") String password, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
@@ -221,45 +219,14 @@ public class JavaStudentController {
 		return "redirect:/java/user";
 	}
 
+	/* STUDENT PROFILE DELETE */
 	@GetMapping("/java/student/profile/delete/{userId}")
 	public String deleteUser(@PathVariable("userId") @Valid Long userId, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
 
 		return "redirect:/java/student/profile";
 	}
-
-	@GetMapping("/java/student/individual/performance")
-	public String studentIndividualPerformance(ModelMap modelMap, Locale locale) throws java.text.ParseException {
-		Date date = new Date();
-		LocalDate currentdate = LocalDate.now();
-		Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(currentdate.withDayOfMonth(1).toString());
-		Date lastDate = new SimpleDateFormat("yyyy-MM-dd")
-				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
-		List<Double> getTodayPercentage = new ArrayList<Double>();
-		List<Double> getStudentTodayTestMarks = new ArrayList<Double>();
-		List<Double> getStudentMonthlyTestMarks = new ArrayList<Double>();
-		List<Double> getMonthlyPercentage = new ArrayList<Double>();
-		Integer userId = this.userService.findBySSO(this.getPrincipal()).getId();
-		for (TestResult testMonthly : this.dashboardService.getMonthlysPerformancePercentageAll(startDate, lastDate)) {
-			if (userId == testMonthly.getUserId()) {
-				getStudentMonthlyTestMarks.add(testMonthly.getObtainedMarks());
-				getMonthlyPercentage.add(testMonthly.getPercentage());
-				modelMap.addAttribute("percentageMonthly", getMonthlyPercentage);
-				modelMap.addAttribute("testMonthly", getStudentMonthlyTestMarks);
-			}
-		}
-		for (TestResult testToday : this.dashboardService.getTodaysPerformancePercentageAll(date)) {
-			if (userId == testToday.getUserId()) {
-				getStudentTodayTestMarks.add(testToday.getObtainedMarks());
-				getTodayPercentage.add(testToday.getPercentage());
-				modelMap.addAttribute("percentageToday", getTodayPercentage);
-				modelMap.addAttribute("testToday", getStudentTodayTestMarks);
-			}
-		}
-		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-
-		return "studentIndividualPerformance";
-	}
+	
 
 	/**
 	 * This method returns the principal[user-name] of logged-in user.

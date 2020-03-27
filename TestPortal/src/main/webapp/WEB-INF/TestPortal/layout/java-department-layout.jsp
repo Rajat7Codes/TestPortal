@@ -23,15 +23,15 @@
 <link
 	href="${pageContext.request.contextPath }/static/bower_components/bootstrap-daterangepicker/daterangepicker.css"
 	rel="stylesheet">
-<link																																																																																																																																																																																																													
+<link
 	href="${pageContext.request.contextPath }/static/bower_components/dropzone/dist/dropzone.css"
 	rel="stylesheet">
 <link
 	href="${pageContext.request.contextPath }/static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"
-	rel="stylesheet">																																																																																																									
+	rel="stylesheet">
 <link
 	href="${pageContext.request.contextPath }/static/bower_components/fullcalendar/dist/fullcalendar.min.css"
-	rel="stylesheet">																																																										
+	rel="stylesheet">
 <link
 	href="${pageContext.request.contextPath }/static/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css"
 	rel="stylesheet">
@@ -51,10 +51,13 @@
 	class="menu-position-side menu-side-left full-screen with-content-panel">
 	<div class="all-wrapper with-side-panel solid-bg-all">
 		<tiles:insertAttribute name="header"></tiles:insertAttribute>
-		<div class="layout-w" style="height:100vh;">
+		<div class="layout-w" style="height: 100vh;">
 			<tiles:insertAttribute name="sidebar"></tiles:insertAttribute>
 			<div class="content-i">
-				<tiles:insertAttribute name="body"></tiles:insertAttribute>
+				<div class="content-box">
+					<tiles:insertAttribute name="body"></tiles:insertAttribute>
+					<tiles:insertAttribute name="footer"></tiles:insertAttribute>
+				</div>
 			</div>
 		</div>
 	</div>

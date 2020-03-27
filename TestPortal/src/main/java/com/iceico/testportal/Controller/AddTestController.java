@@ -64,6 +64,9 @@ public class AddTestController {
 	@Autowired
 	private UserService userService;
 
+	/* MASTER ADMIN PANEL METHODS */
+
+	/* ADD TEST */
 	@GetMapping("/admin/add/test")
 	public String getTest(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("addTest", new AddTest());
@@ -72,6 +75,7 @@ public class AddTestController {
 		return "addTest";
 	}
 
+	/* EDIT TEST */
 	@GetMapping("/admin/add/test/edit/{addTestId}")
 	public String editTest(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
@@ -83,6 +87,7 @@ public class AddTestController {
 		return "addTest";
 	}
 
+	/* DELETE TEST */
 	@GetMapping("/admin/add/test/delete/{addTestId}")
 	public String deleteTest(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
@@ -94,6 +99,7 @@ public class AddTestController {
 		return "addTestView";
 	}
 
+	/* VIEW TEST */
 	@GetMapping("/admin/add/test/view")
 	public String viewTest(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
@@ -102,6 +108,7 @@ public class AddTestController {
 		return "addTestView";
 	}
 
+	/* SAVE TEST */
 	@PostMapping("/admin/add/test/save")
 	public String saveTest(@RequestParam("questionsJson") String questions,
 			@ModelAttribute("addTest") @Valid AddTest addTest, BindingResult bindingResult, ModelMap modelMap,
@@ -110,8 +117,6 @@ public class AddTestController {
 			modelMap.addAttribute("addTest", new AddTest());
 			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
 			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-			System.out.println("*********************Not Saved!!!");
-			System.out.println("***********" + bindingResult.getAllErrors());
 			return "addTest";
 		} else {
 
@@ -126,14 +131,10 @@ public class AddTestController {
 				testQuestions.setQuestionId(Long.parseLong(obj.get("questionId") + ""));
 				testQuestions.setAddTest(addTest);
 				addedQuestions.add(testQuestions);
-				System.out.println("+++++++++++++>>>>>>>> " + obj.get("questionId"));
 			}
-			System.out.println("********************* Saving in process....one step behind!!!");
-			System.out.println("+++++++++++++>>>>>>>> " + addedQuestions);
 			addTest.setTestQuestions(addedQuestions);
 			addTest.setIsDeleted(false);
 			this.addTestService.saveAddTest(addTest);
-			System.out.println("********************* Saved!!!");
 
 			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 			return "redirect:/admin/add/test";
@@ -150,6 +151,7 @@ public class AddTestController {
 	 * return "viewResult"; }
 	 */
 
+	/* TEST RESULT */
 	@GetMapping("/admin/test/result/{addTestId}")
 	public String viewResult(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
@@ -200,7 +202,7 @@ public class AddTestController {
 		return "viewResult";
 	}
 
-	/* result page of admin section */
+	/* TEST RESULT LIST */
 	@RequestMapping("/admin/test/result/list")
 	public String testResult(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));

@@ -31,7 +31,7 @@ import com.iceico.testportal.Service.UserService;
  */
 @Controller
 public class TestResultController {
-	
+
 	@Autowired
 	private TestResultService testResultService;
 
@@ -43,48 +43,52 @@ public class TestResultController {
 
 	@Autowired
 	private UserService userService;
-	
 
 	/**
 	 * 
 	 */
 	public TestResultController() {
-		
+
 	}
 
+	/* JAVA STUDENT PANEL METHODS */
+
+	/* JAVA STUDENT TEST RESULT */
 	@GetMapping("/java/student/test/result")
-	public String getTestResultPage(ModelMap modelMap) {
+	public String getTestResultPage_java(ModelMap modelMap) {
 		modelMap.addAttribute("testResult", new TestResult());
 		modelMap.addAttribute("edit", false);
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+
 		return "result";
 	}
-	
 
-
+	/* JAVA STUDENT TEST HISTORY */
 	@GetMapping("/java/student/test/history")
-	public String getTestHistory(ModelMap modelMap) {
-
+	public String getTestHistory_java(ModelMap modelMap) {
 		modelMap.addAttribute("resultList", this.testResultService.getTestResultList());
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+
 		return "testHistory";
 	}
-	
 
+	/* JAVA STUDENT TEST RESULT VIEW */
 	@GetMapping("/java/student/view/test/result/{testResultId}")
-	public String getTestHistoryEach( @PathVariable Long testResultId, 
-			ModelMap modelMap) throws ResourceNotFoundException {
+	public String getTestHistoryEach_java(@PathVariable Long testResultId, ModelMap modelMap)
+			throws ResourceNotFoundException {
 
 		TestResult result = this.testResultService.getTestResultById(testResultId);
 		AddTest addTest = this.addtestService.getAddTestById(result.getTestId());
 
 		List<QuestionBank> questionList = new ArrayList<QuestionBank>();
-		
+
 		int totalMarks = 0;
-		for(TestQuestion testQ : addTest.getTestQuestions()) {
+		for (TestQuestion testQ : addTest.getTestQuestions()) {
 			QuestionBank qBank = this.questionBankService.getQuestionBankById(testQ.getQuestionId());
 			totalMarks += qBank.getMarks();
 			questionList.add(qBank);
 		}
-		
+
 		String allAns = result.getAnswersGiven();
 		String answers[] = allAns.split(",");
 		answers[0] = answers[0].replaceFirst("null", "");
@@ -95,10 +99,64 @@ public class TestResultController {
 		modelMap.addAttribute("questionCount", addTest.getTestQuestions().size());
 		modelMap.addAttribute("totalMarks", totalMarks);
 		modelMap.addAttribute("result", result);
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+
 		return "testHistoryEach";
 	}
-	
-	
+
+	/* WEB STUDENT PANEL METHODS */
+
+	/* WEB STUDENT TEST RESULT */
+	@GetMapping("/web/student/test/result")
+	public String getTestResultPage_web(ModelMap modelMap) {
+		modelMap.addAttribute("testResult", new TestResult());
+		modelMap.addAttribute("edit", false);
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+
+		return "result";
+	}
+
+	/* JAVA STUDENT TEST HISTORY */
+	@GetMapping("/web/student/test/history")
+	public String getTestHistory_web(ModelMap modelMap) {
+		modelMap.addAttribute("resultList", this.testResultService.getTestResultList());
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+
+		return "testHistory";
+	}
+
+	/* WEB STUDENT TEST RESULT VIEW */
+	@GetMapping("/web/student/view/test/result/{testResultId}")
+	public String getTestHistoryEach_web(@PathVariable Long testResultId, ModelMap modelMap)
+			throws ResourceNotFoundException {
+
+		TestResult result = this.testResultService.getTestResultById(testResultId);
+		AddTest addTest = this.addtestService.getAddTestById(result.getTestId());
+
+		List<QuestionBank> questionList = new ArrayList<QuestionBank>();
+
+		int totalMarks = 0;
+		for (TestQuestion testQ : addTest.getTestQuestions()) {
+			QuestionBank qBank = this.questionBankService.getQuestionBankById(testQ.getQuestionId());
+			totalMarks += qBank.getMarks();
+			questionList.add(qBank);
+		}
+
+		String allAns = result.getAnswersGiven();
+		String answers[] = allAns.split(",");
+		answers[0] = answers[0].replaceFirst("null", "");
+
+		modelMap.addAttribute("answerList", answers);
+		modelMap.addAttribute("questionList", questionList);
+		modelMap.addAttribute("test", addTest);
+		modelMap.addAttribute("questionCount", addTest.getTestQuestions().size());
+		modelMap.addAttribute("totalMarks", totalMarks);
+		modelMap.addAttribute("result", result);
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+
+		return "testHistoryEach";
+	}
+
 	/**
 	 * This method returns the principal[user-name] of logged-in user.
 	 */

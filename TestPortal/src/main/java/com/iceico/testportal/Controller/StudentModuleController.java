@@ -140,6 +140,7 @@ public class StudentModuleController {
 		return "otpVerify";
 	}
 
+	/* USER REGISTRATION VERIFY OTP */
 	@PostMapping("/register/verify/otp")
 	public String verifyOtpSave(@RequestParam("finalJson") String sdata,
 			@RequestParam("verifyEmailOtp") String verifyEmailOtp, ModelMap modelMap, Locale locale,
@@ -193,6 +194,7 @@ public class StudentModuleController {
 		}
 	}
 
+	/* USER REGISTRATION RESEND OTP */
 	@PostMapping("/register/resend/otp")
 	public String resendOtp(@RequestParam("finalJson") String data, ModelMap modelMap, Locale locale)
 			throws ParseException {
@@ -244,14 +246,14 @@ public class StudentModuleController {
 		return "studentProfile";
 	}
 
-	/* STUDENT PROFILE */
+	/* STUDENT PROFILE UPDATE */
 	@GetMapping(value = { "/student/profile/update" })
 	public String updateStudentProfile(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "updateStudProfile";
 	}
 
-	/* STUDENT PROFILE */
+	/* STUDENT PROFILE SAVE */
 	@PostMapping(value = { "/student/profile/save" })
 	public String saveStudentProfile(@RequestParam("jsonData") String jsonData,
 			@RequestParam("fileName") MultipartFile fileName, HttpServletRequest httpServletRequest, ModelMap modelMap,
