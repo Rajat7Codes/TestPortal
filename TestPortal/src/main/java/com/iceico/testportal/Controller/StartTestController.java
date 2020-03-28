@@ -6,6 +6,7 @@ package com.iceico.testportal.Controller;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -68,34 +69,38 @@ public class StartTestController {
 	@RequestMapping("/java/student/test/list")
 	public String testList(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 
-		List<List<String>> listOfTest = new ArrayList<List<String>>();
-		String status = null;
+		HashMap<Long, String> testList = new HashMap<Long, String>();
+		
 		for (AddTest addTest : this.addTestService.getAddTestList()) {
-			for (TestResult testResult : this.testResultService.getTestResultList()) {
-
-				for (User user : this.userService.findAllUsers()) {
-					if (addTest.getAddTestId() == testResult.getTestId()) {
-						//check for given test
-						if (testResult.getUserId() == user.getId()) {
-							status = testResult.getResultStatus();
-
-							List<String> test = new ArrayList<String>();
-							test.add(addTest.getIsDeleted() + "");
-							test.add(addTest.getTestName());
-							test.add(addTest.getTime() + "");
-							test.add(addTest.getDate() + "");
-							test.add(addTest.getAddTestId() + "");
-							test.add(status);
-							listOfTest.add(test);
-							System.out.println("=============>" + listOfTest);
-						}
+			for (TestResult result : testResultService.getTestResultList()) {
+				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
+					testList.put(addTest.getAddTestId(), "not given");
+				}
+			}
+		}
+					
+		
+		for (AddTest addTest : this.addTestService.getAddTestList()) {
+			for (TestResult result : testResultService.getTestResultList()) {
+				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
+					if (addTest.getAddTestId() == result.getTestId()) {
+						testList.put(addTest.getAddTestId(), "given");
 					}
 				}
 			}
 		}
-		modelMap.addAttribute("list", listOfTest);
-		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+		
+		List<AddTest> addTestList = new ArrayList<AddTest>();
+		for( Long testId : testList.keySet()) {
+			if(testList.get(testId).equals("not given")) {
+				addTestList.add(this.addTestService.getAddTestById(testId));
+			}
+		}
+
+
+		modelMap.addAttribute("testList", addTestList);
+		User user = this.userService.findBySSO(this.getPrincipal());
+		modelMap.addAttribute("user", user);
 		return "testList";
 
 	}
@@ -118,7 +123,7 @@ public class StartTestController {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "startTest";
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@RequestMapping(value = "/java/student/start/test/compiler", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	public @ResponseBody JSONObject runCode(@RequestParam("language") String languageIn,
@@ -181,11 +186,12 @@ public class StartTestController {
 
 				String response = this.compilerService.runCodeWithInput(lang, code, input);
 				JSONObject resObj = (JSONObject) new JSONParser().parse(response);
-				
-				if( yourAnswers == null) yourAnswers += resObj.get("output");
-				else yourAnswers += ","+resObj.get("output");
-				
-				
+
+				if (yourAnswers == null)
+					yourAnswers += resObj.get("output");
+				else
+					yourAnswers += "," + resObj.get("output");
+
 				if (question.getHiddenOutput().equals(resObj.get("output"))
 						|| question.getHiddenOutput().equals("\n" + resObj.get("output"))) {
 					obtainedMarks += Integer.parseInt(answer.get("marks").toString());
@@ -217,11 +223,13 @@ public class StartTestController {
 
 			} else {
 				for (Options opt : question.getOptions()) {
-				
+
 					if (opt.getOptionsId() == Long.parseLong(answer.get("optionId") + "")) {
 						Boolean userAnswer = opt.getCorrectAnswer();
-						if( yourAnswers == null) yourAnswers += opt.getOptionName();
-						else yourAnswers += ","+opt.getOptionName();
+						if (yourAnswers == null)
+							yourAnswers += opt.getOptionName();
+						else
+							yourAnswers += "," + opt.getOptionName();
 
 						if (userAnswer == true) {
 							obtainedMarks += Integer.parseInt(answer.get("marks").toString());
@@ -284,9 +292,9 @@ public class StartTestController {
 		testResult.setUserId(this.userService.findBySSO(this.getPrincipal()).getId());
 		testResult.setPercentage(per);
 		this.testResultService.saveTestResult(testResult);
-		
+
 		JSONObject obj = new JSONObject();
-		obj.put( "testId", testResult.getTestResultId());
+		obj.put("testId", testResult.getTestResultId());
 		return obj;
 	}
 
