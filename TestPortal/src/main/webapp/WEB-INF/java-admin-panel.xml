@@ -4,7 +4,7 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-	<definition name="adminbase.definition"
+	<definition name="javaadminbase.definition"
 		template="/WEB-INF/TestPortal/layout/java-admin-layout.jsp">
 		<put-attribute name="title" value="" />
 		<put-attribute name="header"
@@ -16,19 +16,109 @@
 			value="/WEB-INF/TestPortal/view/java-admin-module/common-pages/footer.jsp" />
 	</definition>
 
-
 	<!-- DASHBOARD PAGE -->
 	<definition name="javaAdminDashboard"
-		extends="adminbase.definition">
-		<put-attribute name="title" value="Dashboard" />
+		extends="javaadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL| JAVA ADMIN DASHBOARD" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/java-admin-module/dashboard.jsp" />
 	</definition>
 
+	<!-- ADMIN PROFILE DETAILS -->
+	<definition name="adminStudProfile"
+		extends="javaadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | ADMIN PROFILE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/profile-pages/adminInformation.jsp" />
+	</definition>
 
-	<!-- DASHBOARD PAGE <definition name="javaAdminDashboard" extends="adminbase.definition"> 
-		<put-attribute name="title" value="TEST PORTAL | JAVA ADMIN DASHBOARD" /> 
-		<put-attribute name="body" value="/webapp/WEB-INF/TestPortal/view/java-admin-module/dashboard.jsp" 
-		/> </definition> -->
+	<definition name="updateAdminProfile"
+		extends="javaadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | UPDATE PROFILE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/profile-pages/updateAdminInformation.jsp" />
+	</definition>
+
+	<!-- QUESTION BANK PAGES -->
+	<definition name="j_questionBank"
+		extends="javaadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | QUESTION BANK" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/question-bank/questionBank.jsp" />
+	</definition>
+
+	<definition name="j_questionBankView"
+		extends="javaadminbase.definition">
+		<put-attribute name="title"
+			value=" TEST PORTAL | QUESTIONS" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/question-bank/questionBankView.jsp" />
+	</definition>
+
+	<definition name="j_searchQuestions"
+		extends="javaadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | QUESTION SEARCH" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/question-bank/searchQuestions.jsp" />
+	</definition>
+
+	<!-- DEPARTMENT PAGE -->
+	<definition name="j_department" extends="javaadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | DEPARTMENT" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/other-pages/department.jsp" />
+	</definition>
+
+	<!-- SUBJECT PAGE -->
+	<definition name="j_subject" extends="javaadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | SUBJECT" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/other-pages/subject.jsp" />
+	</definition>
+
+	<!-- QUESTION TYPE PAGE -->
+	<definition name="j_questionType"
+		extends="javaadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | QUESTION TYPE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/other-pages/questionType.jsp" />
+	</definition>
+
+	<!-- TEST PAGES -->
+	<definition name="j_addTest" extends="javaadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | NEW TEST" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/test-pages/addTest.jsp" />
+	</definition>
+
+	<definition name="j_addTestView"
+		extends="javaadminbase.definition">
+		<put-attribute name="title" value="TEST PORTAL | TESTS" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/test-pages/addTestView.jsp" />
+	</definition>
+
+	<!-- RESULT PAGES -->
+	<definition name="j_viewResult" extends="javaadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | VIEW RESULT" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/result-pages/result.jsp" />
+	</definition>
+
+	<definition name="j_testResult" extends="javaadminbase.definition">
+		<put-attribute name="title" value="TEST PORTAL | RESULT" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/result-pages/testResult.jsp" />
+	</definition>
 
 </tiles-definitions>

@@ -21,6 +21,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -42,6 +44,7 @@ import com.iceico.testportal.Model.Subject;
 import com.iceico.testportal.Service.QuestionBankService;
 import com.iceico.testportal.Service.QuestionTypeService;
 import com.iceico.testportal.Service.SubjectService;
+import com.iceico.testportal.Service.UserService;
 
 /**
  * @author SAMEER KADGAYE
@@ -68,7 +71,15 @@ public class QuestionBankController {
 
 	@Autowired
 	private SubjectService subjectService;
+	@Autowired
+	private UserService userService;
 
+	/**
+	 * MASTER ADMIN METHODS
+	 *
+	 */
+
+	/* NEW QUESTION BANK */
 	@SuppressWarnings("unchecked")
 	@GetMapping("/admin/question/bank/new")
 	public String getQuestionBank(ModelMap modelMap, Locale locale) {
@@ -90,9 +101,11 @@ public class QuestionBankController {
 		}
 		modelMap.addAttribute("questionTypeJson", jsonArray);
 		modelMap.addAttribute("edit", false);
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "questionBank";
 	}
 
+	/* SAVE QUESTION BANK */
 	@RequestMapping(value = "/admin/question/bank/save", method = RequestMethod.POST)
 	public String saveQuestionBank(@ModelAttribute("questionBank") @Valid QuestionBank questionBank,
 			BindingResult bindingResult, @RequestParam("imageName") MultipartFile imageName,
@@ -141,19 +154,23 @@ public class QuestionBankController {
 				e.printStackTrace();
 			}
 		}
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "redirect:/admin/question/bank";
 	}
 
+	/* QUESTION BANK LIST */
 	@GetMapping("/admin/question/bank")
 	public String viewQuestionBankPage(ModelMap modelMap, Locale locale) {
-
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		modelMap.addAttribute("questionBankList", this.questionBankService.getQuestionBankList());
 		return "questionBankView";
 	}
 
+	/* EDIT QUESTION BANK */
 	@GetMapping("/admin/question/bank/edit/{questionBankId}")
 	public String editQuestionBankPage(@PathVariable("questionBankId") @Valid Long questionBankId, ModelMap modelMap,
 			Locale locale) throws ResourceNotFoundException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		modelMap.addAttribute("questionBank", this.questionBankService.getQuestionBankById(questionBankId));
 		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
 		modelMap.addAttribute("questionBankList", this.questionBankService.getQuestionBankList());
@@ -161,17 +178,253 @@ public class QuestionBankController {
 		return "questionBank";
 	}
 
-	/* AJAX CALL FOR SEARCH BY TYPE */
+	/* QUESTION BANK SEARCH */
 	@GetMapping("/admin/question/bank/search")
 	public String searchQuestions(@ModelAttribute("questionBank") @Valid QuestionBank questionBank, ModelMap modelMap,
 			Locale locale) {
-
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		modelMap.addAttribute("questionBankList", this.questionBankService.getQuestionBankList());
 		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
 		return "searchQuestions";
 	}
 
+	/**
+	 * JAVA ADMIN METHODS
+	 *
+	 */
+
+	/* NEW QUESTION BANK */
+	@SuppressWarnings("unchecked")
+	@GetMapping("/java/admin/question/bank/new")
+	public String getQuestionBank_java(ModelMap modelMap, Locale locale) {
+		QuestionBank questionBank = new QuestionBank();
+
+		modelMap.addAttribute("questionBank", questionBank);
+		modelMap.addAttribute("questionTypeList", this.questionTypeService.getActiveQuestionType());
+		modelMap.addAttribute("subjectList", this.subjectService.getActiveSubject());
+		List<QuestionType> questionTypeList = this.questionTypeService.getQuestionTypeList();
+		JSONArray jsonArray = new JSONArray();
+
+		for (QuestionType questionType : questionTypeList) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("questionTypeId", questionType.getQuestionTypeId());
+			jsonObject.put("type", questionType.getType());
+			jsonObject.put("programType", questionType.getProgramType());
+			jsonObject.put("imageType", questionType.getImageType());
+			jsonArray.add(jsonObject);
+		}
+		modelMap.addAttribute("questionTypeJson", jsonArray);
+		modelMap.addAttribute("edit", false);
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "j_questionBank";
+	}
+
+	/* SAVE QUESTION BANK */
+	@RequestMapping(value = "/java/admin/question/bank/save", method = RequestMethod.POST)
+	public String saveQuestionBank_java(@ModelAttribute("questionBank") @Valid QuestionBank questionBank,
+			BindingResult bindingResult, @RequestParam("imageName") MultipartFile imageName,
+			@RequestParam("data") String data, ModelMap modelMap, HttpServletRequest httpServletRequest) {
+		JSONParser jsonParser = new JSONParser();
+		List<Options> optionsList = new ArrayList<Options>();
+		String uploadFolder = httpServletRequest.getServletContext().getRealPath("/uploaded");
+		File directory = new File(uploadFolder);
+		if (!directory.exists()) {
+			directory.mkdir();
+		}
+		if (imageName.isEmpty()) {
+			questionBank.setImageName(questionBank.getImageName());
+			questionBank.setContentType(questionBank.getContentType());
+			questionBank.setFilePath(questionBank.getFilePath());
+		}
+		if (!imageName.isEmpty()) {
+			try {
+				questionBank.setImageName(imageName.getOriginalFilename());
+				questionBank.setContentType(imageName.getContentType());
+
+				BufferedImage src = ImageIO.read(new ByteArrayInputStream(imageName.getBytes()));
+				File destination = new File(uploadFolder + "/" + imageName.getOriginalFilename());
+				ImageIO.write(src, "jpg", destination);
+				questionBank.setFilePath(uploadFolder + "/" + imageName.getOriginalFilename());
+			} catch (Exception e) {
+				System.out.println("File Upload Error " + e);
+			}
+		}
+		if (questionBank.getQuestionBankId() == null) {
+
+			try {
+				JSONArray jsonArray = (JSONArray) jsonParser.parse(data);
+				for (int i = 0; i < jsonArray.size(); i++) {
+					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+					Options options = new Options();
+					Boolean answer = Boolean.parseBoolean((String) jsonObject.get("correctAnswer"));
+					options.setOptionName(jsonObject.get("optionName").toString());
+					options.setCorrectAnswer(answer);
+					options.setQuestionBank(questionBank);
+					optionsList.add(options);
+				}
+				questionBank.setOptions(optionsList);
+				this.questionBankService.saveQuestionBank(questionBank);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "redirect:/java/admin/question/bank";
+	}
+
+	/* QUESTION BANK LIST */
+	@GetMapping("/java/admin/question/bank")
+	public String viewQuestionBankPage_java(ModelMap modelMap, Locale locale) {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		modelMap.addAttribute("questionBankList", this.questionBankService.getQuestionBankList());
+		return "j_questionBankView";
+	}
+
+	/* EDIT QUESTION BANK */
+	@GetMapping("/java/admin/question/bank/edit/{questionBankId}")
+	public String editQuestionBankPage_java(@PathVariable("questionBankId") @Valid Long questionBankId,
+			ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		modelMap.addAttribute("questionBank", this.questionBankService.getQuestionBankById(questionBankId));
+		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
+		modelMap.addAttribute("questionBankList", this.questionBankService.getQuestionBankList());
+		modelMap.addAttribute("edit", true);
+		return "j_questionBank";
+	}
+
+	/* QUESTION BANK SEARCH */
+	@GetMapping("/java/admin/question/bank/search")
+	public String searchQuestions_java(@ModelAttribute("questionBank") @Valid QuestionBank questionBank,
+			ModelMap modelMap, Locale locale) {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		modelMap.addAttribute("questionBankList", this.questionBankService.getQuestionBankList());
+		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		return "j_searchQuestions";
+	}
+
+	/**
+	 * WEB ADMIN METHODS
+	 *
+	 */
+
+	/* NEW QUESTION BANK */
+	@SuppressWarnings("unchecked")
+	@GetMapping("/web/admin/question/bank/new")
+	public String getQuestionBank_web(ModelMap modelMap, Locale locale) {
+		QuestionBank questionBank = new QuestionBank();
+
+		modelMap.addAttribute("questionBank", questionBank);
+		modelMap.addAttribute("questionTypeList", this.questionTypeService.getActiveQuestionType());
+		modelMap.addAttribute("subjectList", this.subjectService.getActiveSubject());
+		List<QuestionType> questionTypeList = this.questionTypeService.getQuestionTypeList();
+		JSONArray jsonArray = new JSONArray();
+
+		for (QuestionType questionType : questionTypeList) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("questionTypeId", questionType.getQuestionTypeId());
+			jsonObject.put("type", questionType.getType());
+			jsonObject.put("programType", questionType.getProgramType());
+			jsonObject.put("imageType", questionType.getImageType());
+			jsonArray.add(jsonObject);
+		}
+		modelMap.addAttribute("questionTypeJson", jsonArray);
+		modelMap.addAttribute("edit", false);
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "w_questionBank";
+	}
+
+	/* SAVE QUESTION BANK */
+	@RequestMapping(value = "/web/admin/question/bank/save", method = RequestMethod.POST)
+	public String saveQuestionBank_web(@ModelAttribute("questionBank") @Valid QuestionBank questionBank,
+			BindingResult bindingResult, @RequestParam("imageName") MultipartFile imageName,
+			@RequestParam("data") String data, ModelMap modelMap, HttpServletRequest httpServletRequest) {
+		JSONParser jsonParser = new JSONParser();
+		List<Options> optionsList = new ArrayList<Options>();
+		String uploadFolder = httpServletRequest.getServletContext().getRealPath("/uploaded");
+		File directory = new File(uploadFolder);
+		if (!directory.exists()) {
+			directory.mkdir();
+		}
+		if (imageName.isEmpty()) {
+			questionBank.setImageName(questionBank.getImageName());
+			questionBank.setContentType(questionBank.getContentType());
+			questionBank.setFilePath(questionBank.getFilePath());
+		}
+		if (!imageName.isEmpty()) {
+			try {
+				questionBank.setImageName(imageName.getOriginalFilename());
+				questionBank.setContentType(imageName.getContentType());
+
+				BufferedImage src = ImageIO.read(new ByteArrayInputStream(imageName.getBytes()));
+				File destination = new File(uploadFolder + "/" + imageName.getOriginalFilename());
+				ImageIO.write(src, "jpg", destination);
+				questionBank.setFilePath(uploadFolder + "/" + imageName.getOriginalFilename());
+			} catch (Exception e) {
+				System.out.println("File Upload Error " + e);
+			}
+		}
+		if (questionBank.getQuestionBankId() == null) {
+
+			try {
+				JSONArray jsonArray = (JSONArray) jsonParser.parse(data);
+				for (int i = 0; i < jsonArray.size(); i++) {
+					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+					Options options = new Options();
+					Boolean answer = Boolean.parseBoolean((String) jsonObject.get("correctAnswer"));
+					options.setOptionName(jsonObject.get("optionName").toString());
+					options.setCorrectAnswer(answer);
+					options.setQuestionBank(questionBank);
+					optionsList.add(options);
+				}
+				questionBank.setOptions(optionsList);
+				this.questionBankService.saveQuestionBank(questionBank);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "redirect:/web/admin/question/bank";
+	}
+
+	/* QUESTION BANK LIST */
+	@GetMapping("/web/admin/question/bank")
+	public String viewQuestionBankPage_web(ModelMap modelMap, Locale locale) {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		modelMap.addAttribute("questionBankList", this.questionBankService.getQuestionBankList());
+		return "w_questionBankView";
+	}
+
+	/* EDIT QUESTION BANK */
+	@GetMapping("/web/admin/question/bank/edit/{questionBankId}")
+	public String editQuestionBankPage_web(@PathVariable("questionBankId") @Valid Long questionBankId,
+			ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		modelMap.addAttribute("questionBank", this.questionBankService.getQuestionBankById(questionBankId));
+		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
+		modelMap.addAttribute("questionBankList", this.questionBankService.getQuestionBankList());
+		modelMap.addAttribute("edit", true);
+		return "w_questionBank";
+	}
+
+	/* QUESTION BANK SEARCH */
+	@GetMapping("/web/admin/question/bank/search")
+	public String searchQuestions_web(@ModelAttribute("questionBank") @Valid QuestionBank questionBank,
+			ModelMap modelMap, Locale locale) {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		modelMap.addAttribute("questionBankList", this.questionBankService.getQuestionBankList());
+		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		return "w_searchQuestions";
+	}
+
+	/**
+	 * ALL AJAX CALL FOR ALL ADMINS
+	 * 
+	 */
+
+	/* AJAX CALL FOR QUESTION BANK BY TYPE */
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@RequestMapping(value = "/question/bank/type/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	public @ResponseBody JSONArray filterStudentListByAll(@RequestParam("type") Long type,
@@ -216,7 +469,6 @@ public class QuestionBankController {
 				questionBankArray.add(questionBankObject);
 			}
 			return questionBankArray;
-
 		}
 
 		if (type == null & subject != null & marks == 0) {
@@ -230,7 +482,6 @@ public class QuestionBankController {
 				questionBankArray.add(questionBankObject);
 			}
 			return questionBankArray;
-
 		}
 
 		if (type != null & subject == null & marks == 0) {
@@ -285,10 +536,11 @@ public class QuestionBankController {
 			}
 			return questionBankArray;
 		}
+
 		return questionBankArray;
 	}
 
-	/* AJAX CALL FOR GET BY SUBJECT */
+	/* AJAX CALL FOR GET GUESTION BANK BY SUBJECT */
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@RequestMapping(value = "/add/test/filter/subject", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	public @ResponseBody JSONArray filterQuestionListBySubject(@RequestParam("subjectID") Long subjectId)
@@ -297,10 +549,8 @@ public class QuestionBankController {
 		Subject subject = this.subjectService.getSubjectById(subjectId);
 		JSONArray questionArray = new JSONArray();
 
-		System.out.println("questionBank :======++=======:"+subject.getQuestionBank());
-		for(int i=0; i<subject.getQuestionBank().size(); i++) {
-			System.out.println("questionBank :======++=======:"+subject.getQuestionBank().get(i));
-			JSONObject queObject = new JSONObject(); 
+		for (int i = 0; i < subject.getQuestionBank().size(); i++) {
+			JSONObject queObject = new JSONObject();
 			queObject.put("questionId", subject.getQuestionBank().get(i).getQuestionBankId());
 			queObject.put("question", subject.getQuestionBank().get(i).getQuestion());
 			queObject.put("questionType", subject.getQuestionBank().get(i).getQuestionType().getType());
@@ -308,8 +558,22 @@ public class QuestionBankController {
 			questionArray.add(queObject);
 		}
 
-		System.out.println(questionArray);
-
 		return questionArray;
 	}
+
+	/**
+	 * 
+	 */
+	private String getPrincipal() {
+		String userName = null;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (principal instanceof UserDetails) {
+			userName = ((UserDetails) principal).getUsername();
+		} else {
+			userName = principal.toString();
+		}
+		return userName;
+	}
+
 }

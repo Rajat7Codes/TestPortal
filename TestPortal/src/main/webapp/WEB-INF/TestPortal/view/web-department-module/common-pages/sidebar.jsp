@@ -13,7 +13,7 @@
 			<a class="mm-logo"
 				href="${pageContext.request.contextPath }/web/student/dashboard"><img
 				src="${pageContext.request.contextPath }/static/img/Iceico_round.png"><span>Test
-					Portal</span></a>
+					Portal</span> </a>
 			<div class="mm-buttons">
 				<div class="content-panel-open">
 					<div class="os-icon os-icon-grid-circles"></div>

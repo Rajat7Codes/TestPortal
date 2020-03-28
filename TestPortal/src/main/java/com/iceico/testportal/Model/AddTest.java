@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.iceico.testportal.audit.Auditable.Auditable;
 
 /**
  * @author Rajat
@@ -27,7 +31,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "tab_add_test")
-public class AddTest implements Serializable {
+@EntityListeners(AuditingEntityListener.class)
+public class AddTest extends Auditable<String> implements Serializable {
 
 	private static final long serialVersionUID = 1705449679883875529L;
 
@@ -45,7 +50,7 @@ public class AddTest implements Serializable {
 
 	@Column(name = "time")
 	private Integer time;
-	
+
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "date")
@@ -66,13 +71,20 @@ public class AddTest implements Serializable {
 	@Column(name = "passing_percent")
 	private float passingPercent;
 
+	@Column(name = "user_id")
+	private Integer userId;
+
+	@Column(name = "department_name")
+	private String departmentName;
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "subject_id", insertable = true, nullable = true, updatable = true)
 	private Subject subject;
 
-	@OneToMany(mappedBy = "addTest", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToMany(mappedBy = "addTest", cascade = { CascadeType.PERSIST,
+			CascadeType.REMOVE }, fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<TestQuestion> testQuestions;
-	
+
 	/**
 	 * @param addTestId
 	 * @param testName
@@ -83,12 +95,14 @@ public class AddTest implements Serializable {
 	 * @param isDeleted
 	 * @param instructions
 	 * @param passingPercent
+	 * @param userId
+	 * @param departmentName
 	 * @param subject
 	 * @param testQuestions
 	 */
 	public AddTest(Long addTestId, String testName, Integer time, Date date, Boolean negativeMarking, String ratio,
-			Boolean isDeleted, String instructions, float passingPercent, Subject subject,
-			List<TestQuestion> testQuestions) {
+			Boolean isDeleted, String instructions, float passingPercent, Integer userId, String departmentName,
+			Subject subject, List<TestQuestion> testQuestions) {
 		super();
 		this.addTestId = addTestId;
 		this.testName = testName;
@@ -99,6 +113,8 @@ public class AddTest implements Serializable {
 		this.isDeleted = isDeleted;
 		this.instructions = instructions;
 		this.passingPercent = passingPercent;
+		this.userId = userId;
+		this.departmentName = departmentName;
 		this.subject = subject;
 		this.testQuestions = testQuestions;
 	}
@@ -230,6 +246,34 @@ public class AddTest implements Serializable {
 	}
 
 	/**
+	 * @return the userId
+	 */
+	public Integer getUserId() {
+		return userId;
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	/**
+	 * @return the departmentName
+	 */
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	/**
+	 * @param departmentName the departmentName to set
+	 */
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+
+	/**
 	 * @return the subject
 	 */
 	public Subject getSubject() {
@@ -256,5 +300,4 @@ public class AddTest implements Serializable {
 	public void setTestQuestions(List<TestQuestion> testQuestions) {
 		this.testQuestions = testQuestions;
 	}
-	
 }
