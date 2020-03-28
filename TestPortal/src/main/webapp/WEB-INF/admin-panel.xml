@@ -4,7 +4,7 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
-	<definition name="adminbase.definition"
+	<definition name="masteradminbase.definition"
 		template="/WEB-INF/TestPortal/layout/admin-layout.jsp">
 		<put-attribute name="title" value="" />
 		<put-attribute name="header"
@@ -12,8 +12,8 @@
 		<put-attribute name="sidebar"
 			value="/WEB-INF/TestPortal/view/admin-module/common-pages/sidebar.jsp" />
 		<put-attribute name="body" value="" />
-		<!-- <put-attribute name="footer" value="/WEB-INF/TestPortal/view/admin-module/common-pages/footer.jsp" 
-			/> -->
+		<put-attribute name="footer"
+			value="/WEB-INF/TestPortal/view/admin-module/common-pages/footer.jsp" />
 	</definition>
 
 
@@ -45,95 +45,121 @@
 
 	<!-- DASHBOARD PAGE -->
 	<definition name="adminDashboard"
-		extends="adminbase.definition">
-		<put-attribute name="title" value="Dashboard" />
+		extends="masteradminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | ADMIN DASHBOARD" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/admin-module/dashboard.jsp" />
 	</definition>
 
-
-	<!-- Question Bank -->
-	<definition name="questionBank"
-		extends="adminbase.definition">
-		<put-attribute name="title" value="question Bank" />
+	<!-- ADMIN PROFILE PAGES -->
+	<definition name="adminStudProfile"
+		extends="masteradminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | ADMIN PROFILE" />
 		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/admin-module/question-bank/questionBank.jsp" />
+			value="/WEB-INF/TestPortal/view/admin-module/profile-pages/adminInformation.jsp" />
 	</definition>
 
-	<definition name="questionBankView"
-		extends="adminbase.definition">
-		<put-attribute name="title" value="Question" />
+	<definition name="updateAdminProfile"
+		extends="masteradminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | UPDATE PROFILE" />
 		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/admin-module/question-bank/questionBankView.jsp" />
+			value="/WEB-INF/TestPortal/view/admin-module/profile-pages/updateAdminInformation.jsp" />
 	</definition>
 
-	<!-- search master -->
-
-	<definition name="searchQuestions"
-		extends="adminbase.definition">
-		<put-attribute name="title" value="Question" />
-		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/admin-module/search-master/searchQuestions.jsp" />
-	</definition>
-
-
-	<!-- department pages -->
-
-	<!--Department page -->
-	<definition name="department" extends="adminbase.definition">
-		<put-attribute name="title" value="Department" />
-		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/admin-module/department-pages/department.jsp" />
-	</definition>
-
-
-	<definition name="subject" extends="adminbase.definition">
-		<put-attribute name="title" value="Subject" />
-		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/admin-module/department-pages/subject.jsp" />
-	</definition>
-
-	<definition name="questionType"
-		extends="adminbase.definition">
-		<put-attribute name="title" value="Question Type" />
-		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/admin-module/department-pages/questionType.jsp" />
-	</definition>
-
-	<!--Add test -->
-	<definition name="addTest" extends="adminbase.definition">
-		<put-attribute name="title" value="Add Test" />
-		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/admin-module/test-pages/addTest.jsp" />
-	</definition>
-
-	<!--View test -->
-	<definition name="addTestView"
-		extends="adminbase.definition">
-		<put-attribute name="title" value="View Tests" />
-		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/admin-module/test-pages/addTestView.jsp" />
-	</definition>
-
-	<!-- Add admin -->
-	<definition name="newAdmin" extends="adminbase.definition">
+	<!-- NEW ADMIN PAGE -->
+	<definition name="newAdmin"
+		extends="masteradminbase.definition">
 		<put-attribute name="title" value="Add Admin" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/admin-module/adminRegister.jsp" />
 	</definition>
 
-
-	<!-- RESULT PAGE -->
-	<definition name="viewResult" extends="adminbase.definition">
-		<put-attribute name="title" value="View Result" />
+	<!-- QUESTION BANK PAGES -->
+	<definition name="questionBank"
+		extends="masteradminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | QUESTION BANK" />
 		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/admin-module/result.jsp" />
+			value="/WEB-INF/TestPortal/view/admin-module/question-bank/questionBank.jsp" />
 	</definition>
 
-	<!-- TEST RESULT -->
-	<definition name="testResult" extends="adminbase.definition">
-		<put-attribute name="title" value="Test Result" />
+	<definition name="questionBankView"
+		extends="masteradminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | VIEW QUESTION BANK" />
 		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/admin-module/testResult.jsp" />
+			value="/WEB-INF/TestPortal/view/admin-module/question-bank/questionBankView.jsp" />
 	</definition>
+
+	<definition name="searchQuestions"
+		extends="masteradminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | SEARCH QUESTIONS" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/question-bank/searchQuestions.jsp" />
+	</definition>
+
+	<!-- DEPARTMENT PAGE -->
+	<definition name="department"
+		extends="masteradminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | DEPARTMENT" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/other-pages/department.jsp" />
+	</definition>
+
+	<!-- SUBJECT PAGE -->
+	<definition name="subject"
+		extends="masteradminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | SUBJECT" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/other-pages/subject.jsp" />
+	</definition>
+
+	<!-- QUESTION TYPE PAGE -->
+	<definition name="questionType"
+		extends="masteradminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | QUESTION TYPE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/java-admin-module/other-pages/questionType.jsp" />
+	</definition>
+
+	<!-- TEST PAGES -->
+	<definition name="addTest"
+		extends="masteradminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | NEW TEST" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/test-pages/addTest.jsp" />
+	</definition>
+
+	<definition name="addTestView"
+		extends="masteradminbase.definition">
+		<put-attribute name="title" value="TEST PORTAL | TESTS" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/test-pages/addTestView.jsp" />
+	</definition>
+
+	<!-- RESULT PAGES -->
+	<definition name="viewResult"
+		extends="masteradminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | RESULTS" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/result-pages/result.jsp" />
+	</definition>
+
+	<definition name="testResult"
+		extends="masteradminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | TEST RESULT" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/admin-module/result-pages/testResult.jsp" />
+	</definition>
+
 </tiles-definitions>

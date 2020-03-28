@@ -6,26 +6,105 @@
 	<definition name="webbase.definition"
 		template="/WEB-INF/TestPortal/layout/web-department-layout.jsp">
 		<put-attribute name="title" value="" />
-		<put-attribute name="header" value="/WEB-INF/TestPortal/view/web-department-module/common-pages/header.jsp" />
-		<put-attribute name="sidebar" value="/WEB-INF/TestPortal/view/web-department-module/common-pages/sidebar.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/TestPortal/view/web-department-module/common-pages/header.jsp" />
+		<put-attribute name="sidebar"
+			value="/WEB-INF/TestPortal/view/web-department-module/common-pages/sidebar.jsp" />
 		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/TestPortal/view/web-department-module/common-pages/footer.jsp" />
 	</definition>
 
 	<!-- DASHBOARD PAGE -->
 	<definition name="webDashboard" extends="webbase.definition">
-		<put-attribute name="title" value="TEST PORTAL | WEB DASHBOARD" />
-		<put-attribute name="body" value="/WEB-INF/TestPortal/view/web-department-module/dashboard.jsp" />
+		<put-attribute name="title"
+			value="TEST PORTAL | WEB DASHBOARD" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/web-department-module/dashboard.jsp" />
 	</definition>
 
 	<!-- STUDENT PROFILE PAGE -->
-	<definition name="webStudProfile" extends="webbase.definition">
-		<put-attribute name="title" value="TEST PORTAL | PROFILE" />
-		<put-attribute name="body" value="/WEB-INF/TestPortal/view/web-department-module/profile-pages/userInformation.jsp" />
+	<definition name="webStudProfile"
+		extends="webbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | PROFILE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/web-department-module/profile-pages/userInformation.jsp" />
 	</definition>
 
 	<!-- UPDATE STUDENT PROFILE PAGE -->
-	<definition name="updateWebStudProfile" extends="webbase.definition">
-		<put-attribute name="title" value="TEST PORTAL | UPDATE PROFILE" />
-		<put-attribute name="body" value="/WEB-INF/TestPortal/view/web-department-module/profile-pages/updateUserInformation.jsp" />
+	<definition name="updateWebStudProfile"
+		extends="webbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | UPDATE PROFILE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/web-department-module/profile-pages/updateUserInformation.jsp" />
 	</definition>
+
+	<!-- PERFORMANCE PAGE -->
+	<definition name="studentIndividualPerformance"
+		extends="webbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | PERFORMANCE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/web-department-module/performance-pages/studentIndividualPerformance.jsp" />
+	</definition>
+
+	<!-- sample page for START TEST -->
+	<definition name="startTest" extends="webbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | START TEST" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/web-department-module/test-pages/startTest.jsp" />
+	</definition>
+
+	<!-- sample page for START TEST with Compiler -->
+	<definition name="startTestCompiler"
+		extends="webbase.definition">
+		<put-attribute name="title" value="start test 2" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/web-department-module/test-pages/startTestCompiler.jsp" />
+	</definition>
+
+	<!-- sample page for START TEST with Images -->
+	<definition name="startTestImage"
+		extends="webbase.definition">
+		<put-attribute name="title" value="start Test " />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/web-department-module/test-pages/startTestImage.jsp" />
+	</definition>
+
+	<!-- page for TEST Lists -->
+	<definition name="testList" extends="webbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | TEST LIST " />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/web-department-module/test-pages/testList.jsp" />
+	</definition>
+
+	<!-- view page for Test result -->
+	<definition name="result" extends="webbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | TEST RESULT " />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/web-department-module/result-pages/result.jsp" />
+	</definition>
+
+	<!-- Test History page -->
+	<definition name="testHistory" extends="webbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | TEST HISTORY " />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/web-department-module/test-history-pages/testHistory.jsp" />
+	</definition>
+
+	<!-- Test History Each page -->
+	<definition name="testHistoryEach"
+		extends="webbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | TEST HISTORY " />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/web-department-module/test-history-pages/testHistoryEach.jsp" />
+	</definition>
+
 </tiles-definitions>

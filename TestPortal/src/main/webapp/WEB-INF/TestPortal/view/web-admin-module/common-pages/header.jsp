@@ -26,14 +26,11 @@
 					</div>
 					<ul>
 						<li><a
-							href="${pageContext.request.contextPath }/admin/department"><i
-								class="os-icon os-icon-ui-49"></i><span>Department</span></a></li>
+							href="${pageContext.request.contextPath }/web/admin/subject"><i
+								class="os-icon os-icon-book"></i><span>Subject</span></a></li>
 						<li><a
-							href="${pageContext.request.contextPath }/admin/subject"><i
-								class="os-icon os-icon-grid-10"></i><span>Subject</span></a></li>
-						<li><a
-							href="${pageContext.request.contextPath }/admin/questionType"><i
-								class="os-icon os-icon-ui-44"></i><span>Question Type</span></a></li>
+							href="${pageContext.request.contextPath }/web/admin/questionType"><i
+								class="os-icon os-icon-layers"></i><span>Question Type</span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -75,7 +72,8 @@
 							<i class="os-icon os-icon-wallet-loaded"></i>
 						</div>
 						<ul>
-							<li><a href="#"><i
+							<li><a
+								href="${pageContext.request.contextPath }/admin/profile"><i
 									class="os-icon os-icon-user-male-circle2"></i><span>
 										Profile Details</span></a></li>
 

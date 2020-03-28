@@ -77,8 +77,6 @@ public class TilesController {
 				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
 		String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
 				.getDepartmentName();
-		// System.out.println("Current admin department ==========>>>" +
-		// currentAdminDepartment);
 
 		/* questions Count */
 		List<QuestionBank> questionBanks = this.questionBankService.getQuestionBankList();
@@ -135,13 +133,12 @@ public class TilesController {
 		modelMap.addAttribute("monthlyTotalTestCount",
 				this.dashboardService.getMonthlysPerformancePercentageAll(startDate, lastDate).size());
 		modelMap.addAttribute("monthlyPassFailStudentCount", monthlyCountPassFailStudents);
-		modelMap.addAttribute("OverallTestCount", this.testResultService.getTestResultList().size());
+		modelMap.addAttribute("OverallTestCount", this.addTestService.getAddTestList().size());
 
 		/* Today top ten result */
 		List<Double> topTenStudentsPercentages = new ArrayList<Double>();
 		List<String> topTenStudentsNames = new ArrayList<String>();
 		for (TestResult tResult : this.dashboardService.getTopTenStudentList(date)) {
-			// System.out.println("top ====>>" + tResult.getPercentage());
 			topTenStudentsPercentages.add(tResult.getPercentage());
 			topTenStudentsNames.add(tResult.getCreatedBy());
 		}
@@ -163,7 +160,8 @@ public class TilesController {
 				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
 
 		Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
-		System.out.println("currentUserId ==============>>>" + currentUserId);
+
+		// System.out.println("currentUserId ==============>>>" + currentUserId);
 
 		/* All Question Count */
 		List<QuestionBank> questionBankList = this.questionBankService.getQuestionBankList();
@@ -181,7 +179,122 @@ public class TilesController {
 				if (!users.equals("Admin")) {
 					if (!userPro.getDepartment().getDepartmentName().equals("WEB")) {
 						userListCount.add(UserId);
-						// System.out.println("users ==============>>>" + users);
+						modelMap.addAttribute("totalJavaUsersCount", userListCount.size());
+					}
+				}
+			}
+		}
+		/* END Total Student Count List */
+
+		/* FOR CALCULATE TOTAL TEST COUNT DEPARTMENT WISE */
+
+		for (User userPro : this.userService.findAllUsers()) {
+			if (currentAdminDepartment.equals("JAVA")) {
+
+				modelMap.addAttribute("totalTestCountThis", totalTestList.size());
+
+			}
+
+		}
+
+		/* End HERE FOR CALCULATE TOTAL TEST COUNT DEPARTMENT WISE */
+
+		/* Today Wise */
+		List<TestResult> todayTestResult = this.dashboardService.getTodaysPerformancePercentageAll(date);
+		List<String> todayPassStudents = new ArrayList<String>();
+		List<String> todayFailStudents = new ArrayList<String>();
+		List<Integer> todayPassFailStudentsCount = new ArrayList<Integer>();
+
+		/* Monthly Wise */
+		List<TestResult> monthlyTestResult = this.dashboardService.getMonthlysPerformancePercentageAll(startDate,
+				lastDate);
+		List<String> monthlyPassStudents = new ArrayList<String>();
+		List<String> monthlyFailStudents = new ArrayList<String>();
+		List<Integer> monthlyPassFailStudentsCount = new ArrayList<Integer>();
+
+		/* END student dashboard releated stuff */
+
+		for (TestResult tResult : todayTestResult) {
+			if (tResult.getResultStatus().equals("PASS")) {
+				todayPassStudents.add(tResult.getResultStatus());
+			}
+			if (tResult.getResultStatus().equals("FAIL")) {
+				todayFailStudents.add(tResult.getResultStatus());
+			}
+		}
+
+		for (TestResult tResult : monthlyTestResult) {
+			if (tResult.getResultStatus().equals("PASS")) {
+				monthlyPassStudents.add(tResult.getResultStatus());
+			}
+			if (tResult.getResultStatus().equals("FAIL")) {
+				monthlyFailStudents.add(tResult.getResultStatus());
+			}
+		}
+
+		/* pass fail for each end */
+
+		for (TestResult testResult1 : todayTestResult) {
+			for (int i = 0; i < todayTestResult.size(); i++) {
+			}
+
+			Double percentage = testResult1.getPercentage();
+
+			if (testResult1.getUserId() == currentUserId) {
+
+			}
+		}
+		todayPassFailStudentsCount.add(todayPassStudents.size());
+		todayPassFailStudentsCount.add(todayFailStudents.size());
+
+		monthlyPassFailStudentsCount.add(monthlyPassStudents.size());
+		monthlyPassFailStudentsCount.add(monthlyFailStudents.size());
+
+		modelMap.addAttribute("todayStudentPassFailStatus", todayPassFailStudentsCount);
+		modelMap.addAttribute("todayStudentPassFailStatusTotalCount", todayTestResult.size());
+
+		modelMap.addAttribute("monthlyStudentPassFailStatus", monthlyPassFailStudentsCount);
+		modelMap.addAttribute("monthlyStudentPassFailStatusTotalCount", monthlyTestResult.size());
+		modelMap.addAttribute("testResultStudentMonthly",
+				this.dashboardService.getTopTenStudentListMonthly(startDate, lastDate));
+		modelMap.addAttribute("testResultStudentToday", this.dashboardService.getTopTenStudentList(date));
+
+		modelMap.addAttribute("testQuestions", questionBankList.size());
+		modelMap.addAttribute("totalTestList", totalTestList.size());
+
+		modelMap.addAttribute("userService", userService);
+
+		System.out.println("bjkjbkjb" + userService.findBySSO(this.getPrincipal()).getFirstName());
+		return "javaDashboard";
+	}
+
+	@RequestMapping("/web/student/dashboard")
+	public String webDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+
+		/* START student dashboard releated stuff */
+		Date date = new Date();
+		LocalDate currentdate = LocalDate.now();
+		Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(currentdate.withDayOfMonth(1).toString());
+		Date lastDate = new SimpleDateFormat("yyyy-MM-dd")
+				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
+
+		/* All Question Count */
+		List<QuestionBank> questionBankList = this.questionBankService.getQuestionBankList();
+		/* All Added Test Count */
+		List<AddTest> totalTestList = this.addTestService.getAddTestList();
+
+		/* Total Student Count List */
+		String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
+				.getDepartmentName();
+		List<Integer> userListCount = new ArrayList<Integer>();
+		for (User userPro : this.userService.findAllUsers()) {
+			if (currentAdminDepartment.equals("JAVA")) {
+				String users = userPro.getFirstName();
+				Integer UserId = userPro.getId();
+				if (!users.equals("Admin")) {
+					if (!userPro.getDepartment().getDepartmentName().equals("WEB")) {
+						userListCount.add(UserId);
 						modelMap.addAttribute("totalJavaUsersCount", userListCount.size());
 					}
 				}
@@ -222,26 +335,6 @@ public class TilesController {
 			}
 		}
 
-		/* pass fail for each end */
-
-		for (TestResult testResult1 : todayTestResult) {
-			for (int i = 0; i < todayTestResult.size(); i++) {
-				// System.out.println("pecentages ==========>>> " + todayTestResult.get(i));
-			}
-
-			Double percentage = testResult1.getPercentage();
-			System.out.println("UserId === " + testResult1.getUserId() + "   pecentages ==" + percentage);
-			/*
-			 * if (percentage ==) {
-			 * 
-			 * }
-			 */
-
-			if (testResult1.getUserId() == currentUserId) {
-				System.out.println("User Id Inner ==========>>>" + percentage);
-
-			}
-		}
 		todayPassFailStudentsCount.add(todayPassStudents.size());
 		todayPassFailStudentsCount.add(todayFailStudents.size());
 
@@ -262,13 +355,6 @@ public class TilesController {
 
 		modelMap.addAttribute("userService", userService);
 
-		System.out.println("bjkjbkjb"+userService.findBySSO(this.getPrincipal()).getFirstName());
-		return "javaDashboard";
-	}
-
-	@RequestMapping("/web/student/dashboard")
-	public String webDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
-		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "webDashboard";
 	}
 

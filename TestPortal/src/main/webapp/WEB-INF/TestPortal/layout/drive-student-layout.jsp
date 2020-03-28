@@ -54,7 +54,10 @@
 		<div class="layout-w">
 			<tiles:insertAttribute name="sidebar"></tiles:insertAttribute>
 			<div class="content-i">
-				<tiles:insertAttribute name="body"></tiles:insertAttribute>
+				<div class="content-box">
+					<tiles:insertAttribute name="body"></tiles:insertAttribute>
+					<tiles:insertAttribute name="footer"></tiles:insertAttribute>
+				</div>
 			</div>
 		</div>
 	</div>

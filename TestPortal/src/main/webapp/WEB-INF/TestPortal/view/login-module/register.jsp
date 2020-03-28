@@ -82,7 +82,7 @@ input:focus {
 				<div class="form-group">
 					<label> Phone Number</label> <input class="form-control"
 						name="mobile" id="mobile" placeholder="Enter mobile number"
-						type="number">
+						type="text">
 					<div class="pre-icon os-icon os-icon-phone"></div>
 				</div>
 				<div class="form-group">

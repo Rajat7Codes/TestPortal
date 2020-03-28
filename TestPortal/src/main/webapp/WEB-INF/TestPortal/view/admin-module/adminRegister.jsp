@@ -70,7 +70,7 @@
 
 											</div>
 											<div class="form-group">
-												<label class="w-100"> Email address </label> <input
+												<label class="w-100"> Email Address </label> <input
 													class="form-control" placeholder="Enter email" id="emailId"
 													name="emailId" type="email">
 

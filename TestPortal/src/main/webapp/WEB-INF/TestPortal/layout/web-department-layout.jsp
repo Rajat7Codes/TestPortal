@@ -23,15 +23,15 @@
 <link
 	href="${pageContext.request.contextPath }/static/bower_components/bootstrap-daterangepicker/daterangepicker.css"
 	rel="stylesheet">
-<link																																																																																																																																																																																																													
+<link
 	href="${pageContext.request.contextPath }/static/bower_components/dropzone/dist/dropzone.css"
 	rel="stylesheet">
 <link
 	href="${pageContext.request.contextPath }/static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"
-	rel="stylesheet">																																																																																																									
+	rel="stylesheet">
 <link
 	href="${pageContext.request.contextPath }/static/bower_components/fullcalendar/dist/fullcalendar.min.css"
-	rel="stylesheet">																																																										
+	rel="stylesheet">
 <link
 	href="${pageContext.request.contextPath }/static/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css"
 	rel="stylesheet">
@@ -54,12 +54,13 @@
 		<div class="layout-w">
 			<tiles:insertAttribute name="sidebar"></tiles:insertAttribute>
 			<div class="content-i">
-				<tiles:insertAttribute name="body"></tiles:insertAttribute>
+				<div class="content-box">
+					<tiles:insertAttribute name="body"></tiles:insertAttribute>
+					<tiles:insertAttribute name="footer"></tiles:insertAttribute>
+				</div>
 			</div>
 		</div>
 	</div>
-
-
 
 	<script
 		src="${pageContext.request.contextPath }/static/bower_components/jquery/dist/jquery.min.js"></script>

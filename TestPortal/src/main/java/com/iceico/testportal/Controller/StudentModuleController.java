@@ -140,15 +140,12 @@ public class StudentModuleController {
 		return "otpVerify";
 	}
 
+	/* USER REGISTRATION VERIFY OTP */
 	@PostMapping("/register/verify/otp")
 	public String verifyOtpSave(@RequestParam("finalJson") String sdata,
 			@RequestParam("verifyEmailOtp") String verifyEmailOtp, ModelMap modelMap, Locale locale,
 			HttpServletRequest httpServletRequest)
 			throws ParseException, NumberFormatException, ResourceNotFoundException {
-
-		// System.out.println("finalJson <<<<===============>>>>> "+sdata);
-		// System.out.println("<<<<============= verifyEmailOtp ============>>>>>" +
-		// verifyEmailOtp);
 
 		String character = sdata.substring(sdata.length() - 1, sdata.length());
 		if (character.equals(",")) {
@@ -158,7 +155,6 @@ public class StudentModuleController {
 		JSONParser jsonParser = new JSONParser();
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(sdata);
 		String emailOtp = jsonObject.get("emailOtp").toString();
-		// System.out.println(">>>>>======== emailOtp =========<<<<<<" + emailOtp);
 
 		String jobj = jsonObject.get("data").toString();
 		JSONObject data = (JSONObject) jsonParser.parse(jobj);
@@ -170,23 +166,8 @@ public class StudentModuleController {
 			Department department = this.departmentService
 					.getDepartmentById(Long.parseLong(data.get("department").toString()));
 
-			/*
-			 * System.out.println("obj depart =========>>"+Long.parseLong(data.get(
-			 * "department").toString())); System.out.println("department ========>>" +
-			 * department);
-			 * System.out.println("Main Department name =========>>>>>"+department.
-			 * getDepartmentName());
-			 */
-		//	String depName = department.getDepartmentName();
-
-			// System.out.println("profile if start =============>>>");
-			// System.out.println("===========>> Department Name
-			// ==================="+userProfileService.findByType(depName));
-
 			profile = userProfileService.findByType(department.getDepartmentName());
-			// System.out.println("Profie ==========>" + profile);
 			profile.setType(department.getDepartmentName());
-			// System.out.println("profile if end =============>>>");
 
 			Set<UserProfile> role = new HashSet<>();
 			role.add(profile);
@@ -213,6 +194,7 @@ public class StudentModuleController {
 		}
 	}
 
+	/* USER REGISTRATION RESEND OTP */
 	@PostMapping("/register/resend/otp")
 	public String resendOtp(@RequestParam("finalJson") String data, ModelMap modelMap, Locale locale)
 			throws ParseException {
@@ -264,14 +246,14 @@ public class StudentModuleController {
 		return "studentProfile";
 	}
 
-	/* STUDENT PROFILE */
+	/* STUDENT PROFILE UPDATE */
 	@GetMapping(value = { "/student/profile/update" })
 	public String updateStudentProfile(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 		return "updateStudProfile";
 	}
 
-	/* STUDENT PROFILE */
+	/* STUDENT PROFILE SAVE */
 	@PostMapping(value = { "/student/profile/save" })
 	public String saveStudentProfile(@RequestParam("jsonData") String jsonData,
 			@RequestParam("fileName") MultipartFile fileName, HttpServletRequest httpServletRequest, ModelMap modelMap,
