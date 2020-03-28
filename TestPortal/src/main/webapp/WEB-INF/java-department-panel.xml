@@ -12,6 +12,8 @@
 		<put-attribute name="sidebar"
 			value="/WEB-INF/TestPortal/view/java-department-module/common-pages/sidebar.jsp" />
 		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/TestPortal/view/java-department-module/common-pages/footer.jsp" />
 	</definition>
 
 	<!-- DASHBOARD PAGE -->
@@ -90,7 +92,8 @@
 	<!-- My Performance page for Test result -->
 	<definition name="studentIndividualPerformance"
 		extends="javabase.definition">
-		<put-attribute name="title" value="Student Individual Performance" />
+		<put-attribute name="title"
+			value="Student Individual Performance" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/java-department-module/studentIndividualPerformance.jsp" />
 	</definition>
@@ -105,7 +108,8 @@
 
 
 	<!-- Test History Each page -->
-	<definition name="testHistoryEach" extends="javabase.definition">
+	<definition name="testHistoryEach"
+		extends="javabase.definition">
 		<put-attribute name="title" value="Result" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/java-department-module/testHistoryEach.jsp" />

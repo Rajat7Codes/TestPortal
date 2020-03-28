@@ -21,9 +21,10 @@ import com.iceico.testportal.Service.SubjectService;
 import com.iceico.testportal.Service.UserService;
 
 /**
- * @author puja
+ * @author PUJA POKALE
  * @version 0.1
- *  Creation Date: 13/02/2020
+ * 
+ *          Created Date: 13/02/2020
  *
  */
 
@@ -37,8 +38,15 @@ public class SubjectController {
 	private UserService userService;
 
 	public SubjectController() {
+
 	}
 
+	/**
+	 * MASTER ADMIN METHODS
+	 * 
+	 */
+
+	/* NEW SUBJECT & SUBJECT LIST */
 	@GetMapping("/admin/subject")
 	public String getSubject(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("subject", new Subject());
@@ -47,6 +55,7 @@ public class SubjectController {
 		return "subject";
 	}
 
+	/* SAVE SUBJECT */
 	@PostMapping("/admin/subject/save")
 	public String saveSubject(@ModelAttribute("subject") @Valid Subject subject, BindingResult bindingResult,
 			ModelMap modelMap, Locale locale) {
@@ -63,6 +72,7 @@ public class SubjectController {
 		}
 	}
 
+	/* EDIT SUBJECT */
 	@GetMapping("/admin/subject/edit/{subjectId}")
 	public String editSubject(@PathVariable("subjectId") @Valid Long subjectId, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
@@ -72,11 +82,110 @@ public class SubjectController {
 		return "subject";
 	}
 
+	/* DELETE SUBJECT */
 	@GetMapping("/admin/subject/delete/{subjectId}")
 	public String deleteSubject(@PathVariable("subjectId") @Valid Long subjectId, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
 		this.subjectService.deleteSubject(subjectId);
 		return "redirect:/admin/subject";
+	}
+
+	/**
+	 * 
+	 * JAVA ADMIN METHODS
+	 */
+
+	/* NEW SUBJECT & SUBJECT LIST */
+	@GetMapping("/java/admin/subject")
+	public String getSubject_java(ModelMap modelMap, Locale locale) {
+		modelMap.addAttribute("subject", new Subject());
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "j_subject";
+	}
+
+	/* SAVE SUBJECT */
+	@PostMapping("/java/admin/subject/save")
+	public String saveSubject_java(@ModelAttribute("subject") @Valid Subject subject, BindingResult bindingResult,
+			ModelMap modelMap, Locale locale) {
+		if (bindingResult.hasErrors()) {
+			modelMap.addAttribute("subject", new Subject());
+			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+
+			return "j_subject";
+		} else {
+			this.subjectService.saveSubject(subject);
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+			return "redirect:/java/admin/subject";
+		}
+	}
+
+	/* EDIT SUBJECT */
+	@GetMapping("/java/admin/subject/edit/{subjectId}")
+	public String editSubject_java(@PathVariable("subjectId") @Valid Long subjectId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		modelMap.addAttribute("subject", this.subjectService.getSubjectById(subjectId));
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "j_subject";
+	}
+
+	/* DELETE SUBJECT */
+	@GetMapping("/java/admin/subject/delete/{subjectId}")
+	public String deleteSubject_java(@PathVariable("subjectId") @Valid Long subjectId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		this.subjectService.deleteSubject(subjectId);
+		return "redirect:/java/admin/subject";
+	}
+
+	/**
+	 * JAVA ADMIN METHODS
+	 * 
+	 */
+
+	/* NEW SUBJECT & SUBJECT LIST */
+	@GetMapping("/web/admin/subject")
+	public String getSubject_web(ModelMap modelMap, Locale locale) {
+		modelMap.addAttribute("subject", new Subject());
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "w_subject";
+	}
+
+	/* SAVE SUBJECT */
+	@PostMapping("/web/admin/subject/save")
+	public String saveSubject_web(@ModelAttribute("subject") @Valid Subject subject, BindingResult bindingResult,
+			ModelMap modelMap, Locale locale) {
+		if (bindingResult.hasErrors()) {
+			modelMap.addAttribute("subject", new Subject());
+			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+
+			return "w_subject";
+		} else {
+			this.subjectService.saveSubject(subject);
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+			return "redirect:/web/admin/subject";
+		}
+	}
+
+	/* EDIT SUBJECT */
+	@GetMapping("/web/admin/subject/edit/{subjectId}")
+	public String editSubject_web(@PathVariable("subjectId") @Valid Long subjectId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		modelMap.addAttribute("subject", this.subjectService.getSubjectById(subjectId));
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "w_subject";
+	}
+
+	/* DELETE SUBJECT */
+	@GetMapping("/web/admin/subject/delete/{subjectId}")
+	public String deleteSubject_web(@PathVariable("subjectId") @Valid Long subjectId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		this.subjectService.deleteSubject(subjectId);
+		return "redirect:/web/admin/subject";
 	}
 
 	/**

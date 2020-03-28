@@ -77,7 +77,7 @@
 		style="margin-top: -63px;">
 		<div class="logo-w">
 			<a class="logo"
-				href="${pageContext.request.contextPath }/java/student/dashboard">
+				href="${pageContext.request.contextPath }/web/student/dashboard">
 				<img
 				src="${pageContext.request.contextPath }/static/img/Iceico_round.png">
 				<div class="logo-label">Test Portal</div>
@@ -193,7 +193,7 @@
 					<div class="onboarding-content with-gradient pt-4 pb-4">
 						<h4 class="onboarding-title">Password Change</h4>
 						<form
-							action="${pageContext.request.contextPath }/java/student/profile/send/token"
+							action="${pageContext.request.contextPath }/web/student/profile/send/token"
 							method="get">
 							<div class="row">
 								<div class="col-sm-6">

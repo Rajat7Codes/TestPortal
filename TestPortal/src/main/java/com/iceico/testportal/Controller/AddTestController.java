@@ -64,6 +64,11 @@ public class AddTestController {
 	@Autowired
 	private UserService userService;
 
+	/*
+	 * MASTER ADMIN PANEL METHODS
+	 */
+
+	/* ADD TEST */
 	@GetMapping("/admin/add/test")
 	public String getTest(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("addTest", new AddTest());
@@ -72,24 +77,7 @@ public class AddTestController {
 		return "addTest";
 	}
 
-// Add Test for Java Department
-	@GetMapping("/java/admin/add/test")
-	public String getTestForJava(ModelMap modelMap, Locale locale) {
-		modelMap.addAttribute("addTest", new AddTest());
-		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		return "addTestForJava";
-	}
-
-	// Add Test for Web Department
-	@GetMapping("/web/admin/add/test")
-	public String getTestForWeb(ModelMap modelMap, Locale locale) {
-		modelMap.addAttribute("addTest", new AddTest());
-		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		return "addTestForWeb";
-	}
-
+	/* EDIT TEST */
 	@GetMapping("/admin/add/test/edit/{addTestId}")
 	public String editTest(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
@@ -101,6 +89,7 @@ public class AddTestController {
 		return "addTest";
 	}
 
+	/* DELETE TEST */
 	@GetMapping("/admin/add/test/delete/{addTestId}")
 	public String deleteTest(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
@@ -112,6 +101,7 @@ public class AddTestController {
 		return "addTestView";
 	}
 
+	/* VIEW TEST */
 	@GetMapping("/admin/add/test/view")
 	public String viewTest(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
@@ -120,6 +110,7 @@ public class AddTestController {
 		return "addTestView";
 	}
 
+	/* SAVE TEST */
 	@PostMapping("/admin/add/test/save")
 	public String saveTest(@RequestParam("questionsJson") String questions,
 			@ModelAttribute("addTest") @Valid AddTest addTest, BindingResult bindingResult, ModelMap modelMap,
@@ -128,18 +119,14 @@ public class AddTestController {
 			modelMap.addAttribute("addTest", new AddTest());
 			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
 			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-			System.out.println("*********************Not Saved!!!");
-			System.out.println("***********" + bindingResult.getAllErrors());
 			return "addTest";
 		} else {
 
 			List<TestQuestion> addedQuestions = new ArrayList<TestQuestion>();
 			Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
-			System.out.println("currentUserId   =============>>>>" + currentUserId);
 			String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
 					.getDepartmentName();
 
-			System.out.println("currentAdminDepartment ============>>>>>>>>>  " + currentAdminDepartment);
 			JSONParser parser = new JSONParser();
 			JSONArray questionArray = (JSONArray) parser.parse(questions);
 
@@ -149,110 +136,19 @@ public class AddTestController {
 				testQuestions.setQuestionId(Long.parseLong(obj.get("questionId") + ""));
 				testQuestions.setAddTest(addTest);
 				addedQuestions.add(testQuestions);
-				System.out.println("+++++++++++++>>>>>>>> " + obj.get("questionId"));
 			}
-			System.out.println("********************* Saving in process....one step behind!!!");
-			System.out.println("+++++++++++++>>>>>>>> " + addedQuestions);
 			addTest.setTestQuestions(addedQuestions);
 			addTest.setIsDeleted(false);
 			addTest.setUserId(currentUserId);
 			addTest.setDepartmentName(currentAdminDepartment);
 			this.addTestService.saveAddTest(addTest);
-			System.out.println("********************* Saved!!!");
 
 			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 			return "redirect:/admin/add/test";
 		}
 	}
 
-	// save test for java department
-	@PostMapping("/java/admin/add/test/save")
-	public String saveTestForJava(@RequestParam("questionsJson") String questions,
-			@ModelAttribute("addTest") @Valid AddTest addTest, BindingResult bindingResult, ModelMap modelMap,
-			Locale locale) throws ParseException, ResourceNotFoundException {
-		if (bindingResult.hasErrors()) {
-			modelMap.addAttribute("addTest", new AddTest());
-			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-			System.out.println("*********************Not Saved!!!");
-			System.out.println("***********" + bindingResult.getAllErrors());
-			return "addTest";
-		} else {
-
-			List<TestQuestion> addedQuestions = new ArrayList<TestQuestion>();
-
-			JSONParser parser = new JSONParser();
-			JSONArray questionArray = (JSONArray) parser.parse(questions);
-
-			for (int i = 0; i < questionArray.size(); i++) {
-				TestQuestion testQuestions = new TestQuestion();
-				JSONObject obj = (JSONObject) questionArray.get(i);
-				testQuestions.setQuestionId(Long.parseLong(obj.get("questionId") + ""));
-				testQuestions.setAddTest(addTest);
-				addedQuestions.add(testQuestions);
-				System.out.println("+++++++++++++>>>>>>>> " + obj.get("questionId"));
-			}
-			System.out.println("********************* Saving in process....one step behind!!!");
-			System.out.println("+++++++++++++>>>>>>>> " + addedQuestions);
-			addTest.setTestQuestions(addedQuestions);
-			addTest.setIsDeleted(false);
-			this.addTestService.saveAddTest(addTest);
-			System.out.println("********************* Saved!!!");
-
-			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-			return "redirect:/java/admin/add/test";
-		}
-	}
-
-	// save test for java department
-	@PostMapping("/web/admin/add/test/save")
-	public String saveTestForWeb(@RequestParam("questionsJson") String questions,
-			@ModelAttribute("addTest") @Valid AddTest addTest, BindingResult bindingResult, ModelMap modelMap,
-			Locale locale) throws ParseException, ResourceNotFoundException {
-		if (bindingResult.hasErrors()) {
-			modelMap.addAttribute("addTest", new AddTest());
-			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-			System.out.println("*********************Not Saved!!!");
-			System.out.println("***********" + bindingResult.getAllErrors());
-			return "addTest";
-		} else {
-
-			List<TestQuestion> addedQuestions = new ArrayList<TestQuestion>();
-
-			JSONParser parser = new JSONParser();
-			JSONArray questionArray = (JSONArray) parser.parse(questions);
-
-			for (int i = 0; i < questionArray.size(); i++) {
-				TestQuestion testQuestions = new TestQuestion();
-				JSONObject obj = (JSONObject) questionArray.get(i);
-				testQuestions.setQuestionId(Long.parseLong(obj.get("questionId") + ""));
-				testQuestions.setAddTest(addTest);
-				addedQuestions.add(testQuestions);
-				System.out.println("+++++++++++++>>>>>>>> " + obj.get("questionId"));
-			}
-			System.out.println("********************* Saving in process....one step behind!!!");
-			System.out.println("+++++++++++++>>>>>>>> " + addedQuestions);
-			addTest.setTestQuestions(addedQuestions);
-			addTest.setIsDeleted(false);
-			this.addTestService.saveAddTest(addTest);
-			System.out.println("********************* Saved!!!");
-
-			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-			return "redirect:/web/admin/add/test";
-		}
-	}
-
-	/* sample method result page designing of admin section */
-	/*
-	 * @RequestMapping("/admin/test/result") public String viewResult(ModelMap
-	 * modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
-	 * modelMap.addAttribute("user",
-	 * this.userService.findBySSO(this.getPrincipal()));
-	 * modelMap.addAttribute("testList", this.addTestService.getAddTestList());
-	 * return "viewResult"; }
-	 */
-
+	/* TEST RESULT */
 	@GetMapping("/admin/test/result/{addTestId}")
 	public String viewResult(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
@@ -303,7 +199,7 @@ public class AddTestController {
 		return "viewResult";
 	}
 
-	/* result page of admin section */
+	/* TEST RESULT LIST */
 	@RequestMapping("/admin/test/result/list")
 	public String testResult(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
@@ -313,6 +209,299 @@ public class AddTestController {
 		return "testResult";
 	}
 
+	/**
+	 * JAVA ADMIN PANEL METHODS
+	 *
+	 */
+
+	/* ADD TEST */
+	@GetMapping("/java/admin/add/test")
+	public String getTest_java(ModelMap modelMap, Locale locale) {
+		modelMap.addAttribute("addTest", new AddTest());
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "j_addTest";
+	}
+
+	/* EDIT TEST */
+	@GetMapping("/java/admin/add/test/edit/{addTestId}")
+	public String editTest_java(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		AddTest addTest = this.addTestService.getAddTestById(addTestId);
+		modelMap.addAttribute("addTest", addTest);
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("dateValue", new SimpleDateFormat("dd/MM/YYYY").format(addTest.getDate()));
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "j_addTest";
+	}
+
+	/* DELETE TEST */
+	@GetMapping("/java/admin/add/test/delete/{addTestId}")
+	public String deleteTest_java(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		AddTest addTest = this.addTestService.getAddTestById(addTestId);
+		addTest.setIsDeleted(true);
+		this.addTestService.saveAddTest(addTest);
+		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "addTestView";
+	}
+
+	/* VIEW TEST */
+	@GetMapping("/java/admin/add/test/view")
+	public String viewTest_java(ModelMap modelMap, Locale locale) {
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "j_addTestView";
+	}
+
+	/* SAVE TEST */
+	@PostMapping("/java/admin/add/test/save")
+	public String saveTest_java(@RequestParam("questionsJson") String questions,
+			@ModelAttribute("addTest") @Valid AddTest addTest, BindingResult bindingResult, ModelMap modelMap,
+			Locale locale) throws ParseException, ResourceNotFoundException {
+		if (bindingResult.hasErrors()) {
+			modelMap.addAttribute("addTest", new AddTest());
+			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+			return "j_addTest";
+		} else {
+
+			List<TestQuestion> addedQuestions = new ArrayList<TestQuestion>();
+			Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
+			String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
+					.getDepartmentName();
+
+			JSONParser parser = new JSONParser();
+			JSONArray questionArray = (JSONArray) parser.parse(questions);
+
+			for (int i = 0; i < questionArray.size(); i++) {
+				TestQuestion testQuestions = new TestQuestion();
+				JSONObject obj = (JSONObject) questionArray.get(i);
+				testQuestions.setQuestionId(Long.parseLong(obj.get("questionId") + ""));
+				testQuestions.setAddTest(addTest);
+				addedQuestions.add(testQuestions);
+			}
+			addTest.setTestQuestions(addedQuestions);
+			addTest.setIsDeleted(false);
+			addTest.setUserId(currentUserId);
+			addTest.setDepartmentName(currentAdminDepartment);
+			this.addTestService.saveAddTest(addTest);
+
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+			return "redirect:/java/admin/add/test";
+		}
+	}
+
+	/* TEST RESULT */
+	@GetMapping("/java/admin/test/result/{addTestId}")
+	public String viewResult_java(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		AddTest addTest = this.addTestService.getAddTestById(addTestId);
+		modelMap.addAttribute("test", addTest);
+
+		int marks = 0;
+		for (TestQuestion question : addTest.getTestQuestions()) {
+			QuestionBank questionBank = this.questionBankService.getQuestionBankById(question.getQuestionId());
+			marks += questionBank.getMarks();
+		}
+		int attempted = 0;
+		int passed = 0;
+		int failed = 0;
+		List<String[]> list = new ArrayList<String[]>();
+		for (TestResult testResult : this.testResultService.getTestResultList()) {
+
+			if (addTestId == testResult.getTestId()) {
+				if (testResult.getResultStatus().equals("PASS")) {
+
+					passed++;
+				} else {
+					failed++;
+				}
+			}
+			for (User user : this.userService.findAllUsers()) {
+				if (testResult.getUserId() == user.getId()) {
+					if (addTestId == testResult.getTestId()) {
+						String array[] = new String[5];
+						array[0] = user.getFirstName() + " " + user.getLastName();
+						array[1] = testResult.getResultStatus();
+						array[2] = new SimpleDateFormat("dd/MM/YYYY").format(testResult.getDate());
+						array[3] = testResult.getObtainedMarks().toString().replace(".0", "");
+						list.add(array);
+						attempted++;
+					}
+				}
+			}
+		}
+		System.out.println(list);
+		modelMap.addAttribute("userList", list);
+		modelMap.addAttribute("marks", marks);
+		modelMap.addAttribute("attempted", attempted);
+		modelMap.addAttribute("passed", passed);
+		modelMap.addAttribute("failed", failed);
+		modelMap.addAttribute("dateValue", new SimpleDateFormat("dd/MM/YYYY").format(addTest.getDate()));
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "j_viewResult";
+	}
+
+	/* TEST RESULT LIST */
+	@RequestMapping("/java/admin/test/result/list")
+	public String testResult_java(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		modelMap.addAttribute("test", new AddTest());
+		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+		return "j_testResult";
+	}
+
+	/**
+	 * WEB ADMIN PANEL METHODS
+	 *
+	 */
+
+	/* ADD TEST */
+	@GetMapping("/web/admin/add/test")
+	public String getTest_web(ModelMap modelMap, Locale locale) {
+		modelMap.addAttribute("addTest", new AddTest());
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "w_addTest";
+	}
+
+	/* EDIT TEST */
+	@GetMapping("/web/admin/add/test/edit/{addTestId}")
+	public String editTest_web(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		AddTest addTest = this.addTestService.getAddTestById(addTestId);
+		modelMap.addAttribute("addTest", addTest);
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("dateValue", new SimpleDateFormat("dd/MM/YYYY").format(addTest.getDate()));
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "w_addTest";
+	}
+
+	/* DELETE TEST */
+	@GetMapping("/web/admin/add/test/delete/{addTestId}")
+	public String deleteTest_web(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		AddTest addTest = this.addTestService.getAddTestById(addTestId);
+		addTest.setIsDeleted(true);
+		this.addTestService.saveAddTest(addTest);
+		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "w_addTestView";
+	}
+
+	/* VIEW TEST */
+	@GetMapping("/web/admin/add/test/view")
+	public String viewTest_web(ModelMap modelMap, Locale locale) {
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "w_addTestView";
+	}
+
+	/* SAVE TEST */
+	@PostMapping("/web/admin/add/test/save")
+	public String saveTest_web(@RequestParam("questionsJson") String questions,
+			@ModelAttribute("addTest") @Valid AddTest addTest, BindingResult bindingResult, ModelMap modelMap,
+			Locale locale) throws ParseException, ResourceNotFoundException {
+		if (bindingResult.hasErrors()) {
+			modelMap.addAttribute("addTest", new AddTest());
+			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+			return "w_addTest";
+		} else {
+
+			List<TestQuestion> addedQuestions = new ArrayList<TestQuestion>();
+			Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
+			String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
+					.getDepartmentName();
+
+			JSONParser parser = new JSONParser();
+			JSONArray questionArray = (JSONArray) parser.parse(questions);
+
+			for (int i = 0; i < questionArray.size(); i++) {
+				TestQuestion testQuestions = new TestQuestion();
+				JSONObject obj = (JSONObject) questionArray.get(i);
+				testQuestions.setQuestionId(Long.parseLong(obj.get("questionId") + ""));
+				testQuestions.setAddTest(addTest);
+				addedQuestions.add(testQuestions);
+			}
+			addTest.setTestQuestions(addedQuestions);
+			addTest.setIsDeleted(false);
+			addTest.setUserId(currentUserId);
+			addTest.setDepartmentName(currentAdminDepartment);
+			this.addTestService.saveAddTest(addTest);
+
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+			return "redirect:/web/admin/add/test";
+		}
+	}
+
+	/* TEST RESULT */
+	@GetMapping("/web/admin/test/result/{addTestId}")
+	public String viewResult_web(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		AddTest addTest = this.addTestService.getAddTestById(addTestId);
+		modelMap.addAttribute("test", addTest);
+
+		int marks = 0;
+		for (TestQuestion question : addTest.getTestQuestions()) {
+			QuestionBank questionBank = this.questionBankService.getQuestionBankById(question.getQuestionId());
+			marks += questionBank.getMarks();
+		}
+		int attempted = 0;
+		int passed = 0;
+		int failed = 0;
+		List<String[]> list = new ArrayList<String[]>();
+		for (TestResult testResult : this.testResultService.getTestResultList()) {
+
+			if (addTestId == testResult.getTestId()) {
+				if (testResult.getResultStatus().equals("PASS")) {
+
+					passed++;
+				} else {
+					failed++;
+				}
+			}
+			for (User user : this.userService.findAllUsers()) {
+				if (testResult.getUserId() == user.getId()) {
+					if (addTestId == testResult.getTestId()) {
+						String array[] = new String[5];
+						array[0] = user.getFirstName() + " " + user.getLastName();
+						array[1] = testResult.getResultStatus();
+						array[2] = new SimpleDateFormat("dd/MM/YYYY").format(testResult.getDate());
+						array[3] = testResult.getObtainedMarks().toString().replace(".0", "");
+						list.add(array);
+						attempted++;
+					}
+				}
+			}
+		}
+		System.out.println(list);
+		modelMap.addAttribute("userList", list);
+		modelMap.addAttribute("marks", marks);
+		modelMap.addAttribute("attempted", attempted);
+		modelMap.addAttribute("passed", passed);
+		modelMap.addAttribute("failed", failed);
+		modelMap.addAttribute("dateValue", new SimpleDateFormat("dd/MM/YYYY").format(addTest.getDate()));
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "w_viewResult";
+	}
+
+	/* TEST RESULT LIST */
+	@RequestMapping("/web/admin/test/result/list")
+	public String testResult_web(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		modelMap.addAttribute("test", new AddTest());
+		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+		return "w_testResult";
+	}
+
+	/**
+	 * 
+	 */
 	private String getPrincipal() {
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

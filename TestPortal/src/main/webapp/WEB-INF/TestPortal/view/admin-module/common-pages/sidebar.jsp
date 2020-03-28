@@ -6,13 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style type="text/css">
+.menu-w .logo-w img {
+	width: 26px;
+}
+</style>
+
 </head>
 <body>
 	<div class="menu-mobile menu-activated-on-click color-scheme-dark">
 		<div class="mm-logo-buttons-w">
 			<a class="mm-logo"
 				href="${pageContext.request.contextPath }/admin/dashboard"><img
-				src="img/logo.png"><span>Test Portal</span></a>
+				src="${pageContext.request.contextPath }/static/img/Iceico_round.png"><span>Test
+					Portal</span></a>
 			<div class="mm-buttons">
 				<div class="content-panel-open">
 					<div class="os-icon os-icon-grid-circles"></div>
@@ -46,25 +54,29 @@
 							<div class="os-icon os-icon-grid"></div>
 						</div> <span>Question Bank</span></a>
 					<ul class="sub-menu">
-						<li><a href="#">New</a></li>
-						<li><a href="#">New</a></li>
-						<!-- <li><a href="tables_datatables.html">Data Tables</a></li> -->
-						<!-- <li><a href="tables_editable.html">Search Master</a></li> -->
-					</ul></li>
-
-				<li class="has-sub-menu"><a href="#"><div class="icon-w">
-							<div class="os-icon os-icon-grid"></div>
-						</div> <span>Search Master</span></a>
-					<ul class="sub-menu">
+						<li><a
+							href="${pageContext.request.contextPath }/admin/question/bank/new">New</a></li>
+						<li><a
+							href="${pageContext.request.contextPath }/admin/question/bank">View</a></li>
 						<li><a
 							href="${pageContext.request.contextPath }/admin/question/bank/search">Search</a></li>
 					</ul></li>
 
-				<li class="has-sub-menu"><a
-					href="${pageContext.request.contextPath }/admin/add/test">
-						<div class="icon-w">
+				<li class="has-sub-menu"><a href="#"><div class="icon-w">
 							<div class="os-icon os-icon-edit-32"></div>
-						</div> <span>Add Test</span>
+						</div> <span>Test</span></a>
+					<ul class="sub-menu">
+						<li><a
+							href="${pageContext.request.contextPath }/admin/add/test">New</a></li>
+						<li><a
+							href="${pageContext.request.contextPath }/admin/add/test/view">View</a></li>
+					</ul></li>
+
+				<li><a
+					href="${pageContext.request.contextPath }/admin/test/result/list">
+						<div class="icon-w">
+							<div class="os-icon os-icon-window-content"></div>
+						</div> <span>Results</span>
 				</a></li>
 			</ul>
 		</div>
@@ -74,9 +86,10 @@
 		style="margin-top: -54px;">
 		<div class="logo-w">
 			<a class="logo"
-				href="${pageContext.request.contextPath }/admin/dashboard"><div
-					class="logo-element"></div>
-				<div class="logo-label">Test Portal Here</div></a>
+				href="${pageContext.request.contextPath }/admin/dashboard"> <img
+				src="${pageContext.request.contextPath }/static/img/Iceico_round.png">
+				<div class="logo-label">Test Portal</div>
+			</a>
 		</div>
 		<div class="logged-user-w avatar-inline">
 			<div class="logged-user-i">
@@ -139,15 +152,6 @@
 
 		<h1 class="menu-page-header">Page Header</h1>
 		<ul class="main-menu">
-			<!-- <li class="sub-header"><span>Layouts</span></li> -->
-
-			<li class="has-sub-menu"><a
-				href="${pageContext.request.contextPath}/admin/addTest"><div
-						class="icon-w">
-						<div class="os-icon os-icon-grid"></div>
-					</div> <span>Test</span></a></li>
-
-
 
 			<li class="has-sub-menu"><a href="#"><div class="icon-w">
 						<div class="os-icon os-icon-grid"></div>
@@ -163,36 +167,35 @@
 								href="${pageContext.request.contextPath }/admin/question/bank/new">New</a></li>
 							<li><a
 								href="${pageContext.request.contextPath }/admin/question/bank">View</a></li>
+							<li><a
+								href="${pageContext.request.contextPath }/admin/question/bank/search">Search</a></li>
 						</ul>
 					</div>
 				</div></li>
 
-			<li class="has-sub-menu"><a
-				href="${pageContext.request.contextPath }/admin/question/bank/search">
-					<div class="icon-w">
+			<li class="has-sub-menu"><a href="#"><div class="icon-w">
 						<div class="os-icon os-icon-edit-32"></div>
-					</div> <span>Search Master</span>
-			</a></li>
+					</div> <span>Test</span></a>
+				<div class="sub-menu-w">
+					<div class="sub-menu-header">Test</div>
+					<div class="sub-menu-icon">
+						<i class="os-icon os-icon-grid"></i>
+					</div>
+					<div class="sub-menu-i">
+						<ul class="sub-menu">
+							<li><a
+								href="${pageContext.request.contextPath }/admin/add/test">New</a></li>
+							<li><a
+								href="${pageContext.request.contextPath }/admin/add/test/view">View</a></li>
+						</ul>
+					</div>
+				</div></li>
 
-			<li class="has-sub-menu"><a
-				href="${pageContext.request.contextPath }/admin/add/test">
-					<div class="icon-w">
-						<div class="os-icon os-icon-edit-32"></div>
-					</div> <span>Add Test</span>
-			</a></li>
-
-			<li class="has-sub-menu"><a
-				href="${pageContext.request.contextPath }/admin/add/test/view">
-					<div class="icon-w">
-						<div class="os-icon os-icon-edit-32"></div>
-					</div> <span>View Test</span>
-			</a></li>
-
-			<li class="has-sub-menu"><a
+			<li><a
 				href="${pageContext.request.contextPath }/admin/test/result/list">
 					<div class="icon-w">
-						<div class="os-icon os-icon-edit-32"></div>
-					</div> <span>Test Result</span>
+						<div class="os-icon os-icon-window-content"></div>
+					</div> <span>Results</span>
 			</a></li>
 		</ul>
 	</div>
