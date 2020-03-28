@@ -29,6 +29,7 @@ import com.iceico.testportal.Exceptions.ResourceNotFoundException;
 import com.iceico.testportal.Model.AddTest;
 import com.iceico.testportal.Model.TestResult;
 import com.iceico.testportal.Model.User;
+import com.iceico.testportal.Service.AddTestService;
 import com.iceico.testportal.Service.EMailService;
 import com.iceico.testportal.Service.TestResultService;
 import com.iceico.testportal.Service.UserService;
@@ -38,9 +39,7 @@ import com.iceico.testportal.Service.UserService;
  * @author RAJAT PATIL
  * @version 0.1
  * 
- *          Created Date : 21 Feb 2020 
- *          Updated By : Sameer Kadgaye 
- *          Updated Date
+ *          Created Date : 21 Feb 2020 Updated By : Sameer Kadgaye Updated Date
  *          : 23 Feb 2020
  * 
  */
@@ -55,6 +54,8 @@ public class JavaStudentController {
 
 	@Autowired
 	private TestResultService testResultService;
+
+	private AddTestService addTestService;
 
 	private String passwordToken = null;
 
