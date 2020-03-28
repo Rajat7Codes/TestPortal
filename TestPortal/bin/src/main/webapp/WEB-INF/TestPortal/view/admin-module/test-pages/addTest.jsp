@@ -6,8 +6,6 @@
 <html>
 
 <head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <title>Add Test</title>
 </head>
@@ -40,7 +38,7 @@
 										<div class="form-group">
 											<form:label path="date">Date</form:label>
 											<form:input path="date" type="date" name="date" id="date"
-												class="form-control" />
+												value="${dateValue }" class="form-control" />
 											<form:errors path="date"></form:errors>
 										</div>
 									</div>
@@ -54,12 +52,14 @@
 									</div>
 									<div class="col-sm-3">
 										<div class="form-group">
-											<form:label path="subject"> Subject </form:label>
+											<form:label path="subject">Subject</form:label>
 											<form:select class="form-control" name="subject"
-												path="subject" id="subject" itemLabel="subjectName"
-												items="${subjectList}" itemValue="subjectId">
+												path="subject" onchange="filterBySubject()" id="subject">
+												<form:option value="" label="--- Select Subject ---" />
+												<form:options items="${subjectList}" itemValue="subjectId"
+													itemLabel="subjectName" id="subject" multiple="single" />
 											</form:select>
-											<form:errors path="subject" class="errors" />
+											<form:errors path="subject" />
 										</div>
 									</div>
 
@@ -71,22 +71,50 @@
 											<form:label path="negativeMarking">Negative Marking</form:label>
 											<form:select path="negativeMarking" name="negativeMarking"
 												id="negativeMarking" class="form-control">
-												<form:option value="true">Yes</form:option>
+												<form:option selected="true" value="true">Yes</form:option>
 												<form:option value="false">No</form:option>
 											</form:select>
 											<form:errors path="negativeMarking"></form:errors>
 										</div>
 									</div>
 
-									<div class="col-sm-3" id="ratioDiv">
-										<div class="form-group">
-											<form:label path="ratio"> Ratio</form:label>
-											<form:input path="ratio" name="ratio" id="ratio"
-												class="form-control"
-												placeholder="Enter negative marking ratio" />
-											<form:errors path="ratio"></form:errors>
+									<c:if test="${ addTest.negativeMarking==true }"> 
+										<div class="col-sm-3" id="ratioDiv">
+											<div class="form-group">
+												<form:label path="ratio"> Ratio</form:label>
+												<form:input path="ratio" name="ratio" id="ratio"
+													class="form-control"
+													placeholder="Enter negative marking ratio" />
+												<form:errors path="ratio"></form:errors>
+											</div>
 										</div>
-									</div>
+									</c:if>
+
+									<c:if test="${ addTest.negativeMarking==null }"> 
+										<div class="col-sm-3" id="ratioDiv">
+											<div class="form-group">
+												<form:label path="ratio"> Ratio</form:label>
+												<form:input path="ratio" name="ratio" id="ratio"
+													class="form-control"
+													placeholder="Enter negative marking ratio" />
+												<form:errors path="ratio"></form:errors>
+											</div>
+										</div>
+									</c:if>
+									
+									
+									<c:if test="${ addTest.negativeMarking==false }"> 
+										<div class="col-sm-3" style="display: none" id="ratioDiv">
+											<div class="form-group">
+												<form:label path="ratio"> Ratio</form:label>
+												<form:input path="ratio" name="ratio" id="ratio"
+													class="form-control"
+													placeholder="Enter negative marking ratio" />
+												<form:errors path="ratio"></form:errors>
+											</div>
+										</div>
+									</c:if>
+									
 									<div class="col-sm-3">
 										<div class="form-group">
 											<form:label path="passingPercent"> Passing Percentage </form:label>
@@ -106,8 +134,8 @@
 								</div>
 
 								<!-- table -->
-								<div class="element-wrapper" id="questions-table">
-									<div class="element-box">
+								<div class="element-wrapper">
+									<div class="element-box" style="display: none;"  id="questions-table">
 										<h6 class="element-header mb-5">Questions List</h6>
 
 										<div class="table-responsive">
@@ -133,8 +161,6 @@
 										<button class="btn btn-primary" type="submit">Submit</button>
 									</div>
 								</div>
-
-
 							</form:form>
 						</div>
 					</div>
@@ -144,6 +170,64 @@
 	</div>
 </body>
 
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Script triggered on change of subject -->
+<script type="text/javascript">
+	function filterBySubject() {
+		
+			$('#tableBody tr').remove();
+			data = { "subjectID" : $("#subject").val() };
+
+			
+			$.ajax({
+						type : "GET",
+						contentType : "application/json",
+						url : "${pageContext.request.contextPath}/add/test/filter/subject",
+						data : data,
+						dataType : 'json',
+
+						cache : false,
+
+						timeout : 600000,
+
+						success : function(response) {
+							var trHTML = '';
+
+							$
+									.each(
+											response,
+											function(i, item) {
+												trHTML += '<tr><td>'
+														+ item.questionId
+														+ '</td><td>'
+														+ item.question
+														+ '</td><td>'
+														+ item.questionType
+														+ '</td><td>'
+														+ item.marks
+														+ '</td><td>'
+														+ '<button type="button" id="addbtn'
+														+ (item.questionId)
+														+ '" class="btn btn-primary" onclick="add('
+														+ (item.questionId)
+														+ ');"> Add </button> </td> </tr>';
+											});
+
+							$('#tableBody tr td').remove();
+							$('#tableBody').append(trHTML);
+
+						}
+
+					});
+
+			$("#questions-table")
+					.css("display", "block");
+		}	
+</script>
+
 <!-- Script for toggling ratioDiv on negative marking change -->
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -152,72 +236,6 @@
 		});
 	});
 </script>
-
-<!-- AJAX script for subject change filteration -->
-<script type="text/javascript">
-function filterBySubject() {
-
-	alert("");
-	$('#tableBody tr').remove();
-	data = { "subjectID" : $("#subject").val() };
-
-	$.ajax({
-				type : "GET",
-				contentType : "application/json",
-				url : "${pageContext.request.contextPath}/add/test/filter/subject",
-				data : data,
-				dataType : 'json',
-
-				cache : false,
-
-				timeout : 600000,
-
-				success : function(response) {
-					var trHTML = '';
-
-					$
-							.each(
-									response,
-									function(i, item) {
-										trHTML += '<tr><td>'
-												+ item.questionId
-												+ '</td><td>'
-												+ item.question
-												+ '</td><td>'
-												+ item.questionType
-												+ '</td><td>'
-												+ item.marks
-												+ '</td><td>'
-												+ '<button type="button" id="addbtn'
-												+ (item.questionId)
-												+ '" class="btn btn-primary" onclick="add('
-												+ (item.questionId)
-												+ ');"> Add </button> </td> </tr>';
-									});
-
-					$('#tableBody tr td').remove();
-					$('#tableBody').append(trHTML);
-
-				}
-
-			});
-
-	$("#questions-table")
-			.css("display", "block !important");
-}
-</script>
-
-<!-- Script triggered on change of subject -->
-<script type="text/javascript">
-	$("#subject").change( 
-		filterBySubject() 	
-	);
-</script>
-
-<!-- Script triggered on load of body -->
-<!-- <script type="text/javascript">
-	$(document).ready( filterBySubject() );
-</script> -->
 
 <!-- Script for changing add btn to added -->
 <script type="text/javascript">

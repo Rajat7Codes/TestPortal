@@ -67,12 +67,12 @@
 				<div class="col-lg-12">
 					<div class="padded-lg">
 						<div class="projects-list">
-							<c:forEach var="test" items="${list}" varStatus="ind">
-								<c:if test="${test[0] != true }">
+							<c:forEach var="test" items="${testList}" varStatus="ind">
+								<c:if test="${ test.isDeleted != true}">
 									<div class="project-box">
 										<div class="project-head">
 											<div class="project-title">
-												<h5>${test[1]}</h5>
+												<h5>${test.testName}</h5>
 											</div>
 										</div>
 										<div class="project-info">
@@ -82,14 +82,14 @@
 														<div class="col-4">
 															<div class="el-tablo highlight">
 																<div class="label font-weight-bold  ">Total time</div>
-																<h5 class="text-primary font-weight-bold">${test[2]}</h5>
+																<h5 class="text-primary font-weight-bold">${test.time}</h5>
 															</div>
 														</div>
 														<div class="col-4">
 															<div class="el-tablo highlight">
 																<div class="label font-weight-bold ">Test uploaded
 																	date</div>
-																<h5 class="text-primary font-weight-bold">${test[3]}</h5>
+																<h5 class="text-primary font-weight-bold">${test.date}</h5>
 															</div>
 														</div>
 														<div class="col-4">
@@ -98,10 +98,8 @@
 																	below start test</div>
 
 																<a class="badge badge-pill  badge-primary px-3 py-1"
-																	href="${pageContext.request.contextPath }/java/student/start/test/${test[4]}">start
+																	href="${pageContext.request.contextPath }/java/student/start/test/${test.addTestId}">start
 																	test</a>
-
-
 															</div>
 														</div>
 													</div>
@@ -111,9 +109,6 @@
 									</div>
 								</c:if>
 							</c:forEach>
-
-
-
 						</div>
 					</div>
 				</div>

@@ -78,14 +78,16 @@
 				</button>
 				<div class="onboarding-slide">
 					<div class="onboarding-media pt-0 w-100">
-						<img alt="" src="${pageContext.request.contextPath }/static/img/security3.jpg" 
-							width="100%" style="
-    background-size: cover;
-    background-repeat: no-repeat;">
+						<img alt=""
+							src="${pageContext.request.contextPath }/static/img/security3.jpg"
+							width="100%"
+							style="background-size: cover; background-repeat: no-repeat;">
 					</div>
 					<div class="onboarding-content with-gradient pt-4 pb-4">
 						<h4 class="onboarding-title">Password Change</h4>
-						<form action="${pageContext.request.contextPath }/java/student/profile/send/token" method="get">
+						<form
+							action="${pageContext.request.contextPath }/java/student/profile/send/token"
+							method="get">
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
@@ -96,8 +98,8 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="">Your Email Address</label><input
-											name="mailId" class="form-control"
+										<label for="">Your Email Address</label><input name="mailId"
+											class="form-control"
 											placeholder="Enter your Email address..." value="">
 									</div>
 								</div>
@@ -105,17 +107,16 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="">Your Mobile Number</label><input
-											name="mobile" class="form-control"
+										<label for="">Your Mobile Number</label><input name="mobile"
+											class="form-control"
 											placeholder="Enter your Mobile number..." value="">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="">Your New Password</label><input name="password"
-											type="password"
-											class="form-control" placeholder="Enter your New password..."
-											value="">
+											type="password" class="form-control"
+											placeholder="Enter your New password..." value="">
 									</div>
 								</div>
 							</div>

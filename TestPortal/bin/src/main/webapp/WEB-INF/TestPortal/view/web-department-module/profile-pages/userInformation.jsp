@@ -212,7 +212,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="floated-chat-btn">
+			<!-- <div class="floated-chat-btn">
 				<i class="os-icon os-icon-mail-07"></i><span>Demo Chat</span>
 			</div>
 			<div class="floated-chat-w">
@@ -260,7 +260,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </body>
