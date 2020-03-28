@@ -94,18 +94,26 @@ public class StartTestController {
 				}
 			}
 		}
-		
+
 		List<AddTest> addTestList = new ArrayList<AddTest>();
-		for( Long testId : testList.keySet()) {
-			if(testList.get(testId).equals("not given")) {
-				addTestList.add(this.addTestService.getAddTestById(testId));
+		if(!testList.isEmpty()) {
+			for( Long testId : testList.keySet()) {
+				if(testList.get(testId).equals("not given")) {
+					addTestList.add(this.addTestService.getAddTestById(testId));
+				}
+			}
+		} else {
+			for( AddTest test: addTestService.getAddTestList()) {
+				addTestList.add(test);
 			}
 		}
+		
+		System.out.println(addTestList);
+		
 
-
-		modelMap.addAttribute("testList", addTestList);
 		User user = this.userService.findBySSO(this.getPrincipal());
 		modelMap.addAttribute("user", user);
+		modelMap.addAttribute("testListShown", addTestList);
 		return "testList";
 
 	}
