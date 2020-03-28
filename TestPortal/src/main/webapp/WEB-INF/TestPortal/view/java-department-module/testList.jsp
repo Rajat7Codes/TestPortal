@@ -12,7 +12,7 @@
 <body>
 	<div class="content-i">
 		<div class="content-box">
-			<%-- 
+
 			<div class="element-wrapper">
 				<div class="element-box">
 					<h5 class="element-header mb-4">Test List</h5>
@@ -42,7 +42,7 @@
 								</c:if>
 							</c:forEach>
 						</tbody>
-						
+
 						<tbody>
 							<c:forEach var="test" items="${testList}" varStatus="ind">
 								<c:if test="${ test.isDeleted!= true }">
@@ -61,9 +61,9 @@
 					</table>
 				</div>
 
-			</div> --%>
+			</div>
 
-			<div class="row">
+			<%-- <div class="row">
 				<div class="col-lg-12">
 					<div class="padded-lg">
 						<div class="projects-list">
@@ -111,13 +111,11 @@
 									</div>
 								</c:if>
 							</c:forEach>
-
-
-
 						</div>
 					</div>
 				</div>
 			</div>
+			 --%>
 		</div>
 	</div>
 </body>

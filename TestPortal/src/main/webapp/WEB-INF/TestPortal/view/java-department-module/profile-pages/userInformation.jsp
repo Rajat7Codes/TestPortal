@@ -85,8 +85,8 @@
 								<div class="row">
 									<div class="col-sm-6 b-r b-b">
 										<div class="el-tablo centered padded">
-											<div class="value">3814</div>
-											<div class="label">Products Sold</div>
+											<div class="value">${totalTestCountDepartmentJava }</div>
+											<div class="label">Total Test</div>
 										</div>
 									</div>
 									<div class="col-sm-6 b-b b-r">
