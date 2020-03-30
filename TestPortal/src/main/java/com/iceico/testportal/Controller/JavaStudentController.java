@@ -105,13 +105,14 @@ public class JavaStudentController {
 		 * }
 		 */
 
-		
-		  for (AddTest test : totalTestList) { testDepartment =
-		  test.getDepartmentName(); for (User userPro :
-		  this.userService.findAllUsers()) { if
-		  (currentUserDepartment.equals(testDepartment)) {
-		  totalTestCountDepartmentJava.add(test.getTestName()); } } }
-		 
+		for (AddTest test : totalTestList) {
+			testDepartment = test.getDepartmentName();
+			for (User userPro : this.userService.findAllUsers()) {
+				if (currentUserDepartment.equals(testDepartment)) {
+					totalTestCountDepartmentJava.add(test.getTestName());
+				}
+			}
+		}
 
 		modelMap.addAttribute("totalTestCountDepartmentJava", totalTestCountDepartmentJava.size());
 		/* END FOR CALCULATE TOTAL TEST COUNT DEPARTMENT WISE */

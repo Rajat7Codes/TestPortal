@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -73,33 +74,44 @@ public class StartTestController {
 	@RequestMapping("/java/student/test/list")
 	public String testList(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 
-		List<List<String>> listOfTest = new ArrayList<List<String>>();
-		String status = null;
+		HashMap<Long, String> testList = new HashMap<Long, String>();
+
 		for (AddTest addTest : this.addTestService.getAddTestList()) {
-			for (TestResult testResult : this.testResultService.getTestResultList()) {
+			for (TestResult result : testResultService.getTestResultList()) {
+				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
+					testList.put(addTest.getAddTestId(), "not given");
+				}
+			}
+		}
 
-				for (User user : this.userService.findAllUsers()) {
-					if (addTest.getAddTestId() == testResult.getTestId()) {
-						// check for given test
-						if (testResult.getUserId() == user.getId()) {
-							status = testResult.getResultStatus();
-
-							List<String> test = new ArrayList<String>();
-							test.add(addTest.getIsDeleted() + "");
-							test.add(addTest.getTestName());
-							test.add(addTest.getTime() + "");
-							test.add(addTest.getDate() + "");
-							test.add(addTest.getAddTestId() + "");
-							test.add(status);
-							listOfTest.add(test);
-						}
+		for (AddTest addTest : this.addTestService.getAddTestList()) {
+			for (TestResult result : testResultService.getTestResultList()) {
+				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
+					if (addTest.getAddTestId() == result.getTestId()) {
+						testList.put(addTest.getAddTestId(), "given");
 					}
 				}
 			}
 		}
-		modelMap.addAttribute("list", listOfTest);
-		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+
+		List<AddTest> addTestList = new ArrayList<AddTest>();
+		if (!testList.isEmpty()) {
+			for (Long testId : testList.keySet()) {
+				if (testList.get(testId).equals("not given")) {
+					addTestList.add(this.addTestService.getAddTestById(testId));
+				}
+			}
+		} else {
+			for (AddTest test : addTestService.getAddTestList()) {
+				addTestList.add(test);
+			}
+		}
+
+		System.out.println(addTestList);
+
+		User user = this.userService.findBySSO(this.getPrincipal());
+		modelMap.addAttribute("user", user);
+		modelMap.addAttribute("testListShown", addTestList);
 		return "testList";
 
 	}
@@ -288,33 +300,44 @@ public class StartTestController {
 	@RequestMapping("/web/student/test/list")
 	public String testList_web(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 
-		List<List<String>> listOfTest = new ArrayList<List<String>>();
-		String status = null;
+		HashMap<Long, String> testList = new HashMap<Long, String>();
+
 		for (AddTest addTest : this.addTestService.getAddTestList()) {
-			for (TestResult testResult : this.testResultService.getTestResultList()) {
+			for (TestResult result : testResultService.getTestResultList()) {
+				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
+					testList.put(addTest.getAddTestId(), "not given");
+				}
+			}
+		}
 
-				for (User user : this.userService.findAllUsers()) {
-					if (addTest.getAddTestId() == testResult.getTestId()) {
-						// check for given test
-						if (testResult.getUserId() == user.getId()) {
-							status = testResult.getResultStatus();
-
-							List<String> test = new ArrayList<String>();
-							test.add(addTest.getIsDeleted() + "");
-							test.add(addTest.getTestName());
-							test.add(addTest.getTime() + "");
-							test.add(addTest.getDate() + "");
-							test.add(addTest.getAddTestId() + "");
-							test.add(status);
-							listOfTest.add(test);
-						}
+		for (AddTest addTest : this.addTestService.getAddTestList()) {
+			for (TestResult result : testResultService.getTestResultList()) {
+				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
+					if (addTest.getAddTestId() == result.getTestId()) {
+						testList.put(addTest.getAddTestId(), "given");
 					}
 				}
 			}
 		}
-		modelMap.addAttribute("list", listOfTest);
-		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+
+		List<AddTest> addTestList = new ArrayList<AddTest>();
+		if (!testList.isEmpty()) {
+			for (Long testId : testList.keySet()) {
+				if (testList.get(testId).equals("not given")) {
+					addTestList.add(this.addTestService.getAddTestById(testId));
+				}
+			}
+		} else {
+			for (AddTest test : addTestService.getAddTestList()) {
+				addTestList.add(test);
+			}
+		}
+
+		System.out.println(addTestList);
+
+		User user = this.userService.findBySSO(this.getPrincipal());
+		modelMap.addAttribute("user", user);
+		modelMap.addAttribute("testListShown", addTestList);
 		return "testList";
 
 	}

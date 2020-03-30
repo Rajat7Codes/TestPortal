@@ -42,15 +42,49 @@
 }
 
 /* :not(:required) hides these rules from IE9 and below */
-.loading:not (:required ) {
-	/* hide "loading..." text */
-	font: 0/0 a;
-	color: transparent;
-	text-shadow: none;
-	background-color: transparent;
-	border: 0;
-}
+.loading
+:not
+ 
+(
+:required
+ 
+)
+{
+/* hide "loading..." text */
+font
+:
+ 
+0/0
+a
+;
 
+	
+color
+:
+ 
+transparent
+;
+
+	
+text-shadow
+:
+ 
+none
+;
+
+	
+background-color
+:
+ 
+transparent
+;
+
+	
+border
+:
+ 
+0;
+}
 .loading:not (:required ):after {
 	content: '';
 	display: block;
@@ -89,40 +123,90 @@
 100%
 {
 -webkit-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 -moz-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 -ms-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 -o-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
   
+
 }
 }
 @
@@ -137,40 +221,90 @@ rotate
 100%
 {
 -webkit-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 -moz-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 -ms-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 -o-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
   
+
 }
 }
 @
@@ -185,40 +319,90 @@ rotate
 100%
 {
 -webkit-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 -moz-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 -ms-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 -o-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
   
+
 }
 }
 @
@@ -232,40 +416,90 @@ keyframes spinner { 0% {
 100%
 {
 -webkit-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 -moz-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 -ms-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 -o-transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
     
+
 transform
+
+
 :
+
  
+
 rotate
-(360deg);
+
+
+(360
+deg
+);
+
 
   
+
 }
 }
 </style>
@@ -598,7 +832,7 @@ var allAnswers = [];
 		window.alert("Test Submission Successfully");
 	 	window.location="${pageContext.request.contextPath}/web/student/view/test/result/"+e["testId"]
 	},
-	error: function(e) {]
+	error: function(e) {
 		window.alert("Test Submitted Successfully");
 	    window.location="${pageContext.request.contextPath}/web/student/view/test/result/"+e["testId"]
 	}
