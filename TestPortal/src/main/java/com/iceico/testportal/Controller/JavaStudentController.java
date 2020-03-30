@@ -55,6 +55,7 @@ public class JavaStudentController {
 	@Autowired
 	private TestResultService testResultService;
 
+	@Autowired
 	private AddTestService addTestService;
 
 	private String passwordToken = null;
@@ -96,14 +97,22 @@ public class JavaStudentController {
 		List<String> totalTestCountDepartmentJava = new ArrayList<String>();
 		String currentUserDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
 				.getDepartmentName();
-		for (AddTest test : totalTestList) {
-			testDepartment = test.getDepartmentName();
-			for (User userPro : this.userService.findAllUsers()) {
-				if (currentUserDepartment.equals(testDepartment)) {
-					totalTestCountDepartmentJava.add(test.getTestName());
-				}
-			}
-		}
+
+		/*
+		 * if (!totalTestList.isEmpty()) {
+		 * System.out.println("Is empty ======================/>>>>>>");
+		 * 
+		 * }
+		 */
+
+		
+		  for (AddTest test : totalTestList) { testDepartment =
+		  test.getDepartmentName(); for (User userPro :
+		  this.userService.findAllUsers()) { if
+		  (currentUserDepartment.equals(testDepartment)) {
+		  totalTestCountDepartmentJava.add(test.getTestName()); } } }
+		 
+
 		modelMap.addAttribute("totalTestCountDepartmentJava", totalTestCountDepartmentJava.size());
 		/* END FOR CALCULATE TOTAL TEST COUNT DEPARTMENT WISE */
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
