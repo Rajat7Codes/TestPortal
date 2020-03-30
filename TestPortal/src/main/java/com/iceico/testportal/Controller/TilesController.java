@@ -167,6 +167,7 @@ public class TilesController {
 		List<QuestionBank> questionBankList = this.questionBankService.getQuestionBankList();
 		/* All Added Test Count */
 		List<AddTest> totalTestList = this.addTestService.getAddTestList();
+		String testDepartment;
 
 		/* Total Student Count List */
 		String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
@@ -189,6 +190,11 @@ public class TilesController {
 		/* FOR CALCULATE TOTAL TEST COUNT DEPARTMENT WISE */
 
 		for (User userPro : this.userService.findAllUsers()) {
+			for (AddTest test : totalTestList) {
+				testDepartment = test.getDepartmentName();
+				System.out.println("testDepartment =======>>>   " + testDepartment);
+
+			}
 			if (currentAdminDepartment.equals("JAVA")) {
 
 				modelMap.addAttribute("totalTestCountThis", totalTestList.size());
