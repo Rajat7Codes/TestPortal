@@ -14,7 +14,8 @@
 			<div class="row">
 				<div class="col-sm-5">
 					<div class="user-profile compact">
-						<div class="up-head-w" style="background-image: url(${pageContext.request.contextPath }/static/img/java-android-banner.jpg)">
+						<div class="up-head-w"
+							style="background-image: url(${pageContext.request.contextPath }/static/img/java-android-banner.jpg)">
 							<div class="up-main-info">
 								<h2 class="up-header" style="">${user.firstName }&nbsp;${user.lastName }</h2>
 								<h6 class="up-sub-header" style="">${user.position }</h6>
@@ -48,14 +49,14 @@
 								<div class="row m-b">
 									<div class="col-sm-6 b-r b-b">
 										<div class="el-tablo centered padded-v">
-											<div class="value">25</div>
-											<div class="label">Products Sold</div>
+											<div class="value">${studentTotalTestAttemptedCount }</div>
+											<div class="label">Total Test Attempted</div>
 										</div>
 									</div>
 									<div class="col-sm-6 b-b">
 										<div class="el-tablo centered padded-v">
-											<div class="value">315</div>
-											<div class="label">Friends</div>
+											<div class="value">${studentTotalPassCountUpTillNow }</div>
+											<div class="label">Total Pass Test</div>
 										</div>
 									</div>
 								</div>

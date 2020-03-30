@@ -17,8 +17,6 @@
 </head>
 <body
 	class="menu-position-side menu-side-left full-screen with-content-panel ">
-
-
 	<div class="content-i">
 		<div class="content-box">
 			<div class="element-wrapper">

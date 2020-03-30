@@ -137,41 +137,35 @@
 
 		<h1 class="menu-page-header">Page Header</h1>
 		<ul class="main-menu">
-			<li class="sub-header"><span>Layouts</span></li>
-			<li class="has-sub-menu"><a href="#"><div class="icon-w">
+			<!-- <li class="sub-header"><span>Layouts</span></li> -->
+			<li class=""><a
+				href="${pageContext.request.contextPath }/java/student/test/list">
+					<div class="icon-w">
 						<div class="os-icon os-icon-edit-32"></div>
-					</div> <span>Forms</span></a>
-				<div class="sub-menu-w">
-					<div class="sub-menu-header">Forms</div>
-					<div class="sub-menu-icon">
-						<i class="os-icon os-icon-edit-32"></i>
-					</div>
-					<div class="sub-menu-i">
-						<ul class="sub-menu">
-							<li><a href="forms_regular.html">Regular Forms</a></li>
-							<li><a href="forms_validation.html">Form Validation</a></li>
-							<li><a href="forms_wizard.html">Form Wizard</a></li>
-							<li><a href="forms_uploads.html">File Uploads</a></li>
-							<li><a href="forms_wisiwig.html">Wisiwig Editor</a></li>
-						</ul>
-					</div>
-				</div></li>
-			<li class="has-sub-menu"><a href="#"><div class="icon-w">
-						<div class="os-icon os-icon-grid"></div>
-					</div> <span>Tables</span></a>
-				<div class="sub-menu-w">
-					<div class="sub-menu-header">Tables</div>
-					<div class="sub-menu-icon">
-						<i class="os-icon os-icon-grid"></i>
-					</div>
-					<div class="sub-menu-i">
-						<ul class="sub-menu">
-							<li><a href="tables_regular.html">Regular Tables</a></li>
-							<li><a href="tables_datatables.html">Data Tables</a></li>
-							<li><a href="tables_editable.html">Editable Tables</a></li>
-						</ul>
-					</div>
-				</div></li>
+					</div> <span> Test List</span>
+			</a></li>
+			<li class=""><a
+				href="${pageContext.request.contextPath }/java/student/test/result">
+					<div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span> Test Result</span>
+			</a></li>
+			<li class=""><a
+				href="${pageContext.request.contextPath }/java/student/test/history">
+					<div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span> Test History</span>
+			</a></li>
+
+			<li class=""><a
+				href="${pageContext.request.contextPath }/java/student/student/individual/performance">
+
+					<li class="has-sub-menu"><a
+						href="${pageContext.request.contextPath }/java/student/individual/performance">
+							<div class="icon-w">
+								<div class="os-icon os-icon-edit-32"></div>
+							</div> <span> My Performance</span>
+					</a></li>
 		</ul>
 	</div>
 
@@ -186,23 +180,28 @@
 					<span class="os-icon os-icon-close"></span>
 				</button>
 				<div class="onboarding-slide">
-					<div class="onboarding-media">
-						<img alt="" src="img/bigicon5.png" width="200px">
+					<div class="onboarding-media pt-0 w-100">
+						<img alt=""
+							src="${pageContext.request.contextPath }/static/img/security3.jpg"
+							width="100%"
+							style="background-size: cover; background-repeat: no-repeat;">
 					</div>
-					<div class="onboarding-content with-gradient">
+					<div class="onboarding-content with-gradient pt-4 pb-4">
 						<h4 class="onboarding-title">Password Change</h4>
-						<form action="${pageContext.request.contextPath }/">
+						<form
+							action="${pageContext.request.contextPath }/java/student/profile/send/token"
+							method="get">
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="">Your User Name</label><input
+										<label for="">Your User Name</label><input name="username"
 											class="form-control" placeholder="Enter your User name..."
 											value="">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="">Your Email Address</label><input
+										<label for="">Your Email Address</label><input name="mailId"
 											class="form-control"
 											placeholder="Enter your Email address..." value="">
 									</div>
@@ -211,23 +210,22 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="">Your Mobile Number</label><input
+										<label for="">Your Mobile Number</label><input name="mobile"
 											class="form-control"
 											placeholder="Enter your Mobile number..." value="">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="">Your New Password</label><input
-											class="form-control" placeholder="Enter your New password..."
-											value="">
+										<label for="">Your New Password</label><input name="password"
+											type="password" class="form-control"
+											placeholder="Enter your New password..." value="">
 									</div>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-sm-12" align="center">
-									<button class="btn btn-primary" type="submit"
-										onclick="getData();">Submit</button>
+								<div class="col-sm-12 py-3" align="center">
+									<button class="btn btn-primary" type="submit">Submit</button>
 								</div>
 							</div>
 						</form>
