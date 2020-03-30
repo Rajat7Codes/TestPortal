@@ -4,6 +4,9 @@
 package com.iceico.testportal.Controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,9 +69,10 @@ public class TestResultController {
 	/* JAVA STUDENT TEST HISTORY */
 	@GetMapping("/java/student/test/history")
 	public String getTestHistory_java(ModelMap modelMap) {
-		modelMap.addAttribute("resultList", this.testResultService.getTestResultList());
+		List<TestResult> results = this.testResultService.getTestResultList();
+		Collections.reverse(results);
+		modelMap.addAttribute("resultList", results);
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-
 		return "j_testHistory";
 	}
 

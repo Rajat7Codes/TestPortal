@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -102,17 +103,18 @@ public class StartTestController {
 		if (!testList.isEmpty()) {
 			for (Long testId : testList.keySet()) {
 				if (testList.get(testId).equals("not given")) {
-					addTestList.add(this.addTestService.getAddTestById(testId));
+					addTestList.add( this.addTestService.getAddTestById(testId));
 				}
 			}
 		} else {
 			for (AddTest test : addTestService.getAddTestList()) {
-				addTestList.add(test);
+				if (this.userService.findBySSO(getPrincipal()).getDepartment().getDepartmentName().equals("JAVA")) {
+					addTestList.add(test);
+				}
 			}
 		}
 
-		System.out.println("Addtest =====> " + addTestList);
-
+		Collections.reverse(addTestList);
 		User user = this.userService.findBySSO(this.getPrincipal());
 		modelMap.addAttribute("user", user);
 		modelMap.addAttribute("testListShown", addTestList);
@@ -328,6 +330,7 @@ public class StartTestController {
 			}
 		}
 
+
 		List<AddTest> addTestList = new ArrayList<AddTest>();
 		if (!testList.isEmpty()) {
 			for (Long testId : testList.keySet()) {
@@ -337,12 +340,14 @@ public class StartTestController {
 			}
 		} else {
 			for (AddTest test : addTestService.getAddTestList()) {
-				addTestList.add(test);
+				if (this.userService.findBySSO(getPrincipal()).getDepartment().getDepartmentName().equals("JAVA")) {
+					addTestList.add(test);
+				}
 			}
 		}
 
 		System.out.println("Addtest =====> " + addTestList);
-
+		Collections.reverse(addTestList);
 		User user = this.userService.findBySSO(this.getPrincipal());
 		modelMap.addAttribute("user", user);
 		modelMap.addAttribute("testListShown", addTestList);

@@ -91,22 +91,22 @@
 									</div>
 									<div class="col-sm-6 b-b b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">47.5K</div>
-											<div class="label">Followers</div>
+											<div class="value">${studentTotalTestAttemptedCount }</div>
+											<div class="label">Total Test Attempted</div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-6 b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">$95</div>
-											<div class="label">Daily Earnings</div>
+											<div class="value">${studentTotalPassCountUpTillNow }</div>
+											<div class="label">Total Pass Result</div>
 										</div>
 									</div>
 									<div class="col-sm-6 b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">12</div>
-											<div class="label">Products</div>
+											<div class="value">${studentTotalFailCountUpTillNow }</div>
+											<div class="label">Total Fail Results</div>
 										</div>
 									</div>
 								</div>

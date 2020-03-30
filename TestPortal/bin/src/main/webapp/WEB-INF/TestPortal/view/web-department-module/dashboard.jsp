@@ -25,48 +25,32 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="element-wrapper">
-						<div class="element-actions">
-							<form class="form-inline justify-content-sm-end">
-								<select class="form-control form-control-sm"><option
-										value="Pending">Today</option>
-									<option value="Active">Last Week</option>
-									<option value="Cancelled">Last 30 Days</option></select>
-							</form>
-						</div>
 
-						<h6 class="element-header">Sales Dashboard</h6>
+						<h6 class="element-header">Student Dashboard</h6>
 						<div class="element-content">
 							<div class="row">
-								<div class="col-sm-4 col-xxxl-3">
-									<a class="element-box el-tablo" href="#"><div class="label">Products
-											Sold</div>
-										<div class="value">57</div>
+								<div class="col-sm-4 col-xxxl-4">
+									<a class="element-box el-tablo" href="#"><div class="label">Total
+											Students</div>
+										<div class="value">${totalJavaUsersCount }</div>
 										<div class="trending trending-up-basic">
-											<span>12%</span><i class="os-icon os-icon-arrow-up2"></i>
+											<!-- <span>12%</span><i class="os-icon os-icon-arrow-up2"></i> -->
 										</div></a>
 								</div>
-								<div class="col-sm-4 col-xxxl-3">
-									<a class="element-box el-tablo" href="#"><div class="label">Gross
-											Profit</div>
-										<div class="value">$457</div>
+								<div class="col-sm-4 col-xxxl-4">
+									<a class="element-box el-tablo" href="#"><div class="label">Total
+											Test</div>
+										<div class="value">${totalTestList }</div>
 										<div class="trending trending-down-basic">
-											<span>12%</span><i class="os-icon os-icon-arrow-down"></i>
+											<!-- <span>12%</span><i class="os-icon os-icon-arrow-down"></i> -->
 										</div></a>
 								</div>
-								<div class="col-sm-4 col-xxxl-3">
-									<a class="element-box el-tablo" href="#"><div class="label">New
-											Customers</div>
-										<div class="value">125</div>
+								<div class="col-sm-4 col-xxxl-4">
+									<a class="element-box el-tablo" href="#"><div class="label">Total
+											Questions</div>
+										<div class="value">${testQuestions }</div>
 										<div class="trending trending-down-basic">
-											<span>9%</span><i class="os-icon os-icon-arrow-down"></i>
-										</div></a>
-								</div>
-								<div class="d-none d-xxxl-block col-xxxl-3">
-									<a class="element-box el-tablo" href="#"><div class="label">Refunds
-											Processed</div>
-										<div class="value">$294</div>
-										<div class="trending trending-up-basic">
-											<span>12%</span><i class="os-icon os-icon-arrow-up2"></i>
+											<!-- <span>9%</span><i class="os-icon os-icon-arrow-down"></i> -->
 										</div></a>
 								</div>
 							</div>
@@ -74,7 +58,154 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="row">
+				<div class="col-sm-12  col-xxxl-6"">
+					<div class="element-wrapper">
+
+						<h6 class="element-header">Today Students Result</h6>
+						<div class="element-box">
+							<div class="table-responsive">
+								<table
+									class="table table-bordered table-lg table-v2 table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">Rank</th>
+											<th>Students</th>
+											<th>Date</th>
+											<th>Test Name</th>
+											<th>Total Marks</th>
+											<th>Obtained Marks</th>
+											<th>Percentage</th>
+											<th>Status</th>
+											<!-- <th>Actions</th> -->
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="test" items="${testResultStudentToday}"
+											varStatus="ind">
+											<tr>
+												<td class="text-center">${ind.index+1}</td>
+												<td>${userService.findById(test.userId).getFirstName() }</td>
+												<td>${test.date }</td>
+												<td>${test.testName }</td>
+												<td>${test.totalMarks }</td>
+												<td>${test.obtainedMarks }</td>
+												<td>${test.percentage }</td>
+												<td class="text-center">${test.resultStatus }</div></td>
+												<!-- <td class="row-actions"><a href="#"><i
+													class="os-icon os-icon-ui-49"></i></a><a href="#"><i
+													class="os-icon os-icon-grid-10"></i></a><a class="danger"
+												href="#"><i class="os-icon os-icon-ui-15"></i></a></td> -->
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12  col-xxxl-6"">
+					<div class="element-wrapper">
+
+						<h6 class="element-header">Monthly Top 10 Students</h6>
+						<div class="element-box">
+							<div class="table-responsive">
+								<table
+									class="table table-bordered table-lg table-v2 table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">Rank</th>
+											<th>Students</th>
+											<th>Date</th>
+											<th>Test Name</th>
+											<th>Total Marks</th>
+											<th>Obtained Marks</th>
+											<th>Percentage</th>
+											<th>Status</th>
+											<!-- <th>Actions</th> -->
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="test" items="${testResultStudentMonthly}"
+											varStatus="ind">
+											<tr>
+												<td class="text-center">${ind.index+1}</td>
+												<td>${userService.findById(test.userId).getFirstName() }</td>
+												<td>${test.date }</td>
+												<td>${test.testName }</td>
+												<td>${test.totalMarks }</td>
+												<td>${test.obtainedMarks }</td>
+												<td>${test.percentage }</td>
+												<td class="text-center">${test.resultStatus }</div></td>
+												<!-- <td class="row-actions"><a href="#"><i
+													class="os-icon os-icon-ui-49"></i></a><a href="#"><i
+													class="os-icon os-icon-grid-10"></i></a><a class="danger"
+												href="#"><i class="os-icon os-icon-ui-15"></i></a></td> -->
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<%-- 	<div class="row">
+				<div class="col-sm-12  col-xxxl-6"">
+					<div class="element-wrapper">
+
+						<h6 class="element-header">Monthly Top 10 Students</h6>
+						<div class="element-box">
+							<div class="table-responsive">
+								<table
+									class="table table-bordered table-lg table-v2 table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">Rank</th>
+											<th>Students</th>
+											<th>Date</th>
+											<th>Test Name</th>
+											<th>Total Marks</th>
+											<th>Obtained Marks</th>
+											<th>Percentage</th>
+											<th>Status</th>
+											<!-- <th>Actions</th> -->
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="test" items="${testResultStudentMonthly}"
+											varStatus="ind">
+											<tr>
+												<td class="text-center">${ind.index+1}</td>
+												<td>${userService.findById(test.userId).getFirstName() }</td>
+												<td>${test.date }</td>
+												<td>${test.testName }</td>
+												<td>${test.totalMarks }</td>
+												<td>${test.obtainedMarks }</td>
+												<td>${test.percentage }</td>
+												<td class="text-center">${test.resultStatus }</div></td>
+												<!-- <td class="row-actions"><a href="#"><i
+													class="os-icon os-icon-ui-49"></i></a><a href="#"><i
+													class="os-icon os-icon-grid-10"></i></a><a class="danger"
+												href="#"><i class="os-icon os-icon-ui-15"></i></a></td> -->
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> --%>
+
+
+
+			<%-- <div class="row">
 				<div class="col-sm-12 col-xxxl-6">
 
 
@@ -117,9 +248,6 @@
 							</div>
 						</div>
 					</div>
-
-
-
 				</div>
 				<div class="col-sm-4 d-xxxl-none"></div>
 				<div class="d-none d-xxxl-block col-xxxl-6">
@@ -215,164 +343,9 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="floated-colors-btn second-floated-btn">
-				<div class="os-toggler-w">
-					<div class="os-toggler-i">
-						<div class="os-toggler-pill"></div>
-					</div>
-				</div>
-				<span>Dark </span><span>Colors</span>
-			</div>
-			<div class="floated-customizer-btn third-floated-btn">
-				<div class="icon-w">
-					<i class="os-icon os-icon-ui-46"></i>
-				</div>
-				<span>Customizer</span>
-			</div>
-			<div class="floated-customizer-panel">
-				<div class="fcp-content">
-					<div class="close-customizer-btn">
-						<i class="os-icon os-icon-x"></i>
-					</div>
-					<div class="fcp-group">
-						<div class="fcp-group-header">Menu Settings</div>
-						<div class="fcp-group-contents">
-							<div class="fcp-field">
-								<label for="">Menu Position</label><select
-									class="menu-position-selector"><option value="left">Left</option>
-									<option value="right">Right</option>
-									<option value="top">Top</option></select>
-							</div>
-							<div class="fcp-field">
-								<label for="">Menu Style</label><select
-									class="menu-layout-selector"><option value="compact">Compact</option>
-									<option value="full">Full</option>
-									<option value="mini">Mini</option></select>
-							</div>
-							<div class="fcp-field with-image-selector-w">
-								<label for="">With Image</label><select
-									class="with-image-selector"><option value="yes">Yes</option>
-									<option value="no">No</option></select>
-							</div>
-							<div class="fcp-field">
-								<label for="">Menu Color</label>
-								<div class="fcp-colors menu-color-selector">
-									<div
-										class="color-selector menu-color-selector color-bright selected"></div>
-									<div class="color-selector menu-color-selector color-dark"></div>
-									<div class="color-selector menu-color-selector color-light"></div>
-									<div
-										class="color-selector menu-color-selector color-transparent"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="fcp-group">
-						<div class="fcp-group-header">Sub Menu</div>
-						<div class="fcp-group-contents">
-							<div class="fcp-field">
-								<label for="">Sub Menu Style</label><select
-									class="sub-menu-style-selector"><option value="flyout">Flyout</option>
-									<option value="inside">Inside/Click</option>
-									<option value="over">Over</option></select>
-							</div>
-							<div class="fcp-field">
-								<label for="">Sub Menu Color</label>
-								<div class="fcp-colors">
-									<div
-										class="color-selector sub-menu-color-selector color-bright selected"></div>
-									<div class="color-selector sub-menu-color-selector color-dark"></div>
-									<div class="color-selector sub-menu-color-selector color-light"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="fcp-group">
-						<div class="fcp-group-header">Other Settings</div>
-						<div class="fcp-group-contents">
-							<div class="fcp-field">
-								<label for="">Full Screen?</label><select
-									class="full-screen-selector"><option value="yes">Yes</option>
-									<option value="no">No</option></select>
-							</div>
-							<div class="fcp-field">
-								<label for="">Show Top Bar</label><select
-									class="top-bar-visibility-selector"><option
-										value="yes">Yes</option>
-									<option value="no">No</option></select>
-							</div>
-							<div class="fcp-field">
-								<label for="">Above Menu?</label><select
-									class="top-bar-above-menu-selector"><option
-										value="yes">Yes</option>
-									<option value="no">No</option></select>
-							</div>
-							<div class="fcp-field">
-								<label for="">Top Bar Color</label>
-								<div class="fcp-colors">
-									<div
-										class="color-selector top-bar-color-selector color-bright selected"></div>
-									<div class="color-selector top-bar-color-selector color-dark"></div>
-									<div class="color-selector top-bar-color-selector color-light"></div>
-									<div
-										class="color-selector top-bar-color-selector color-transparent"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="floated-chat-btn">
-				<i class="os-icon os-icon-mail-07"></i><span>Demo Chat</span>
-			</div>
-			<div class="floated-chat-w">
-				<div class="floated-chat-i">
-					<div class="chat-close">
-						<i class="os-icon os-icon-close"></i>
-					</div>
-					<div class="chat-head">
-						<div class="user-w with-status status-green">
-							<div class="user-avatar-w">
-								<div class="user-avatar">
-									<img alt="" src="img/avatar1.jpg">
-								</div>
-							</div>
-							<div class="user-name">
-								<h6 class="user-title">John Mayers</h6>
-								<div class="user-role">Account Manager</div>
-							</div>
-						</div>
-					</div>
-					<div class="chat-messages">
-						<div class="message">
-							<div class="message-content">Hi, how can I help you?</div>
-						</div>
-						<div class="date-break">Mon 10:20am</div>
-						<div class="message">
-							<div class="message-content">Hi, my name is Mike, I will be
-								happy to assist you</div>
-						</div>
-						<div class="message self">
-							<div class="message-content">Hi, I tried ordering this
-								product and it keeps showing me error code.</div>
-						</div>
-					</div>
-					<div class="chat-controls">
-						<input class="message-input"
-							placeholder="Type your message here...">
-						<div class="chat-extra">
-							<a href="#"><span class="extra-tooltip">Attach
-									Document</span><i class="os-icon os-icon-documents-07"></i></a><a href="#"><span
-								class="extra-tooltip">Insert Photo</span><i
-								class="os-icon os-icon-others-29"></i></a><a href="#"><span
-								class="extra-tooltip">Upload Video</span><i
-								class="os-icon os-icon-ui-51"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
+			</div> --%>
 		</div>
+
 		<div class="content-panel">
 			<div class="content-panel-close">
 				<i class="os-icon os-icon-close"></i>
