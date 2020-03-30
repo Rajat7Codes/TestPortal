@@ -26,28 +26,28 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:if test="${testList != null}">
-								<c:forEach var="test" items="${testList}" varStatus="ind">
-
+							<c:if test="${testListShown != null}">
+								<c:forEach var="testEach" items="${testListShown}" varStatus="ind">
+									<c:if test="${!testEach.isDeleted }">
 									<tr>
 										<td>${ind.index+1}</td>
-										<td>${test.testName}</td>
-										<td>${test.date}</td>
-										<td>${test.time}</td>
+										<td>${testEach.testName}</td>
+										<td>${testEach.date}</td>
+										<td>${testEach.time}</td>
 										<td><a class="text-decoration-none !important"
-											href="${pageContext.request.contextPath }/java/student/start/test/${test.addTestId}">start
+											href="${pageContext.request.contextPath }/java/student/start/test/${testEach.addTestId}">start
 												test</a></td>
 									</tr>
+									</c:if>
 								</c:forEach>
+							</c:if>
+							<c:if test="${testListShown == null}">
+								<tr> <td colspan="4"> No tests found </td> </tr>
 							</c:if>
 						</tbody>
 					</table>
 				</div>
-
 			</div>
-
-
-
 		</div>
 	</div>
 </body>

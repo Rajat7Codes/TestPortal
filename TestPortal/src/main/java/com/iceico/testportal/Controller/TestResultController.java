@@ -60,7 +60,7 @@ public class TestResultController {
 		modelMap.addAttribute("edit", false);
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 
-		return "result";
+		return "j_result";
 	}
 
 	/* JAVA STUDENT TEST HISTORY */
@@ -69,7 +69,7 @@ public class TestResultController {
 		modelMap.addAttribute("resultList", this.testResultService.getTestResultList());
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 
-		return "testHistory";
+		return "j_testHistory";
 	}
 
 	/* JAVA STUDENT TEST RESULT VIEW */
@@ -101,7 +101,7 @@ public class TestResultController {
 		modelMap.addAttribute("result", result);
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 
-		return "testHistoryEach";
+		return "j_testHistoryEach";
 	}
 
 	/* WEB STUDENT PANEL METHODS */
@@ -113,7 +113,7 @@ public class TestResultController {
 		modelMap.addAttribute("edit", false);
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 
-		return "result";
+		return "w_result";
 	}
 
 	/* JAVA STUDENT TEST HISTORY */
@@ -122,7 +122,7 @@ public class TestResultController {
 		modelMap.addAttribute("resultList", this.testResultService.getTestResultList());
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 
-		return "testHistory";
+		return "w_testHistory";
 	}
 
 	/* WEB STUDENT TEST RESULT VIEW */
@@ -154,7 +154,7 @@ public class TestResultController {
 		modelMap.addAttribute("result", result);
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 
-		return "testHistoryEach";
+		return "w_testHistoryEach";
 	}
 
 	/**
