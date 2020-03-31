@@ -12,8 +12,6 @@
 <body>
 	<div class="content-i">
 		<div class="content-box">
-
-
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="padded-lg">

@@ -73,6 +73,7 @@ public class AddTestController {
 	public String getTest(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("addTest", new AddTest());
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("edit", false);
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "addTest";
 	}
@@ -82,8 +83,19 @@ public class AddTestController {
 	public String editTest(@PathVariable("addTestId") @Valid Long addTestId, ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException {
 		AddTest addTest = this.addTestService.getAddTestById(addTestId);
-		modelMap.addAttribute("addTest", addTest);
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("dateValue", new SimpleDateFormat("dd/MM/YYYY").format(addTest.getDate()));
+		modelMap.addAttribute("edit", true);
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "addTest";
+	}
+
+	// SAVE EDITED TEST
+
+	@GetMapping("/admin/add/test/edit/")
+	public String saveEditedTest(@ModelAttribute("addTest") @Valid AddTest addTest, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		this.addTestService.saveAddTest(addTest);
 		modelMap.addAttribute("dateValue", new SimpleDateFormat("dd/MM/YYYY").format(addTest.getDate()));
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "addTest";
@@ -138,11 +150,9 @@ public class AddTestController {
 				addedQuestions.add(testQuestions);
 			}
 			addTest.setTestQuestions(addedQuestions);
-			addTest.setIsDeleted(false);
 			addTest.setUserId(currentUserId);
 			addTest.setDepartmentName(currentAdminDepartment);
 			this.addTestService.saveAddTest(addTest);
-
 			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 			return "redirect:/admin/add/test";
 		}
