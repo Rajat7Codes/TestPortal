@@ -76,7 +76,6 @@ public class StartTestController {
 	public String testList(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 
 		HashMap<Long, String> testList = new HashMap<Long, String>();
-
 		for (AddTest addTest : this.addTestService.getAddTestList()) {
 			for (TestResult result : testResultService.getTestResultList()) {
 				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
