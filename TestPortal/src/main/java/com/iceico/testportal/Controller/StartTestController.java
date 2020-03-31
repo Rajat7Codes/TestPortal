@@ -80,7 +80,7 @@ public class StartTestController {
 		for (AddTest addTest : this.addTestService.getAddTestList()) {
 			for (TestResult result : testResultService.getTestResultList()) {
 				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
-					if (this.userService.findBySSO(getPrincipal()).getDepartment().getDepartmentName().equals("JAVA")) {
+					if (addTest.getDepartmentName().equals("JAVA")) {
 						testList.put(addTest.getAddTestId(), "not given");
 					}
 				}
@@ -90,7 +90,7 @@ public class StartTestController {
 		for (AddTest addTest : this.addTestService.getAddTestList()) {
 			for (TestResult result : testResultService.getTestResultList()) {
 				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
-					if (this.userService.findBySSO(getPrincipal()).getDepartment().getDepartmentName().equals("JAVA")) {
+					if (addTest.getDepartmentName().equals("JAVA")) {
 						if (addTest.getAddTestId() == result.getTestId()) {
 							testList.put(addTest.getAddTestId(), "given");
 						}
@@ -108,7 +108,7 @@ public class StartTestController {
 			}
 		} else {
 			for (AddTest test : addTestService.getAddTestList()) {
-				if (this.userService.findBySSO(getPrincipal()).getDepartment().getDepartmentName().equals("JAVA")) {
+				if ( test.getDepartmentName().equals("JAVA")) {
 					addTestList.add(test);
 				}
 			}
@@ -311,7 +311,7 @@ public class StartTestController {
 		for (AddTest addTest : this.addTestService.getAddTestList()) {
 			for (TestResult result : testResultService.getTestResultList()) {
 				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
-					if (this.userService.findBySSO(getPrincipal()).getDepartment().getDepartmentName().equals("WEB")) {
+					if (addTest.getDepartmentName().equals("WEB")) {
 						testList.put(addTest.getAddTestId(), "not given");
 					}
 				}
@@ -321,7 +321,7 @@ public class StartTestController {
 		for (AddTest addTest : this.addTestService.getAddTestList()) {
 			for (TestResult result : testResultService.getTestResultList()) {
 				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
-					if (this.userService.findBySSO(getPrincipal()).getDepartment().getDepartmentName().equals("WEB")) {
+					if (addTest.getDepartmentName().equals("WEB")) {
 						if (addTest.getAddTestId() == result.getTestId()) {
 							testList.put(addTest.getAddTestId(), "given");
 						}
@@ -340,7 +340,7 @@ public class StartTestController {
 			}
 		} else {
 			for (AddTest test : addTestService.getAddTestList()) {
-				if (this.userService.findBySSO(getPrincipal()).getDepartment().getDepartmentName().equals("JAVA")) {
+				if ( test.getDepartmentName().equals("WEB")) {
 					addTestList.add(test);
 				}
 			}

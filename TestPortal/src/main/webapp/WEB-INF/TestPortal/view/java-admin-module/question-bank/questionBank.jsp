@@ -22,7 +22,7 @@
 					<div class="element-wrapper">
 						<div class="element-box">
 							<form:form
-								action="${pageContext.request.contextPath }/admin/question/bank/save"
+								action="${pageContext.request.contextPath }/java/admin/question/bank/save"
 								modelAttribute="questionBank" method="post"
 								enctype="multipart/form-data">
 
