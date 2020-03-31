@@ -13,7 +13,8 @@
 <meta content="Tamerlan Soziev" name="author">
 <meta content="Admin dashboard html template" name="description">
 <meta content="width=device-width,initial-scale=1" name="viewport">
-
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/static/bower_components/chart.js/dist/Chart.min.js"></script>
 </head>
 <body
 	class="menu-position-side menu-side-left full-screen with-content-panel">

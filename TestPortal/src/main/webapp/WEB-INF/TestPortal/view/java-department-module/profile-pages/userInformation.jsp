@@ -3,7 +3,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +14,8 @@
 <meta content="Tamerlan Soziev" name="author">
 <meta content="Admin dashboard html template" name="description">
 <meta content="width=device-width,initial-scale=1" name="viewport">
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/chart.js/dist/Chart.min.js"></script>
 </head>
 <body
 	class="menu-position-side menu-side-left full-screen with-content-panel ">
@@ -123,13 +125,12 @@
 										</div>
 									</div>
 									<div class="el-chart-w">
-										<canvas height="130" id="liteLineChart" width="300"></canvas>
+										<%-- <canvas height="130" id="liteLineChart" width="300"></canvas> --%>
+										<canvas id="line" width="800" height="450"></canvas>
 									</div>
 								</div>
 							</div>
 						</div>
-
-
 					</div>
 				</div>
 			</div>
@@ -291,7 +292,34 @@
 			</div>
 		</div>
 	</div>
+	<div id="month">${monthWiseList}</div>
 </body>
+
+<script>
+	var ctx = document.getElementById('line');
+	var mon = '${monthWiseList}';
+	var stackedLine = new Chart(ctx, {
+		type : 'line',
+		data : {
+			/* labels : [ "", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+					"Aug", "Sep", "Oct", "Nov", "Dec" ], */
+			labels : '${monthWiseList}',
+
+			datasets : [ {
+				data : ${percentageMonthWiseList},
+				label : "Result",
+				borderColor : "#3e95cd",
+				fill : false
+			} ]
+		},
+		options : {
+			title : {
+				display : true,
+			/* text : 'World population per region (in millions)' */
+			}
+		}
+	});
+</script>
 
 
 <c:if test="${passwordMsg != \"\" && passwordMsg != null}">

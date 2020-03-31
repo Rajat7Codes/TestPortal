@@ -3,7 +3,11 @@ package com.iceico.testportal.Controller;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,6 +34,7 @@ import com.iceico.testportal.Model.AddTest;
 import com.iceico.testportal.Model.TestResult;
 import com.iceico.testportal.Model.User;
 import com.iceico.testportal.Service.AddTestService;
+import com.iceico.testportal.Service.DashboardService;
 import com.iceico.testportal.Service.EMailService;
 import com.iceico.testportal.Service.TestResultService;
 import com.iceico.testportal.Service.UserService;
@@ -50,6 +55,9 @@ public class JavaStudentController {
 	private UserService userService;
 
 	@Autowired
+	private DashboardService dashboardService;
+
+	@Autowired
 	private EMailService emailService;
 
 	@Autowired
@@ -68,7 +76,7 @@ public class JavaStudentController {
 
 	/* JAVA STUDENT PROFILE */
 	@GetMapping("/java/student/profile")
-	public String displayUserInformation(ModelMap modelMap, Locale locale) {
+	public String displayUserInformation(ModelMap modelMap, Locale locale) throws java.text.ParseException {
 		Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
 		/* All Result List Pass & Fail Up Till Now */
 		List<String> studentTotalPassCountUpTillNow = new ArrayList<String>();
@@ -97,14 +105,6 @@ public class JavaStudentController {
 		List<String> totalTestCountDepartmentJava = new ArrayList<String>();
 		String currentUserDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
 				.getDepartmentName();
-
-		/*
-		 * if (!totalTestList.isEmpty()) {
-		 * System.out.println("Is empty ======================/>>>>>>");
-		 * 
-		 * }
-		 */
-
 		for (AddTest test : totalTestList) {
 			testDepartment = test.getDepartmentName();
 			for (User userPro : this.userService.findAllUsers()) {
@@ -113,9 +113,31 @@ public class JavaStudentController {
 				}
 			}
 		}
-
 		modelMap.addAttribute("totalTestCountDepartmentJava", totalTestCountDepartmentJava.size());
 		/* END FOR CALCULATE TOTAL TEST COUNT DEPARTMENT WISE */
+		/* Monthly wise Performance For Line Graph */
+		Date date = new Date();
+		LocalDate currentdate = LocalDate.now();
+		Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(currentdate.withDayOfMonth(1).toString());
+		Date lastDate = new SimpleDateFormat("yyyy-MM-dd")
+				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
+
+		SimpleDateFormat month_date = new SimpleDateFormat("MMMM");
+		String monthWise = null;
+		List<String> monthWiseList = new ArrayList<String>();
+		List<Double> percentageMonthWiseList = new ArrayList<Double>();
+		percentageMonthWiseList.add(0.0);
+		for (TestResult testResultForLineGraph : this.dashboardService.getMonthlysPerformancePercentageAll(startDate,
+				lastDate)) {
+			System.out.println("Line per ================>>>>" + testResultForLineGraph.getPercentage());
+			monthWise = month_date.format(testResultForLineGraph.getDate());
+			monthWiseList.add(monthWise);
+			percentageMonthWiseList.add(testResultForLineGraph.getPercentage());
+		}
+		modelMap.addAttribute("monthWiseList", monthWiseList);
+		modelMap.addAttribute("percentageMonthWiseList", percentageMonthWiseList);
+		System.out.println("Line per Month ================>>>>" + monthWise);
+		/* END Monthly wise Performance For Line Graph */
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "javaStudProfile";
 	}
