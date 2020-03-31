@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -75,11 +76,12 @@ public class StartTestController {
 	public String testList(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 
 		HashMap<Long, String> testList = new HashMap<Long, String>();
-
 		for (AddTest addTest : this.addTestService.getAddTestList()) {
 			for (TestResult result : testResultService.getTestResultList()) {
 				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
-					testList.put(addTest.getAddTestId(), "not given");
+					if (addTest.getDepartmentName().equals("JAVA")) {
+						testList.put(addTest.getAddTestId(), "not given");
+					}
 				}
 			}
 		}
@@ -87,8 +89,10 @@ public class StartTestController {
 		for (AddTest addTest : this.addTestService.getAddTestList()) {
 			for (TestResult result : testResultService.getTestResultList()) {
 				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
-					if (addTest.getAddTestId() == result.getTestId()) {
-						testList.put(addTest.getAddTestId(), "given");
+					if (addTest.getDepartmentName().equals("JAVA")) {
+						if (addTest.getAddTestId() == result.getTestId()) {
+							testList.put(addTest.getAddTestId(), "given");
+						}
 					}
 				}
 			}
@@ -98,21 +102,22 @@ public class StartTestController {
 		if (!testList.isEmpty()) {
 			for (Long testId : testList.keySet()) {
 				if (testList.get(testId).equals("not given")) {
-					addTestList.add(this.addTestService.getAddTestById(testId));
+					addTestList.add( this.addTestService.getAddTestById(testId));
 				}
 			}
 		} else {
 			for (AddTest test : addTestService.getAddTestList()) {
-				addTestList.add(test);
+				if ( test.getDepartmentName().equals("JAVA")) {
+					addTestList.add(test);
+				}
 			}
 		}
 
-		System.out.println(addTestList);
-
+		Collections.reverse(addTestList);
 		User user = this.userService.findBySSO(this.getPrincipal());
 		modelMap.addAttribute("user", user);
 		modelMap.addAttribute("testListShown", addTestList);
-		return "testList";
+		return "j_testList";
 
 	}
 
@@ -132,7 +137,7 @@ public class StartTestController {
 
 		modelMap.addAttribute("testQuestions", questionDetailList);
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		return "startTest";
+		return "j_startTest";
 	}
 
 	/* COMPILE TEST */
@@ -305,7 +310,9 @@ public class StartTestController {
 		for (AddTest addTest : this.addTestService.getAddTestList()) {
 			for (TestResult result : testResultService.getTestResultList()) {
 				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
-					testList.put(addTest.getAddTestId(), "not given");
+					if (addTest.getDepartmentName().equals("WEB")) {
+						testList.put(addTest.getAddTestId(), "not given");
+					}
 				}
 			}
 		}
@@ -313,12 +320,15 @@ public class StartTestController {
 		for (AddTest addTest : this.addTestService.getAddTestList()) {
 			for (TestResult result : testResultService.getTestResultList()) {
 				if (this.userService.findBySSO(getPrincipal()).getId() == result.getUserId()) {
-					if (addTest.getAddTestId() == result.getTestId()) {
-						testList.put(addTest.getAddTestId(), "given");
+					if (addTest.getDepartmentName().equals("WEB")) {
+						if (addTest.getAddTestId() == result.getTestId()) {
+							testList.put(addTest.getAddTestId(), "given");
+						}
 					}
 				}
 			}
 		}
+
 
 		List<AddTest> addTestList = new ArrayList<AddTest>();
 		if (!testList.isEmpty()) {
@@ -329,17 +339,19 @@ public class StartTestController {
 			}
 		} else {
 			for (AddTest test : addTestService.getAddTestList()) {
-				addTestList.add(test);
+				if ( test.getDepartmentName().equals("WEB")) {
+					addTestList.add(test);
+				}
 			}
 		}
 
-		System.out.println(addTestList);
-
+		System.out.println("Addtest =====> " + addTestList);
+		Collections.reverse(addTestList);
 		User user = this.userService.findBySSO(this.getPrincipal());
 		modelMap.addAttribute("user", user);
 		modelMap.addAttribute("testListShown", addTestList);
-		return "testList";
 
+		return "w_testList";
 	}
 
 	/* START TEST PAGE */
@@ -358,7 +370,7 @@ public class StartTestController {
 
 		modelMap.addAttribute("testQuestions", questionDetailList);
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		return "startTest";
+		return "j_startTest";
 	}
 
 	/* COMPILE TEST */

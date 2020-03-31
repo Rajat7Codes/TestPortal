@@ -4,6 +4,9 @@
 package com.iceico.testportal.Controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,16 +63,17 @@ public class TestResultController {
 		modelMap.addAttribute("edit", false);
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 
-		return "result";
+		return "j_result";
 	}
 
 	/* JAVA STUDENT TEST HISTORY */
 	@GetMapping("/java/student/test/history")
 	public String getTestHistory_java(ModelMap modelMap) {
-		modelMap.addAttribute("resultList", this.testResultService.getTestResultList());
+		List<TestResult> results = this.testResultService.getTestResultList();
+		Collections.reverse(results);
+		modelMap.addAttribute("resultList", results);
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-
-		return "testHistory";
+		return "j_testHistory";
 	}
 
 	/* JAVA STUDENT TEST RESULT VIEW */
@@ -101,7 +105,7 @@ public class TestResultController {
 		modelMap.addAttribute("result", result);
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 
-		return "testHistoryEach";
+		return "j_testHistoryEach";
 	}
 
 	/* WEB STUDENT PANEL METHODS */
@@ -113,7 +117,7 @@ public class TestResultController {
 		modelMap.addAttribute("edit", false);
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 
-		return "result";
+		return "w_result";
 	}
 
 	/* JAVA STUDENT TEST HISTORY */
@@ -122,7 +126,7 @@ public class TestResultController {
 		modelMap.addAttribute("resultList", this.testResultService.getTestResultList());
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 
-		return "testHistory";
+		return "w_testHistory";
 	}
 
 	/* WEB STUDENT TEST RESULT VIEW */
@@ -154,7 +158,7 @@ public class TestResultController {
 		modelMap.addAttribute("result", result);
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
 
-		return "testHistoryEach";
+		return "w_testHistoryEach";
 	}
 
 	/**

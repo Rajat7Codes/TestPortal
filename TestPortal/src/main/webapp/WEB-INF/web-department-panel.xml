@@ -42,7 +42,7 @@
 	</definition>
 
 	<!-- PERFORMANCE PAGE -->
-	<definition name="studentIndividualPerformance"
+	<definition name="w_studentIndividualPerformance"
 		extends="webbase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | PERFORMANCE" />
@@ -51,31 +51,15 @@
 	</definition>
 
 	<!-- sample page for START TEST -->
-	<definition name="startTest" extends="webbase.definition">
+	<definition name="w_startTest" extends="webbase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | START TEST" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/web-department-module/test-pages/startTest.jsp" />
 	</definition>
 
-	<!-- sample page for START TEST with Compiler -->
-	<definition name="startTestCompiler"
-		extends="webbase.definition">
-		<put-attribute name="title" value="start test 2" />
-		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/web-department-module/test-pages/startTestCompiler.jsp" />
-	</definition>
-
-	<!-- sample page for START TEST with Images -->
-	<definition name="startTestImage"
-		extends="webbase.definition">
-		<put-attribute name="title" value="start Test " />
-		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/web-department-module/test-pages/startTestImage.jsp" />
-	</definition>
-
 	<!-- page for TEST Lists -->
-	<definition name="testList" extends="webbase.definition">
+	<definition name="w_testList" extends="webbase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | TEST LIST " />
 		<put-attribute name="body"
@@ -83,7 +67,7 @@
 	</definition>
 
 	<!-- view page for Test result -->
-	<definition name="result" extends="webbase.definition">
+	<definition name="w_result" extends="webbase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | TEST RESULT " />
 		<put-attribute name="body"
@@ -91,7 +75,7 @@
 	</definition>
 
 	<!-- Test History page -->
-	<definition name="testHistory" extends="webbase.definition">
+	<definition name="w_testHistory" extends="webbase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | TEST HISTORY " />
 		<put-attribute name="body"
@@ -99,7 +83,7 @@
 	</definition>
 
 	<!-- Test History Each page -->
-	<definition name="testHistoryEach"
+	<definition name="w_testHistoryEach"
 		extends="webbase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | TEST HISTORY " />

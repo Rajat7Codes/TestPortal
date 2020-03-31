@@ -16,8 +16,8 @@
 				<div class="col-lg-12">
 					<div class="padded-lg">
 						<div class="projects-list">
-							<c:forEach var="test" items="${testList}" varStatus="ind">
-								<c:if test="${ test.isDeleted != true}">
+							<c:forEach var="test" items="${testListShown}" varStatus="ind">
+								<c:if test="${ test.isDeleted!= true }">
 									<div class="project-box">
 										<div class="project-head">
 											<div class="project-title">
@@ -62,7 +62,6 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </body>

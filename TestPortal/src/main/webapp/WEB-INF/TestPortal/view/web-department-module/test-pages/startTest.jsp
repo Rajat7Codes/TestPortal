@@ -12,6 +12,9 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.7/ace.js"
+	type="text/javascript" charset="utf-8"></script>
+
 <link href="${pageContext.request.contextPath }/static/css/compiler.css">
 
 <style type="text/css">
@@ -686,8 +689,7 @@ deg
 <link
 	href="${pageContext.request.contextPath }/static/countdown_timer/CSS/jquery.countdownTimer.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.7/ace.js"
-	type="text/javascript" charset="utf-8"></script>
+
 
 <!-- Script for Question Changing -->
 <script type="text/javascript">
@@ -828,12 +830,17 @@ var allAnswers = [];
 	dataType : 'json',
 	cache : false,
 	timeout : 600000,
+	beforeSend: function(){
+	document.getElementById("loading").style.display = "block";
+	},
 	success: function(e) {
 		window.alert("Test Submission Successfully");
+		document.getElementById("loading").style.display = "none";
 	 	window.location="${pageContext.request.contextPath}/web/student/view/test/result/"+e["testId"]
 	},
 	error: function(e) {
 		window.alert("Test Submitted Successfully");
+		document.getElementById("loading").style.display = "none";
 	    window.location="${pageContext.request.contextPath}/web/student/view/test/result/"+e["testId"]
 	}
 	}); 

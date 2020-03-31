@@ -128,6 +128,7 @@ public class AddTestController {
 			@ModelAttribute("addTest") @Valid AddTest addTest, BindingResult bindingResult, ModelMap modelMap,
 			Locale locale) throws ParseException, ResourceNotFoundException {
 		if (bindingResult.hasErrors()) {
+			System.out.println("error ===> "+bindingResult.getAllErrors());
 			modelMap.addAttribute("addTest", new AddTest());
 			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
 			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
