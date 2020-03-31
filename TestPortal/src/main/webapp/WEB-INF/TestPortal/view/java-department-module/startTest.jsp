@@ -841,7 +841,7 @@ var allAnswers = [];
 		window.alert("Test Submission Successfully");
 	 	window.location="${pageContext.request.contextPath}/java/student/view/test/result/"+e["testId"]
 	},
-	error: function(e) {
+	error: function(e) { 
 		window.alert("Test Submitted Successfully");
 	    window.location="${pageContext.request.contextPath}/java/student/view/test/result/"+e["testId"]
 	}

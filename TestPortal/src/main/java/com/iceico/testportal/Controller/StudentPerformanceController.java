@@ -77,7 +77,7 @@ public class StudentPerformanceController {
 		}
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 
-		return "studentIndividualPerformance";
+		return "j_studentIndividualPerformance";
 	}
 
 	/* WEB STUDENT PANEL METHODS */
@@ -113,7 +113,7 @@ public class StudentPerformanceController {
 		}
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 
-		return "studentIndividualPerformance";
+		return "w_studentIndividualPerformance";
 	}
 
 	/**
