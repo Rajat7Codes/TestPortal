@@ -24,28 +24,25 @@
 									method="post">
 
 									<form:hidden path="subjectId" />
+
 									<h5 class="form-header">Add Subject</h5>
 
-									<div class="row form-group">
-										<div class="col-md-12 col-sm-12 col-lg-12 col-12">
-											<form:label path="subjectName"> Subject Name </form:label>
-											<form:input path="subjectName" name="subjectName"
-												id="subjectName" class="form-control"
-												placeholder="Enter Subject Name" />
-											<form:errors path="subjectName"></form:errors>
-										</div>
-
-										<div class="col-md-12 col-sm-12 col-lg-12 col-12">
-											<form:label path="status">Status</form:label>
-											<form:select path="status" name="status" id="status"
-												class="form-control">
-												<form:option value="true">Active</form:option>
-												<form:option value="false">Inactive</form:option>
-											</form:select>
-											<form:errors path="status"></form:errors>
-										</div>
+									<div class="form-group">
+										<form:label class="col-form-label" path="subjectName"> Subject Name</form:label>
+										<form:input class="form-control"
+											placeholder="Enter Subject Name" path="subjectName"
+											name="subjectName" id="subjectName" type="text" />
 									</div>
-									<br>
+
+									<div class="form-group">
+										<form:label class="col-form-label" path="status"> Status</form:label>
+										<form:select path="status" name="status" id="status"
+											class="form-control">
+											<form:option value="true">Active</form:option>
+											<form:option value="false">Inactive</form:option>
+										</form:select>
+									</div>
+
 									<div class="form-buttons-w">
 										<button class="btn btn-secondary" type="submit">Reset</button>
 										<button class="btn btn-primary" type="submit">Submit</button>

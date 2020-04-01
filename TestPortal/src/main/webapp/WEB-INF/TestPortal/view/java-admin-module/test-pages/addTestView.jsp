@@ -10,25 +10,13 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	<div class="content-i">
-		<div class="content-box">
+	<div class="row">
+		<div class="col-lg-12">
 			<div class="element-wrapper">
-				<!-- <h6 class="element-header">Question Bank View</h6> -->
-				<div class="element-box">
-					<!-- <h6 class="">Question Bank</h6> -->
-					<div class="row">
-						<div class="col-sm-12 element-header">
-							<h6 class="">Add Test View</h6>
-							<%-- <a class="btn btn-primary float-right"
-								href="<c:url value="/admin/question/bank/new" />">Question
-								Bank New</a> --%>
-							<!-- <button class="btn btn-primary float-right" type="button"></button> -->
-						</div>
+				<h5 class="element-header">Test List</h5>
+				<div class="element-wrapper">
+					<div class="element-box">
 
-					</div>
-					<!-- <h6 class="element-header mb-5">Question Bank</h6>
-					<button class="btn btn-primary float-right" type="button">View</button> -->
-					<div class="row">
 						<div class="table-responsive">
 							<table id="" width="100%"
 								class="table table-striped table-lightfont text-center">
@@ -38,7 +26,7 @@
 										<th>Name</th>
 										<th>Date</th>
 										<th>Time</th>
-										<th>Intructions</th>
+										<th>Instructions</th>
 										<th>Passing Percent</th>
 										<th>Negative Marking</th>
 										<th>Ratio</th>
