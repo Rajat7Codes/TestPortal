@@ -39,7 +39,7 @@
 											<div class="form-group">
 												<form:label path="date">Date</form:label>
 												<form:input path="date" type="date" name="date" id="date"
-													value="${dateValue }" class="form-control" />
+													class="form-control" />
 												<form:errors path="date"></form:errors>
 											</div>
 										</div>
@@ -186,7 +186,8 @@
 										<div class="col-sm-3">
 											<div class="form-group">
 												<form:label path="date">Date</form:label>
-												<form:input path="date" type="date" name="date" id="date" class="form-control" />
+												<form:input path="date" type="date" name="date" id="date"
+													class="form-control" />
 												<form:errors path="date"></form:errors>
 											</div>
 										</div>
@@ -283,8 +284,7 @@
 
 									<div class="element-wrapper">
 										<div class="form-buttons-w">
-											<button class="btn btn-secondary"
-												type="button">Reset</button>
+											<button class="btn btn-secondary" type="button">Reset</button>
 											<button class="btn btn-primary" type="submit">Submit</button>
 										</div>
 									</div>
