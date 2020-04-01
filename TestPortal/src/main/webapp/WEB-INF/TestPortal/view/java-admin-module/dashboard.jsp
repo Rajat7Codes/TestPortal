@@ -44,7 +44,7 @@
 								</div>
 								<div class="col-sm-4 col-xxxl-3">
 									<a class="element-box el-tablo"
-										href="${pageContext.request.contextPath }/admin/add/test/view"><div
+										href="${pageContext.request.contextPath }/java/admin/add/test/view"><div
 											class="label">Test</div>
 										<div class="value">${OverallTestCount }</div>
 										<div class="trending trending-down-basic">
@@ -53,7 +53,7 @@
 								</div>
 								<div class="col-sm-4 col-xxxl-3">
 									<a class="element-box el-tablo"
-										href="${pageContext.request.contextPath }/admin/question/bank"><div
+										href="${pageContext.request.contextPath }/java/admin/question/bank"><div
 											class="label">Questions</div>
 										<div class="value">${totalQuestionsCount }</div>
 										<div class="trending trending-down-basic">
@@ -256,14 +256,6 @@
 					</div>
 				</div>
 			</div>
-
-
-
-
-
-
-
-
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="element-wrapper">
@@ -648,12 +640,12 @@
 	var myChart = new Chart(ctx, {
 		type : 'bar',
 		data : {
-			labels : ${topTenStudentsUserId},
+			labels : ${topTenStudentsUserIdJava},
 			datasets : [ {
 				label : '# UserId & Percentage (%)',
 				barPercentage : 0.4,
 
-				data : ${topTenPercentages},
+				data : ${topTenPercentagesjava},
 				backgroundColor : [ 'rgba(255, 99, 132)', 'rgba(54, 162, 235)',
 						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
 						'rgba(153, 102, 255)', 'rgba(255, 159, 64)','rgba(255, 99, 132)', 'rgba(54, 162, 235)',
@@ -676,10 +668,9 @@
 						'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
 						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
 						'rgba(255, 159, 64, 1)' ],
-				borderWidth : 1
+				borderWidth : 3
 			} ]
 		},
-
 		options : {
 			scales : {
 				yAxes : [ {

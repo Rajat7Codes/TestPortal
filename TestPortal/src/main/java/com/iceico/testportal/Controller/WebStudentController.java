@@ -6,6 +6,11 @@ package com.iceico.testportal.Controller;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.imageio.ImageIO;
@@ -27,8 +32,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iceico.testportal.Exceptions.ResourceNotFoundException;
+import com.iceico.testportal.Model.AddTest;
+import com.iceico.testportal.Model.TestResult;
 import com.iceico.testportal.Model.User;
+import com.iceico.testportal.Service.AddTestService;
+import com.iceico.testportal.Service.DashboardService;
 import com.iceico.testportal.Service.EMailService;
+import com.iceico.testportal.Service.TestResultService;
 import com.iceico.testportal.Service.UserService;
 
 /**
@@ -47,6 +57,15 @@ public class WebStudentController {
 	@Autowired
 	private EMailService emailService;
 
+	@Autowired
+	private DashboardService dashboardService;
+
+	@Autowired
+	private TestResultService testResultService;
+
+	@Autowired
+	private AddTestService addTestService;
+
 	private String passwordToken = null;
 
 	private String tempPass = null;
@@ -60,8 +79,72 @@ public class WebStudentController {
 
 	/* WEB STUDENT PROFILE */
 	@GetMapping("/web/student/profile")
-	public String displayStudentInformation(ModelMap modelMap, Locale locale) {
+	public String displayStudentInformation(ModelMap modelMap, Locale locale) throws java.text.ParseException {
+		String userDepartmentName = "WEB";
+		Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
+		/* All Result List Pass & Fail Up Till Now */
+		List<String> studentTotalPassCountUpTillNow = new ArrayList<String>();
+		List<String> studentTotalFailCountUpTillNow = new ArrayList<String>();
+		List<String> studentTotalTestAttemptedCount = new ArrayList<String>();
+		/* Start Total Pass Fail Up Till Now Count Department Wise */
+		for (TestResult allTestResult : this.testResultService.getTestResultList()) {
+			Integer userId = allTestResult.getUserId();
+			if (currentUserId == userId) {
+				studentTotalTestAttemptedCount.add(allTestResult.getResultStatus());
+				if (allTestResult.getResultStatus().equals("PASS")) {
+					studentTotalPassCountUpTillNow.add(allTestResult.getResultStatus());
+				}
+				if (allTestResult.getResultStatus().equals("FAIL")) {
+					studentTotalFailCountUpTillNow.add(allTestResult.getResultStatus());
+				}
+			}
+		}
+		modelMap.addAttribute("studentTotalTestAttemptedCount", studentTotalTestAttemptedCount.size());
+		modelMap.addAttribute("studentTotalPassCountUpTillNow", studentTotalPassCountUpTillNow.size());
+		modelMap.addAttribute("studentTotalFailCountUpTillNow", studentTotalFailCountUpTillNow.size());
+		/* End Total Pass Fail Up Till Now Count Department Wise */
+		/* FOR CALCULATE TOTAL TEST COUNT DEPARTMENT WISE */
+		String testDepartment = "";
+		List<AddTest> totalTestList = this.addTestService.getAddTestList();
+		List<String> totalTestCountDepartmentJava = new ArrayList<String>();
+		String currentUserDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
+				.getDepartmentName();
+		for (AddTest test : totalTestList) {
+			testDepartment = test.getDepartmentName();
+			for (User userPro : this.userService.findAllUsers()) {
+				if (currentUserDepartment.equals(testDepartment)) {
+					totalTestCountDepartmentJava.add(test.getTestName());
+				}
+			}
+		}
+		modelMap.addAttribute("totalTestCountDepartmentJava", totalTestCountDepartmentJava.size());
+		/* END FOR CALCULATE TOTAL TEST COUNT DEPARTMENT WISE */
+		/* Monthly wise Performance For Line Graph */
+		Date date = new Date();
+		LocalDate currentdate = LocalDate.now();
+		Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(currentdate.withDayOfMonth(1).toString());
+		Date lastDate = new SimpleDateFormat("yyyy-MM-dd")
+				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
+		SimpleDateFormat month_date = new SimpleDateFormat("EE");
+		String dayWise = null;
+		List<Double> percentageMonthWiseList = new ArrayList<Double>();
+		percentageMonthWiseList.add(0.0);
+		List<String> monthWiseList = new ArrayList<String>();
+		List<Date> dateWiseList = new ArrayList<Date>();
+		dateWiseList.add(null);
+		monthWiseList.add("");
+		for (TestResult testResultForLineGraph : this.dashboardService
+				.getMonthlysPerformanceForDepartmentWiseAllResult(userDepartmentName, startDate, lastDate)) {
+			dayWise = month_date.format(testResultForLineGraph.getDate());
+			monthWiseList.add(dayWise);
+			dateWiseList.add(testResultForLineGraph.getDate());
+			percentageMonthWiseList.add(testResultForLineGraph.getPercentage());
+		}
+		modelMap.addAttribute("dateWiseList", dateWiseList);
+		modelMap.addAttribute("percentageMonthWiseList", percentageMonthWiseList);
+		/* END Monthly wise Performance For Line Graph */
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+
 		return "webStudProfile";
 	}
 
@@ -127,6 +210,28 @@ public class WebStudentController {
 	/* WEB STUDENT PROFILE UPDATE */
 	@GetMapping("/web/student/profile/update")
 	public String editStudent(ModelMap modelMap, Locale locale) throws ResourceNotFoundException {
+		Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
+		/* All Result List Pass & Fail Up Till Now */
+		List<String> studentTotalPassCountUpTillNow = new ArrayList<String>();
+		List<String> studentTotalFailCountUpTillNow = new ArrayList<String>();
+		List<String> studentTotalTestAttemptedCount = new ArrayList<String>();
+		/* Start Total Pass Fail Up Till Now Count Department Wise */
+		for (TestResult allTestResult : this.testResultService.getTestResultList()) {
+			Integer userId = allTestResult.getUserId();
+			if (currentUserId == userId) {
+				studentTotalTestAttemptedCount.add(allTestResult.getResultStatus());
+				if (allTestResult.getResultStatus().equals("PASS")) {
+					studentTotalPassCountUpTillNow.add(allTestResult.getResultStatus());
+				}
+				if (allTestResult.getResultStatus().equals("FAIL")) {
+					studentTotalFailCountUpTillNow.add(allTestResult.getResultStatus());
+				}
+			}
+		}
+		modelMap.addAttribute("studentTotalTestAttemptedCount", studentTotalTestAttemptedCount.size());
+		modelMap.addAttribute("studentTotalPassCountUpTillNow", studentTotalPassCountUpTillNow.size());
+		modelMap.addAttribute("studentTotalFailCountUpTillNow", studentTotalFailCountUpTillNow.size());
+		/* End Total Pass Fail Up Till Now Count Department Wise */
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "updateWebStudProfile";
 	}

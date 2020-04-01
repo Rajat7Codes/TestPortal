@@ -120,7 +120,8 @@
 											<div class="os-icon os-icon-bar-chart-stats-up"></div>
 										</div>
 										<div class="element-info-text">
-											<h5 class="element-inner-header">Monthly Revenue</h5>
+											<h5 class="element-inner-header">Monthly Percentage
+												Graph</h5>
 											<div class="element-inner-desc">Calculated every month</div>
 										</div>
 									</div>
@@ -297,13 +298,16 @@
 
 <script>
 	var ctx = document.getElementById('line');
-	var mon = '${monthWiseList}';
+	var mon = '${dateWiseList}';
+	mon[0]="";
+	mon[mon.length]="";
+	var list1= mon.split(",");
 	var stackedLine = new Chart(ctx, {
 		type : 'line',
 		data : {
 			/* labels : [ "", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
-					"Aug", "Sep", "Oct", "Nov", "Dec" ], */
-			labels : '${monthWiseList}',
+					"Aug", "Sep", "Oct", "Nov", "Dec" ],  */
+			labels : list1,
 
 			datasets : [ {
 				data : ${percentageMonthWiseList},
@@ -315,7 +319,6 @@
 		options : {
 			title : {
 				display : true,
-			/* text : 'World population per region (in millions)' */
 			}
 		}
 	});

@@ -89,4 +89,32 @@ public class DashboardServiceIMPL implements DashboardService {
 				.setParameter("date", date).getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TestResult> getMonthlysPerformanceForDepartmentWiseAll(String userDepartmentName, Date startDate,
+			Date lastDate) {
+		return this.getSession().createQuery(
+				"from TestResult where userDepartmentName=:userDepartmentName AND date BETWEEN :startDate AND :lastDate ORDER BY percentage DESC")
+				.setParameter("userDepartmentName", userDepartmentName).setParameter("startDate", startDate)
+				.setParameter("lastDate", lastDate).setMaxResults(10).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TestResult> getTodaysPerformanceForDepartmentWiseAll(String userDepartmentName, Date date) {
+		return this.getSession().createQuery(
+				"from TestResult where userDepartmentName=:userDepartmentName AND date=:date ORDER BY percentage DESC")
+				.setParameter("userDepartmentName", userDepartmentName).setParameter("date", date).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TestResult> getMonthlysPerformanceForDepartmentWiseAllResult(String userDepartmentName, Date startDate,
+			Date lastDate) {
+		return this.getSession().createQuery(
+				"from TestResult where userDepartmentName=:userDepartmentName AND date BETWEEN :startDate AND :lastDate ORDER BY percentage DESC")
+				.setParameter("userDepartmentName", userDepartmentName).setParameter("startDate", startDate)
+				.setParameter("lastDate", lastDate).getResultList();
+	}
+
 }

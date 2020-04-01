@@ -648,7 +648,7 @@
 	var myChart = new Chart(ctx, {
 		type : 'bar',
 		data : {
-			labels : ${topTenStudentsUserId},
+			labels : ${topTenStudentsUserIdWeb},
 			datasets : [ {
 				label : '# UserId & Percentage (%)',
 				barPercentage : 0.4,

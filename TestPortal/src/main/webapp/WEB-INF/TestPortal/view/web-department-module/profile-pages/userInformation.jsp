@@ -60,28 +60,28 @@
 								<div class="row">
 									<div class="col-sm-6 b-r b-b">
 										<div class="el-tablo centered padded">
-											<div class="value">3814</div>
-											<div class="label">Products Sold</div>
+											<div class="value">${totalTestCountDepartmentJava }</div>
+											<div class="label">Total Test</div>
 										</div>
 									</div>
 									<div class="col-sm-6 b-b b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">47.5K</div>
-											<div class="label">Followers</div>
+											<div class="value">${studentTotalTestAttemptedCount }</div>
+											<div class="label">Total Test Attempted</div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-6 b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">$95</div>
-											<div class="label">Daily Earnings</div>
+											<div class="value">${studentTotalPassCountUpTillNow }</div>
+											<div class="label">Total Pass Result</div>
 										</div>
 									</div>
 									<div class="col-sm-6 b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">12</div>
-											<div class="label">Products</div>
+											<div class="value">${studentTotalFailCountUpTillNow }</div>
+											<div class="label">Total Fail Results</div>
 										</div>
 									</div>
 								</div>
@@ -93,7 +93,8 @@
 											<div class="os-icon os-icon-bar-chart-stats-up"></div>
 										</div>
 										<div class="element-info-text">
-											<h5 class="element-inner-header">Monthly Revenue</h5>
+											<h5 class="element-inner-header">Monthly Percentage
+												Graph</h5>
 											<div class="element-inner-desc">Calculated every month</div>
 										</div>
 									</div>
@@ -271,54 +272,27 @@
 </body>
 <script>
 	var ctx = document.getElementById('line');
+	var mon = '${dateWiseList}';
+	mon[0]="";
+	mon[mon.length]="";
+	var list1= mon.split(",");
 	var stackedLine = new Chart(ctx, {
 		type : 'line',
-		/* labels : [ 1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950,
-				1999, 2050 ], */
-		/* labels : [ Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep,
-			Oct, Nov, Dec ] */
-		/* data : {
-			labels : [ Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep,
-					Oct, Nov, Dec ],
-			data : [ 86, 114, 106, 106, 107, 111, 133, 221, 783, 2478 ],
-			label : "Africa",
-			borderColor : "#3e95cd",
-			fill : false
-		}, */
 		data : {
-			labels : [ 1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999,
-					2050 ],
+			/* labels : [ "", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+					"Aug", "Sep", "Oct", "Nov", "Dec" ],  */
+			labels : list1,
+
 			datasets : [ {
-				data : [ 86, 114, 106, 106, 107, 111, 133, 221, 783, 2478 ],
-				label : "Africa",
+				data : ${percentageMonthWiseList},
+				label : "Result",
 				borderColor : "#3e95cd",
-				fill : false
-			}, {
-				data : [ 282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267 ],
-				label : "Asia",
-				borderColor : "#8e5ea2",
-				fill : false
-			}, {
-				data : [ 168, 170, 178, 190, 203, 276, 408, 547, 675, 734 ],
-				label : "Europe",
-				borderColor : "#3cba9f",
-				fill : false
-			}, {
-				data : [ 40, 20, 10, 16, 24, 38, 74, 167, 508, 784 ],
-				label : "Latin America",
-				borderColor : "#e8c3b9",
-				fill : false
-			}, {
-				data : [ 6, 3, 2, 2, 7, 26, 82, 172, 312, 433 ],
-				label : "North America",
-				borderColor : "#c45850",
 				fill : false
 			} ]
 		},
 		options : {
 			title : {
 				display : true,
-				text : 'World population per region (in millions)'
 			}
 		}
 	});

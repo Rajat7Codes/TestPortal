@@ -15,8 +15,8 @@
 <meta content="Admin dashboard html template" name="description">
 <meta content="width=device-width,initial-scale=1" name="viewport">
 </head>
-
-
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/static/bower_components/chart.js/dist/Chart.min.js"></script>
 <body
 	class="menu-position-side menu-side-left full-screen with-content-panel ">
 
@@ -32,7 +32,7 @@
 								<div class="col-sm-4 col-xxxl-4">
 									<a class="element-box el-tablo" href="#"><div class="label">Total
 											Students</div>
-										<div class="value">${totalJavaUsersCount }</div>
+										<div class="value">${totalWebUsersCount }</div>
 										<div class="trending trending-up-basic">
 											<!-- <span>12%</span><i class="os-icon os-icon-arrow-up2"></i> -->
 										</div></a>
@@ -40,7 +40,7 @@
 								<div class="col-sm-4 col-xxxl-4">
 									<a class="element-box el-tablo" href="#"><div class="label">Total
 											Test</div>
-										<div class="value">${totalTestList }</div>
+										<div class="value">${totalTestCountThis }</div>
 										<div class="trending trending-down-basic">
 											<!-- <span>12%</span><i class="os-icon os-icon-arrow-down"></i> -->
 										</div></a>
@@ -84,6 +84,7 @@
 									<tbody>
 										<c:forEach var="test" items="${testResultStudentToday}"
 											varStatus="ind">
+											<%-- <c:if test="${ test.userDepartmentName == 'WEB'}"> --%>
 											<tr>
 												<td class="text-center">${ind.index+1}</td>
 												<td>${userService.findById(test.userId).getFirstName() }</td>
@@ -98,6 +99,7 @@
 													class="os-icon os-icon-grid-10"></i></a><a class="danger"
 												href="#"><i class="os-icon os-icon-ui-15"></i></a></td> -->
 											</tr>
+											<%-- </c:if> --%>
 										</c:forEach>
 									</tbody>
 								</table>
@@ -132,6 +134,7 @@
 									<tbody>
 										<c:forEach var="test" items="${testResultStudentMonthly}"
 											varStatus="ind">
+											<%-- <c:if test="${ test.userDepartmentName == 'WEB'}"> --%>
 											<tr>
 												<td class="text-center">${ind.index+1}</td>
 												<td>${userService.findById(test.userId).getFirstName() }</td>
@@ -146,6 +149,7 @@
 													class="os-icon os-icon-grid-10"></i></a><a class="danger"
 												href="#"><i class="os-icon os-icon-ui-15"></i></a></td> -->
 											</tr>
+											<%-- </c:if> --%>
 										</c:forEach>
 									</tbody>
 								</table>
@@ -347,7 +351,7 @@
 		</div>
 
 		<div class="content-panel">
-			<div class="content-panel-close">
+			<!-- <div class="content-panel-close">
 				<i class="os-icon os-icon-close"></i>
 			</div>
 			<div class="element-wrapper">
@@ -363,17 +367,22 @@
 								Settings</span></a>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<div class="element-wrapper">
-				<h6 class="element-header">Top Selling Today</h6>
+				<h6 class="element-header">Today Student Result Status</h6>
 				<div class="element-box">
 					<div class="el-chart-w">
-						<canvas height="120" id="donutChart" width="120"></canvas>
+						<canvas id="todayStudentPieChart" width="150" height="250"
+							class="chartjs-render-monitor" style="display: block;"></canvas>
 						<div class="inside-donut-chart-label">
-							<strong>142</strong><span>Total Orders</span>
+							<strong>${todayStudentPassFailStatusTotalCount}</strong><span>Total
+								Results</span>
 						</div>
 					</div>
-					<div class="el-legend condensed">
+
+
+
+					<!-- <div class="el-legend condensed">
 						<div class="row">
 							<div class="col-auto col-xxxxl-6 ml-sm-auto mr-sm-auto col-6">
 								<div class="legend-value-w">
@@ -412,6 +421,17 @@
 								</div>
 							</div>
 						</div>
+					</div> -->
+				</div>
+				<h6 class="element-header">Monthly Student Result Status</h6>
+				<div class="element-box">
+					<div class="el-chart-w">
+						<canvas id="monthlyStudentPieChart" width="150" height="250"
+							class="chartjs-render-monitor" style="display: block;"></canvas>
+						<div class="inside-donut-chart-label">
+							<strong>${monthlyStudentPassFailStatusTotalCount}</strong><span>Total
+								Results</span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -419,4 +439,45 @@
 	</div>
 
 </body>
+
+<script>
+	var ctx = document.getElementById('todayStudentPieChart');
+	var myChart = new Chart(ctx, {
+		type : 'doughnut',
+		data : {
+			labels : [ 'Pass', 'Fail' ],
+			datasets : [ {
+				label : '# of Votes',
+				data : ${todayStudentPassFailStatus},
+				backgroundColor : [ 'rgba(54, 162, 235)', 'rgba(255, 99, 132)',
+						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
+						'rgba(153, 102, 255)', 'rgba(255, 159, 64)' ],
+				borderColor : [ 'rgba(54, 162, 235, 1)',
+						'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)' ],
+			} ]
+		},
+	});
+</script>
+<script>
+	var ctx = document.getElementById('monthlyStudentPieChart');
+	var myChart = new Chart(ctx, {
+		type : 'doughnut',
+		data : {
+			labels : [ 'Pass', 'Fail' ],
+			datasets : [ {
+				label : '# of Votes',
+				data : ${monthlyStudentPassFailStatus},
+				backgroundColor : [ 'rgba(54, 162, 235)', 'rgba(255, 99, 132)',
+						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
+						'rgba(153, 102, 255)', 'rgba(255, 159, 64)' ],
+				borderColor : [ 'rgba(54, 162, 235, 1)',
+						'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)' ],
+			} ]
+		},
+	});
+</script>
 </html>
