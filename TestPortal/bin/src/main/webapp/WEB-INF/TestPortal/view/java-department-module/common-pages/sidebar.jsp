@@ -119,7 +119,8 @@
 						<i class="os-icon os-icon-wallet-loaded"></i>
 					</div>
 					<ul>
-						<li><a href="#"><i
+						<li><a
+							href="${pageContext.request.contextPath }/java/student/profile"><i
 								class="os-icon os-icon-user-male-circle2"></i><span>Profile
 									Details</span></a></li>
 
@@ -141,29 +142,29 @@
 			<li class=""><a
 				href="${pageContext.request.contextPath }/java/student/test/list">
 					<div class="icon-w">
-						<div class="os-icon os-icon-edit-32"></div>
+						<div class="os-icon os-icon-list"></div>
 					</div> <span> Test List</span>
 			</a></li>
 			<li class=""><a
 				href="${pageContext.request.contextPath }/java/student/test/result">
 					<div class="icon-w">
-						<div class="os-icon os-icon-edit-32"></div>
+						<div class="os-icon os-icon-window-content"></div>
 					</div> <span> Test Result</span>
 			</a></li>
 			<li class=""><a
 				href="${pageContext.request.contextPath }/java/student/test/history">
 					<div class="icon-w">
-						<div class="os-icon os-icon-edit-32"></div>
+						<div class="os-icon os-icon-newspaper"></div>
 					</div> <span> Test History</span>
 			</a></li>
 
-			<li class=""><a
+			<li><a
 				href="${pageContext.request.contextPath }/java/student/student/individual/performance">
 
-					<li class="has-sub-menu"><a
+					<li class=""><a
 						href="${pageContext.request.contextPath }/java/student/individual/performance">
 							<div class="icon-w">
-								<div class="os-icon os-icon-edit-32"></div>
+								<div class="os-icon os-icon-bar-chart-stats-up"></div>
 							</div> <span> My Performance</span>
 					</a></li>
 		</ul>

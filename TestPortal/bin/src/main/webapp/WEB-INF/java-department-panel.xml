@@ -52,30 +52,14 @@
 	</definition>
 
 	<!-- sample page for START TEST -->
-	<definition name="startTest" extends="javabase.definition">
+	<definition name="j_startTest" extends="javabase.definition">
 		<put-attribute name="title" value="start test" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/java-department-module/startTest.jsp" />
 	</definition>
 
-	<!-- sample page for START TEST with Compiler -->
-	<definition name="startTestCompiler"
-		extends="javabase.definition">
-		<put-attribute name="title" value="start test 2" />
-		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/java-department-module/startTestCompiler.jsp" />
-	</definition>
-
-	<!-- sample page for START TEST with Images -->
-	<definition name="startTestImage"
-		extends="javabase.definition">
-		<put-attribute name="title" value="start Test " />
-		<put-attribute name="body"
-			value="/WEB-INF/TestPortal/view/java-department-module/startTestImage.jsp" />
-	</definition>
-
 	<!-- page for TEST Lists -->
-	<definition name="testList" extends="javabase.definition">
+	<definition name="j_testList" extends="javabase.definition">
 		<put-attribute name="title" value="Test List" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/java-department-module/testList.jsp" />
@@ -83,14 +67,14 @@
 
 
 	<!-- view page for Test result -->
-	<definition name="result" extends="javabase.definition">
+	<definition name="j_result" extends="javabase.definition">
 		<put-attribute name="title" value="Result" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/java-department-module/result.jsp" />
 	</definition>
 
 	<!-- My Performance page for Test result -->
-	<definition name="studentIndividualPerformance"
+	<definition name="j_studentIndividualPerformance"
 		extends="javabase.definition">
 		<put-attribute name="title"
 			value="Student Individual Performance" />
@@ -100,7 +84,7 @@
 
 
 	<!-- Test History page -->
-	<definition name="testHistory" extends="javabase.definition">
+	<definition name="j_testHistory" extends="javabase.definition">
 		<put-attribute name="title" value="Result" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/java-department-module/testHistory.jsp" />
@@ -108,7 +92,7 @@
 
 
 	<!-- Test History Each page -->
-	<definition name="testHistoryEach"
+	<definition name="j_testHistoryEach"
 		extends="javabase.definition">
 		<put-attribute name="title" value="Result" />
 		<put-attribute name="body"

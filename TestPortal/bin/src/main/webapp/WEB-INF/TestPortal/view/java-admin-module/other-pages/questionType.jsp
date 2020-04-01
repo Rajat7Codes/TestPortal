@@ -26,14 +26,15 @@
 									<form:hidden path="questionTypeId" />
 									<h5 class="form-header">Add Question Type</h5>
 
-									<div class="row form-group">
+									<div class=" form-group">
 										<div class="col-md-12 col-sm-12 col-lg-12 col-12">
 											<form:label path="type"> Question Type</form:label>
 											<form:input path="type" name="type" id="type"
 												class="form-control" placeholder="Enter Question type" />
 											<form:errors path="type"></form:errors>
 										</div>
-
+									</div>
+									<div class=" form-group">
 										<div class="col-md-12 col-sm-12 col-lg-12 col-12">
 											<form:label path="status">Status</form:label>
 											<form:select path="status" name="status" id="status"
@@ -43,6 +44,8 @@
 											</form:select>
 											<form:errors path="status"></form:errors>
 										</div>
+									</div>
+									<div class=" form-group">
 										<div class="col-md-12 col-sm-12 col-lg-12 col-12">
 											<form:label path="programType">Program Status</form:label>
 											<form:select path="programType" name="programType"
@@ -52,19 +55,20 @@
 											</form:select>
 											<form:errors path="programType"></form:errors>
 										</div>
+									</div>
+									<div class=" form-group">
 										<div class="col-md-12 col-sm-12 col-lg-12 col-12">
 											<form:label path="imageType">Image Status</form:label>
 											<form:select path="imageType" name="imageType" id="imageType"
 												class="form-control">
 												<form:option value="false">Inactive</form:option>
 												<form:option value="true">Active</form:option>
-
 											</form:select>
 											<form:errors path="imageType"></form:errors>
 										</div>
 									</div>
 									<div class="form-buttons-w">
-										<button class="btn btn-secondary" type="submit">Reset</button>
+										<button class="btn btn-secondary" type="reset">Reset</button>
 										<button class="btn btn-primary" type="submit">Submit</button>
 									</div>
 								</form:form>
@@ -77,15 +81,15 @@
 							<div class="element-box">
 								<h5 class="form-header">Question Type List</h5>
 								<div class="table-responsive">
-									<table class="table table-striped table-lightfont">
+									<table class="table table-striped table-lightfont text-center">
 										<thead>
 											<tr>
 												<th>Sr. No.</th>
-												<th class="type">Question Type</th>
-												<th class="status">Status</th>
-												<th class="status">Program Status</th>
-												<th class="status">Image Status</th>
-												<th class="action">Action</th>
+												<th>Question Type</th>
+												<th>Status</th>
+												<th>Program Status</th>
+												<th>Image Status</th>
+												<th >Action</th>
 											</tr>
 										</thead>
 										<tbody id="tableBody">
@@ -116,22 +120,12 @@
 														<td class="status"><c:out value="Inactive" /></td>
 													</c:if>
 
-													<td class="valigntop"><div class="btn-group">
-															<button
-																class="btn btn-xs btn-success dropdown-toggle no-margin"
-																type="button" data-toggle="dropdown"
-																aria-expanded="false">
-																Actions <i class="fa fa-angle-down"></i>
-															</button>
-															<ul class="dropdown-menu pull-left" role="menu">
-																<li><a title="Delete"
-																	href="<c:url value='/java/admin/questionType/delete/${questionType.questionTypeId }' />"><i
-																		class="fa fa-trash"></i>Delete</a></li>
-																<li><a title="Edit"
-																	href="<c:url value='/java/admin/questionType/edit/${questionType.questionTypeId }' />"><i
-																		class="fa fa-edit"></i>Edit</a></li>
-															</ul>
-														</div></td>
+													<td class="row-actions"><a title="Edit"
+														href="<c:url value='/java/admin/questionType/edit/${questionType.questionTypeId }' />"><i
+															class="os-icon os-icon-ui-49"></i></a> <a class="danger"
+														title="Delete"
+														href="<c:url value='/java/admin/questionType/delete/${questionType.questionTypeId }' />"><i
+															class="os-icon os-icon-ui-15"></i></a></td>
 												</tr>
 											</c:forEach>
 										</tbody>

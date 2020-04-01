@@ -76,7 +76,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="up-contents">
+					<%-- 			<div class="up-contents">
 						<h5 class="element-header">Profile Statistics</h5>
 						<div class="row m-b">
 							<div class="col-lg-6">
@@ -127,8 +127,7 @@
 							</div>
 						</div>
 
-
-					</div>
+					</div> --%>
 				</div>
 			</div>
 			<div class="floated-colors-btn second-floated-btn">

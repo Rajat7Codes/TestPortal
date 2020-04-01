@@ -87,7 +87,7 @@
 								<div class="tab-content">
 									<div class="tab-pane active" id="tab_overview">
 										<div class="el-tablo bigger">
-											<div class="label">Result Graph</div>
+											<div class="label">Student Result Graph</div>
 											<!-- <div class="value">10</div> -->
 										</div>
 										<div class="el-chart-w">
@@ -111,7 +111,7 @@
 								<div class="tab-content">
 									<div class="tab-pane active" id="tab_overview">
 										<div class="el-tablo bigger">
-											<div class="label">Result Graph</div>
+											<div class="label">Student Result Graph</div>
 											<!-- <div class="value">10</div> -->
 										</div>
 										<div class="el-chart-w">
@@ -128,7 +128,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+
+
+			<%-- <div class="row">
 				<div class="col-sm-12 col-xxxl-6">
 					<div class="element-wrapper">
 						<h6 class="element-header">Performance Graph</h6>
@@ -248,6 +250,9 @@
 					</div>
 				</div>
 			</div>
+			 --%>
+
+
 			<div class="floated-colors-btn second-floated-btn">
 				<div class="os-toggler-w">
 					<div class="os-toggler-i">
@@ -417,7 +422,7 @@
 			labels : ${testToday},
 			datasets : [ {
 
-				label : 'Percentage',
+				label : 'Percentage & Marks',
 				data : ${percentageToday},
 				backgroundColor : [ 'rgba(255, 99, 132)',
 						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
@@ -690,7 +695,7 @@
 			labels : ${testMonthly},
 			datasets : [ {
 
-				label : 'Percentage',
+				label : 'Percentage & Marks',
 				data :${percentageMonthly},
 				backgroundColor : [ 'rgba(255, 99, 132)',
 					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
