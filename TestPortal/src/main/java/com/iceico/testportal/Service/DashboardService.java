@@ -20,8 +20,15 @@ public interface DashboardService {
 
 	public List<TestResult> getMonthlysPerformancePercentageAll(Date startDate, Date lastDate);
 
+	public List<TestResult> getMonthlysPerformanceForDepartmentWiseAll(String userDepartmentName, Date startDate,
+			Date lastDate);
+	public List<TestResult> getMonthlysPerformanceForDepartmentWiseAllResult(String userDepartmentName, Date startDate,
+			Date lastDate);
+
+	public List<TestResult> getTodaysPerformanceForDepartmentWiseAll(String userDepartmentName, Date date);
+
 	/* End Java Department dashboard */
-	
+
 	public List<TestResult> getRankWiseStudentListAll(Date date);
 
 	public List<TestResult> getTopTenStudentList(Date date);

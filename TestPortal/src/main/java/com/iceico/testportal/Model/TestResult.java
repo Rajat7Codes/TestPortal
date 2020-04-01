@@ -5,7 +5,6 @@ package com.iceico.testportal.Model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -54,6 +53,9 @@ public class TestResult extends Auditable<String> implements Serializable {
 	@Column(name = "user_id", nullable = true)
 	private Integer userId;
 
+	@Column(name = "user_department_name")
+	private String userDepartmentName;
+
 	@Column(name = "test_name")
 	private String testName;
 
@@ -76,7 +78,7 @@ public class TestResult extends Auditable<String> implements Serializable {
 
 	@Column(name = "result_status")
 	private String resultStatus;
-	
+
 	@Column(name = "answers_given")
 	private String answersGiven;
 
@@ -87,6 +89,7 @@ public class TestResult extends Auditable<String> implements Serializable {
 	 * @param testResultId
 	 * @param testId
 	 * @param userId
+	 * @param userDepartmentName
 	 * @param testName
 	 * @param obtainedMarks
 	 * @param totalMarks
@@ -94,15 +97,17 @@ public class TestResult extends Auditable<String> implements Serializable {
 	 * @param negativeMarks
 	 * @param attempted
 	 * @param resultStatus
+	 * @param answersGiven
 	 * @param percentage
 	 */
-	public TestResult(Long testResultId, Long testId, Integer userId, String testName, Double obtainedMarks,
-			Double totalMarks, Date date, Double negativeMarks, Integer attempted, String resultStatus,
-			Double percentage) {
+	public TestResult(Long testResultId, Long testId, Integer userId, String userDepartmentName, String testName,
+			Double obtainedMarks, Double totalMarks, Date date, Double negativeMarks, Integer attempted,
+			String resultStatus, String answersGiven, Double percentage) {
 		super();
 		this.testResultId = testResultId;
 		this.testId = testId;
 		this.userId = userId;
+		this.userDepartmentName = userDepartmentName;
 		this.testName = testName;
 		this.obtainedMarks = obtainedMarks;
 		this.totalMarks = totalMarks;
@@ -110,6 +115,7 @@ public class TestResult extends Auditable<String> implements Serializable {
 		this.negativeMarks = negativeMarks;
 		Attempted = attempted;
 		this.resultStatus = resultStatus;
+		this.answersGiven = answersGiven;
 		this.percentage = percentage;
 	}
 
@@ -153,6 +159,20 @@ public class TestResult extends Auditable<String> implements Serializable {
 	 */
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	/**
+	 * @return the userDepartmentName
+	 */
+	public String getUserDepartmentName() {
+		return userDepartmentName;
+	}
+
+	/**
+	 * @param userDepartmentName the userDepartmentName to set
+	 */
+	public void setUserDepartmentName(String userDepartmentName) {
+		this.userDepartmentName = userDepartmentName;
 	}
 
 	/**

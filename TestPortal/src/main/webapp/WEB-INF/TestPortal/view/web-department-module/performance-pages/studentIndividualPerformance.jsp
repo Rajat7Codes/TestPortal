@@ -87,7 +87,7 @@
 			labels : ${testToday},
 			datasets : [ {
 
-				label : 'Percentage',
+				label : 'Percentage & Marks',
 				data : ${percentageToday},
 				backgroundColor : [ 'rgba(255, 99, 132)',
 						'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
@@ -360,7 +360,7 @@
 			labels : ${testMonthly},
 			datasets : [ {
 
-				label : 'Percentage',
+				label : 'Percentage & Marks',
 				data :${percentageMonthly},
 				backgroundColor : [ 'rgba(255, 99, 132)',
 					'rgba(54, 162, 235)', 'rgba(255, 206, 86)',
