@@ -2,6 +2,7 @@ package com.iceico.testportal.Controller;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -118,6 +120,7 @@ public class UserController {
 		user.setEmail(emailId);
 		user.setFirstName(fName);
 		user.setLastName(lName);
+		user.setIsDeleted(false);
 		user.setPassword(password);
 		user.setMobileNumber(mobile);
 
@@ -142,6 +145,7 @@ public class UserController {
 
 		User user = new User();
 		user.setEmail(emailId);
+		user.setIsDeleted(false);
 		user.setFirstName(fName);
 		user.setLastName(lName);
 		user.setMobileNumber(mobile);
@@ -156,6 +160,28 @@ public class UserController {
 		this.userService.saveUser(user);
 		modelMap.addAttribute("user", getPrincipal());
 		return null;
+	}
+
+	@GetMapping("/admin/delete/{userId}")
+	public String deleteAdmin(@PathVariable("userId") @Valid Integer userId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		User user = this.userService.findById(userId);
+		user.setIsDeleted(true);
+		modelMap.addAttribute("departmentList", this.departmentService.getDepartmentList());
+		modelMap.addAttribute("userList", userService.findAllUsers());
+		this.userService.saveUser(user);
+		return "redirect:/admin/new";
+	}
+
+	@GetMapping("/admin/edit/{userId}")
+	public String editAdmin(@PathVariable("userId") @Valid Integer userId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		User user = this.userService.findById(userId);
+		modelMap.addAttribute("edit", true);
+		modelMap.addAttribute("departmentList", this.departmentService.getDepartmentList());
+		modelMap.addAttribute("userList", userService.findAllUsers());
+		modelMap.addAttribute("user", user);
+		return "newAdmin";
 	}
 
 	@RequestMapping(value = { "/admin/save" }, method = RequestMethod.POST)
@@ -178,12 +204,19 @@ public class UserController {
 			profile.setType("WEBADMIN");
 		}
 
-		User user = new User();
+		User user = null;new User();
+		if( this.userService.findBySSO(ssoId) == null) {
+			user = new User();
+		} else {
+			user = this.userService.findBySSO(ssoId);
+		}
 		user.setFirstName(fName);
 		user.setLastName(lName);
 		user.setGender(gender);
 		user.setMobileNumber(mobile);
+		user.setIsDeleted(false);
 		user.setEmail(emailId);
+		user.setPosition(position);
 		user.setDepartment(department);
 		user.setPassword(password);
 		user.setSsoId(ssoId);

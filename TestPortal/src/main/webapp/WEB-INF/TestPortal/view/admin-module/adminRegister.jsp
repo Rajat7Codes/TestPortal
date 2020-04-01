@@ -43,6 +43,7 @@
 											<div class="form-group">
 												<label> First Name </label> <input id="fname" name="fname"
 													type="text" class="form-control"
+													<c:if test="${edit==true}"> value="${user.firstName}"</c:if>
 													placeholder="Enter first name" data-bv-regexp="true"
 													data-bv-regexp-regexp="^[a-zA-Z]*$"
 													data-bv-regexp-message="Alphabets without spaces only">
@@ -52,6 +53,7 @@
 											<div class="form-group">
 												<label> Last Name </label> <input class="form-control"
 													placeholder="Enter last name" id="lname" name="lname"
+													<c:if test="${edit==true}"> value="${user.lastName}"</c:if>
 													data-bv-regexp="true" data-bv-regexp-regexp="^[a-zA-Z]*$"
 													data-bv-regexp-message="Alphabets without spaces only"
 													type="text">
@@ -61,7 +63,8 @@
 									<div class="form-group">
 										<label class="w-100"> Username </label> <input
 											class="form-control" placeholder="Enter username" id="ssoId"
-											name="ssoId" type="text" data-bv-regexp="true"
+											<c:if test="${edit==true}"> value="${user.ssoId}" readonly="readonly"</c:if>
+											 name="ssoId" type="text" data-bv-regexp="true"
 											data-bv-regexp-regexp="^[a-zA-Z]*$"
 											data-bv-regexp-message="Alphabets without spaces only" />
 
@@ -69,30 +72,68 @@
 									<div class="form-group">
 										<label class="w-100"> Email Address </label> <input
 											class="form-control" placeholder="Enter email" id="emailId"
+											<c:if test="${edit==true}"> value="${user.email}"</c:if>
 											name="emailId" type="email">
 
 									</div>
 									<div class="form-group">
 										<label> Phone Number</label> <input class="form-control"
 											name="mobile" id="mobile" placeholder="Enter mobile number"
+											<c:if test="${edit==true}"> value="${user.mobileNumber}"</c:if>
 											type="number">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label> Gender</label> <select class="form-control"
+										<label> Gender</label> <select class="form-control" value=""
 											id="gender" name="gender">
-											<option value="Female">Female</option>
-											<option value="Male">Male</option>
-											<option value="Transgender">Transgender</option>
+											<c:if test="${edit==false}">
+												<option value="Female">Female</option>
+												<option value="Male">Male</option>
+												<option value="Transgender">Transgender</option>
+											</c:if>
+											<c:if test="${edit==true}">
+												<option
+													<c:if test="${user.gender==\"Female\"}">
+											selected
+											</c:if>
+													value="Female">Female</option>
+
+												<option
+													<c:if test="${user.gender==\"Male\"}">
+											selected
+											</c:if>
+													value="Male">Male</option>
+
+												<option
+													<c:if test="${user.gender==\"Transgender\"}">
+											selected
+											</c:if>
+													value="Transgender">Transgender</option>
+											</c:if>
 										</select>
 									</div>
 									<div class="form-group">
 										<label> Department</label> <select class="form-control"
 											id="department" name="department">
-											<c:forEach var="department" items="${departmentList}">
-												<option value="${department.departmentId}">${department.departmentName}</option>
-											</c:forEach>
+											<c:if test="${edit==false}">
+												<c:forEach var="department" items="${departmentList}">
+													<option value="${department.departmentId}">${department.departmentName}</option>
+												</c:forEach>
+											</c:if>
+											<c:if test="${edit==true}">
+												<c:forEach var="department" items="${departmentList}">
+													<c:if
+														test="${user.department.departmentId==department.departmentId}">
+														<option selected value="${department.departmentId}">${department.departmentName}</option>
+													</c:if>
+													<c:if
+														test="${user.department.departmentId!=department.departmentId}">
+														<option value="${department.departmentId}">${department.departmentName}</option>
+													</c:if>
+
+												</c:forEach>
+											</c:if>
 										</select>
 									</div>
 									<div class="form-group">
@@ -150,21 +191,23 @@
 								</thead>
 								<tbody id="tableBody">
 									<c:forEach var="user" items="${userList }" varStatus="ind">
-										<tr>
-											<td>${ind.index+1 }</td>
-											<td>${user.firstName }&nbsp;${user.lastName }</td>
-											<td>${user.ssoId }</td>
-											<td>${user.department.departmentName }</td>
-											<td>${user.email }</td>
-											<td>${user.position }</td>
-											<td>${user.mobileNumber }</td>
-											<td class="row-actions"><a title="Edit"
-												href="<c:url value='/admin/edit/${user.id }' />"><i
-													class="os-icon os-icon-ui-49"></i></a> <a class="danger"
-												title="Delete"
-												href="<c:url value='/admin/delete/${user.id }' />"><i
-													class="os-icon os-icon-ui-15"></i></a></td>
-										</tr>
+										<c:if test="${!user.isDeleted}">
+											<tr>
+												<td>${ind.index+1 }</td>
+												<td>${user.firstName }&nbsp;${user.lastName }</td>
+												<td>${user.ssoId }</td>
+												<td>${user.department.departmentName }</td>
+												<td>${user.email }</td>
+												<td>${user.position }</td>
+												<td>${user.mobileNumber }</td>
+												<td class="row-actions"><a title="Edit"
+													href="<c:url value='/admin/edit/${user.id }' />"><i
+														class="os-icon os-icon-ui-49"></i></a> <a class="danger"
+													title="Delete"
+													href="<c:url value='/admin/delete/${user.id }' />"><i
+														class="os-icon os-icon-ui-15"></i></a></td>
+											</tr>
+										</c:if>
 									</c:forEach>
 								</tbody>
 							</table>

@@ -79,6 +79,9 @@ public class User implements Serializable {
 	@Column(name = "description")
 	@Size(min = 0, max = 255, message = "Description range must be 0-255 charecters only")
 	private String description;
+	
+	@Column(name = "delete_flag")
+	private Boolean isDeleted;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "department_id", insertable = true, nullable = true, updatable = true)
@@ -284,6 +287,20 @@ public class User implements Serializable {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the isDeleted
+	 */
+	public Boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+	/**
+	 * @param isDeleted the isDeleted to set
+	 */
+	public void setIsDeleted(Boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	/**
