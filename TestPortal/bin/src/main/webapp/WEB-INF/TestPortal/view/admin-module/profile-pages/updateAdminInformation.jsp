@@ -39,7 +39,7 @@
 								</div>
 								<div class="col-sm-6 text-right">
 									<a class="btn btn-primary btn-sm"
-										href="${pageContext.request.contextPath }/java/student/profile"><i
+										href="${pageContext.request.contextPath }/admin/profile"><i
 										class="os-icon os-icon-user"></i><span>View Profile</span></a>
 								</div>
 							</div>

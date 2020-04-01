@@ -127,7 +127,8 @@
 						<i class="os-icon os-icon-wallet-loaded"></i>
 					</div>
 					<ul>
-						<li><a href="#"><i
+						<li><a
+							href="${pageContext.request.contextPath }/web/student/profile"><i
 								class="os-icon os-icon-user-male-circle2"></i><span>Profile
 									Details</span></a></li>
 

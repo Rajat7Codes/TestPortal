@@ -115,7 +115,7 @@
 					<div class="element-wrapper">
 						<div class="element-box">
 							<form
-								action="${pageContext.request.contextPath }/admin/profile/save"
+								action="${pageContext.request.contextPath }/java/admin/profile/save"
 								name="formValidateForm" id="formValidateForm" method="post"
 								enctype="multipart/form-data">
 

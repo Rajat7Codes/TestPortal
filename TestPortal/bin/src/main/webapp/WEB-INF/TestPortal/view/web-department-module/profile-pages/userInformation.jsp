@@ -8,6 +8,9 @@
 <meta content="Tamerlan Soziev" name="author">
 <meta content="Admin dashboard html template" name="description">
 <meta content="width=device-width,initial-scale=1" name="viewport">
+<script type="text/javascript"></script>
+<script
+	src="${pageContext.request.contextPath }/static/bower_components/chart.js/dist/Chart.min.js"></script>
 </head>
 <body
 	class="menu-position-side menu-side-left full-screen with-content-panel ">
@@ -40,10 +43,8 @@
 					<div class="up-controls">
 						<div class="row">
 							<div class="col-lg-6">
-								<div class="value-pair">
-								</div>
-								<div class="value-pair">
-								</div>
+								<div class="value-pair"></div>
+								<div class="value-pair"></div>
 							</div>
 							<div class="col-lg-6 text-right">
 								<a class="btn btn-primary btn-sm"
@@ -59,28 +60,28 @@
 								<div class="row">
 									<div class="col-sm-6 b-r b-b">
 										<div class="el-tablo centered padded">
-											<div class="value">3814</div>
-											<div class="label">Products Sold</div>
+											<div class="value">${totalTestCountDepartmentJava }</div>
+											<div class="label">Total Test</div>
 										</div>
 									</div>
 									<div class="col-sm-6 b-b b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">47.5K</div>
-											<div class="label">Followers</div>
+											<div class="value">${studentTotalTestAttemptedCount }</div>
+											<div class="label">Total Test Attempted</div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-6 b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">$95</div>
-											<div class="label">Daily Earnings</div>
+											<div class="value">${studentTotalPassCountUpTillNow }</div>
+											<div class="label">Total Pass Result</div>
 										</div>
 									</div>
 									<div class="col-sm-6 b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">12</div>
-											<div class="label">Products</div>
+											<div class="value">${studentTotalFailCountUpTillNow }</div>
+											<div class="label">Total Fail Results</div>
 										</div>
 									</div>
 								</div>
@@ -92,12 +93,16 @@
 											<div class="os-icon os-icon-bar-chart-stats-up"></div>
 										</div>
 										<div class="element-info-text">
-											<h5 class="element-inner-header">Monthly Revenue</h5>
+											<h5 class="element-inner-header">Monthly Percentage
+												Graph</h5>
 											<div class="element-inner-desc">Calculated every month</div>
 										</div>
 									</div>
 									<div class="el-chart-w">
-										<canvas height="130" id="liteLineChart" width="300"></canvas>
+										<!-- <canvas height="130" id="liteLineChart" width="300"></canvas> -->
+										<!-- <canvas id="line" height="130" width="300"></canvas> -->
+										<canvas id="line" width="800" height="450"></canvas>
+
 									</div>
 								</div>
 							</div>
@@ -263,5 +268,34 @@
 			</div> -->
 		</div>
 	</div>
+	<!-- <h1>Hello</h1> -->
 </body>
+<script>
+	var ctx = document.getElementById('line');
+	var mon = '${dateWiseList}';
+	mon[0]="";
+	mon[mon.length]="";
+	var list1= mon.split(",");
+	var stackedLine = new Chart(ctx, {
+		type : 'line',
+		data : {
+			/* labels : [ "", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+					"Aug", "Sep", "Oct", "Nov", "Dec" ],  */
+			labels : list1,
+
+			datasets : [ {
+				data : ${percentageMonthWiseList},
+				label : "Result",
+				borderColor : "#3e95cd",
+				fill : false
+			} ]
+		},
+		options : {
+			title : {
+				display : true,
+			}
+		}
+	});
+</script>
+
 </html>

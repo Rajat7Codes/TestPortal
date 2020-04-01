@@ -57,16 +57,20 @@
 												<td>${test.passingPercent }</td>
 												<td class="text-center"><c:if
 														test="${test.negativeMarking==true}">
-														<div class="status-pill green" data-title="Negative Marking"
-															data-toggle="tooltip" data-original-title="" title=""></div>
+														<div class="status-pill green"
+															data-title="Negative Marking" data-toggle="tooltip"
+															data-original-title="" title=""></div>
 													</c:if> <c:if test="${test.negativeMarking==false}">
-														<div class="status-pill red" data-title="No Negative Marking"
-															data-toggle="tooltip" data-original-title="" title=""></div>
+														<div class="status-pill red"
+															data-title="No Negative Marking" data-toggle="tooltip"
+															data-original-title="" title=""></div>
 													</c:if></td>
 												<td>${test.ratio }</td>
-												<td class="row-actions">
-													<a href="<c:url value='/admin/add/test/edit/${test.addTestId}' />"><i class="os-icon os-icon-ui-49"></i></a>
-													<a class="danger" href="<c:url value='/admin/add/test/delete/${test.addTestId}' />"><i class="os-icon os-icon-ui-15"></i></a></td>
+												<td class="row-actions"><a
+													href="<c:url value='/web/admin/add/test/edit/${test.addTestId}' />"><i
+														class="os-icon os-icon-ui-49"></i></a> <a class="danger"
+													href="<c:url value='/web/admin/add/test/delete/${test.addTestId}' />"><i
+														class="os-icon os-icon-ui-15"></i></a></td>
 											</tr>
 										</c:if>
 									</c:forEach>

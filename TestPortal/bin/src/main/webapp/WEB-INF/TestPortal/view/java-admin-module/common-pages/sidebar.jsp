@@ -57,7 +57,7 @@
 						<li><a
 							href="${pageContext.request.contextPath }/java/admin/question/bank/new">New</a></li>
 						<li><a
-							href="${pageContext.request.contextPath }/java/admin/question/bank">View</a></li>
+							href="${pageContext.request.contextPath }/java/admin/question/bank">List</a></li>
 						<li><a
 							href="${pageContext.request.contextPath }/java/admin/question/bank/search">Search</a></li>
 					</ul></li>
@@ -69,7 +69,7 @@
 						<li><a
 							href="${pageContext.request.contextPath }/java/admin/add/test">New</a></li>
 						<li><a
-							href="${pageContext.request.contextPath }/java/admin/add/test/view">View</a></li>
+							href="${pageContext.request.contextPath }/java/admin/add/test/view">List</a></li>
 					</ul></li>
 
 				<li><a
@@ -136,7 +136,8 @@
 						<i class="os-icon os-icon-wallet-loaded"></i>
 					</div>
 					<ul>
-						<li><a href="#"><i
+						<li><a
+							href="${pageContext.request.contextPath }/java/admin/profile"><i
 								class="os-icon os-icon-user-male-circle2"></i><span>Profile
 									Details</span></a></li>
 
@@ -167,7 +168,7 @@
 							<li><a
 								href="${pageContext.request.contextPath }/java/admin/question/bank/new">New</a></li>
 							<li><a
-								href="${pageContext.request.contextPath }/java/admin/question/bank">View</a></li>
+								href="${pageContext.request.contextPath }/java/admin/question/bank">List</a></li>
 							<li><a
 								href="${pageContext.request.contextPath }/java/admin/question/bank/search">Search</a></li>
 						</ul>
@@ -187,7 +188,7 @@
 							<li><a
 								href="${pageContext.request.contextPath }/java/admin/add/test">New</a></li>
 							<li><a
-								href="${pageContext.request.contextPath }/java/admin/add/test/view">View</a></li>
+								href="${pageContext.request.contextPath }/java/admin/add/test/view">List</a></li>
 						</ul>
 					</div>
 				</div></li>
@@ -200,5 +201,72 @@
 			</a></li>
 		</ul>
 	</div>
+
+	<!-- MODAL -->
+	<div aria-hidden="true" id="myModal"
+		class="onboarding-modal modal fade animated" role="dialog"
+		tabindex="-1">
+		<div class="modal-dialog modal-centered" role="document">
+			<div class="modal-content text-center">
+				<button aria-label="Close" class="close" data-dismiss="modal"
+					type="button">
+					<span class="os-icon os-icon-close"></span>
+				</button>
+				<div class="onboarding-slide">
+					<div class="onboarding-media pt-0 w-100">
+						<img alt=""
+							src="${pageContext.request.contextPath }/static/img/security3.jpg"
+							width="100%"
+							style="background-size: cover; background-repeat: no-repeat;">
+					</div>
+					<div class="onboarding-content with-gradient pt-4 pb-4">
+						<h4 class="onboarding-title">Password Change</h4>
+						<form
+							action="${pageContext.request.contextPath }/java/student/profile/send/token"
+							method="get">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">Your User Name</label><input name="username"
+											class="form-control" placeholder="Enter your User name..."
+											value="">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">Your Email Address</label><input name="mailId"
+											class="form-control"
+											placeholder="Enter your Email address..." value="">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">Your Mobile Number</label><input name="mobile"
+											class="form-control"
+											placeholder="Enter your Mobile number..." value="">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">Your New Password</label><input name="password"
+											type="password" class="form-control"
+											placeholder="Enter your New password..." value="">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12 py-3" align="center">
+									<button class="btn btn-primary" type="submit">Submit</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>

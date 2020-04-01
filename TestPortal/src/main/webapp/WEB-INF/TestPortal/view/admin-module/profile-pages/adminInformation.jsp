@@ -78,59 +78,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="up-contents">
-						<h5 class="element-header">Profile Statistics</h5>
-						<div class="row m-b">
-							<div class="col-lg-6">
-								<div class="row">
-									<div class="col-sm-6 b-r b-b">
-										<div class="el-tablo centered padded">
-											<div class="value">3814</div>
-											<div class="label">Products Sold</div>
-										</div>
-									</div>
-									<div class="col-sm-6 b-b b-r">
-										<div class="el-tablo centered padded">
-											<div class="value">47.5K</div>
-											<div class="label">Followers</div>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-6 b-r">
-										<div class="el-tablo centered padded">
-											<div class="value">$95</div>
-											<div class="label">Daily Earnings</div>
-										</div>
-									</div>
-									<div class="col-sm-6 b-r">
-										<div class="el-tablo centered padded">
-											<div class="value">12</div>
-											<div class="label">Products</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="padded">
-									<div class="element-info-with-icon smaller">
-										<div class="element-info-icon">
-											<div class="os-icon os-icon-bar-chart-stats-up"></div>
-										</div>
-										<div class="element-info-text">
-											<h5 class="element-inner-header">Monthly Revenue</h5>
-											<div class="element-inner-desc">Calculated every month</div>
-										</div>
-									</div>
-									<div class="el-chart-w">
-										<canvas height="130" id="liteLineChart" width="300"></canvas>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-					</div>
+			
 				</div>
 			</div>
 			<div class="floated-colors-btn second-floated-btn">

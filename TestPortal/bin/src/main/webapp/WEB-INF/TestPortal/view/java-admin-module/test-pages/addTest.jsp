@@ -16,6 +16,7 @@
 				<div class="col-lg-12">
 					<div class="element-wrapper">
 						<div class="element-box">
+
 							<form:form
 								action="${pageContext.request.contextPath }/java/admin/add/test/save"
 								modelAttribute="addTest" name="addTest" id="addTestForm"
@@ -38,7 +39,7 @@
 										<div class="form-group">
 											<form:label path="date">Date</form:label>
 											<form:input path="date" type="date" name="date" id="date"
-												value="${dateValue }" class="form-control" />
+												class="form-control" />
 											<form:errors path="date"></form:errors>
 										</div>
 									</div>
@@ -78,7 +79,7 @@
 										</div>
 									</div>
 
-									<c:if test="${ addTest.negativeMarking==true }"> 
+									<c:if test="${ addTest.negativeMarking==true }">
 										<div class="col-sm-3" id="ratioDiv">
 											<div class="form-group">
 												<form:label path="ratio"> Ratio</form:label>
@@ -90,7 +91,7 @@
 										</div>
 									</c:if>
 
-									<c:if test="${ addTest.negativeMarking==null }"> 
+									<c:if test="${ addTest.negativeMarking==null }">
 										<div class="col-sm-3" id="ratioDiv">
 											<div class="form-group">
 												<form:label path="ratio"> Ratio</form:label>
@@ -101,9 +102,9 @@
 											</div>
 										</div>
 									</c:if>
-									
-									
-									<c:if test="${ addTest.negativeMarking==false }"> 
+
+
+									<c:if test="${ addTest.negativeMarking==false }">
 										<div class="col-sm-3" style="display: none" id="ratioDiv">
 											<div class="form-group">
 												<form:label path="ratio"> Ratio</form:label>
@@ -114,7 +115,7 @@
 											</div>
 										</div>
 									</c:if>
-									
+
 									<div class="col-sm-3">
 										<div class="form-group">
 											<form:label path="passingPercent"> Passing Percentage </form:label>
@@ -135,7 +136,8 @@
 
 								<!-- table -->
 								<div class="element-wrapper">
-									<div class="element-box" style="display: none;"  id="questions-table">
+									<div class="element-box" style="display: none;"
+										id="questions-table">
 										<h6 class="element-header mb-5">Questions List</h6>
 
 										<div class="table-responsive">
@@ -162,6 +164,7 @@
 									</div>
 								</div>
 							</form:form>
+
 						</div>
 					</div>
 				</div>
@@ -177,55 +180,36 @@
 <!-- Script triggered on change of subject -->
 <script type="text/javascript">
 	function filterBySubject() {
-		
-			$('#tableBody tr').remove();
-			data = { "subjectID" : $("#subject").val() };
-
-			
-			$.ajax({
-						type : "GET",
-						contentType : "application/json",
-						url : "${pageContext.request.contextPath}/add/test/filter/subject",
-						data : data,
-						dataType : 'json',
-
-						cache : false,
-
-						timeout : 600000,
-
-						success : function(response) {
-							var trHTML = '';
-
-							$
-									.each(
-											response,
-											function(i, item) {
-												trHTML += '<tr><td>'
-														+ item.questionId
-														+ '</td><td>'
-														+ item.question
-														+ '</td><td>'
-														+ item.questionType
-														+ '</td><td>'
-														+ item.marks
-														+ '</td><td>'
-														+ '<button type="button" id="addbtn'
-														+ (item.questionId)
-														+ '" class="btn btn-primary" onclick="add('
-														+ (item.questionId)
-														+ ');"> Add </button> </td> </tr>';
-											});
-
-							$('#tableBody tr td').remove();
-							$('#tableBody').append(trHTML);
-
-						}
-
-					});
-
-			$("#questions-table")
-					.css("display", "block");
-		}	
+		$('#tableBody tr').remove();
+		data = {
+			"subjectID" : $("#subject").val()
+		};
+		$.ajax({
+			type : "GET",
+			contentType : "application/json",
+			url : "${pageContext.request.contextPath}/add/test/filter/subject",
+			data : data,
+			dataType : 'json',
+			cache : false,
+			timeout : 600000,
+			success : function(response) {
+				var trHTML = '';
+				$.each(response, function(i, item) {
+					trHTML += '<tr><td>' + item.questionId + '</td><td>'
+							+ item.question + '</td><td>' + item.questionType
+							+ '</td><td>' + item.marks + '</td><td>'
+							+ '<button type="button" id="addbtn'
+							+ (item.questionId)
+							+ '" class="btn btn-primary" onclick="add('
+							+ (item.questionId)
+							+ ');"> Add </button> </td> </tr>';
+				});
+				$('#tableBody tr td').remove();
+				$('#tableBody').append(trHTML);
+			}
+		});
+		$("#questions-table").css("display", "block");
+	}
 </script>
 
 <!-- Script for toggling ratioDiv on negative marking change -->
@@ -262,7 +246,6 @@
 				jsonArr.push(jsonobj);
 			}
 		}
-
 		var data = document.getElementById('questionsJson');
 		data.value = JSON.stringify(jsonArr);
 	};

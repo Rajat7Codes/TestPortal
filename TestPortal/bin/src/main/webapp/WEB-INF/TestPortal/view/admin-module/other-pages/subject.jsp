@@ -12,7 +12,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="element-wrapper">
-				<h5 class="element-header">Subject Subject</h5>
+				<h5 class="element-header">Subject</h5>
 
 				<div class="row">
 					<div class="col-lg-4">
@@ -24,26 +24,23 @@
 									method="post">
 
 									<form:hidden path="subjectId" />
+
 									<h5 class="form-header">Add Subject</h5>
 
-									<div class="form-group row">
-										<form:label class="col-form-label col-sm-4" path="subjectName"> Subject Name</form:label>
-										<div class="col-sm-8">
-											<form:input class="form-control"
-												placeholder="Enter Subject Name" path="subjectName"
-												name="subjectName" id="subjectName" type="text" />
-										</div>
+									<div class="form-group">
+										<form:label class="col-form-label" path="subjectName"> Subject Name</form:label>
+										<form:input class="form-control"
+											placeholder="Enter Subject Name" path="subjectName"
+											name="subjectName" id="subjectName" type="text" />
 									</div>
 
-									<div class="form-group row">
-										<form:label class="col-form-label col-sm-4" path="status"> Status</form:label>
-										<div class="col-sm-8">
-											<form:select path="status" name="status" id="status"
-												class="form-control">
-												<form:option value="true">Active</form:option>
-												<form:option value="false">Inactive</form:option>
-											</form:select>
-										</div>
+									<div class="form-group">
+										<form:label class="col-form-label" path="status"> Status</form:label>
+										<form:select path="status" name="status" id="status"
+											class="form-control">
+											<form:option value="true">Active</form:option>
+											<form:option value="false">Inactive</form:option>
+										</form:select>
 									</div>
 
 									<div class="form-buttons-w">

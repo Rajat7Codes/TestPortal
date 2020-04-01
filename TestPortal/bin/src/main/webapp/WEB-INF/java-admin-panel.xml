@@ -26,7 +26,7 @@
 	</definition>
 
 	<!-- ADMIN PROFILE DETAILS -->
-	<definition name="adminStudProfile"
+	<definition name="j_adminStudProfile"
 		extends="javaadminbase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | ADMIN PROFILE" />
@@ -34,7 +34,7 @@
 			value="/WEB-INF/TestPortal/view/java-admin-module/profile-pages/adminInformation.jsp" />
 	</definition>
 
-	<definition name="updateAdminProfile"
+	<definition name="j_updateAdminProfile"
 		extends="javaadminbase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | UPDATE PROFILE" />
@@ -68,7 +68,8 @@
 	</definition>
 
 	<!-- DEPARTMENT PAGE -->
-	<definition name="j_department" extends="javaadminbase.definition">
+	<definition name="j_department"
+		extends="javaadminbase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | DEPARTMENT" />
 		<put-attribute name="body"
@@ -76,7 +77,8 @@
 	</definition>
 
 	<!-- SUBJECT PAGE -->
-	<definition name="j_subject" extends="javaadminbase.definition">
+	<definition name="j_subject"
+		extends="javaadminbase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | SUBJECT" />
 		<put-attribute name="body"
@@ -93,7 +95,8 @@
 	</definition>
 
 	<!-- TEST PAGES -->
-	<definition name="j_addTest" extends="javaadminbase.definition">
+	<definition name="j_addTest"
+		extends="javaadminbase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | NEW TEST" />
 		<put-attribute name="body"
@@ -108,14 +111,16 @@
 	</definition>
 
 	<!-- RESULT PAGES -->
-	<definition name="j_viewResult" extends="javaadminbase.definition">
+	<definition name="j_viewResult"
+		extends="javaadminbase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | VIEW RESULT" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/java-admin-module/result-pages/result.jsp" />
 	</definition>
 
-	<definition name="j_testResult" extends="javaadminbase.definition">
+	<definition name="j_testResult"
+		extends="javaadminbase.definition">
 		<put-attribute name="title" value="TEST PORTAL | RESULT" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/java-admin-module/result-pages/testResult.jsp" />

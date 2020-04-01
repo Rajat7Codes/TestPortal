@@ -17,8 +17,6 @@
 </head>
 <body
 	class="menu-position-side menu-side-left full-screen with-content-panel ">
-
-
 	<div class="content-i">
 		<div class="content-box">
 			<div class="element-wrapper">
@@ -73,7 +71,7 @@
 								<!-- <a class="btn btn-primary btn-sm" href="#"><i
 									class="os-icon os-icon-link-3"></i><span>Add to Friends</span></a> -->
 								<a class="btn btn-primary btn-sm"
-									href="${pageContext.request.contextPath }/admin/profile/update"><i
+									href="${pageContext.request.contextPath }/java/admin/profile/update"><i
 									class="os-icon os-icon-edit"></i><span>Edit Profile</span></a>
 							</div>
 						</div>
