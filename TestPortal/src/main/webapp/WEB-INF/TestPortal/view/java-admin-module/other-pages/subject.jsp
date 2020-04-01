@@ -57,13 +57,13 @@
 							<div class="element-box">
 								<h5 class="form-header">Subject List</h5>
 								<div class="table-responsive">
-									<table class="table table-striped table-lightfont">
+									<table class="table table-striped table-lightfont text-center">
 										<thead>
 											<tr>
 												<th>Id</th>
-												<th class="subject_">subject Name</th>
-												<th class="status_">Status</th>
-												<th class="action_">Action</th>
+												<th>subject Name</th>
+												<th>Status</th>
+												<th>Action</th>
 											</tr>
 										</thead>
 										<tbody id="tableBody">
@@ -78,22 +78,12 @@
 													<c:if test="${subject.status == false}">
 														<td class="status"><c:out value="Inactive" /></td>
 													</c:if>
-													<td class="valigntop"><div class="btn-group">
-															<button
-																class="btn btn-xs btn-success dropdown-toggle no-margin"
-																type="button" data-toggle="dropdown"
-																aria-expanded="false">
-																Actions <i class="fa fa-angle-down"></i>
-															</button>
-															<ul class="dropdown-menu pull-left" role="menu">
-																<li><a title="Delete"
-																	href="<c:url value='/java/admin/subject/delete/${subject.subjectId }' />"><i
-																		class="fa fa-trash"></i>Delete</a></li>
-																<li><a title="Edit"
-																	href="<c:url value='/java/admin/subject/edit/${subject.subjectId }' />"><i
-																		class="fa fa-edit"></i>Edit</a></li>
-															</ul>
-														</div></td>
+													<td class="row-actions"><a title="Edit"
+														href="<c:url value='/java/admin/subject/edit/${subject.subjectId }' />"><i
+															class="os-icon os-icon-ui-49"></i></a> <a class="danger"
+														title="Delete"
+														href="<c:url value='/java/admin/subject/delete/${subject.subjectId }' />"><i
+															class="os-icon os-icon-ui-15"></i></a></td>
 												</tr>
 											</c:forEach>
 										</tbody>

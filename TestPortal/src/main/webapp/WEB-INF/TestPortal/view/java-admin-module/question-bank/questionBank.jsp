@@ -13,26 +13,24 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body onload="myToggle();">
-
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="element-wrapper">
 				<h5 class="element-header">Question Bank</h5>
-
-				<!-- 	<div class="row">
-					<div class="col-lg-12"> -->
 				<div class="element-wrapper">
 					<div class="element-box">
+
 						<form:form
-							action="${pageContext.request.contextPath }/admin/question/bank/save"
+							action="${pageContext.request.contextPath }/java/admin/question/bank/save"
 							modelAttribute="questionBank" method="post"
 							enctype="multipart/form-data">
 
 							<form:hidden path="questionBankId" />
 							<form:hidden path="filePath" />
 							<form:hidden path="contentType" />
+
 							<div style="display: none;" id="typeArray">${questionTypeJson}</div>
-							<h6 class="element-header mb-5">Add Question Bank</h6>
+							<h6 class="element-header">New Question Bank</h6>
 							<div class="row">
 								<c:if test="${edit == false }">
 									<div class="col-sm-6">
@@ -208,7 +206,6 @@
 								</div>
 							</div>
 
-
 							<c:if test="${edit == false }">
 								<div id="optionsDiv">
 									<h6 class="element-header mt-5">Options</h6>
@@ -218,10 +215,9 @@
 											placeholder="Option Name" id="optionName"><label
 											class="form-check-label text-center col-sm-3 mb-2"><input
 											class="form-check-input" type="checkbox" id="correct">
-											Correct</label>
+											Answer</label>
 										<button class="btn btn-primary" id="add" type="button">Add</button>
 									</div>
-
 
 									<div class="mt-5">
 										<div class="table-responsive mb-5">
@@ -290,10 +286,8 @@
 									</div>
 								</div>
 							</c:if>
-							<div class="form-buttons-w">
+							<div class="form-buttons-w text-center pt-5">
 								<input type="text" id="data" name="data" style="display: none;">
-								<!-- <i class="btn" id="jsonBtn" onclick="addToUpdateJson1();">Add</i> -->
-								<!-- <input type="button" onclick="newPageJson();">Cheack -->
 								<c:if test="${edit == true }">
 									<button class="btn btn-primary" type="submit"
 										onclick="addToUpdateJson1();">Update</button>
@@ -311,22 +305,21 @@
 		</div>
 	</div>
 </body>
+
 <script type="text/javascript">
 	function myToggle() {
 		var type = document.getElementById("questionType").value;
 		var typeArray = document.getElementById('typeArray').innerHTML;
 		var parseJson = JSON.parse(typeArray);
 		var stringifyJson = JSON.stringify(parseJson);
-		//alert("stringifyJson ===>>>" + stringifyJson);
+
 		for (i = 0; i <= parseJson.length; i++) {
 			var obj = parseJson[i];
 			var questionTypeId = obj.questionTypeId
-			//var imageTypeId= obj.
 			if (type == questionTypeId) {
 				var questionType = obj.type;
 				var programType = obj.programType;
 				var imageType = obj.imageType;
-				//alert("imageType ==>>" + imageType);
 				if (imageType == true) {
 					document.getElementById('subDiv').classList
 							.remove("col-sm-12");
@@ -335,7 +328,6 @@
 					/* document.getElementById('questionDiv').style.display = 'none'; */
 				} else {
 					document.getElementById('imageToggle').style.display = 'none';
-
 					document.getElementById('subDiv').classList
 							.add("col-sm-12");
 				}
@@ -350,6 +342,7 @@
 		}
 	}
 </script>
+
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -359,9 +352,7 @@
 										function() {
 											var option = document
 													.getElementById("optionName").value;
-
 											if ($("#correct").prop('checked') == true) {
-
 												var answer = document
 														.getElementById("optionName").value;
 												var answer = true;
@@ -375,7 +366,6 @@
 													+ "</td><td>"
 													+ answer
 													+ "</td><td><i class='os-icon os-icon-ui-15' style='color:red;' onclick='deleteRow($(this));'><i></td>/tr>";
-
 											$('#optionsBody').append(markup);
 										});
 					});
@@ -383,24 +373,22 @@
 		row.closest('tr').remove();
 	}
 </script>
+
 <script type="text/javascript">
 	function newPageJson() {
 		var sellEntryDetArray = [];
 		var sellEntryTable = document.getElementById("optionsBody");
 
-		//alert("sellEntryTable===>" + sellEntryTable.rows.length);
 		for (var i = 0; i < sellEntryTable.rows.length; i++) {
-			//alert("sellEntryTable===>" + sellEntryTable.rows[i].cells[0].innerHTML);
 			var jsonObject = {
 				"optionName" : sellEntryTable.rows[i].cells[0].innerHTML,
 				"correctAnswer" : sellEntryTable.rows[i].cells[1].innerHTML
 			};
-			//alert("json===>" + JSON.stringify(jsonObject));
 			sellEntryDetArray.push(jsonObject);
 		}
+
 		var data = document.getElementById('data');
 		data.value = JSON.stringify(sellEntryDetArray);
-		//alert("json array===>" + JSON.stringify(sellEntryDetArray));
 	}
 </script>
 
@@ -423,7 +411,6 @@
 									var attr = $('#optTableUpdate thead tr th')
 											.eq(idxCell).text();
 									retVal[attr] = input.val();
-
 								} else {
 									var attr = $('#optTableUpdate thead tr th')
 											.eq(idxCell).text();
@@ -432,11 +419,9 @@
 							});
 					return retVal;
 				}).get();
-
 		jsonArray.push(tbl);
 		var data = document.getElementById("data");
 		data.value = JSON.stringify(tbl);
-		//alert("update array data =====>>>" + JSON.stringify(tbl))
 	}
 </script>
 </html>

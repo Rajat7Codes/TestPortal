@@ -35,14 +35,12 @@
 									<span class="element-box el-tablo bg-white">
 										<div class="label text-dark">isNegative</div>
 										<div class="font-weight-bold">
-
 											<c:if test="${test.negativeMarking==true}">
 												<div class="">Yes</div>
 											</c:if>
 											<c:if test="${test.negativeMarking==false}">
 												<div class="">No</div>
 											</c:if>
-											</td>
 										</div>
 									</span>
 								</div>

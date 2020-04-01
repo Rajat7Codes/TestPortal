@@ -18,7 +18,7 @@
 					<div class="element-box">
 
 						<div class="table-responsive">
-							<table id="" width="100%"
+							<table style="width: 100%"
 								class="table table-striped table-lightfont text-center">
 								<thead>
 									<tr>

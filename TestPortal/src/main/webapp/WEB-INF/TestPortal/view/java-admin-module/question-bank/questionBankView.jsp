@@ -18,8 +18,7 @@
 					<div class="element-box">
 
 						<div class="table-responsive">
-							<table id="" width="100%"
-								class="table table-striped table-lightfont">
+							<table class="table table-striped table-lightfont text-center">
 								<thead>
 									<tr>
 										<th>Sr. No</th>
@@ -39,21 +38,13 @@
 											<td>${questionBank.question }</td>
 											<td>${questionBank.getSubject().subjectName }</td>
 											<td>${questionBank.marks }</td>
-											<%-- <td class="valigntop"><div class="btn-group">
-													<button
-														class="btn btn-xs btn-success dropdown-toggle no-margin"
-														type="button" data-toggle="dropdown" aria-expanded="false">
-														Actions <i class="fa fa-angle-down"></i>
-													</button>
-													<ul class="dropdown-menu pull-left" role="menu">
-														<li><a title="Delete"
-															href="<c:url value='/admin/question/bank/edit/${questionBank.questionBankId}' />"><i
-																class="fa fa-trash"></i>Edit</a></li>
-														<li><a title="Edit"
-															href="<c:url value='/admin/question/bank/delete/${questionBank.questionBankId}' />"><i
-																class="fa fa-edit"></i>Delete</a></li>
-													</ul>
-												</div></td> --%>
+
+											<%-- <td class="row-actions"><a title="Edit"
+												href="<c:url value='/admin/question/bank/edit/${questionBank.questionBankId}' />"><i
+													class="os-icon os-icon-ui-49"></i></a> <a class="danger"
+												title="Delete"
+												href="<c:url value='/java/admin/questionType/delete/${questionType.questionTypeId }' />"><i
+													class="os-icon os-icon-ui-15"></i></a></td> --%>
 										</tr>
 									</c:forEach>
 								</tbody>

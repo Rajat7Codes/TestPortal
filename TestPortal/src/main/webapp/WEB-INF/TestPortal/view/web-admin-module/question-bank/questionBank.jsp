@@ -22,7 +22,7 @@
 					<div class="element-wrapper">
 						<div class="element-box">
 							<form:form
-								action="${pageContext.request.contextPath }/admin/question/bank/save"
+								action="${pageContext.request.contextPath }/web/admin/question/bank/save"
 								modelAttribute="questionBank" method="post"
 								enctype="multipart/form-data">
 
@@ -131,7 +131,10 @@
 										<div class="form-group w-25 m-auto text-center">
 											<button class="btn btn-dark rounded-circle"
 												data-target="#onboardingTextModal" data-toggle="modal"
-												type="button"><i data-toggle="tooltip"  title="Example Input" class="fa fa-question"></i> </button>
+												type="button">
+												<i data-toggle="tooltip" title="Example Input"
+													class="fa fa-question"></i>
+											</button>
 											<div aria-hidden="true"
 												class="onboarding-modal modal fade animated"
 												id="onboardingTextModal" role="dialog" tabindex="-1">
@@ -142,8 +145,11 @@
 															<span class="os-icon os-icon-close"></span>
 														</button>
 														<div class="onboarding-content with-gradient">
-															<h4 class="onboarding-title">Example of Sample Input!</h4>
-															<div class="onboarding-text">3<br>This<br>Is<br>Example</div>
+															<h4 class="onboarding-title">Example of Sample
+																Input!</h4>
+															<div class="onboarding-text">
+																3<br>This<br>Is<br>Example
+															</div>
 														</div>
 													</div>
 												</div>
@@ -160,7 +166,10 @@
 										<div class="form-group w-25 m-auto text-center">
 											<button class="btn btn-dark rounded-circle"
 												data-target="#onboardingTextModal1" data-toggle="modal"
-												type="button"><i data-toggle="tooltip"  title="Example Output" class="fa fa-question"></i> </button>
+												type="button">
+												<i data-toggle="tooltip" title="Example Output"
+													class="fa fa-question"></i>
+											</button>
 											<div aria-hidden="true"
 												class="onboarding-modal modal fade animated"
 												id="onboardingTextModal1" role="dialog" tabindex="-1">
@@ -171,7 +180,8 @@
 															<span class="os-icon os-icon-close"></span>
 														</button>
 														<div class="onboarding-content with-gradient">
-															<h4 class="onboarding-title">Example of Sample Output!</h4>
+															<h4 class="onboarding-title">Example of Sample
+																Output!</h4>
 															<div class="onboarding-text">Example</div>
 														</div>
 													</div>
@@ -179,7 +189,7 @@
 											</div>
 										</div>
 									</div>
-									
+
 									<!-- Hidden Input Output -->
 									<div class="col-12 p-0 row">
 										<div class="form-group col-6">
