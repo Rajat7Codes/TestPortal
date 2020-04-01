@@ -73,7 +73,7 @@
 						</div>
 						<ul>
 							<li><a
-								href="${pageContext.request.contextPath }/admin/profile"><i
+								href="${pageContext.request.contextPath }/web/admin/profile"><i
 									class="os-icon os-icon-user-male-circle2"></i><span>
 										Profile Details</span></a></li>
 

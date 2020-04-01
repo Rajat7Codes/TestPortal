@@ -102,12 +102,12 @@ public class StartTestController {
 		if (!testList.isEmpty()) {
 			for (Long testId : testList.keySet()) {
 				if (testList.get(testId).equals("not given")) {
-					addTestList.add( this.addTestService.getAddTestById(testId));
+					addTestList.add(this.addTestService.getAddTestById(testId));
 				}
 			}
 		} else {
 			for (AddTest test : addTestService.getAddTestList()) {
-				if ( test.getDepartmentName().equals("JAVA")) {
+				if (test.getDepartmentName().equals("JAVA")) {
 					addTestList.add(test);
 				}
 			}
@@ -292,6 +292,10 @@ public class StartTestController {
 		testResult.setAnswersGiven(yourAnswers);
 		testResult.setUserId(this.userService.findBySSO(this.getPrincipal()).getId());
 		testResult.setPercentage(Double.parseDouble(form.format(per)));
+		testResult.setUserDepartmentName(
+				this.userService.findBySSO(this.getPrincipal()).getDepartment().getDepartmentName());
+		System.out.println("Department name ============>>>>>>"
+				+ this.userService.findBySSO(this.getPrincipal()).getDepartment().getDepartmentName());
 		this.testResultService.saveTestResult(testResult);
 
 		JSONObject obj = new JSONObject();
@@ -329,7 +333,6 @@ public class StartTestController {
 			}
 		}
 
-
 		List<AddTest> addTestList = new ArrayList<AddTest>();
 		if (!testList.isEmpty()) {
 			for (Long testId : testList.keySet()) {
@@ -339,7 +342,7 @@ public class StartTestController {
 			}
 		} else {
 			for (AddTest test : addTestService.getAddTestList()) {
-				if ( test.getDepartmentName().equals("WEB")) {
+				if (test.getDepartmentName().equals("WEB")) {
 					addTestList.add(test);
 				}
 			}

@@ -40,7 +40,7 @@
 								<div class="col-sm-4 col-xxxl-4">
 									<a class="element-box el-tablo" href="#"><div class="label">Total
 											Test</div>
-										<div class="value">${totalTestList }</div>
+										<div class="value">${totalTestCountThis }</div>
 										<div class="trending trending-down-basic">
 											<!-- <span>12%</span><i class="os-icon os-icon-arrow-down"></i> -->
 										</div></a>
@@ -227,6 +227,7 @@
 									<tbody>
 										<c:forEach var="test" items="${testResultStudentToday}"
 											varStatus="ind">
+											<%-- <c:if test="${ test.userDepartmentName == 'JAVA'}"> --%>
 											<tr>
 												<td class="text-center">${ind.index+1}</td>
 												<td>${userService.findById(test.userId).getFirstName() }</td>
@@ -241,6 +242,7 @@
 													class="os-icon os-icon-grid-10"></i></a><a class="danger"
 												href="#"><i class="os-icon os-icon-ui-15"></i></a></td> -->
 											</tr>
+											<%-- </c:if> --%>
 										</c:forEach>
 
 									</tbody>
@@ -274,6 +276,7 @@
 									<tbody>
 										<c:forEach var="test" items="${testResultStudentMonthly}"
 											varStatus="ind">
+											<%-- <c:if test="${ test.userDepartmentName == 'JAVA'}"> --%>
 											<tr>
 												<td class="text-center">${ind.index+1}</td>
 												<td>${userService.findById(test.userId).getFirstName() }</td>
@@ -288,6 +291,7 @@
 													class="os-icon os-icon-grid-10"></i></a><a class="danger"
 												href="#"><i class="os-icon os-icon-ui-15"></i></a></td> -->
 											</tr>
+											<%-- </c:if> --%>
 										</c:forEach>
 
 									</tbody>
@@ -497,7 +501,7 @@
 							class="chartjs-render-monitor" style="display: block;"></canvas>
 						<div class="inside-donut-chart-label">
 							<strong>${todayStudentPassFailStatusTotalCount}</strong><span>Total
-								Students</span>
+								Results</span>
 						</div>
 					</div>
 					<!-- <div class="el-legend condensed">
@@ -549,7 +553,7 @@
 							class="chartjs-render-monitor" style="display: block;"></canvas>
 						<div class="inside-donut-chart-label">
 							<strong>${monthlyStudentPassFailStatusTotalCount}</strong><span>Total
-								Students</span>
+								Results</span>
 						</div>
 					</div>
 					<!-- <div class="el-legend condensed">

@@ -26,7 +26,7 @@
 	</definition>
 
 	<!-- ADMIN PROFILE DETAILS -->
-	<definition name="adminStudProfile"
+	<definition name="w_adminStudProfile"
 		extends="webadminbase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | ADMIN PROFILE" />
@@ -34,7 +34,7 @@
 			value="/WEB-INF/TestPortal/view/web-admin-module/profile-pages/adminInformation.jsp" />
 	</definition>
 
-	<definition name="updateAdminProfile"
+	<definition name="w_updateAdminProfile"
 		extends="webadminbase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | UPDATE PROFILE" />

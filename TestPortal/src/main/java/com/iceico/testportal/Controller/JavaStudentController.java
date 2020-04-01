@@ -79,6 +79,7 @@ public class JavaStudentController {
 	/* JAVA STUDENT PROFILE */
 	@GetMapping("/java/student/profile")
 	public String displayUserInformation(ModelMap modelMap, Locale locale) throws java.text.ParseException {
+		String userDepartmentName = "JAVA";
 		Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
 		/* All Result List Pass & Fail Up Till Now */
 		List<String> studentTotalPassCountUpTillNow = new ArrayList<String>();
@@ -123,22 +124,23 @@ public class JavaStudentController {
 		Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(currentdate.withDayOfMonth(1).toString());
 		Date lastDate = new SimpleDateFormat("yyyy-MM-dd")
 				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
-
-		SimpleDateFormat month_date = new SimpleDateFormat("MMMM");
-		String monthWise = null;
-		List<String> monthWiseList = new ArrayList<String>();
+		SimpleDateFormat month_date = new SimpleDateFormat("EE");
+		String dayWise = null;
 		List<Double> percentageMonthWiseList = new ArrayList<Double>();
 		percentageMonthWiseList.add(0.0);
-		for (TestResult testResultForLineGraph : this.dashboardService.getMonthlysPerformancePercentageAll(startDate,
-				lastDate)) {
-			System.out.println("Line per ================>>>>" + testResultForLineGraph.getPercentage());
-			monthWise = month_date.format(testResultForLineGraph.getDate());
-			monthWiseList.add(monthWise);
+		List<String> monthWiseList = new ArrayList<String>();
+		List<Date> dateWiseList = new ArrayList<Date>();
+		dateWiseList.add(null);
+		monthWiseList.add("");
+		for (TestResult testResultForLineGraph : this.dashboardService
+				.getMonthlysPerformanceForDepartmentWiseAllResult(userDepartmentName, startDate, lastDate)) {
+			dayWise = month_date.format(testResultForLineGraph.getDate());
+			monthWiseList.add(dayWise);
+			dateWiseList.add(testResultForLineGraph.getDate());
 			percentageMonthWiseList.add(testResultForLineGraph.getPercentage());
 		}
-		modelMap.addAttribute("monthWiseList", monthWiseList);
+		modelMap.addAttribute("dateWiseList", dateWiseList);
 		modelMap.addAttribute("percentageMonthWiseList", percentageMonthWiseList);
-		System.out.println("Line per Month ================>>>>" + monthWise);
 		/* END Monthly wise Performance For Line Graph */
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "javaStudProfile";
@@ -204,7 +206,6 @@ public class JavaStudentController {
 		List<String> studentTotalPassCountUpTillNow = new ArrayList<String>();
 		List<String> studentTotalFailCountUpTillNow = new ArrayList<String>();
 		List<String> studentTotalTestAttemptedCount = new ArrayList<String>();
-
 		/* Start Total Pass Fail Up Till Now Count Department Wise */
 		for (TestResult allTestResult : this.testResultService.getTestResultList()) {
 			Integer userId = allTestResult.getUserId();

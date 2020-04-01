@@ -39,7 +39,7 @@
 								</div>
 								<div class="col-sm-6 text-right">
 									<a class="btn btn-primary btn-sm"
-										href="${pageContext.request.contextPath }/java/student/profile"><i
+										href="${pageContext.request.contextPath }/web/admin/profile"><i
 										class="os-icon os-icon-user"></i><span>View Profile</span></a>
 								</div>
 							</div>
@@ -115,7 +115,7 @@
 					<div class="element-wrapper">
 						<div class="element-box">
 							<form
-								action="${pageContext.request.contextPath }/admin/profile/save"
+								action="${pageContext.request.contextPath }/web/admin/profile/save"
 								name="formValidateForm" id="formValidateForm" method="post"
 								enctype="multipart/form-data">
 

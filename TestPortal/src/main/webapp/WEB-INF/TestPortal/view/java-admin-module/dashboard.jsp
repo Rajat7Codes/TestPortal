@@ -31,6 +31,7 @@
 							</form>
 						</div> -->
 
+<<<<<<< HEAD
 				<h6 class="element-header">Java Admin Dashboard</h6>
 				<div class="element-content">
 					<div class="row">
@@ -66,6 +67,45 @@
 								<div class="trending trending-up-basic">
 									<span>12%</span><i class="os-icon os-icon-arrow-up2"></i>
 								</div></a>
+=======
+						<h6 class="element-header">Java Admin Dashboard</h6>
+						<div class="element-content">
+							<div class="row">
+								<div class="col-sm-4 col-xxxl-3">
+									<a class="element-box el-tablo" href="#"><div class="label">Users</div>
+										<div class="value">${totalJavaUsersCount }</div>
+										<div class="trending trending-up-basic">
+											<!-- <span>12%</span><i class="os-icon os-icon-arrow-up2"></i> -->
+										</div></a>
+								</div>
+								<div class="col-sm-4 col-xxxl-3">
+									<a class="element-box el-tablo"
+										href="${pageContext.request.contextPath }/java/admin/add/test/view"><div
+											class="label">Test</div>
+										<div class="value">${OverallTestCount }</div>
+										<div class="trending trending-down-basic">
+											<!-- <span>12%</span><i class="os-icon os-icon-arrow-down"></i> -->
+										</div></a>
+								</div>
+								<div class="col-sm-4 col-xxxl-3">
+									<a class="element-box el-tablo"
+										href="${pageContext.request.contextPath }/java/admin/question/bank"><div
+											class="label">Questions</div>
+										<div class="value">${totalQuestionsCount }</div>
+										<div class="trending trending-down-basic">
+											<!-- <span>9%</span><i class="os-icon os-icon-arrow-down"></i> -->
+										</div></a>
+								</div>
+								<div class="d-none d-xxxl-block col-xxxl-3">
+									<a class="element-box el-tablo" href="#"><div class="label">Refunds
+											Processed</div>
+										<div class="value">$294</div>
+										<div class="trending trending-up-basic">
+											<span>12%</span><i class="os-icon os-icon-arrow-up2"></i>
+										</div></a>
+								</div>
+							</div>
+>>>>>>> e75884126c57eec6861e6a4f03f5ddc3e83e007c
 						</div>
 					</div>
 				</div>
@@ -253,6 +293,7 @@
 					</div>
 				</div>
 			</div>
+<<<<<<< HEAD
 		</div>
 	</div>
 
@@ -301,6 +342,54 @@
 								</c:forEach>
 							</tbody>
 						</table>
+=======
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="element-wrapper">
+						<h6 class="element-header">Today Top 10 Students</h6>
+						<div class="element-box-tp">
+							<div class="table-responsive">
+								<table
+									class="table table-bordered table-lg table-v2 table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">Rank</th>
+											<th>User Id</th>
+											<th>Students</th>
+											<th>Date</th>
+											<th>Test Name</th>
+											<th>Total Marks</th>
+											<th>Obtained Marks</th>
+											<th>Percentage</th>
+											<th>Status</th>
+											<!-- <th>Actions</th> -->
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="test" items="${testResultStudentToday}"
+											varStatus="ind">
+											<tr>
+												<td class="text-center">${ind.index+1}</td>
+												<td>${test.userId }</td>
+												<td>${userService.findById(test.userId).getFirstName() }</td>
+												<td>${test.date }</td>
+												<td>${test.testName }</td>
+												<td>${test.totalMarks }</td>
+												<td>${test.obtainedMarks }</td>
+												<td>${test.percentage }</td>
+												<td class="text-center">${test.resultStatus }</div></td>
+												<!-- <td class="row-actions"><a href="#"><i
+													class="os-icon os-icon-ui-49"></i></a><a href="#"><i
+													class="os-icon os-icon-grid-10"></i></a><a class="danger"
+												href="#"><i class="os-icon os-icon-ui-15"></i></a></td> -->
+											</tr>
+										</c:forEach>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+>>>>>>> e75884126c57eec6861e6a4f03f5ddc3e83e007c
 					</div>
 				</div>
 			</div>
@@ -635,12 +724,12 @@
 	var myChart = new Chart(ctx, {
 		type : 'bar',
 		data : {
-			labels : ${topTenStudentsUserId},
+			labels : ${topTenStudentsUserIdJava},
 			datasets : [ {
 				label : '# UserId & Percentage (%)',
 				barPercentage : 0.4,
 
-				data : ${topTenPercentages},
+				data : ${topTenPercentagesjava},
 				backgroundColor : [ 'rgba(255, 99, 132)', 'rgba(54, 162, 235)',
 						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
 						'rgba(153, 102, 255)', 'rgba(255, 159, 64)','rgba(255, 99, 132)', 'rgba(54, 162, 235)',
@@ -663,10 +752,9 @@
 						'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
 						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
 						'rgba(255, 159, 64, 1)' ],
-				borderWidth : 1
+				borderWidth : 3
 			} ]
 		},
-
 		options : {
 			scales : {
 				yAxes : [ {
