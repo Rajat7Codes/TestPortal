@@ -61,8 +61,6 @@ public class AdminController {
 			@RequestParam("fileName") MultipartFile fileName, HttpServletRequest httpServletRequest, ModelMap modelMap,
 			Locale locale) throws ParseException {
 
-		System.out.println("fileName ============>>> " + fileName);
-
 		String uploadFolder = httpServletRequest.getServletContext().getRealPath("/uploaded");
 
 		File directory = new File(uploadFolder);

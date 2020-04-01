@@ -84,18 +84,8 @@ public class AddTestController {
 			throws ResourceNotFoundException {
 		AddTest addTest = this.addTestService.getAddTestById(addTestId);
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-		modelMap.addAttribute("dateValue", new SimpleDateFormat("dd/MM/YYYY").format(addTest.getDate()));
+		modelMap.addAttribute("addTest", addTest);
 		modelMap.addAttribute("edit", true);
-		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		return "addTest";
-	}
-
-	// SAVE EDITED TEST
-	@GetMapping("/admin/add/test/edit")
-	public String saveEditedTest(@ModelAttribute("addTest") @Valid AddTest addTest, ModelMap modelMap, Locale locale)
-			throws ResourceNotFoundException {
-		this.addTestService.saveAddTest(addTest);
-		modelMap.addAttribute("dateValue", new SimpleDateFormat("dd/MM/YYYY").format(addTest.getDate()));
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "addTest";
 	}
@@ -127,35 +117,37 @@ public class AddTestController {
 			@ModelAttribute("addTest") @Valid AddTest addTest, BindingResult bindingResult, ModelMap modelMap,
 			Locale locale) throws ParseException, ResourceNotFoundException {
 		if (bindingResult.hasErrors()) {
-			System.out.println("error ===> "+bindingResult.getAllErrors());
-			modelMap.addAttribute("addTest", new AddTest());
-			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-			return "addTest";
-		} else {
+				modelMap.addAttribute("addTest", new AddTest());
+				modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+				modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+				return "addTest";
+			} else {
 
-			List<TestQuestion> addedQuestions = new ArrayList<TestQuestion>();
-			Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
-			String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
-					.getDepartmentName();
+				List<TestQuestion> addedQuestions = new ArrayList<TestQuestion>();
+				Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
+				String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
+						.getDepartmentName();
 
-			JSONParser parser = new JSONParser();
-			JSONArray questionArray = (JSONArray) parser.parse(questions);
+				JSONParser parser = new JSONParser();
+				JSONArray questionArray = (JSONArray) parser.parse(questions);
 
-			for (int i = 0; i < questionArray.size(); i++) {
-				TestQuestion testQuestions = new TestQuestion();
-				JSONObject obj = (JSONObject) questionArray.get(i);
-				testQuestions.setQuestionId(Long.parseLong(obj.get("questionId") + ""));
-				testQuestions.setAddTest(addTest);
-				addedQuestions.add(testQuestions);
+				for (int i = 0; i < questionArray.size(); i++) {
+					TestQuestion testQuestions = new TestQuestion();
+					JSONObject obj = (JSONObject) questionArray.get(i);
+					testQuestions.setQuestionId(Long.parseLong(obj.get("questionId") + ""));
+					testQuestions.setAddTest(addTest);
+					addedQuestions.add(testQuestions);
+				}
+				addTest.setTestQuestions(addedQuestions);
+				addTest.setIsDeleted(false);
+				addTest.setUserId(currentUserId);
+				addTest.setSubject(addTest.getSubject());
+				addTest.setDepartmentName(currentAdminDepartment);
+				this.addTestService.saveAddTest(addTest);
+
+				modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+				return "redirect:/admin/add/test/view";
 			}
-			addTest.setTestQuestions(addedQuestions);
-			addTest.setUserId(currentUserId);
-			addTest.setDepartmentName(currentAdminDepartment);
-			this.addTestService.saveAddTest(addTest);
-			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-			return "redirect:/admin/add/test";
-		}
 	}
 
 	/* TEST RESULT */
@@ -242,7 +234,6 @@ public class AddTestController {
 		modelMap.addAttribute("addTest", addTest);
 		modelMap.addAttribute("edit", true);
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-		modelMap.addAttribute("dateValue", new SimpleDateFormat("dd/MM/YYYY").format(addTest.getDate()));
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "j_addTest";
 	}
@@ -273,7 +264,6 @@ public class AddTestController {
 	public String saveTest_java(@RequestParam("questionsJson") String questions,
 			@ModelAttribute("addTest") @Valid AddTest addTest, BindingResult bindingResult, ModelMap modelMap,
 			Locale locale) throws ParseException, ResourceNotFoundException {
-		System.out.println("askcbjkcjbakcjbaskc");
 		if (bindingResult.hasErrors()) {
 			modelMap.addAttribute("addTest", new AddTest());
 			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
@@ -299,38 +289,12 @@ public class AddTestController {
 			addTest.setTestQuestions(addedQuestions);
 			addTest.setIsDeleted(false);
 			addTest.setUserId(currentUserId);
+			addTest.setSubject(addTest.getSubject());
 			addTest.setDepartmentName(currentAdminDepartment);
 			this.addTestService.saveAddTest(addTest);
 
 			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-			return "redirect:/java/admin/add/test";
-		}
-	}
-
-	/* SAVE TEST */
-	@PostMapping("/java/admin/add/test/edit/save")
-	public String saveEditedTest_java( @ModelAttribute("addTest") @Valid AddTest addTest, BindingResult bindingResult, ModelMap modelMap,
-			Locale locale) throws ParseException, ResourceNotFoundException {
-		if (bindingResult.hasErrors()) {
-			System.out.println("addtest ====> "+addTest);
-			modelMap.addAttribute("addTest", new AddTest());
-			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-			return "j_addTest";
-		} else {
-
-			System.out.println("addtest ====> "+addTest);
-			Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
-			String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
-					.getDepartmentName();
-
-			addTest.setIsDeleted(false);
-			addTest.setUserId(currentUserId);
-			addTest.setDepartmentName(currentAdminDepartment);
-			this.addTestService.saveAddTest(addTest);
-
-			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-			return "redirect:/java/admin/add/test";
+			return "redirect:/java/admin/add/test/view";
 		}
 	}
 
@@ -416,24 +380,6 @@ public class AddTestController {
 		modelMap.addAttribute("addTest", addTest);
 		modelMap.addAttribute("edit", true);
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-		modelMap.addAttribute("dateValue", new SimpleDateFormat("dd/MM/YYYY").format(addTest.getDate()));
-		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-		return "w_addTest";
-	}
-
-	// SAVE EDITED TEST
-	@PostMapping("web/admin/add/test/edit/save")
-	public String saveEditedTest_web(@ModelAttribute("addTest") @Valid AddTest addTest, ModelMap modelMap, Locale locale)
-			throws ResourceNotFoundException {
-		Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
-		String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
-				.getDepartmentName();
-		addTest.setIsDeleted(false);
-		addTest.setUserId(currentUserId);
-		addTest.setDepartmentName(currentAdminDepartment);
-		
-		this.addTestService.saveAddTest(addTest);
-		modelMap.addAttribute("edit", false);
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "w_addTest";
 	}
@@ -489,11 +435,12 @@ public class AddTestController {
 			addTest.setTestQuestions(addedQuestions);
 			addTest.setIsDeleted(false);
 			addTest.setUserId(currentUserId);
+			addTest.setSubject(addTest.getSubject());
 			addTest.setDepartmentName(currentAdminDepartment);
 			this.addTestService.saveAddTest(addTest);
 
 			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-			return "redirect:/web/admin/add/test";
+			return "redirect:/web/admin/add/test/view";
 		}
 	}
 

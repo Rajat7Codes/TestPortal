@@ -32,7 +32,7 @@
 							</form>
 						</div> -->
 
-				<h6 class="element-header">Java Admin Dashboard</h6>
+				<h6 class="element-header">Admin Dashboard</h6>
 				<div class="element-content">
 					<div class="row">
 						<div class="col-sm-4 col-xxxl-3">
@@ -249,11 +249,11 @@
 	var myChart = new Chart(ctx, {
 		type : 'bar',
 		data : {
-			labels : ${topTenStudentsUserIdJava},
+			labels : ${topTenStudentUserId},
 			datasets : [ {
 				label : '#UserId & Percentage (%)',
 				barPercentage : 0.4,
-				data : ${topTenPercentagesjava},
+				data : ${topTenStudentsPercentagesMonthly},
 				backgroundColor : [ 'rgba(255, 99, 132)', 'rgba(54, 162, 235)',
 						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
 						'rgba(153, 102, 255)', 'rgba(255, 159, 64)','rgba(255, 99, 132)', 'rgba(54, 162, 235)',
@@ -301,7 +301,7 @@
 		data : {
 			labels : [ 'Pass', 'Fail' ],
 			datasets : [ {
-				label : '#Result',
+				label : '# of Votes',
 				data : ${todayPassFailStudentCount},
 				backgroundColor : [ 'rgba(54, 162, 235)','rgba(255, 99, 132)',
 						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
@@ -322,7 +322,7 @@
 		data : {
 			labels : [ 'Pass', 'Fail' ],
 			datasets : [ {
-				label : '#Result',
+				label : '# of Votes',
 				data : ${monthlyPassFailStudentCount},
 				backgroundColor : [  'rgba(54, 162, 235)', 'rgba(255, 99, 132)',
 						'rgba(255, 206, 86)', 'rgba(75, 192, 192)',
