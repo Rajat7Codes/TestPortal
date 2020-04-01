@@ -82,7 +82,7 @@ public class AddTest extends Auditable<String> implements Serializable {
 	private Subject subject;
 
 	@OneToMany(mappedBy = "addTest", cascade = { CascadeType.PERSIST,
-			CascadeType.REMOVE }, fetch = FetchType.LAZY, orphanRemoval = true)
+			CascadeType.REMOVE }, fetch = FetchType.LAZY)
 	private List<TestQuestion> testQuestions;
 
 	/**
