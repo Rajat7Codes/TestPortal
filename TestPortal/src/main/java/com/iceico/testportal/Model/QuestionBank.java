@@ -82,6 +82,9 @@ public class QuestionBank extends Auditable<String> implements Serializable {
 	@Column(name = "description")
 	private String description;
 
+	@Column(name = "department_name")
+	private String departmentName;
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "question_Type_Id", insertable = true, nullable = true, updatable = true)
 	private QuestionType questionType;
@@ -100,28 +103,38 @@ public class QuestionBank extends Auditable<String> implements Serializable {
 	/**
 	 * @param questionBankId
 	 * @param question
+	 * @param sampleInput
+	 * @param sampleOutput
+	 * @param hiddenInput
+	 * @param hiddenOutput
 	 * @param marks
 	 * @param imageName
 	 * @param filePath
 	 * @param contentType
 	 * @param description
+	 * @param departmentName
 	 * @param questionType
-	 * @param addTest
 	 * @param testQuestion
 	 * @param options
 	 * @param subject
 	 */
-	public QuestionBank(Long questionBankId, String question, Integer marks, String imageName, String filePath,
-			String contentType, String description, QuestionType questionType, AddTest addTest,
+	public QuestionBank(Long questionBankId, String question, String sampleInput, String sampleOutput,
+			String hiddenInput, String hiddenOutput, Integer marks, String imageName, String filePath,
+			String contentType, String description, String departmentName, QuestionType questionType,
 			TestQuestion testQuestion, List<Options> options, Subject subject) {
 		super();
 		this.questionBankId = questionBankId;
 		this.question = question;
+		this.sampleInput = sampleInput;
+		this.sampleOutput = sampleOutput;
+		this.hiddenInput = hiddenInput;
+		this.hiddenOutput = hiddenOutput;
 		this.marks = marks;
 		this.imageName = imageName;
 		this.filePath = filePath;
 		this.contentType = contentType;
 		this.description = description;
+		this.departmentName = departmentName;
 		this.questionType = questionType;
 		this.testQuestion = testQuestion;
 		this.options = options;
@@ -224,6 +237,20 @@ public class QuestionBank extends Auditable<String> implements Serializable {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the departmentName
+	 */
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	/**
+	 * @param departmentName the departmentName to set
+	 */
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 
 	/**

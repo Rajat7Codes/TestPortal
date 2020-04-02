@@ -149,6 +149,7 @@ public class QuestionBankController {
 					optionsList.add(options);
 				}
 				questionBank.setOptions(optionsList);
+				questionBank.setDepartmentName(userService.findBySSO(getPrincipal()).getDepartment().getDepartmentName());
 				this.questionBankService.saveQuestionBank(questionBank);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -264,6 +265,7 @@ public class QuestionBankController {
 					optionsList.add(options);
 				}
 				questionBank.setOptions(optionsList);
+				questionBank.setDepartmentName(userService.findBySSO(getPrincipal()).getDepartment().getDepartmentName());
 				this.questionBankService.saveQuestionBank(questionBank);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -379,6 +381,7 @@ public class QuestionBankController {
 					optionsList.add(options);
 				}
 				questionBank.setOptions(optionsList);
+				questionBank.setDepartmentName(userService.findBySSO(getPrincipal()).getDepartment().getDepartmentName());
 				this.questionBankService.saveQuestionBank(questionBank);
 			} catch (Exception e) {
 				e.printStackTrace();
