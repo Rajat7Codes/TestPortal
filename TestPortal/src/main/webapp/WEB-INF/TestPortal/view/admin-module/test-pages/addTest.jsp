@@ -92,7 +92,7 @@
 									</c:if>
 
 									<c:if test="${ addTest.negativeMarking==null }">
-										<div class="col-sm-3" id="ratioDiv">
+										<div class="col-sm-3"  id="ratioDiv">
 											<div class="form-group">
 												<form:label path="ratio"> Ratio</form:label>
 												<form:input path="ratio" name="ratio" id="ratio"
@@ -104,8 +104,8 @@
 									</c:if>
 
 
-									<c:if test="${ addTest.negativeMarking==false }">
-										<div class="col-sm-3" style="display: none" id="ratioDiv">
+									<c:if test="${ addTest.negativeMarking != true }">
+										<div class="col-sm-3" style="display: none;" id="ratioDiv">
 											<div class="form-group">
 												<form:label path="ratio"> Ratio</form:label>
 												<form:input path="ratio" name="ratio" id="ratio"
