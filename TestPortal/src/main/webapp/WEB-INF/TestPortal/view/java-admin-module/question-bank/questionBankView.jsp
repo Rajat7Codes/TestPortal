@@ -32,20 +32,23 @@
 								<tbody>
 									<c:forEach var="questionBank" items="${questionBankList }"
 										varStatus="ind">
-										<tr>
-											<td>${ind.index+1}</td>
-											<td>${questionBank.getQuestionType().type }</td>
-											<td>${questionBank.question }</td>
-											<td>${questionBank.getSubject().subjectName }</td>
-											<td>${questionBank.marks }</td>
+										<c:if
+											test="${questionBank.departmentName==user.department.departmentName}">
+											<tr>
+												<td>${ind.index+1}</td>
+												<td>${questionBank.getQuestionType().type }</td>
+												<td>${questionBank.question }</td>
+												<td>${questionBank.getSubject().subjectName }</td>
+												<td>${questionBank.marks }</td>
 
-											<%-- <td class="row-actions"><a title="Edit"
+												<%-- <td class="row-actions"><a title="Edit"
 												href="<c:url value='/admin/question/bank/edit/${questionBank.questionBankId}' />"><i
 													class="os-icon os-icon-ui-49"></i></a> <a class="danger"
 												title="Delete"
 												href="<c:url value='/java/admin/questionType/delete/${questionType.questionTypeId }' />"><i
 													class="os-icon os-icon-ui-15"></i></a></td> --%>
-										</tr>
+											</tr>
+										</c:if>
 									</c:forEach>
 								</tbody>
 							</table>
