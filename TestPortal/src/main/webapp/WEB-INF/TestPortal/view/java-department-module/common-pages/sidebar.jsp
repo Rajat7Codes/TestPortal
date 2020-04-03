@@ -145,12 +145,12 @@
 						<div class="os-icon os-icon-list"></div>
 					</div> <span> Test List</span>
 			</a></li>
-			<li class=""><a
+			<%-- <li class=""><a
 				href="${pageContext.request.contextPath }/java/student/test/result">
 					<div class="icon-w">
 						<div class="os-icon os-icon-window-content"></div>
 					</div> <span> Test Result</span>
-			</a></li>
+			</a></li> --%>
 			<li class=""><a
 				href="${pageContext.request.contextPath }/java/student/test/history">
 					<div class="icon-w">
