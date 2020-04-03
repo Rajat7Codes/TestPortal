@@ -30,18 +30,18 @@
 						<tbody>
 							<c:forEach var="test" items="${testList}" varStatus="ind">
 								<c:if test="${ test.isDeleted !=true }">
-									<tr>
-										<td>${ind.index+1}</td>
-										<td>${test.testName }</td>
-										<td>${test.date}</td>
-										<td>${test.time }</td>
-										<td>${test.passingPercent }</td>
-										<td>${test.subject.subjectName }</td>
-										<td><a class="text-decoration-none !important"
-											href="${pageContext.request.contextPath }/web/admin/test/result/${test.addTestId}">view
-												result</a></td>
-									</tr>
-								</c:if>
+										<tr>
+											<td>${ind.index+1}</td>
+											<td>${test.testName }</td>
+											<td>${test.date}</td>
+											<td>${test.time }</td>
+											<td>${test.passingPercent }</td>
+											<td>${test.subject.subjectName }</td>
+											<td><a class="text-decoration-none !important"
+												href="${pageContext.request.contextPath }/web/admin/test/result/${test.addTestId}">view
+													result</a></td>
+										</tr>
+									</c:if>
 							</c:forEach>
 						</tbody>
 					</table>

@@ -105,9 +105,16 @@ public class AddTestController {
 	/* VIEW TEST */
 	@GetMapping("/admin/add/test/view")
 	public String viewTest(ModelMap modelMap, Locale locale) {
+		User user = this.userService.findBySSO(this.getPrincipal());
+		List<AddTest> testList = new ArrayList<AddTest>();
+		for( AddTest test : this.addTestService.getAddTestList()) {
+			if( test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
+				testList.add(test);
+			}
+		}
+		modelMap.addAttribute("user", user);
+		modelMap.addAttribute("testList", testList);
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
-		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "addTestView";
 	}
 
@@ -204,10 +211,15 @@ public class AddTestController {
 	/* TEST RESULT LIST */
 	@RequestMapping("/admin/test/result/list")
 	public String testResult(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
-		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		modelMap.addAttribute("test", new AddTest());
-		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
-
+		User user = this.userService.findBySSO(this.getPrincipal());
+		List<AddTest> testList = new ArrayList<AddTest>();
+		for( AddTest test : this.addTestService.getAddTestList()) {
+			if( test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
+				testList.add(test);
+			}
+		}
+		modelMap.addAttribute("user", user);
+		modelMap.addAttribute("testList", testList);
 		return "testResult";
 	}
 
@@ -253,9 +265,16 @@ public class AddTestController {
 	/* VIEW TEST */
 	@GetMapping("/java/admin/add/test/view")
 	public String viewTest_java(ModelMap modelMap, Locale locale) {
+		User user = this.userService.findBySSO(this.getPrincipal());
+		List<AddTest> testList = new ArrayList<AddTest>();
+		for( AddTest test : this.addTestService.getAddTestList()) {
+			if( test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
+				testList.add(test);
+			}
+		}
+		modelMap.addAttribute("user", user);
+		modelMap.addAttribute("testList", testList);
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
-		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "j_addTestView";
 	}
 
@@ -352,9 +371,15 @@ public class AddTestController {
 	/* TEST RESULT LIST */
 	@RequestMapping("/java/admin/test/result/list")
 	public String testResult_java(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
-		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		modelMap.addAttribute("test", new AddTest());
-		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+		User user = this.userService.findBySSO(this.getPrincipal());
+		List<AddTest> testList = new ArrayList<AddTest>();
+		for( AddTest test : this.addTestService.getAddTestList()) {
+			if( test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
+				testList.add(test);
+			}
+		}
+		modelMap.addAttribute("user", user);
+		modelMap.addAttribute("testList", testList);
 		return "j_testResult";
 	}
 
@@ -400,9 +425,16 @@ public class AddTestController {
 	/* VIEW TEST */
 	@GetMapping("/web/admin/add/test/view")
 	public String viewTest_web(ModelMap modelMap, Locale locale) {
+		User user = this.userService.findBySSO(this.getPrincipal());
+		List<AddTest> testList = new ArrayList<AddTest>();
+		for( AddTest test : this.addTestService.getAddTestList()) {
+			if( test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
+				testList.add(test);
+			}
+		}
+		modelMap.addAttribute("user", user);
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
-		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		modelMap.addAttribute("testList", testList);
 		return "w_addTestView";
 	}
 
@@ -499,9 +531,15 @@ public class AddTestController {
 	/* TEST RESULT LIST */
 	@RequestMapping("/web/admin/test/result/list")
 	public String testResult_web(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
-		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		modelMap.addAttribute("test", new AddTest());
-		modelMap.addAttribute("testList", this.addTestService.getAddTestList());
+		User user = this.userService.findBySSO(this.getPrincipal());
+		List<AddTest> testList = new ArrayList<AddTest>();
+		for( AddTest test : this.addTestService.getAddTestList()) {
+			if( test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
+				testList.add(test);
+			}
+		}
+		modelMap.addAttribute("user", user);
+		modelMap.addAttribute("testList", testList);
 		return "w_testResult";
 	}
 
