@@ -10,41 +10,49 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
-	<div class="content-i">
-		<div class="content-box">
+
+	<div class="row">
+		<div class="col-lg-12">
 			<div class="element-wrapper">
-				<div class="element-box">
-					<h5 class="element-header mb-4">Test Results</h5>
-					<table class="table text-center">
-						<thead>
-							<tr>
-								<th>Sr No.</th>
-								<th>Test name</th>
-								<th>date</th>
-								<th>Time</th>
-								<th>Passing Percentage</th>
-								<th>Subject</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="test" items="${testList}" varStatus="ind">
-								<c:if test="${ test.isDeleted !=true }">
+				<h5 class="element-header">Test Results</h5>
+				<div class="element-wrapper">
+					<div class="element-box">
+
+						<div class="table-responsive">
+							<table id="" width="100%"
+								class="table table-striped table-lightfont text-center">
+								<thead>
 									<tr>
-										<td>${ind.index+1}</td>
-										<td>${test.testName }</td>
-										<td>${test.date}</td>
-										<td>${test.time }</td>
-										<td>${test.passingPercent }</td>
-										<td>${test.subject.subjectName }</td>
-										<td><a class="text-decoration-none !important"
-											href="${pageContext.request.contextPath }/admin/test/result/${test.addTestId}">view
-												result</a></td>
+										<th>Sr No.</th>
+										<th>Test name</th>
+										<th>date</th>
+										<th>Time</th>
+										<th>Passing %</th>
+										<th>Subject</th>
+										<th>Action</th>
 									</tr>
-								</c:if>
-							</c:forEach>
-						</tbody>
-					</table>
+								</thead>
+								<tbody>
+									<c:forEach var="test" items="${testList}" varStatus="ind">
+										<c:if test="${ test.isDeleted !=true }">
+											<tr>
+												<td>${ind.index+1}</td>
+												<td>${test.testName }</td>
+												<td>${test.date}</td>
+												<td>${test.time }</td>
+												<td>${test.passingPercent }</td>
+												<td>${test.subject.subjectName }</td>
+												<td><a class="row-actions" title="View Result"
+													href="<c:url value='/admin/test/result/${test.addTestId}' />">
+														<i class="os-icon os-icon-window-content"></i>
+												</a></td>
+											</tr>
+										</c:if>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
