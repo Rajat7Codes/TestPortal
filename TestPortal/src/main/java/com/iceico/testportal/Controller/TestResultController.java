@@ -5,7 +5,9 @@ package com.iceico.testportal.Controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -91,8 +93,24 @@ public class TestResultController {
 		}
 
 		String allAns = result.getAnswersGiven();
-		String answers[] = allAns.split(",");
-		answers[0] = answers[0].replaceFirst("null", "");
+		String testRes[] = allAns.split(",");
+
+		Map<QuestionBank, String> answers = new HashMap<QuestionBank, String>();
+
+		for (QuestionBank questionBank : questionList) {
+			answers.put(questionBank, "No Answer Given");
+		}
+		
+		for( int i=0; i<testRes.length; i++) {
+			String qIdAns[] = testRes[i].split("&");
+			Long qId = Long.parseLong( qIdAns[0]);
+			String ans = qIdAns[1];
+			for (QuestionBank questionBank : questionList) {
+				if( questionBank.getQuestionBankId()==qId) {
+					answers.put(questionBank, ans);
+				}
+			}
+		}
 
 		modelMap.addAttribute("answerList", answers);
 		modelMap.addAttribute("questionList", questionList);

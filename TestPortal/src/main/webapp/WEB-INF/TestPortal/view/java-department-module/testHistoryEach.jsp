@@ -98,7 +98,8 @@
 							</div>
 						</div>
 					</div>
-					<br><br>
+					<br>
+					<br>
 					<table class="table text-center">
 						<thead>
 							<tr>
@@ -113,9 +114,9 @@
 							<c:forEach var="question" items="${questionList}" varStatus="ind">
 								<tr>
 									<td>${ind.index+1}</td>
-									<td>${question.question }
-									<c:if test="${question.questionType.programType==true}">
-									<br>Input => ${question.hiddenInput}
+									<td>${question.question }<c:if
+											test="${question.questionType.programType==true}">
+											<br>Input => ${question.hiddenInput}
 									</c:if>
 									</td>
 									<td>${question.marks }</td>
@@ -129,7 +130,7 @@
 									<c:if test="${question.questionType.programType==true}">
 										<td>${question.hiddenOutput}</td>
 									</c:if>
-									<td> ${answerList[ind.index]} </td>
+									<td>${answerList[question]}</td>
 								</tr>
 							</c:forEach>
 						</tbody>

@@ -16,11 +16,11 @@
 				<div class="col-lg-12">
 					<div class="element-wrapper">
 						<div class="element-box">
+
 							<form:form
 								action="${pageContext.request.contextPath }/admin/add/test/save"
 								modelAttribute="addTest" name="addTest" id="addTestForm"
 								method="post">
-
 
 								<form:hidden path="addTestId" />
 								<input id="questionsJson" name="questionsJson" type="hidden">
@@ -177,29 +177,25 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<c:if test="${edit==false}">
+
 <!-- Script triggered on change of subject -->
 <script type="text/javascript">
 	function filterBySubject() {
-
 		$('#tableBody tr').remove();
 		data = {
 			"subjectID" : $("#subject").val()
 		};
-
 		$.ajax({
 			type : "GET",
 			contentType : "application/json",
 			url : "${pageContext.request.contextPath}/add/test/filter/subject",
 			data : data,
 			dataType : 'json',
-
 			cache : false,
-
 			timeout : 600000,
-
 			success : function(response) {
 				var trHTML = '';
-
 				$.each(response, function(i, item) {
 					trHTML += '<tr><td>' + item.questionId + '</td><td>'
 							+ item.question + '</td><td>' + item.questionType
@@ -210,18 +206,14 @@
 							+ (item.questionId)
 							+ ');"> Add </button> </td> </tr>';
 				});
-
 				$('#tableBody tr td').remove();
 				$('#tableBody').append(trHTML);
-
 			}
-
 		});
-
 		$("#questions-table").css("display", "block");
 	}
 </script>
-
+</c:if>
 <!-- Script for toggling ratioDiv on negative marking change -->
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -256,7 +248,6 @@
 				jsonArr.push(jsonobj);
 			}
 		}
-
 		var data = document.getElementById('questionsJson');
 		data.value = JSON.stringify(jsonArr);
 	};
