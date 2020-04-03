@@ -57,7 +57,7 @@
 						<li><a
 							href="${pageContext.request.contextPath }/admin/question/bank/new">New</a></li>
 						<li><a
-							href="${pageContext.request.contextPath }/admin/question/bank">View</a></li>
+							href="${pageContext.request.contextPath }/admin/question/bank">List</a></li>
 						<li><a
 							href="${pageContext.request.contextPath }/admin/question/bank/search">Search</a></li>
 					</ul></li>
@@ -69,7 +69,7 @@
 						<li><a
 							href="${pageContext.request.contextPath }/admin/add/test">New</a></li>
 						<li><a
-							href="${pageContext.request.contextPath }/admin/add/test/view">View</a></li>
+							href="${pageContext.request.contextPath }/admin/add/test/view">List</a></li>
 					</ul></li>
 
 				<li><a
@@ -167,7 +167,7 @@
 							<li><a
 								href="${pageContext.request.contextPath }/admin/question/bank/new">New</a></li>
 							<li><a
-								href="${pageContext.request.contextPath }/admin/question/bank">View</a></li>
+								href="${pageContext.request.contextPath }/admin/question/bank">List</a></li>
 							<li><a
 								href="${pageContext.request.contextPath }/admin/question/bank/search">Search</a></li>
 						</ul>
@@ -187,7 +187,7 @@
 							<li><a
 								href="${pageContext.request.contextPath }/admin/add/test">New</a></li>
 							<li><a
-								href="${pageContext.request.contextPath }/admin/add/test/view">View</a></li>
+								href="${pageContext.request.contextPath }/admin/add/test/view">List</a></li>
 						</ul>
 					</div>
 				</div></li>

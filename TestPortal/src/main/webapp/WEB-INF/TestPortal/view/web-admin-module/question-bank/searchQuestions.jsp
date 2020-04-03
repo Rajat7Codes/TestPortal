@@ -10,74 +10,79 @@
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 </head>
 <body>
-	<div class="content-i">
-		<div class="content-box">
+	<div class="row">
+		<div class="col-lg-12">
 			<div class="element-wrapper">
-				<div class="element-box">
-					<form:form action="#" modelAttribute="questionBank" method="get"
-						enctype="multipart/form-data">
-						<h6 class="element-header mb-5">Search Bank</h6>
-						<div class="row">
-							<div class="col-sm-4">
-								<div class="form-group">
-									<form:label path="subject">Subject</form:label>
-									<form:select class="form-control" name="subject" path="subject"
-										id="subject">
-										<form:option value="" label="--- Select Subject ---" />
-										<form:options items="${subjectList}" itemValue="subjectId"
-											itemLabel="subjectName" id="subject" multiple="single" />
-									</form:select>
-									<form:errors path="subject" />
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="form-group">
-									<form:label path="questionType">Question Type</form:label>
-									<form:select class="form-control" name="questionType"
-										path="questionType" id="questionType">
-										<form:option value="" label="--- Select Question Type ---" />
-										<form:options items="${questionTypeList}"
-											itemValue="questionTypeId" itemLabel="type"
-											id="categoryOption" multiple="single" />
-									</form:select>
-									<form:errors path="questionType" />
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="form-group" id="byMarks">
-									<label> Marks</label> <input class="form-control"
-										placeholder="Enter Marks" type="text" id="marks" name="marks">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-12 text-center mb-4 mt-4">
-								<div class="form-group">
-									<button class="btn btn-primary" type="button"
-										onclick="all_type_submit();" id="btnByAllType">Submit</button>
-								</div>
-							</div>
-						</div>
-					</form:form>
-					<div id="tableToggle" style="display: none;">
-						<div class="table-responsive">
-							<table id="example1" width="100%"
-								class="table table-striped table-lightfont">
-								<thead>
-									<tr>
-										<th>Sr. No</th>
-										<th>Question Id</th>
-										<th>Subject</th>
-										<th>Type</th>
-										<th>Question</th>
-										<th>Marks</th>
-										<!-- <th>Action</th> -->
-									</tr>
-								</thead>
-								<tbody id="wantThatBody">
+				<h5 class="element-header">Search Question Bank</h5>
 
-								</tbody>
-							</table>
+				<div class="element-wrapper">
+					<div class="element-box">
+						<form:form action="#" modelAttribute="questionBank" method="get"
+							enctype="multipart/form-data">
+							<h5 class="element-header">Search</h5>
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="form-group">
+										<form:label path="subject">Subject</form:label>
+										<form:select class="form-control" name="subject"
+											path="subject" id="subject">
+											<form:option value="" label="--- Select Subject ---" />
+											<form:options items="${subjectList}" itemValue="subjectId"
+												itemLabel="subjectName" id="subject" multiple="single" />
+										</form:select>
+										<form:errors path="subject" />
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<form:label path="questionType">Question Type</form:label>
+										<form:select class="form-control" name="questionType"
+											path="questionType" id="questionType">
+											<form:option value="" label="--- Select Question Type ---" />
+											<form:options items="${questionTypeList}"
+												itemValue="questionTypeId" itemLabel="type"
+												id="categoryOption" multiple="single" />
+										</form:select>
+										<form:errors path="questionType" />
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group" id="byMarks">
+										<label> Marks</label> <input class="form-control"
+											placeholder="Enter Marks" type="text" id="marks" name="marks">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12 text-center mb-4 mt-4">
+									<div class="form-group">
+										<button class="btn btn-primary" type="button"
+											onclick="all_type_submit();" id="btnByAllType">Submit</button>
+									</div>
+								</div>
+							</div>
+						</form:form>
+						<div id="tableToggle" style="display: none;">
+							<h5 class="element-header">Search Result</h5>
+							<div class="table-responsive">
+								<table id="example1" width="100%"
+									class="table table-striped table-lightfont">
+									<thead>
+										<tr>
+											<th>Sr. No</th>
+											<th>Question Id</th>
+											<th>Subject</th>
+											<th>Type</th>
+											<th>Question</th>
+											<th>Marks</th>
+											<!-- <th>Action</th> -->
+										</tr>
+									</thead>
+									<tbody id="wantThatBody">
+
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>

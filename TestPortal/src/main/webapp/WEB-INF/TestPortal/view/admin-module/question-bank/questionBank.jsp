@@ -286,7 +286,7 @@
 									</div>
 								</div>
 							</c:if>
-							<div class="form-buttons-w">
+							<div class="form-buttons-w text-center pt-5">
 								<input type="text" id="data" name="data" style="display: none;">
 								<c:if test="${edit == true }">
 									<button class="btn btn-primary" type="submit"
