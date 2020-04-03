@@ -37,7 +37,7 @@
 					<div class="row">
 						<div class="col-sm-4 col-xxxl-3">
 							<a class="element-box el-tablo" href="#"><div class="label">Users</div>
-								<div class="value">${totalJavaUsersCount }</div>
+								<div class="value">${totalWebUsersCount }</div>
 								<div class="trending trending-up-basic">
 									<!-- <span>12%</span><i class="os-icon os-icon-arrow-up2"></i> -->
 								</div></a>
