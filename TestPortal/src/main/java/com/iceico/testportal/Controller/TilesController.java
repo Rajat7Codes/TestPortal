@@ -23,6 +23,7 @@ import com.iceico.testportal.Model.AddTest;
 import com.iceico.testportal.Model.QuestionBank;
 import com.iceico.testportal.Model.TestResult;
 import com.iceico.testportal.Model.User;
+import com.iceico.testportal.Model.UserProfile;
 import com.iceico.testportal.Service.AddTestService;
 import com.iceico.testportal.Service.DashboardService;
 import com.iceico.testportal.Service.QuestionBankService;
@@ -83,19 +84,28 @@ public class TilesController {
 		modelMap.addAttribute("totalQuestionsCount", this.questionBankService.getQuestionBankList().size());
 		/* End questions Count */
 
-		/* Total users Count List */
-		List<Integer> userListCount = new ArrayList<Integer>();
+		/* Total Student Count List */
+		List<User> userListCount = new ArrayList<User>();
 		for (User userPro : this.userService.findAllUsers()) {
-			if (currentAdminDepartment.equals("JAVA")) {
-				String users = userPro.getFirstName();
-				Integer UserId = userPro.getId();
-				if (!users.equals("Admin")) {
-					userListCount.add(UserId);
-					modelMap.addAttribute("totalJavaUsersCount", userListCount.size());
+			if (userPro.getDepartment().getDepartmentName().equals(currentAdminDepartment)) {
+				if (userPro.getDepartment().getDepartmentName()
+						.equals(this.userService.findBySSO(getPrincipal()).getDepartment().getDepartmentName())) {
+					userListCount.add(userPro);
 				}
 			}
 		}
-		/* END Total users Count List */
+		for (int i = 0; i < userListCount.size(); i++) {
+			for (UserProfile userProf : userListCount.get(i).getUserProfiles()) {
+				if (!(userProf.getType().equals("ADMIN") || userProf.getType().equals("JAVAADMIN")
+						|| userProf.getType().equals("WEBADMIN"))) {
+					userListCount.remove(i);
+				}
+			}
+		}
+		modelMap.addAttribute("totalUsersCount", userListCount.size());
+
+		/* END Total Student Count List */
+
 		/* for today list */
 		List<String> todayResultListForPassStudent = new ArrayList<String>();
 		List<String> todayResultListForFailStudent = new ArrayList<String>();
@@ -180,24 +190,31 @@ public class TilesController {
 		/* All Added Test Count */
 		List<AddTest> totalTestList = this.addTestService.getAddTestList();
 		String testDepartment = null;
+
 		/* Total Student Count List */
 		String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
 				.getDepartmentName();
-		List<Integer> userListCount = new ArrayList<Integer>();
+		List<User> userListCount = new ArrayList<User>();
 		for (User userPro : this.userService.findAllUsers()) {
 			if (userPro.getDepartment().getDepartmentName().equals(currentAdminDepartment)) {
-				String users = userPro.getFirstName();
-				Integer UserId = userPro.getId();
-				if (!users.equals("Admin")) {
-					if (!userPro.getDepartment().getDepartmentName().equals("WEB")) {
-						userListCount.add(UserId);
-						System.out.println("UserId ===>>" + UserId + "users====>>" + users);
-						modelMap.addAttribute("totalJavaUsersCount", userListCount.size());
-					}
+				if (userPro.getDepartment().getDepartmentName()
+						.equals(this.userService.findBySSO(getPrincipal()).getDepartment().getDepartmentName())) {
+					userListCount.add(userPro);
 				}
 			}
 		}
+		for (int i = 0; i < userListCount.size(); i++) {
+			for (UserProfile userProf : userListCount.get(i).getUserProfiles()) {
+				if (!(userProf.getType().equals("ADMIN") || userProf.getType().equals("JAVAADMIN")
+						|| userProf.getType().equals("WEBADMIN"))) {
+					userListCount.remove(i);
+				}
+			}
+		}
+		modelMap.addAttribute("totalJavaUsersCount", userListCount.size());
+
 		/* END Total Student Count List */
+
 		/* FOR CALCULATE TOTAL TEST COUNT DEPARTMENT WISE */
 		List<Long> javaTestCount = new ArrayList<Long>();
 		for (AddTest test : totalTestList) {
@@ -285,23 +302,31 @@ public class TilesController {
 		/* All Added Test Count */
 		List<AddTest> totalTestList = this.addTestService.getAddTestList();
 		String testDepartment = null;
+
 		/* Total Student Count List */
 		String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
 				.getDepartmentName();
-		List<Integer> userListCount = new ArrayList<Integer>();
+		List<User> userListCount = new ArrayList<User>();
 		for (User userPro : this.userService.findAllUsers()) {
 			if (userPro.getDepartment().getDepartmentName().equals(currentAdminDepartment)) {
-				String users = userPro.getFirstName();
-				Integer UserId = userPro.getId();
-				if (!users.equals("Admin")) {
-					if (!userPro.getDepartment().getDepartmentName().equals("JAVA")) {
-						userListCount.add(UserId);
-						modelMap.addAttribute("totalWebUsersCount", userListCount.size());
-					}
+				if (userPro.getDepartment().getDepartmentName()
+						.equals(this.userService.findBySSO(getPrincipal()).getDepartment().getDepartmentName())) {
+					userListCount.add(userPro);
 				}
 			}
 		}
+		for (int i = 0; i < userListCount.size(); i++) {
+			for (UserProfile userProf : userListCount.get(i).getUserProfiles()) {
+				if (!(userProf.getType().equals("ADMIN") || userProf.getType().equals("JAVAADMIN")
+						|| userProf.getType().equals("WEBADMIN"))) {
+					userListCount.remove(i);
+				}
+			}
+		}
+		modelMap.addAttribute("totalWebUsersCount", userListCount.size());
+
 		/* END Total Student Count List */
+
 		/* FOR CALCULATE TOTAL TEST COUNT DEPARTMENT WISE */
 		List<Long> webTestCount = new ArrayList<Long>();
 		for (AddTest test : totalTestList) {
@@ -486,7 +511,7 @@ public class TilesController {
 				.parse(currentdate.withDayOfMonth(currentdate.getMonth().maxLength()).toString());
 		String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
 				.getDepartmentName();
-		//System.out.println("WEB ===========>>" + currentAdminDepartment);
+		// System.out.println("WEB ===========>>" + currentAdminDepartment);
 		Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
 		/* questions Count */
 		List<QuestionBank> questionBanks = this.questionBankService.getQuestionBankList();
