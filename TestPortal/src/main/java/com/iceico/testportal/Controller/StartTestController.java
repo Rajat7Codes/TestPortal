@@ -102,7 +102,8 @@ public class StartTestController {
 		if (!testList.isEmpty()) {
 			for (Long testId : testList.keySet()) {
 				if (testList.get(testId).equals("not given")) {
-					addTestList.add(this.addTestService.getAddTestById(testId));
+					AddTest test = this.addTestService.getAddTestById(testId);
+					addTestList.add(test);
 				}
 			}
 		} else {
@@ -172,7 +173,7 @@ public class StartTestController {
 			throws ResourceNotFoundException, ParseException, org.json.simple.parser.ParseException {
 
 		double totalMarks = 0;
-		String yourAnswers = null;
+		String yourAnswers = "";
 
 		AddTest addTest = this.addTestService.getAddTestById(testId);
 
@@ -204,10 +205,10 @@ public class StartTestController {
 				String response = this.compilerService.runCodeWithInput(lang, code, input);
 				JSONObject resObj = (JSONObject) new JSONParser().parse(response);
 
-				if (yourAnswers == null)
-					yourAnswers += resObj.get("output");
+				if (yourAnswers.isBlank())
+					yourAnswers += question.getQuestionBankId()+"&"+resObj.get("output");
 				else
-					yourAnswers += "," + resObj.get("output");
+					yourAnswers += "," + question.getQuestionBankId()+"&"+resObj.get("output");
 
 				if (question.getHiddenOutput().equals(resObj.get("output"))
 						|| question.getHiddenOutput().equals("\n" + resObj.get("output"))) {
@@ -236,10 +237,10 @@ public class StartTestController {
 
 					if (opt.getOptionsId() == Long.parseLong(answer.get("optionId") + "")) {
 						Boolean userAnswer = opt.getCorrectAnswer();
-						if (yourAnswers == null)
-							yourAnswers += opt.getOptionName();
+						if (yourAnswers.isBlank())
+							yourAnswers += question.getQuestionBankId()+"&"+opt.getOptionName();
 						else
-							yourAnswers += "," + opt.getOptionName();
+							yourAnswers += "," + question.getQuestionBankId()+"&"+opt.getOptionName();
 
 						if (userAnswer == true) {
 							obtainedMarks += Integer.parseInt(answer.get("marks").toString());

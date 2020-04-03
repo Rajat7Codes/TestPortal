@@ -367,6 +367,7 @@ public class AddTestController {
 	@GetMapping("/web/admin/add/test")
 	public String getTest_web(ModelMap modelMap, Locale locale) {
 		modelMap.addAttribute("addTest", new AddTest());
+		modelMap.addAttribute("edit", false);
 		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
 		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
 		return "w_addTest";

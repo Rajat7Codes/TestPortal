@@ -177,6 +177,8 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<c:if test="${edit==false}">
+
 <!-- Script triggered on change of subject -->
 <script type="text/javascript">
 	function filterBySubject() {
@@ -211,7 +213,7 @@
 		$("#questions-table").css("display", "block");
 	}
 </script>
-
+</c:if>
 <!-- Script for toggling ratioDiv on negative marking change -->
 <script type="text/javascript">
 	$(document).ready(function() {
