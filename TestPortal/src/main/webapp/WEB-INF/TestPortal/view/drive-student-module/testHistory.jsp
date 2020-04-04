@@ -10,7 +10,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
-	<div class="content-i">
+	<div class="content-i vh-100">
 		<div class="content-box">
 			<div class="element-wrapper">
 				<div class="element-box">
