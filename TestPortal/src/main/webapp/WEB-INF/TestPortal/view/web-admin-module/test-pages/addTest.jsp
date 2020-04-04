@@ -125,15 +125,23 @@
 										</div>
 									</div>
 									<div class="col-sm-3">
-										<form:label path="instructions">Instructions </form:label>
-										<form:input path="instructions" name="instructions"
-											id="instructions" class="form-control"
-											placeholder="Enter Intructions here.." />
-										<form:errors path="instructions"></form:errors>
+										<form:label path="status">Status</form:label>
+										<form:select path="status" name="status" id="status"
+											class="form-control">
+											<form:option value="true">Active</form:option>
+											<form:option value="false">Inactive</form:option>
+										</form:select>
+										<form:errors path="status"></form:errors>
 									</div>
-
 								</div>
-
+								<div class="col-md-12 col-sm-12 col-lg-12 col-12">
+									<form:label path="instructions">Instructions </form:label>
+									<form:input path="instructions" name="instructions"
+										id="instructions" class="form-control"
+										placeholder="Enter Intructions here.." />
+									<form:errors path="instructions"></form:errors>
+								</div>
+								<br>
 								<!-- table -->
 								<div class="element-wrapper">
 									<div class="element-box" style="display: none;"
@@ -179,40 +187,50 @@
 
 <c:if test="${edit==false}">
 
-<!-- Script triggered on change of subject -->
-<script type="text/javascript">
-	function filterBySubject() {
-		$('#tableBody tr').remove();
-		data = {
-			"subjectID" : $("#subject").val()
-		};
-		$.ajax({
-			type : "GET",
-			contentType : "application/json",
-			url : "${pageContext.request.contextPath}/add/test/filter/subject",
-			data : data,
-			dataType : 'json',
-			cache : false,
-			timeout : 600000,
-			success : function(response) {
-				var trHTML = '';
-				$.each(response, function(i, item) {
-					trHTML += '<tr><td>' + item.questionId + '</td><td>'
-							+ item.question + '</td><td>' + item.questionType
-							+ '</td><td>' + item.marks + '</td><td>'
-							+ '<button type="button" id="addbtn'
-							+ (item.questionId)
-							+ '" class="btn btn-primary" onclick="add('
-							+ (item.questionId)
-							+ ');"> Add </button> </td> </tr>';
-				});
-				$('#tableBody tr td').remove();
-				$('#tableBody').append(trHTML);
-			}
-		});
-		$("#questions-table").css("display", "block");
-	}
-</script>
+	<!-- Script triggered on change of subject -->
+	<script type="text/javascript">
+		function filterBySubject() {
+			$('#tableBody tr').remove();
+			data = {
+				"subjectID" : $("#subject").val()
+			};
+			$
+					.ajax({
+						type : "GET",
+						contentType : "application/json",
+						url : "${pageContext.request.contextPath}/add/test/filter/subject",
+						data : data,
+						dataType : 'json',
+						cache : false,
+						timeout : 600000,
+						success : function(response) {
+							var trHTML = '';
+							$
+									.each(
+											response,
+											function(i, item) {
+												trHTML += '<tr><td>'
+														+ item.questionId
+														+ '</td><td>'
+														+ item.question
+														+ '</td><td>'
+														+ item.questionType
+														+ '</td><td>'
+														+ item.marks
+														+ '</td><td>'
+														+ '<button type="button" id="addbtn'
+														+ (item.questionId)
+														+ '" class="btn btn-primary" onclick="add('
+														+ (item.questionId)
+														+ ');"> Add </button> </td> </tr>';
+											});
+							$('#tableBody tr td').remove();
+							$('#tableBody').append(trHTML);
+						}
+					});
+			$("#questions-table").css("display", "block");
+		}
+	</script>
 </c:if>
 <!-- Script for toggling ratioDiv on negative marking change -->
 <script type="text/javascript">

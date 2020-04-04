@@ -77,12 +77,14 @@ public class AddTest extends Auditable<String> implements Serializable {
 	@Column(name = "department_name")
 	private String departmentName;
 
+	@Column(name = "status")
+	private Boolean status;
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "subject_id", insertable = true, nullable = true, updatable = true)
 	private Subject subject;
 
-	@OneToMany(mappedBy = "addTest", cascade = { CascadeType.PERSIST,
-			CascadeType.REMOVE }, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "addTest", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
 	private List<TestQuestion> testQuestions;
 
 	/**
@@ -97,12 +99,13 @@ public class AddTest extends Auditable<String> implements Serializable {
 	 * @param passingPercent
 	 * @param userId
 	 * @param departmentName
+	 * @param status
 	 * @param subject
 	 * @param testQuestions
 	 */
 	public AddTest(Long addTestId, String testName, Integer time, Date date, Boolean negativeMarking, String ratio,
 			Boolean isDeleted, String instructions, float passingPercent, Integer userId, String departmentName,
-			Subject subject, List<TestQuestion> testQuestions) {
+			Boolean status, Subject subject, List<TestQuestion> testQuestions) {
 		super();
 		this.addTestId = addTestId;
 		this.testName = testName;
@@ -115,6 +118,7 @@ public class AddTest extends Auditable<String> implements Serializable {
 		this.passingPercent = passingPercent;
 		this.userId = userId;
 		this.departmentName = departmentName;
+		this.status = status;
 		this.subject = subject;
 		this.testQuestions = testQuestions;
 	}
@@ -274,6 +278,20 @@ public class AddTest extends Auditable<String> implements Serializable {
 	}
 
 	/**
+	 * @return the status
+	 */
+	public Boolean getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
+	/**
 	 * @return the subject
 	 */
 	public Subject getSubject() {
@@ -300,4 +318,5 @@ public class AddTest extends Auditable<String> implements Serializable {
 	public void setTestQuestions(List<TestQuestion> testQuestions) {
 		this.testQuestions = testQuestions;
 	}
+
 }

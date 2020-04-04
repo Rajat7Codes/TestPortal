@@ -107,8 +107,8 @@ public class AddTestController {
 	public String viewTest(ModelMap modelMap, Locale locale) {
 		User user = this.userService.findBySSO(this.getPrincipal());
 		List<AddTest> testList = new ArrayList<AddTest>();
-		for( AddTest test : this.addTestService.getAddTestList()) {
-			if( test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
+		for (AddTest test : this.addTestService.getAddTestList()) {
+			if (test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
 				testList.add(test);
 			}
 		}
@@ -124,37 +124,38 @@ public class AddTestController {
 			@ModelAttribute("addTest") @Valid AddTest addTest, BindingResult bindingResult, ModelMap modelMap,
 			Locale locale) throws ParseException, ResourceNotFoundException {
 		if (bindingResult.hasErrors()) {
-				modelMap.addAttribute("addTest", new AddTest());
-				modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
-				modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-				return "addTest";
-			} else {
+			modelMap.addAttribute("addTest", new AddTest());
+			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+			return "addTest";
+		} else {
 
-				List<TestQuestion> addedQuestions = new ArrayList<TestQuestion>();
-				Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
-				String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
-						.getDepartmentName();
+			List<TestQuestion> addedQuestions = new ArrayList<TestQuestion>();
+			Integer currentUserId = this.userService.findBySSO(this.getPrincipal()).getId();
+			String currentAdminDepartment = this.userService.findBySSO(this.getPrincipal()).getDepartment()
+					.getDepartmentName();
 
-				JSONParser parser = new JSONParser();
-				JSONArray questionArray = (JSONArray) parser.parse(questions);
+			JSONParser parser = new JSONParser();
+			JSONArray questionArray = (JSONArray) parser.parse(questions);
 
-				for (int i = 0; i < questionArray.size(); i++) {
-					TestQuestion testQuestions = new TestQuestion();
-					JSONObject obj = (JSONObject) questionArray.get(i);
-					testQuestions.setQuestionId(Long.parseLong(obj.get("questionId") + ""));
-					testQuestions.setAddTest(addTest);
-					addedQuestions.add(testQuestions);
-				}
-				addTest.setTestQuestions(addedQuestions);
-				addTest.setIsDeleted(false);
-				addTest.setUserId(currentUserId);
-				addTest.setSubject(addTest.getSubject());
-				addTest.setDepartmentName(currentAdminDepartment);
-				this.addTestService.saveAddTest(addTest);
-
-				modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
-				return "redirect:/admin/add/test/view";
+			for (int i = 0; i < questionArray.size(); i++) {
+				TestQuestion testQuestions = new TestQuestion();
+				JSONObject obj = (JSONObject) questionArray.get(i);
+				testQuestions.setQuestionId(Long.parseLong(obj.get("questionId") + ""));
+				testQuestions.setAddTest(addTest);
+				addedQuestions.add(testQuestions);
 			}
+			addTest.setTestQuestions(addedQuestions);
+			addTest.setIsDeleted(false);
+			addTest.setUserId(currentUserId);
+			addTest.setSubject(addTest.getSubject());
+			addTest.setDepartmentName(currentAdminDepartment);
+			addTest.setStatus(addTest.getStatus());
+			this.addTestService.saveAddTest(addTest);
+
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+			return "redirect:/admin/add/test/view";
+		}
 	}
 
 	/* TEST RESULT */
@@ -213,8 +214,8 @@ public class AddTestController {
 	public String testResult(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		User user = this.userService.findBySSO(this.getPrincipal());
 		List<AddTest> testList = new ArrayList<AddTest>();
-		for( AddTest test : this.addTestService.getAddTestList()) {
-			if( test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
+		for (AddTest test : this.addTestService.getAddTestList()) {
+			if (test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
 				testList.add(test);
 			}
 		}
@@ -267,8 +268,8 @@ public class AddTestController {
 	public String viewTest_java(ModelMap modelMap, Locale locale) {
 		User user = this.userService.findBySSO(this.getPrincipal());
 		List<AddTest> testList = new ArrayList<AddTest>();
-		for( AddTest test : this.addTestService.getAddTestList()) {
-			if( test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
+		for (AddTest test : this.addTestService.getAddTestList()) {
+			if (test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
 				testList.add(test);
 			}
 		}
@@ -310,6 +311,7 @@ public class AddTestController {
 			addTest.setUserId(currentUserId);
 			addTest.setSubject(addTest.getSubject());
 			addTest.setDepartmentName(currentAdminDepartment);
+			addTest.setStatus(addTest.getStatus());
 			this.addTestService.saveAddTest(addTest);
 
 			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
@@ -373,8 +375,8 @@ public class AddTestController {
 	public String testResult_java(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		User user = this.userService.findBySSO(this.getPrincipal());
 		List<AddTest> testList = new ArrayList<AddTest>();
-		for( AddTest test : this.addTestService.getAddTestList()) {
-			if( test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
+		for (AddTest test : this.addTestService.getAddTestList()) {
+			if (test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
 				testList.add(test);
 			}
 		}
@@ -427,8 +429,8 @@ public class AddTestController {
 	public String viewTest_web(ModelMap modelMap, Locale locale) {
 		User user = this.userService.findBySSO(this.getPrincipal());
 		List<AddTest> testList = new ArrayList<AddTest>();
-		for( AddTest test : this.addTestService.getAddTestList()) {
-			if( test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
+		for (AddTest test : this.addTestService.getAddTestList()) {
+			if (test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
 				testList.add(test);
 			}
 		}
@@ -470,6 +472,7 @@ public class AddTestController {
 			addTest.setUserId(currentUserId);
 			addTest.setSubject(addTest.getSubject());
 			addTest.setDepartmentName(currentAdminDepartment);
+			addTest.setStatus(addTest.getStatus());
 			this.addTestService.saveAddTest(addTest);
 
 			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
@@ -533,8 +536,8 @@ public class AddTestController {
 	public String testResult_web(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		User user = this.userService.findBySSO(this.getPrincipal());
 		List<AddTest> testList = new ArrayList<AddTest>();
-		for( AddTest test : this.addTestService.getAddTestList()) {
-			if( test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
+		for (AddTest test : this.addTestService.getAddTestList()) {
+			if (test.getDepartmentName().equals(user.getDepartment().getDepartmentName())) {
 				testList.add(test);
 			}
 		}

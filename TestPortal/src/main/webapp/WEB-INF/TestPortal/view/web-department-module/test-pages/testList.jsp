@@ -27,38 +27,40 @@
 							<div class="row">
 								<c:forEach var="test" items="${testListShown}" varStatus="ind">
 									<c:if test="${ test.isDeleted!= true }">
-										<div class="col-lg-4 col-md-4 col-lg-4 col-xxl-3">
-											<div class="pipeline-body">
-												<div class="pipeline-item">
-													<div class="pi-controls">
-														<c:if test="${ ind.index==0 }">
-															<div class="status status-green" data-placement="top"
-																data-toggle="tooltip" title="Active Status"></div>
-														</c:if>
-														<c:if test="${ ind.index>0 }">
-															<div class="status status-red" data-placement="top"
-																data-toggle="tooltip" title="Active Status"></div>
-														</c:if>
-													</div>
-													<div class="pi-body">
-														<div class="pi-info">
-															<div class="h6 pi-name mb-2">${test.testName}</div>
-															<div class="pi-sub">${test.date}</div>
+										<c:if test="${ test.status == true }">
+											<div class="col-lg-4 col-md-4 col-lg-4 col-xxl-3">
+												<div class="pipeline-body">
+													<div class="pipeline-item">
+														<div class="pi-controls">
+															<c:if test="${ ind.index==0 }">
+																<div class="status status-green" data-placement="top"
+																	data-toggle="tooltip" title="Active Status"></div>
+															</c:if>
+															<c:if test="${ ind.index>0 }">
+																<div class="status status-red" data-placement="top"
+																	data-toggle="tooltip" title="Active Status"></div>
+															</c:if>
 														</div>
-													</div>
-													<div class="pi-foot">
-														<div class="tags">
-															<a class="tag"
-																href="${pageContext.request.contextPath }/java/student/start/test/${test.addTestId}">Start
-																Test</a>
+														<div class="pi-body">
+															<div class="pi-info">
+																<div class="h6 pi-name mb-2">${test.testName}</div>
+																<div class="pi-sub">${test.date}</div>
+															</div>
 														</div>
-														<a class="extra-info" href="#"><i
-															class="os-icon os-icon-watch"></i><span>${test.time}
-																mins</span></a>
+														<div class="pi-foot">
+															<div class="tags">
+																<a class="tag"
+																	href="${pageContext.request.contextPath }/java/student/start/test/${test.addTestId}">Start
+																	Test</a>
+															</div>
+															<a class="extra-info" href="#"><i
+																class="os-icon os-icon-watch"></i><span>${test.time}
+																	mins</span></a>
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
+										</c:if>
 									</c:if>
 								</c:forEach>
 							</div>
