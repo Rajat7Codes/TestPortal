@@ -390,7 +390,7 @@ public class TilesController {
 	@RequestMapping("/drive/student/dashboard")
 	public String driveDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
 		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
-		return "driveDashboard";
+		return "d_testList";
 	}
 
 	@RequestMapping("/drive/admin/dashboard")
