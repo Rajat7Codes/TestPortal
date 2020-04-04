@@ -32,7 +32,7 @@
 										<td>${test.testName }</td>
 										<td>${test.resultStatus }</td>
 										<td><a class="text-decoration-none !important"
-											href="${pageContext.request.contextPath }/java/student/view/test/result/${test.testResultId}">View</a></td>
+											href="${pageContext.request.contextPath }/drive/student/view/test/result/${test.testResultId}">View</a></td>
 									</tr>
 								</c:if>
 							</c:forEach>

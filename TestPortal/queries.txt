@@ -1,4 +1,4 @@
-INSERT INTO tab_user_profile(type)VALUES ('ADMIN'), ('JAVAADMIN'),('WEBADMIN'),('STUDENT'), ('JAVA'), ('WEB'),('DRIVE');
+INSERT INTO tab_user_profile(type)VALUES ('ADMIN'), ('JAVAADMIN'),('WEBADMIN'),('DRIVEADMIN'),('STUDENT'), ('JAVA'), ('WEB'),('DRIVE');
   
 INSERT INTO tab_department VALUES ( 1, "JAVA", "Department", true);
 

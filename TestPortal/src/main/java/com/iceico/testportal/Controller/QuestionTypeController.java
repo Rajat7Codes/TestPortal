@@ -195,6 +195,55 @@ public class QuestionTypeController {
 	}
 
 	/**
+	 * DRIVE ADMIN METHODS
+	 * 
+	 */
+
+	/* NEW QUESTION TYPE & QUESTION TYPE LIST */
+	@GetMapping("/drive/admin/questionType")
+	public String getQuestionType_drive(ModelMap modelMap, Locale locale) {
+		modelMap.addAttribute("questionType", new QuestionType());
+		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "d_questionType";
+	}
+
+	/* SAVE QUESTION TYPE */
+	@PostMapping("/drive/admin/questionType/save")
+	public String saveQuestionType_drive(@ModelAttribute("questionType") @Valid QuestionType questionType,
+			BindingResult bindingResult, ModelMap modelMap, Locale locale) {
+		if (bindingResult.hasErrors()) {
+			modelMap.addAttribute("questionType", new QuestionType());
+			modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
+			modelMap.addAttribute("user", usrService.findBySSO(this.getPrincipal()));
+			return "d_questionType";
+
+		} else {
+			this.questionTypeService.saveQuestionType(questionType);
+			modelMap.addAttribute("user", usrService.findBySSO(this.getPrincipal()));
+			return "redirect:/drive/admin/questionType";
+		}
+	}
+
+	/* EDIT QUESTION TYPE */
+	@GetMapping("/drive/admin/questionType/edit/{questionTypeId}")
+	public String editQuestionType_drive(@PathVariable("questionTypeId") @Valid Long questionTypeId, ModelMap modelMap,
+			Locale locale) throws ResourceNotFoundException {
+		modelMap.addAttribute("questionType", this.questionTypeService.getQuestionTypeById(questionTypeId));
+		modelMap.addAttribute("questionTypeList", this.questionTypeService.getQuestionTypeList());
+		modelMap.addAttribute("user", usrService.findBySSO(this.getPrincipal()));
+		return "d_questionType";
+	}
+
+	/* DELETE QUESTION TYPE */
+	@GetMapping("/drive/admin/questionType/delete/{questionTypeId}")
+	public String deleteQuestionType_drive(@PathVariable("questionTypeId") @Valid Long questionTypeId, ModelMap modelMap,
+			Locale locale) throws ResourceNotFoundException {
+		this.questionTypeService.deleteQuestionType(questionTypeId);
+		return "redirect:/drive/admin/questionType";
+	}
+	
+	/**
 	 * This method returns the principal[user-name] of logged-in user.
 	 */
 	private String getPrincipal() {

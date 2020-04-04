@@ -10,6 +10,23 @@
 <body>
 	<div class="top-bar color-scheme-transparent">
 		<div class="top-menu-controls">
+			<div
+				class="top-icon top-settings os-dropdown-trigger os-dropdown-position-left">
+				<i class="os-icon os-icon-ui-46"></i>
+				<div class="os-dropdown">
+					<div class="icon-w">
+						<i class="os-icon os-icon-ui-46"></i>
+					</div>
+					<ul>
+						<li><a
+							href="${pageContext.request.contextPath }/drive/admin/subject"><i
+								class="os-icon os-icon-book"></i><span>Subject</span></a></li>
+						<li><a
+							href="${pageContext.request.contextPath }/drive/admin/questionType"><i
+								class="os-icon os-icon-layers"></i><span>Question Type</span></a></li>
+					</ul>
+				</div>
+			</div>
 			<div class="logged-user-w">
 				<div class="logged-user-i">
 					<div class="avatar-w">
@@ -48,13 +65,12 @@
 							<i class="os-icon os-icon-wallet-loaded"></i>
 						</div>
 						<ul>
-							<li><a
-								href="${pageContext.request.contextPath }/drive/student/profile"><i
+							<li><a href="${pageContext.request.contextPath }/drive/admin/profile"><i
 									class="os-icon os-icon-user-male-circle2"></i><span>
 										Profile Details</span></a></li>
 
 							<li><a data-target="#myModal" data-toggle="modal"><i
-									class="os-icon os-icon-common-07"></i><span>Change
+									class="os-icon os-icon-common-07"></i><span>Reset
 										Password</span></a></li>
 
 							<li><a href="${pageContext.request.contextPath }/logout"><i

@@ -29,13 +29,15 @@
 									</thead>
 									<tbody>
 										<c:forEach var="test" items="${resultList}" varStatus="ind">
-											<tr>
-												<td>${ind.index+1}</td>
-												<td>${test.testName }</td>
-												<td>${test.resultStatus }</td>
-												<td><a class="text-decoration-none !important"
-													href="${pageContext.request.contextPath }/web/student/view/test/result/${test.testResultId}">View</a></td>
-											</tr>
+											<c:if test="${test.userId==user.id}">
+												<tr>
+													<td>${ind.index+1}</td>
+													<td>${test.testName }</td>
+													<td>${test.resultStatus }</td>
+													<td><a class="text-decoration-none !important"
+														href="${pageContext.request.contextPath }/web/student/view/test/result/${test.testResultId}">View</a></td>
+												</tr>
+											</c:if>
 										</c:forEach>
 									</tbody>
 								</table>

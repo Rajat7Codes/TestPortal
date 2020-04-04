@@ -3,7 +3,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,13 +14,9 @@
 <meta content="Tamerlan Soziev" name="author">
 <meta content="Admin dashboard html template" name="description">
 <meta content="width=device-width,initial-scale=1" name="viewport">
-<script
-	src="${pageContext.request.contextPath }/static/bower_components/chart.js/dist/Chart.min.js"></script>
 </head>
 <body
 	class="menu-position-side menu-side-left full-screen with-content-panel ">
-
-
 	<div class="content-i">
 		<div class="content-box">
 			<div class="element-wrapper">
@@ -75,40 +71,40 @@
 								<!-- <a class="btn btn-primary btn-sm" href="#"><i
 									class="os-icon os-icon-link-3"></i><span>Add to Friends</span></a> -->
 								<a class="btn btn-primary btn-sm"
-									href="${pageContext.request.contextPath }/java/student/profile/update"><i
+									href="${pageContext.request.contextPath }/drive/admin/profile/update"><i
 									class="os-icon os-icon-edit"></i><span>Edit Profile</span></a>
 							</div>
 						</div>
 					</div>
-					<div class="up-contents">
+					<%-- 			<div class="up-contents">
 						<h5 class="element-header">Profile Statistics</h5>
 						<div class="row m-b">
 							<div class="col-lg-6">
 								<div class="row">
 									<div class="col-sm-6 b-r b-b">
 										<div class="el-tablo centered padded">
-											<div class="value">${totalTestCountDepartmentJava }</div>
-											<div class="label">Total Test</div>
+											<div class="value">3814</div>
+											<div class="label">Products Sold</div>
 										</div>
 									</div>
 									<div class="col-sm-6 b-b b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">${studentTotalTestAttemptedCount }</div>
-											<div class="label">Total Test Attempted</div>
+											<div class="value">47.5K</div>
+											<div class="label">Followers</div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-6 b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">${studentTotalPassCountUpTillNow }</div>
-											<div class="label">Total Pass Result</div>
+											<div class="value">$95</div>
+											<div class="label">Daily Earnings</div>
 										</div>
 									</div>
 									<div class="col-sm-6 b-r">
 										<div class="el-tablo centered padded">
-											<div class="value">${studentTotalFailCountUpTillNow }</div>
-											<div class="label">Total Fail Results</div>
+											<div class="value">12</div>
+											<div class="label">Products</div>
 										</div>
 									</div>
 								</div>
@@ -120,19 +116,18 @@
 											<div class="os-icon os-icon-bar-chart-stats-up"></div>
 										</div>
 										<div class="element-info-text">
-											<h5 class="element-inner-header">Monthly Percentage
-												Graph</h5>
+											<h5 class="element-inner-header">Monthly Revenue</h5>
 											<div class="element-inner-desc">Calculated every month</div>
 										</div>
 									</div>
 									<div class="el-chart-w">
-										<%-- <canvas height="130" id="liteLineChart" width="300"></canvas> --%>
-										<canvas id="line" width="800" height="450"></canvas>
+										<canvas height="130" id="liteLineChart" width="300"></canvas>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+
+					</div> --%>
 				</div>
 			</div>
 			<div class="floated-colors-btn second-floated-btn">
@@ -293,36 +288,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="month">${monthWiseList}</div>
 </body>
-
-<script>
-	var ctx = document.getElementById('line');
-	var mon = '${dateWiseList}';
-	mon[0]="";
-	mon[mon.length]="";
-	var list1= mon.split(",");
-	var stackedLine = new Chart(ctx, {
-		type : 'line',
-		data : {
-			/* labels : [ "", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
-					"Aug", "Sep", "Oct", "Nov", "Dec" ],  */
-			labels : list1,
-
-			datasets : [ {
-				data : ${percentageMonthWiseList},
-				label : "Result",
-				borderColor : "#3e95cd",
-				fill : false
-			} ]
-		},
-		options : {
-			title : {
-				display : true,
-			}
-		}
-	});
-</script>
 
 
 <c:if test="${passwordMsg != \"\" && passwordMsg != null}">

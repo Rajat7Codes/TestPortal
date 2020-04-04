@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="driveadminbase.definition"
+		template="/WEB-INF/TestPortal/layout/drive-admin-layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/common-pages/header.jsp" />
+		<put-attribute name="sidebar"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/common-pages/sidebar.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/common-pages/footer.jsp" />
+	</definition>
+
+	<!-- DASHBOARD PAGE -->
+	<definition name="driveAdminDashboard"
+		extends="driveadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | DRIVE ADMIN DASHBOARD" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/dashboard.jsp" />
+	</definition>
+
+	<!-- ADMIN PROFILE DETAILS -->
+	<definition name="d_adminStudProfile"
+		extends="driveadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | ADMIN PROFILE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/profile-pages/adminInformation.jsp" />
+	</definition>
+
+	<definition name="d_updateAdminProfile"
+		extends="driveadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | UPDATE PROFILE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/profile-pages/updateAdminInformation.jsp" />
+	</definition>
+
+	<!-- QUESTION BANK PAGES -->
+	<definition name="d_questionBank"
+		extends="driveadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | QUESTION BANK" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/question-bank/questionBank.jsp" />
+	</definition>
+
+	<definition name="d_questionBankView"
+		extends="driveadminbase.definition">
+		<put-attribute name="title"
+			value=" TEST PORTAL | QUESTIONS" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/question-bank/questionBankView.jsp" />
+	</definition>
+
+	<definition name="d_searchQuestions"
+		extends="driveadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | QUESTION SEARCH" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/question-bank/searchQuestions.jsp" />
+	</definition>
+
+	<!-- DEPARTMENT PAGE -->
+	<definition name="d_department"
+		extends="driveadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | DEPARTMENT" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/other-pages/department.jsp" />
+	</definition>
+
+	<!-- SUBJECT PAGE -->
+	<definition name="d_subject"
+		extends="driveadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | SUBJECT" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/other-pages/subject.jsp" />
+	</definition>
+
+	<!-- QUESTION TYPE PAGE -->
+	<definition name="d_questionType"
+		extends="driveadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | QUESTION TYPE" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/other-pages/questionType.jsp" />
+	</definition>
+
+	<!-- TEST PAGES -->
+	<definition name="d_addTest"
+		extends="driveadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | NEW TEST" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/test-pages/addTest.jsp" />
+	</definition>
+
+	<definition name="d_addTestView"
+		extends="driveadminbase.definition">
+		<put-attribute name="title" value="TEST PORTAL | TESTS" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/test-pages/addTestView.jsp" />
+	</definition>
+
+	<!-- RESULT PAGES -->
+	<definition name="d_viewResult"
+		extends="driveadminbase.definition">
+		<put-attribute name="title"
+			value="TEST PORTAL | VIEW RESULT" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/result-pages/result.jsp" />
+	</definition>
+
+	<definition name="d_testResult"
+		extends="driveadminbase.definition">
+		<put-attribute name="title" value="TEST PORTAL | RESULT" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-admin-module/result-pages/testResult.jsp" />
+	</definition>
+
+</tiles-definitions>
