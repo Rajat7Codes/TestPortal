@@ -30,6 +30,7 @@
 										<th>Passing Percent</th>
 										<th>Negative Marking</th>
 										<th>Ratio</th>
+										<th>Status</th>
 										<th>Action</th>
 									</tr>
 								</thead>
@@ -54,6 +55,12 @@
 															data-original-title="" title=""></div>
 													</c:if></td>
 												<td>${test.ratio }</td>
+												<c:if test="${test.status == true}">
+													<td class="status"><c:out value="Active" /></td>
+												</c:if>
+												<c:if test="${test.status == false}">
+													<td class="status"><c:out value="Inactive" /></td>
+												</c:if>
 												<td class="row-actions"><a
 													href="<c:url value='/java/admin/add/test/edit/${test.addTestId}' />"><i
 														class="os-icon os-icon-ui-49"></i></a> <a class="danger"
