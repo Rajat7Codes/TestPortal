@@ -393,6 +393,12 @@ public class TilesController {
 		return "driveDashboard";
 	}
 
+	@RequestMapping("/drive/admin/dashboard")
+	public String driveAdminDashboard(ModelMap modelMap, Locale locale) throws ResourceNotFoundException, ParseException {
+		modelMap.addAttribute("user", this.userService.findBySSO(this.getPrincipal()));
+		return "driveAdminDashboard";
+	}
+
 	@RequestMapping("/java/admin/dashboard")
 	public String javaAdminDashboard(ModelMap modelMap, Locale locale)
 			throws ResourceNotFoundException, ParseException {

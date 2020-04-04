@@ -140,7 +140,7 @@ public class SubjectController {
 	}
 
 	/**
-	 * JAVA ADMIN METHODS
+	 * WEB ADMIN METHODS
 	 * 
 	 */
 
@@ -186,6 +186,55 @@ public class SubjectController {
 			throws ResourceNotFoundException {
 		this.subjectService.deleteSubject(subjectId);
 		return "redirect:/web/admin/subject";
+	}
+
+	/**
+	 * DRIVE ADMIN METHODS
+	 * 
+	 */
+
+	/* NEW SUBJECT & SUBJECT LIST */
+	@GetMapping("/drive/admin/subject")
+	public String getSubject_drive(ModelMap modelMap, Locale locale) {
+		modelMap.addAttribute("subject", new Subject());
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "d_subject";
+	}
+
+	/* SAVE SUBJECT */
+	@PostMapping("/drive/admin/subject/save")
+	public String saveSubject_drive(@ModelAttribute("subject") @Valid Subject subject, BindingResult bindingResult,
+			ModelMap modelMap, Locale locale) {
+		if (bindingResult.hasErrors()) {
+			modelMap.addAttribute("subject", new Subject());
+			modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+
+			return "d_subject";
+		} else {
+			this.subjectService.saveSubject(subject);
+			modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+			return "redirect:/drive/admin/subject";
+		}
+	}
+
+	/* EDIT SUBJECT */
+	@GetMapping("/drive/admin/subject/edit/{subjectId}")
+	public String editSubject_drive(@PathVariable("subjectId") @Valid Long subjectId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		modelMap.addAttribute("subject", this.subjectService.getSubjectById(subjectId));
+		modelMap.addAttribute("subjectList", this.subjectService.getSubjectList());
+		modelMap.addAttribute("user", userService.findBySSO(this.getPrincipal()));
+		return "d_subject";
+	}
+
+	/* DELETE SUBJECT */
+	@GetMapping("/drive/admin/subject/delete/{subjectId}")
+	public String deleteSubject_drive(@PathVariable("subjectId") @Valid Long subjectId, ModelMap modelMap, Locale locale)
+			throws ResourceNotFoundException {
+		this.subjectService.deleteSubject(subjectId);
+		return "redirect:/drive/admin/subject";
 	}
 
 	/**

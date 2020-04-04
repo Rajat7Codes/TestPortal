@@ -202,10 +202,14 @@ public class UserController {
 		} else if (department.getDepartmentName().equals("WEB")) {
 			profile = this.userProfileService.findByType("WEBADMIN");
 			profile.setType("WEBADMIN");
+		} else if (department.getDepartmentName().equals("DRIVE")) {
+			profile = this.userProfileService.findByType("DRIVEADMIN");
+			profile.setType("DRIVEADMIN");
 		}
 
-		User user = null;new User();
-		if( this.userService.findBySSO(ssoId) == null) {
+		User user = null;
+		new User();
+		if (this.userService.findBySSO(ssoId) == null) {
 			user = new User();
 		} else {
 			user = this.userService.findBySSO(ssoId);

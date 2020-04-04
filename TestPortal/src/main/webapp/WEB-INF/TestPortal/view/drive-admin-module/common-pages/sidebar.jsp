@@ -6,12 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style type="text/css">
+.menu-w .logo-w img {
+	width: 26px;
+}
+</style>
+
 </head>
 <body>
 	<div class="menu-mobile menu-activated-on-click color-scheme-dark">
 		<div class="mm-logo-buttons-w">
 			<a class="mm-logo"
-				href="${pageContext.request.contextPath }/drive/student/dashboard"><img
+				href="${pageContext.request.contextPath }/drive/admin/dashboard"><img
 				src="${pageContext.request.contextPath }/static/img/Iceico_round.png"><span>Test
 					Portal</span></a>
 			<div class="mm-buttons">
@@ -44,32 +51,42 @@
 			</div>
 			<ul class="main-menu">
 				<li class="has-sub-menu"><a href="#"><div class="icon-w">
-							<div class="os-icon os-icon-edit-32"></div>
-						</div> <span>Forms</span></a>
-					<ul class="sub-menu">
-						<li><a href="forms_regular.html">Regular Forms</a></li>
-						<li><a href="forms_validation.html">Form Validation</a></li>
-						<li><a href="forms_wizard.html">Form Wizard</a></li>
-						<li><a href="forms_uploads.html">File Uploads</a></li>
-						<li><a href="forms_wisiwig.html">Wisiwig Editor</a></li>
-					</ul></li>
-				<li class="has-sub-menu"><a href="#"><div class="icon-w">
 							<div class="os-icon os-icon-grid"></div>
-						</div> <span>Tables</span></a>
+						</div> <span>Question Bank</span></a>
 					<ul class="sub-menu">
-						<li><a href="tables_regular.html">Regular Tables</a></li>
-						<li><a href="tables_datatables.html">Data Tables</a></li>
-						<li><a href="tables_editable.html">Editable Tables</a></li>
+						<li><a
+							href="${pageContext.request.contextPath }/drive/admin/question/bank/new">New</a></li>
+						<li><a
+							href="${pageContext.request.contextPath }/drive/admin/question/bank">List</a></li>
+						<li><a
+							href="${pageContext.request.contextPath }/drive/admin/question/bank/search">Search</a></li>
 					</ul></li>
+
+				<li class="has-sub-menu"><a href="#"><div class="icon-w">
+							<div class="os-icon os-icon-edit-32"></div>
+						</div> <span>Test</span></a>
+					<ul class="sub-menu">
+						<li><a
+							href="${pageContext.request.contextPath }/drive/admin/add/test">New</a></li>
+						<li><a
+							href="${pageContext.request.contextPath }/drive/admin/add/test/view">List</a></li>
+					</ul></li>
+
+				<li><a
+					href="${pageContext.request.contextPath }/drive/admin/test/result/list">
+						<div class="icon-w">
+							<div class="os-icon os-icon-window-content"></div>
+						</div> <span>Results</span>
+				</a></li>
 			</ul>
 		</div>
 	</div>
 	<div
 		class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link"
-		style="margin-top: -63px;">
+		style="margin-top: -54px;">
 		<div class="logo-w">
 			<a class="logo"
-				href="${pageContext.request.contextPath }/drive/student/dashboard">
+				href="${pageContext.request.contextPath }/drive/admin/dashboard">
 				<img
 				src="${pageContext.request.contextPath }/static/img/Iceico_round.png">
 				<div class="logo-label">Test Portal</div>
@@ -120,7 +137,7 @@
 					</div>
 					<ul>
 						<li><a
-							href="${pageContext.request.contextPath }/drive/student/profile"><i
+							href="${pageContext.request.contextPath }/drive/admin/profile"><i
 								class="os-icon os-icon-user-male-circle2"></i><span>Profile
 									Details</span></a></li>
 
@@ -135,24 +152,53 @@
 			</div>
 		</div>
 
-
 		<h1 class="menu-page-header">Page Header</h1>
 		<ul class="main-menu">
-			<!-- <li class="sub-header"><span>Layouts</span></li> -->
-			<li class=""><a
-				href="${pageContext.request.contextPath }/drive/student/test/list">
-					<div class="icon-w">
-						<div class="os-icon os-icon-list"></div>
-					</div> <span> Test List</span>
-			</a></li>
-		
-			<li class=""><a
-				href="${pageContext.request.contextPath }/drive/student/test/history">
-					<div class="icon-w">
-						<div class="os-icon os-icon-newspaper"></div>
-					</div> <span> Test History</span>
-			</a></li>
 
+			<li class="has-sub-menu"><a href="#"><div class="icon-w">
+						<div class="os-icon os-icon-grid"></div>
+					</div> <span>Question Bank</span></a>
+				<div class="sub-menu-w">
+					<div class="sub-menu-header">Question Bank</div>
+					<div class="sub-menu-icon">
+						<i class="os-icon os-icon-grid"></i>
+					</div>
+					<div class="sub-menu-i">
+						<ul class="sub-menu">
+							<li><a
+								href="${pageContext.request.contextPath }/drive/admin/question/bank/new">New</a></li>
+							<li><a
+								href="${pageContext.request.contextPath }/drive/admin/question/bank">List</a></li>
+							<li><a
+								href="${pageContext.request.contextPath }/drive/admin/question/bank/search">Search</a></li>
+						</ul>
+					</div>
+				</div></li>
+
+			<li class="has-sub-menu"><a href="#"><div class="icon-w">
+						<div class="os-icon os-icon-edit-32"></div>
+					</div> <span>Test</span></a>
+				<div class="sub-menu-w">
+					<div class="sub-menu-header">Test</div>
+					<div class="sub-menu-icon">
+						<i class="os-icon os-icon-grid"></i>
+					</div>
+					<div class="sub-menu-i">
+						<ul class="sub-menu">
+							<li><a
+								href="${pageContext.request.contextPath }/drive/admin/add/test">New</a></li>
+							<li><a
+								href="${pageContext.request.contextPath }/drive/admin/add/test/view">List</a></li>
+						</ul>
+					</div>
+				</div></li>
+
+			<li><a
+				href="${pageContext.request.contextPath }/drive/admin/test/result/list">
+					<div class="icon-w">
+						<div class="os-icon os-icon-window-content"></div>
+					</div> <span>Results</span>
+			</a></li>
 		</ul>
 	</div>
 

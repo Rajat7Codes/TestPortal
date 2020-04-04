@@ -20,7 +20,7 @@
 	<definition name="driveDashboard"
 		extends="drivebase.definition">
 		<put-attribute name="title"
-			value="TEST PORTAL | DRIVE STUDENT DASHBOARD" />
+			value="TEST PORTAL | DRIVE DASHBOARD" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/drive-student-module/dashboard.jsp" />
 	</definition>
@@ -35,12 +35,59 @@
 	</definition>
 
 	<!-- UPDATE STUDENT PROFILE PAGE -->
-	<definition name="updateStudProfile"
+	<definition name="updateDriveStudProfile"
 		extends="drivebase.definition">
 		<put-attribute name="title"
 			value="TEST PORTAL | UPDATE PROFILE" />
 		<put-attribute name="body"
 			value="/WEB-INF/TestPortal/view/drive-student-module/profile-pages/updateUserInformation.jsp" />
+	</definition>
+
+	<!-- CHANGE USER PASSWORD PAGE -->
+	<definition name="changePassword"
+		extends="drivebase.definition">
+		<put-attribute name="title" value="Change Password" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/login-module/changePassword.jsp" />
+	</definition>
+
+	<!-- sample page for START TEST -->
+	<definition name="d_startTest" extends="drivebase.definition">
+		<put-attribute name="title" value="start test" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-student-module/startTest.jsp" />
+	</definition>
+
+	<!-- page for TEST Lists -->
+	<definition name="d_testList" extends="drivebase.definition">
+		<put-attribute name="title" value="Test List" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-student-module/testList.jsp" />
+	</definition>
+
+
+	<!-- view page for Test result -->
+	<definition name="d_result" extends="drivebase.definition">
+		<put-attribute name="title" value="Result" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-student-module/result.jsp" />
+	</definition>
+
+
+	<!-- Test History page -->
+	<definition name="d_testHistory" extends="drivebase.definition">
+		<put-attribute name="title" value="Result" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-student-module/testHistory.jsp" />
+	</definition>
+
+
+	<!-- Test History Each page -->
+	<definition name="d_testHistoryEach"
+		extends="drivebase.definition">
+		<put-attribute name="title" value="Result" />
+		<put-attribute name="body"
+			value="/WEB-INF/TestPortal/view/drive-student-module/testHistoryEach.jsp" />
 	</definition>
 
 </tiles-definitions>
