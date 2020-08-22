@@ -3,13 +3,13 @@
 Test Portal project was developed for taking daily tests of interns for an organization "ICEICO Technologies Pvt. Ltd." 
 
 Frontend Technologies Used :
-> HTML5
-> CSS3, Bootstrap4
+> HTML5,
+> CSS3, Bootstrap4,
 > JavaScript, Ace.JS
 
 Backend Technologies Used :
-> Java, SpringBoot
-> Hibernate JPA, MySQL
+> Java, SpringBoot,
+> Hibernate JPA, MySQL,
 > JDoodle API, AJAX
 
 
